@@ -1,4 +1,4 @@
-<h1 title>👋 프로젝트명 PROJECT NAME </h1>
+<h1 title>👋 프로젝트명 '파프리카 그룹웨어' </h1>
 
 
 <p align="center">
