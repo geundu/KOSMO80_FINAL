@@ -29,11 +29,8 @@
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
 	
-	<bean id="boardMDao" class="web.mvc.Board41MDao">
+	<bean id="studentinfo-dao" class="paprika.mvc.StudentInfoDao">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 	</bean>
 	
-	<bean id="boardSDao" class="web.mvc.Board41SDao">
-		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
-	</bean>
 </beans>

@@ -2,11 +2,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="emp-logic" class="kosmo80.mvc.sp4.EmpLogic" />
-
-	<bean id="board-logic" class="web.mvc.Board41Logic">
-		<property name="boardMDao" ref="boardMDao"></property>
-		<property name="boardSDao" ref="boardSDao"></property>
+	<bean id="studentinfo-logic" class="paprika.mvc.StudentInfoLogic">
+		<property name="studentInfoDao" ref="studentinfo-dao"></property>
 	</bean>
 	
 	<!-- 트랜잭션 처리  throw e; crudXXX doXXX DI 해줘야 할 게 있다. -->
