@@ -1,4 +1,4 @@
-package paprika.mvc;
+package kr.ac.paprika.mvc;
 
 import java.util.List;
 import java.util.Map;

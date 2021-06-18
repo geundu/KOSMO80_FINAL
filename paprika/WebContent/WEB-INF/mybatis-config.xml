@@ -2,6 +2,6 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<mappers>
-		<mapper resource="com/mybatis/mapper/board.xml" />
+		<mapper resource="kr/ac/paprika/mybatis/mapper/studentInfo.xml" />
 	</mappers>
 </configuration>
