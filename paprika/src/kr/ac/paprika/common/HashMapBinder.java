@@ -18,17 +18,24 @@ public class HashMapBinder {
 
 	// 첨부파일 처리에 필요한 변수 선언
 	// 첨부파일 전송은 반드시 post 방식으로 해야 한다.
-	MultipartRequest	multi			= null;									// 기존의 request로는 값을 가져오지 못하게 된다.
+	// 기존의 request로는 값을 가져오지 못하게 된다.
+	MultipartRequest	multi			= null;
 	String				realFolder		= "";
 	String				encodingType	= "UTF-8";
 	static final int	MAXSIZE			= 5 * 1024 * 1024;
 
+	/**
+	 * @param request
+	 */
 	public HashMapBinder(HttpServletRequest request) {
 		this.request = request;
 		// 절대경로 수정해야 함
 		realFolder = "D:\\Programming\\portfolio-ysy\\lab_spring4\\spring4_1_1\\WebContent\\files";
 	}
 
+	/**
+	 * @param target
+	 */
 	public void bind(Map<String, Object> target) {
 		Enumeration<String> en = request.getParameterNames();
 
@@ -41,6 +48,24 @@ public class HashMapBinder {
 		}
 	}
 
+	/**
+	 * @param target
+	 */
+	public void bindPost(Map<String, Object> target) {
+		Enumeration<String> en = request.getParameterNames();
+
+		// <input type="text" name="mem_id">
+		while (en.hasMoreElements()) {
+			String key = en.nextElement();
+			logger.info("value = " + request.getParameter(key));
+			target.put(key, KoreanConversion.toUTF(request.getParameter(key)));
+			logger.info("target = " + target);
+		}
+	}
+
+	/**
+	 * @param target
+	 */
 	public void multiBind(Map<String, Object> target) {
 		target.clear();
 
@@ -79,18 +104,6 @@ public class HashMapBinder {
 				size = file.length();
 				target.put("bs_size", size);
 			}
-		}
-	}
-
-	public void bindPost(Map<String, Object> target) {
-		Enumeration<String> en = request.getParameterNames();
-
-		// <input type="text" name="mem_id">
-		while (en.hasMoreElements()) {
-			String key = en.nextElement();
-			logger.info("value = " + request.getParameter(key));
-			target.put(key, KoreanConversion.toUTF(request.getParameter(key)));
-			logger.info("target = " + target);
 		}
 	}
 }

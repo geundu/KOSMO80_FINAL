@@ -20,6 +20,11 @@
 			<value>tiger</value>
 		</property>
 	</bean>
+
+	<!-- Transaction Manager for a single JDBC DataSource -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="data-source-target" />
+	</bean>
 	
 	<!-- mybatis-spring에서 지원하는 SqlSessionFactoryBean 클래스 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
