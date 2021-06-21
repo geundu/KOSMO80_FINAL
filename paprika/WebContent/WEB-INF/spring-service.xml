@@ -4,8 +4,9 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
 	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+	
 	<aop:config>
-		<aop:pointcut expression="execution(* web.mvc.*Logic.*(**))" id="point-cut" />
+		<aop:pointcut expression="execution(* kr.ac.paprika.mvc.*Logic.*(**))" id="point-cut" />
 		<aop:advisor advice-ref="tx-advice" pointcut-ref="point-cut" />
 	</aop:config>
 	<tx:advice id="tx-advice" transaction-manager="transactionManager">
