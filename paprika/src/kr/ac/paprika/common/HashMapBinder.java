@@ -22,19 +22,19 @@ public class HashMapBinder {
 	MultipartRequest	multi			= null;
 	String				realFolder		= "";
 	String				encodingType	= "UTF-8";
+	// 파일 크기 5Bytes * 1024 * 1024 = 5MB
 	static final int	MAXSIZE			= 5 * 1024 * 1024;
 
-	/**
-	 * @param request
-	 */
 	public HashMapBinder(HttpServletRequest request) {
 		this.request = request;
 		// 절대경로 수정해야 함
-		realFolder = "D:\\Programming\\portfolio-ysy\\lab_spring4\\spring4_1_1\\WebContent\\files";
+		realFolder = "D:\\Programming\\KOSMO80_FINAL\\paprika\\WebContent\\files";
 	}
 
 	/**
-	 * @param target
+	 * 쿼리스트링 바인딩 메서드
+	 * 
+	 * @param target - 바인딩할 맵
 	 */
 	public void bind(Map<String, Object> target) {
 		Enumeration<String> en = request.getParameterNames();
@@ -49,22 +49,9 @@ public class HashMapBinder {
 	}
 
 	/**
-	 * @param target
-	 */
-	public void bindPost(Map<String, Object> target) {
-		Enumeration<String> en = request.getParameterNames();
-
-		// <input type="text" name="mem_id">
-		while (en.hasMoreElements()) {
-			String key = en.nextElement();
-			logger.info("value = " + request.getParameter(key));
-			target.put(key, KoreanConversion.toUTF(request.getParameter(key)));
-			logger.info("target = " + target);
-		}
-	}
-
-	/**
-	 * @param target
+	 * 파일첨부 포함된 바인딩 메서드
+	 * 
+	 * @param target - 바인딩할 맵
 	 */
 	public void multiBind(Map<String, Object> target) {
 		target.clear();
@@ -92,6 +79,7 @@ public class HashMapBinder {
 			while (files.hasMoreElements()) {
 				String	fname		= files.nextElement();
 				String	fileName	= multi.getFilesystemName(fname);
+				// 파일 키값 재설정해야 함
 				target.put("bs_file", fileName);
 
 				if (fileName != null && fileName.length() > 0) {
@@ -102,6 +90,7 @@ public class HashMapBinder {
 
 			if (file != null) {
 				size = file.length();
+				// 파일 키값 재설정해야 함
 				target.put("bs_size", size);
 			}
 		}
