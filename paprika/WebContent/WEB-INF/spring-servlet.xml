@@ -3,16 +3,62 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+	<bean id="course-controller" class="kr.ac.paprika.mvc.CourseController">
+		<property name="methodNameResolver" ref="course-resolver" />
+		<property name="courseLogic" ref="course-logic" />
+	</bean>
+
+	<bean id="curriculum-controller" class="kr.ac.paprika.mvc.CurriculumController">
+		<property name="methodNameResolver" ref="curriculum-resolver" />
+		<property name="curriculumLogic" ref="curriculum-logic" />
+	</bean>
+
+	<bean id="meetingroom-controller" class="kr.ac.paprika.mvc.MeetingRoomController">
+		<property name="methodNameResolver" ref="meetingroom-resolver" />
+		<property name="meetingRoomLogic" ref="meetingroom-logic" />
+	</bean>
+
+	<bean id="member-controller" class="kr.ac.paprika.mvc.MemberController">
+		<property name="methodNameResolver" ref="member-resolver" />
+		<property name="memberLogic" ref="member-logic" />
+	</bean>
+
+	<bean id="schedule-controller" class="kr.ac.paprika.mvc.ScheduleController">
+		<property name="methodNameResolver" ref="schedule-resolver" />
+		<property name="scheduleLogic" ref="schedule-logic" />
+	</bean>
+
 	<!-- StudentInfoController 선언 -->
 	<bean id="studentinfo-controller" class="kr.ac.paprika.mvc.StudentInfoController">
 		<property name="methodNameResolver" ref="studentinfo-resolver" />
 		<property name="studentInfoLogic" ref="studentinfo-logic" />
 	</bean>
-
+	
 	<!-- ======== SimpleUrlHandlerMapping 땅 ======== -->
 	<bean id="url-mapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
 			<props>
+				<prop key="/paprika/getStudentInfo.do">course-controller</prop>
+				<prop key="/paprika/studentInfoUpdate.do">course-controller</prop>
+				<prop key="/paprika/getRegisterRecord.do">course-controller</prop>
+				<prop key="/paprika/getCourseHistory.do">course-controller</prop>
+				<prop key="/paprika/getGradeHistory.do">course-controller</prop>
+				<prop key="/paprika/getGradeHistory.do">course-controller</prop>
+				<prop key="/paprika/getGradeHistory.do">course-controller</prop>
+
+				<prop key="/paprika/getStudentInfo.do">curriculum-controller</prop>
+				<prop key="/paprika/studentInfoUpdate.do">curriculum-controller</prop>
+
+				<prop key="/paprika/getStudentInfo.do">meetingroom-controller</prop>
+				<prop key="/paprika/studentInfoUpdate.do">meetingroom-controller</prop>
+				<prop key="/paprika/getRegisterRecord.do">meetingroom-controller</prop>
+				<prop key="/paprika/getCourseHistory.do">meetingroom-controller</prop>
+
+				<prop key="/paprika/getStudentInfo.do">member-controller</prop>
+				<prop key="/paprika/studentInfoUpdate.do">member-controller</prop>
+
+				<prop key="/paprika/getStudentInfo.do">schedule-controller</prop>
+
 				<prop key="/paprika/getStudentInfo.do">studentinfo-controller</prop>
 				<prop key="/paprika/studentInfoUpdate.do">studentinfo-controller</prop>
 				<prop key="/paprika/getRegisterRecord.do">studentinfo-controller</prop>
@@ -23,6 +69,57 @@
 	</bean>
 
 	<!-- ======== PropertiesMethodNameResolver 땅 ======== -->
+	<bean id="course-resolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+		<property name="mappings">
+			<props>
+				<prop key="/paprika/getStudentInfo.do">getStudentInfo</prop>
+				<prop key="/paprika/studentInfoUpdate.do">studentInfoUpdate</prop>
+				<prop key="/paprika/getRegisterRecord.do">getRegisterRecord</prop>
+				<prop key="/paprika/getCourseHistory.do">getCourseHistory</prop>
+				<prop key="/paprika/getGradeHistory.do">getGradeHistory</prop>
+				<prop key="/paprika/getGradeHistory.do">getGradeHistory</prop>
+				<prop key="/paprika/getGradeHistory.do">getGradeHistory</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="curriculum-resolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+		<property name="mappings">
+			<props>
+				<prop key="/paprika/getStudentInfo.do">getStudentInfo</prop>
+				<prop key="/paprika/studentInfoUpdate.do">studentInfoUpdate</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="meetingroom-resolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+		<property name="mappings">
+			<props>
+				<prop key="/paprika/getStudentInfo.do">getStudentInfo</prop>
+				<prop key="/paprika/studentInfoUpdate.do">studentInfoUpdate</prop>
+				<prop key="/paprika/getRegisterRecord.do">getRegisterRecord</prop>
+				<prop key="/paprika/getCourseHistory.do">getCourseHistory</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="member-resolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+		<property name="mappings">
+			<props>
+				<prop key="/paprika/getStudentInfo.do">getStudentInfo</prop>
+				<prop key="/paprika/studentInfoUpdate.do">studentInfoUpdate</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="schedule-resolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+		<property name="mappings">
+			<props>
+				<prop key="/paprika/getStudentInfo.do">getStudentInfo</prop>
+			</props>
+		</property>
+	</bean>
+
 	<bean id="studentinfo-resolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
 		<property name="mappings">
 			<props>

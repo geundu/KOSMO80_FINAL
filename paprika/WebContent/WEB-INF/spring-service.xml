@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
 	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
-	
+
 	<aop:config>
 		<aop:pointcut expression="execution(* kr.ac.paprika.mvc.*Logic.*(**))" id="point-cut" />
 		<aop:advisor advice-ref="tx-advice" pointcut-ref="point-cut" />
@@ -16,7 +16,26 @@
 		</tx:attributes>
 	</tx:advice>
 
-	<!-- StudentInfoLogic bean 정의 -->
+	<bean id="course-logic" class="kr.ac.paprika.mvc.CourseLogic">
+		<property name="courseDao" ref="course-dao"></property>
+	</bean>
+
+	<bean id="curriculum-logic" class="kr.ac.paprika.mvc.CurriculumLogic">
+		<property name="curriculumDao" ref="curriculum-dao"></property>
+	</bean>
+
+	<bean id="meetingroom-logic" class="kr.ac.paprika.mvc.MeetingRoomLogic">
+		<property name="meetingRoomDao" ref="meetingroom-dao"></property>
+	</bean>
+
+	<bean id="member-logic" class="kr.ac.paprika.mvc.MemberLogic">
+		<property name="memberDao" ref="member-dao"></property>
+	</bean>
+
+	<bean id="schedule-logic" class="kr.ac.paprika.mvc.ScheduleLogic">
+		<property name="scheduleDao" ref="schedule-dao"></property>
+	</bean>
+
 	<bean id="studentinfo-logic" class="kr.ac.paprika.mvc.StudentInfoLogic">
 		<property name="studentInfoDao" ref="studentinfo-dao"></property>
 	</bean>

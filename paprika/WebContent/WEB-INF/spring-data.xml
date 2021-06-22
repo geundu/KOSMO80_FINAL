@@ -36,6 +36,26 @@
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
+
+	<bean id="course-dao" class="kr.ac.paprika.mvc.CourseDao">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
+
+	<bean id="curriculum-dao" class="kr.ac.paprika.mvc.CurriculumDao">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
+
+	<bean id="meetingroom-dao" class="kr.ac.paprika.mvc.MeetingRoomDao">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
+
+	<bean id="member-dao" class="kr.ac.paprika.mvc.MemberDao">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
+
+	<bean id="schedule-dao" class="kr.ac.paprika.mvc.ScheduleDao">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
 	
 	<!-- StudentInfoDao bean 정의 -->
 	<bean id="studentinfo-dao" class="kr.ac.paprika.mvc.StudentInfoDao">
