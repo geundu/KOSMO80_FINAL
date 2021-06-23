@@ -6,6 +6,10 @@ import java.util.Map;
 public class ScheduleLogic {
 	private ScheduleDao scheduleDao = null;
 
+	public void setScheduleDao(ScheduleDao scheduleDao) {
+		this.scheduleDao = scheduleDao;
+	}
+
 	/**
 	 * 시간표 조회 메서드
 	 * 

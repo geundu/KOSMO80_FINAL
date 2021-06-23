@@ -34,27 +34,27 @@ public class HashMapBinder {
 	/**
 	 * 쿼리스트링 바인딩 메서드
 	 * 
-	 * @param target - 바인딩할 맵
+	 * @param pMap - 바인딩할 맵
 	 */
-	public void bind(Map<String, Object> target) {
+	public void bind(Map<String, Object> pMap) {
 		Enumeration<String> en = request.getParameterNames();
 
 		// <input type="text" name="mem_id">
 		while (en.hasMoreElements()) {
 			String key = en.nextElement();
 			logger.info("value = " + request.getParameter(key));
-			target.put(key, KoreanConversion.toUTF(request.getParameter(key)));
-			logger.info("target = " + target);
+			pMap.put(key, KoreanConversion.toUTF(request.getParameter(key)));
+			logger.info("target = " + pMap);
 		}
 	}
 
 	/**
 	 * 파일첨부 포함된 바인딩 메서드
 	 * 
-	 * @param target - 바인딩할 맵
+	 * @param pMap - 바인딩할 맵
 	 */
-	public void multiBind(Map<String, Object> target) {
-		target.clear();
+	public void multiBind(Map<String, Object> pMap) {
+		pMap.clear();
 
 		try {
 			multi = new MultipartRequest(request, realFolder, MAXSIZE, encodingType, new DefaultFileRenamePolicy());
@@ -68,8 +68,8 @@ public class HashMapBinder {
 		while (en.hasMoreElements()) {
 			String key = en.nextElement();
 			logger.info("value = " + multi.getParameter(key));
-			target.put(key, multi.getParameter(key));
-			logger.info("target = " + target);
+			pMap.put(key, multi.getParameter(key));
+			logger.info("target = " + pMap);
 		}
 		Enumeration<String> files = multi.getFileNames();
 
@@ -80,7 +80,7 @@ public class HashMapBinder {
 				String	fname		= files.nextElement();
 				String	fileName	= multi.getFilesystemName(fname);
 				// 파일 키값 재설정해야 함
-				target.put("bs_file", fileName);
+				pMap.put("bs_file", fileName);
 
 				if (fileName != null && fileName.length() > 0) {
 					file = new File(realFolder + "\\" + fileName);
@@ -91,7 +91,7 @@ public class HashMapBinder {
 			if (file != null) {
 				size = file.length();
 				// 파일 키값 재설정해야 함
-				target.put("bs_size", size);
+				pMap.put("bs_size", size);
 			}
 		}
 	}

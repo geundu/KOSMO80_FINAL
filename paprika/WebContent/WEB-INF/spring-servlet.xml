@@ -38,16 +38,16 @@
 	<bean id="url-mapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
 			<props>
-				<prop key="/paprika/getStudentInfo.do">course-controller</prop>
-				<prop key="/paprika/studentInfoUpdate.do">course-controller</prop>
-				<prop key="/paprika/getRegisterRecord.do">course-controller</prop>
-				<prop key="/paprika/getCourseHistory.do">course-controller</prop>
-				<prop key="/paprika/getGradeHistory.do">course-controller</prop>
-				<prop key="/paprika/getGradeHistory.do">course-controller</prop>
-				<prop key="/paprika/getGradeHistory.do">course-controller</prop>
+				<prop key="/paprika/getCourseList.do">course-controller</prop>
+				<prop key="/paprika/getLectureList.do">course-controller</prop>
+				<prop key="/paprika/getLectureDetail.do">course-controller</prop>
+				<prop key="/paprika/homeworkInsert.do">course-controller</prop>
+				<prop key="/paprika/homeworkUpdate.do">course-controller</prop>
+				<prop key="/paprika/answerInsert.do">course-controller</prop>
+				<prop key="/paprika/feedbackInsert.do">course-controller</prop>
 
-				<prop key="/paprika/getStudentInfo.do">curriculum-controller</prop>
-				<prop key="/paprika/studentInfoUpdate.do">curriculum-controller</prop>
+				<prop key="/paprika/getOpenCourse.do">curriculum-controller</prop>
+				<prop key="/paprika/getCurriculum.do">curriculum-controller</prop>
 
 				<prop key="/paprika/getStudentInfo.do">meetingroom-controller</prop>
 				<prop key="/paprika/studentInfoUpdate.do">meetingroom-controller</prop>
@@ -133,7 +133,7 @@
 	</bean>
 
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="prefix" value="/WEB-INF/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
 

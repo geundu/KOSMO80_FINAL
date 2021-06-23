@@ -17,8 +17,9 @@ public class StudentInfoLogic {
 	 * @return
 	 */
 	public List<Map<String, Object>> getStudentInfo(Map<String, Object> pMap) {
-
-		return null;
+		List<Map<String, Object>> studentList = null;
+		studentList = studentInfoDao.getStudentInfo(pMap);
+		return studentList;
 	}
 
 	/**

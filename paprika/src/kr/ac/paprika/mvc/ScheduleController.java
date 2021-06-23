@@ -12,6 +12,10 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 public class ScheduleController extends MultiActionController {
 	private ScheduleLogic scheduleLogic = null;
 
+	public void setScheduleLogic(ScheduleLogic scheduleLogic) {
+		this.scheduleLogic = scheduleLogic;
+	}
+
 	/**
 	 * 시간표 조회 메서드
 	 * 

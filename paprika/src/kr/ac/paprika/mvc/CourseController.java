@@ -18,6 +18,7 @@ public class CourseController extends MultiActionController {
 
 	/**
 	 * 강좌조회 메서드 eg) 알고리즘, 자료구조, 어셈블리어, ...
+	 * 교수, 학생 분기가 있어야 함
 	 * 
 	 * @param req
 	 * @param res
@@ -32,6 +33,7 @@ public class CourseController extends MultiActionController {
 
 	/**
 	 * 강의조회 메서드 eg) 알고리즘 1강, 2강, ...
+	 * 교수, 학생 분기가 있어야 함
 	 * 
 	 * @param req
 	 * @param res
@@ -46,6 +48,7 @@ public class CourseController extends MultiActionController {
 
 	/**
 	 * 강의상세조회 메서드(강의동영상 여기서 조회)
+	 * 교수도 강의조회 함 화면이 다르면 학생과 분기 있어야 함
 	 * 
 	 * @param req
 	 * @param res

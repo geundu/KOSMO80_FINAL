@@ -19,8 +19,9 @@ public class StudentInfoDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> getStudentInfo(Map<String, Object> pMap) {
-
-		return null;
+		List<Map<String, Object>> studentList = null;
+		studentList = sqlSessionTemplate.selectList("getStudentInfo", pMap);
+		return studentList;
 	}
 
 	/**
