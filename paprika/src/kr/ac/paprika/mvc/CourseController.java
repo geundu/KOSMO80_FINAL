@@ -6,19 +6,22 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 public class CourseController extends MultiActionController {
 	private CourseLogic courseLogic = null;
 
+	/**
+	 * 스프링으로부터 DI를 받기 위한 setter
+	 * 
+	 * @param courseLogic
+	 */
 	public void setCourseLogic(CourseLogic courseLogic) {
 		this.courseLogic = courseLogic;
 	}
 
 	/**
-	 * 강좌조회 메서드 eg) 알고리즘, 자료구조, 어셈블리어, ...
-	 * 교수, 학생 분기가 있어야 함
+	 * 강좌조회 메서드 eg) 알고리즘, 자료구조, 어셈블리어, ... 교수, 학생 분기가 있어야 함
 	 * 
 	 * @param req
 	 * @param res
@@ -26,14 +29,12 @@ public class CourseController extends MultiActionController {
 	 * @throws IOException
 	 * @throws ServletException
 	 */
-	public ModelAndView getCourseList(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+	public void getCourseList(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
-		return null;
 	}
 
 	/**
-	 * 강의조회 메서드 eg) 알고리즘 1강, 2강, ...
-	 * 교수, 학생 분기가 있어야 함
+	 * 강의조회 메서드 eg) 알고리즘 1강, 2강, ... 교수, 학생 분기가 있어야 함
 	 * 
 	 * @param req
 	 * @param res
@@ -41,14 +42,12 @@ public class CourseController extends MultiActionController {
 	 * @throws IOException
 	 * @throws ServletException
 	 */
-	public ModelAndView getLectureList(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+	public void getLectureList(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
-		return null;
 	}
 
 	/**
-	 * 강의상세조회 메서드(강의동영상 여기서 조회)
-	 * 교수도 강의조회 함 화면이 다르면 학생과 분기 있어야 함
+	 * 강의상세조회 메서드(강의동영상 여기서 조회) 교수도 강의조회 함 화면이 다르면 학생과 분기 있어야 함
 	 * 
 	 * @param req
 	 * @param res
@@ -56,9 +55,8 @@ public class CourseController extends MultiActionController {
 	 * @throws IOException
 	 * @throws ServletException
 	 */
-	public ModelAndView getLectureDetail(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+	public void getLectureDetail(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
-		return null;
 	}
 
 	/**
@@ -70,9 +68,8 @@ public class CourseController extends MultiActionController {
 	 * @throws IOException
 	 * @throws ServletException
 	 */
-	public ModelAndView homeworkInsert(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+	public void homeworkInsert(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
-		return null;
 	}
 
 	/**
@@ -84,9 +81,8 @@ public class CourseController extends MultiActionController {
 	 * @throws IOException
 	 * @throws ServletException
 	 */
-	public ModelAndView homeworkUpdate(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+	public void homeworkUpdate(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
-		return null;
 	}
 
 	/**
@@ -98,9 +94,8 @@ public class CourseController extends MultiActionController {
 	 * @throws IOException
 	 * @throws ServletException
 	 */
-	public ModelAndView answerInsert(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+	public void answerInsert(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
-		return null;
 	}
 
 	/**
@@ -112,8 +107,7 @@ public class CourseController extends MultiActionController {
 	 * @throws IOException
 	 * @throws ServletException
 	 */
-	public ModelAndView feedbackInsert(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+	public void feedbackInsert(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
-		return null;
 	}
 }

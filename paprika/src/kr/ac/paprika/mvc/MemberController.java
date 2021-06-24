@@ -12,6 +12,11 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 public class MemberController extends MultiActionController {
 	private MemberLogic memberLogic = null;
 
+	/**
+	 * 스프링으로부터 DI를 받기 위한 setter
+	 * 
+	 * @param memberLogic
+	 */
 	public void setMemberLogic(MemberLogic memberLogic) {
 		this.memberLogic = memberLogic;
 	}
@@ -35,12 +40,10 @@ public class MemberController extends MultiActionController {
 	 * 
 	 * @param req
 	 * @param res
-	 * @return
 	 * @throws IOException
 	 * @throws ServletException
 	 */
-	public ModelAndView getPassword(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+	public void getPassword(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
-		return null;
 	}
 }

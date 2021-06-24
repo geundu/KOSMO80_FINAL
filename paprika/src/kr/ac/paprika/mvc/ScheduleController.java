@@ -12,6 +12,11 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 public class ScheduleController extends MultiActionController {
 	private ScheduleLogic scheduleLogic = null;
 
+	/**
+	 * 스프링으로부터 DI를 받기 위한 setter
+	 * 
+	 * @param scheduleLogic
+	 */
 	public void setScheduleLogic(ScheduleLogic scheduleLogic) {
 		this.scheduleLogic = scheduleLogic;
 	}
@@ -21,12 +26,10 @@ public class ScheduleController extends MultiActionController {
 	 * 
 	 * @param req
 	 * @param res
-	 * @return
 	 * @throws IOException
 	 * @throws ServletException
 	 */
-	public ModelAndView getSchedule(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+	public void getSchedule(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
-		return null;
 	}
 }

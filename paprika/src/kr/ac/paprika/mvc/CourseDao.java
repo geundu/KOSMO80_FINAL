@@ -8,6 +8,11 @@ import org.mybatis.spring.SqlSessionTemplate;
 public class CourseDao {
 	private SqlSessionTemplate sqlSessionTemplate = null;
 
+	/**
+	 * 스프링으로부터 DI를 받기 위한 setter
+	 * 
+	 * @param sqlSessionTemplate
+	 */
 	public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
 		this.sqlSessionTemplate = sqlSessionTemplate;
 	}

@@ -6,6 +6,11 @@ import java.util.Map;
 public class MeetingRoomLogic {
 	private MeetingRoomDao meetingRoomDao = null;
 
+	/**
+	 * 스프링으로부터 DI를 받기 위한 setter
+	 * 
+	 * @param meetingRoomDao
+	 */
 	public void setMeetingRoomDao(MeetingRoomDao meetingRoomDao) {
 		this.meetingRoomDao = meetingRoomDao;
 	}

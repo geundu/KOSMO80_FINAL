@@ -6,6 +6,11 @@ import java.util.Map;
 public class MemberLogic {
 	private MemberDao memberDao = null;
 
+	/**
+	 * 스프링으로부터 DI를 받기 위한 setter
+	 * 
+	 * @param memberDao
+	 */
 	public void setMemberDao(MemberDao memberDao) {
 		this.memberDao = memberDao;
 	}

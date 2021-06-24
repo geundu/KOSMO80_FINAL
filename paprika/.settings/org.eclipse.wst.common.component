@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="final_test_project">
+    <wb-module deploy-name="paprika">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="final_test_project"/>
-        <property name="java-output-path" value="/final_test_project/build/classes"/>
+        <property name="java-output-path" value="/paprika/build/classes"/>
+        <property name="context-root" value="paprika"/>
     </wb-module>
 </project-modules>

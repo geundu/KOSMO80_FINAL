@@ -12,6 +12,11 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 public class MeetingRoomController extends MultiActionController {
 	private MeetingRoomLogic meetingRoomLogic = null;
 
+	/**
+	 * 스프링으로부터 DI를 받기 위한 setter
+	 * 
+	 * @param meetingRoomLogic
+	 */
 	public void setMeetingRoomLogic(MeetingRoomLogic meetingRoomLogic) {
 		this.meetingRoomLogic = meetingRoomLogic;
 	}
@@ -21,13 +26,11 @@ public class MeetingRoomController extends MultiActionController {
 	 * 
 	 * @param req
 	 * @param res
-	 * @return
 	 * @throws IOException
 	 * @throws ServletException
 	 */
-	public ModelAndView getMeetingRoomList(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+	public void getMeetingRoomList(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
-		return null;
 	}
 
 	/**
@@ -47,13 +50,11 @@ public class MeetingRoomController extends MultiActionController {
 	 * 
 	 * @param req
 	 * @param res
-	 * @return
 	 * @throws IOException
 	 * @throws ServletException
 	 */
-	public ModelAndView getMyBookingList(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+	public void getMyBookingList(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
-		return null;
 	}
 
 	/**

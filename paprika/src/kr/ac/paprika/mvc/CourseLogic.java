@@ -6,6 +6,11 @@ import java.util.Map;
 public class CourseLogic {
 	private CourseDao courseDao = null;
 
+	/**
+	 * 스프링으로부터 DI를 받기 위한 setter
+	 * 
+	 * @param courseDao
+	 */
 	public void setCourseDao(CourseDao courseDao) {
 		this.courseDao = courseDao;
 	}

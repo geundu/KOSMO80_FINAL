@@ -6,12 +6,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 public class CurriculumController extends MultiActionController {
 	private CurriculumLogic curriculumLogic = null;
 
+	/**
+	 * 스프링으로부터 DI를 받기 위한 setter
+	 * 
+	 * @param curriculumLogic
+	 */
 	public void setCurriculumLogic(CurriculumLogic curriculumLogic) {
 		this.curriculumLogic = curriculumLogic;
 	}
@@ -21,13 +25,11 @@ public class CurriculumController extends MultiActionController {
 	 * 
 	 * @param req
 	 * @param res
-	 * @return
 	 * @throws IOException
 	 * @throws ServletException
 	 */
-	public ModelAndView getOpenCourse(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+	public void getOpenCourse(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
-		return null;
 	}
 
 	/**
@@ -35,12 +37,10 @@ public class CurriculumController extends MultiActionController {
 	 * 
 	 * @param req
 	 * @param res
-	 * @return
 	 * @throws IOException
 	 * @throws ServletException
 	 */
-	public ModelAndView getCurriculum(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+	public void getCurriculum(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
-		return null;
 	}
 }

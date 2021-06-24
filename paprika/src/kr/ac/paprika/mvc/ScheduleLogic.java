@@ -6,6 +6,11 @@ import java.util.Map;
 public class ScheduleLogic {
 	private ScheduleDao scheduleDao = null;
 
+	/**
+	 * 스프링으로부터 DI를 받기 위한 setter
+	 * 
+	 * @param scheduleDao
+	 */
 	public void setScheduleDao(ScheduleDao scheduleDao) {
 		this.scheduleDao = scheduleDao;
 	}

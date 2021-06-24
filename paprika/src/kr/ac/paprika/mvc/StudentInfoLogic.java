@@ -6,6 +6,11 @@ import java.util.Map;
 public class StudentInfoLogic {
 	private StudentInfoDao studentInfoDao = null;
 
+	/**
+	 * 스프링으로부터 DI를 받기 위한 setter
+	 * 
+	 * @param studentInfoDao
+	 */
 	public void setStudentInfoDao(StudentInfoDao studentInfoDao) {
 		this.studentInfoDao = studentInfoDao;
 	}
@@ -62,6 +67,17 @@ public class StudentInfoLogic {
 	 * @return
 	 */
 	public List<Map<String, Object>> getGradeHistory(Map<String, Object> pMap) {
+
+		return null;
+	}
+
+	/**
+	 * 등록금 조회 메서드
+	 * 
+	 * @param pMap
+	 * @return
+	 */
+	public List<Map<String, Object>> getTuition(Map<String, Object> pMap) {
 
 		return null;
 	}
