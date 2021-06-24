@@ -3,38 +3,43 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+	<!-- 강좌 컨트롤러 -->
 	<bean id="course-controller" class="kr.ac.paprika.mvc.CourseController">
 		<property name="methodNameResolver" ref="course-resolver" />
 		<property name="courseLogic" ref="course-logic" />
 	</bean>
 
+	<!-- 학사정보 컨트롤러 -->
 	<bean id="curriculum-controller" class="kr.ac.paprika.mvc.CurriculumController">
 		<property name="methodNameResolver" ref="curriculum-resolver" />
 		<property name="curriculumLogic" ref="curriculum-logic" />
 	</bean>
 
+	<!-- 회의실예약 컨트롤러 -->
 	<bean id="meetingroom-controller" class="kr.ac.paprika.mvc.MeetingRoomController">
 		<property name="methodNameResolver" ref="meetingroom-resolver" />
 		<property name="meetingRoomLogic" ref="meetingroom-logic" />
 	</bean>
 
+	<!-- 로그인 컨트롤러 -->
 	<bean id="member-controller" class="kr.ac.paprika.mvc.MemberController">
 		<property name="methodNameResolver" ref="member-resolver" />
 		<property name="memberLogic" ref="member-logic" />
 	</bean>
 
+	<!-- 시간표 컨트롤러 -->
 	<bean id="schedule-controller" class="kr.ac.paprika.mvc.ScheduleController">
 		<property name="methodNameResolver" ref="schedule-resolver" />
 		<property name="scheduleLogic" ref="schedule-logic" />
 	</bean>
 
-	<!-- StudentInfoController 선언 -->
+	<!-- 종합정보조회 컨트롤러 -->
 	<bean id="studentinfo-controller" class="kr.ac.paprika.mvc.StudentInfoController">
 		<property name="methodNameResolver" ref="studentinfo-resolver" />
 		<property name="studentInfoLogic" ref="studentinfo-logic" />
 	</bean>
-	
-	<!-- ======== SimpleUrlHandlerMapping 땅 ======== -->
+
+	<!-- 컨트롤러 매핑 -->
 	<bean id="url-mapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
 			<props>
@@ -49,77 +54,83 @@
 				<prop key="/paprika/getOpenCourse.do">curriculum-controller</prop>
 				<prop key="/paprika/getCurriculum.do">curriculum-controller</prop>
 
-				<prop key="/paprika/getStudentInfo.do">meetingroom-controller</prop>
-				<prop key="/paprika/studentInfoUpdate.do">meetingroom-controller</prop>
-				<prop key="/paprika/getRegisterRecord.do">meetingroom-controller</prop>
-				<prop key="/paprika/getCourseHistory.do">meetingroom-controller</prop>
+				<prop key="/paprika/getMeetingRoomList.do">meetingroom-controller</prop>
+				<prop key="/paprika/meetingRoomInsert.do">meetingroom-controller</prop>
+				<prop key="/paprika/getMyBookingList.do">meetingroom-controller</prop>
+				<prop key="/paprika/bookingDelete.do">meetingroom-controller</prop>
 
-				<prop key="/paprika/getStudentInfo.do">member-controller</prop>
-				<prop key="/paprika/studentInfoUpdate.do">member-controller</prop>
+				<prop key="/paprika/signIn.do">member-controller</prop>
+				<prop key="/paprika/getPassword.do">member-controller</prop>
 
-				<prop key="/paprika/getStudentInfo.do">schedule-controller</prop>
+				<prop key="/paprika/getSchedule.do">schedule-controller</prop>
 
 				<prop key="/paprika/getStudentInfo.do">studentinfo-controller</prop>
 				<prop key="/paprika/studentInfoUpdate.do">studentinfo-controller</prop>
 				<prop key="/paprika/getRegisterRecord.do">studentinfo-controller</prop>
 				<prop key="/paprika/getCourseHistory.do">studentinfo-controller</prop>
 				<prop key="/paprika/getGradeHistory.do">studentinfo-controller</prop>
+				<prop key="/paprika/getTuition.do">studentinfo-controller</prop>
 			</props>
 		</property>
 	</bean>
 
-	<!-- ======== PropertiesMethodNameResolver 땅 ======== -->
+	<!-- 강좌 컨트롤러의 메서드 매핑 -->
 	<bean id="course-resolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
 		<property name="mappings">
 			<props>
-				<prop key="/paprika/getStudentInfo.do">getStudentInfo</prop>
-				<prop key="/paprika/studentInfoUpdate.do">studentInfoUpdate</prop>
-				<prop key="/paprika/getRegisterRecord.do">getRegisterRecord</prop>
-				<prop key="/paprika/getCourseHistory.do">getCourseHistory</prop>
-				<prop key="/paprika/getGradeHistory.do">getGradeHistory</prop>
-				<prop key="/paprika/getGradeHistory.do">getGradeHistory</prop>
-				<prop key="/paprika/getGradeHistory.do">getGradeHistory</prop>
+				<prop key="/paprika/getCourseList.do">getCourseList</prop>
+				<prop key="/paprika/getLectureList.do">getLectureList</prop>
+				<prop key="/paprika/getLectureDetail.do">getLectureDetail</prop>
+				<prop key="/paprika/homeworkInsert.do">homeworkInsert</prop>
+				<prop key="/paprika/homeworkUpdate.do">homeworkUpdate</prop>
+				<prop key="/paprika/answerInsert.do">answerInsert</prop>
+				<prop key="/paprika/feedbackInsert.do">feedbackInsert</prop>
 			</props>
 		</property>
 	</bean>
 
+	<!-- 학사정보 컨트롤러의 메서드 매핑 -->
 	<bean id="curriculum-resolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
 		<property name="mappings">
 			<props>
-				<prop key="/paprika/getStudentInfo.do">getStudentInfo</prop>
-				<prop key="/paprika/studentInfoUpdate.do">studentInfoUpdate</prop>
+				<prop key="/paprika/getOpenCourse.do">getOpenCourse</prop>
+				<prop key="/paprika/getCurriculum.do">getCurriculum</prop>
 			</props>
 		</property>
 	</bean>
 
+	<!-- 회의실예약 컨트롤러의 메서드 매핑 -->
 	<bean id="meetingroom-resolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
 		<property name="mappings">
 			<props>
-				<prop key="/paprika/getStudentInfo.do">getStudentInfo</prop>
-				<prop key="/paprika/studentInfoUpdate.do">studentInfoUpdate</prop>
-				<prop key="/paprika/getRegisterRecord.do">getRegisterRecord</prop>
-				<prop key="/paprika/getCourseHistory.do">getCourseHistory</prop>
+				<prop key="/paprika/getMeetingRoomList.do">getMeetingRoomList</prop>
+				<prop key="/paprika/meetingRoomInsert.do">meetingRoomInsert</prop>
+				<prop key="/paprika/getMyBookingList.do">getMyBookingList</prop>
+				<prop key="/paprika/bookingDelete.do">bookingDelete</prop>
 			</props>
 		</property>
 	</bean>
 
+	<!-- 로그인 컨트롤러의 메서드 매핑 -->
 	<bean id="member-resolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
 		<property name="mappings">
 			<props>
-				<prop key="/paprika/getStudentInfo.do">getStudentInfo</prop>
-				<prop key="/paprika/studentInfoUpdate.do">studentInfoUpdate</prop>
+				<prop key="/paprika/signIn.do">signIn</prop>
+				<prop key="/paprika/getPassword.do">getPassword</prop>
 			</props>
 		</property>
 	</bean>
 
+	<!-- 시간표 컨트롤러의 메서드 매핑 -->
 	<bean id="schedule-resolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
 		<property name="mappings">
 			<props>
-				<prop key="/paprika/getStudentInfo.do">getStudentInfo</prop>
+				<prop key="/paprika/getSchedule.do">getSchedule</prop>
 			</props>
 		</property>
 	</bean>
 
+	<!-- 종합정보조회 컨트롤러의 메서드 매핑 -->
 	<bean id="studentinfo-resolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
 		<property name="mappings">
 			<props>
@@ -128,10 +139,12 @@
 				<prop key="/paprika/getRegisterRecord.do">getRegisterRecord</prop>
 				<prop key="/paprika/getCourseHistory.do">getCourseHistory</prop>
 				<prop key="/paprika/getGradeHistory.do">getGradeHistory</prop>
+				<prop key="/paprika/getTuition.do">getTuition</prop>
 			</props>
 		</property>
 	</bean>
 
+	<!-- url 접두&접미사 설정 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/" />
 		<property name="suffix" value=".jsp" />

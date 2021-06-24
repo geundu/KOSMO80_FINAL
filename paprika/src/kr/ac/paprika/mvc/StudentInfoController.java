@@ -95,4 +95,18 @@ public class StudentInfoController extends MultiActionController {
 
 		return null;
 	}
+
+	/**
+	 * 등록금 조회 메서드
+	 * 
+	 * @param req
+	 * @param res
+	 * @return
+	 * @throws IOException
+	 * @throws ServletException
+	 */
+	public ModelAndView getTuition(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+
+		return null;
+	}
 }
