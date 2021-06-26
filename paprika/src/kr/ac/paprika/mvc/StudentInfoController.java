@@ -10,12 +10,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import kr.ac.paprika.common.HashMapBinder;
 
 public class StudentInfoController extends MultiActionController {
-	private StudentInfoLogic studentInfoLogic = null;
+	private StudentInfoLogic	studentInfoLogic	= null;
+	Logger						logger				= Logger.getLogger(StudentInfoController.class);
 
 	/**
 	 * 스프링으로부터 DI를 받기 위한 setter
@@ -37,9 +39,14 @@ public class StudentInfoController extends MultiActionController {
 	public void getStudentInfo(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		HashMapBinder		hmb		= new HashMapBinder(req);
 		Map<String, Object>	pMap	= new HashMap<String, Object>();
+		res.setContentType("text/plain;charset=utf-8");
+
 		hmb.bind(pMap);
-		List<Map<String, Object>>	studentList	= studentInfoLogic.getStudentInfo(pMap);
-		RequestDispatcher			dispatcher	= req.getRequestDispatcher("../index.jsp");
+		List<Map<String, Object>> studentList = null;
+		studentList = studentInfoLogic.getStudentInfo(pMap);
+		logger.info(pMap);
+		logger.info(studentList);
+		RequestDispatcher dispatcher = req.getRequestDispatcher("../index.jsp");
 		req.setAttribute("studentList", studentList);
 		dispatcher.forward(req, res);
 	}
