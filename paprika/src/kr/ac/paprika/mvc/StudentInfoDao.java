@@ -3,10 +3,12 @@ package kr.ac.paprika.mvc;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
 
 public class StudentInfoDao {
-	private SqlSessionTemplate sqlSessionTemplate = null;
+	private SqlSessionTemplate	sqlSessionTemplate	= null;
+	Logger						logger				= Logger.getLogger(StudentInfoDao.class);
 
 	/**
 	 * 스프링으로부터 DI를 받기 위한 setter
@@ -25,7 +27,10 @@ public class StudentInfoDao {
 	 */
 	public List<Map<String, Object>> getStudentInfo(Map<String, Object> pMap) {
 		List<Map<String, Object>> studentList = null;
-		studentList = sqlSessionTemplate.selectList("getStudentInfo", pMap);
+		sqlSessionTemplate.selectList("getCourse", pMap);
+		logger.info(pMap);
+		studentList = (List<Map<String, Object>>) pMap.get("cursor");
+		logger.info(studentList);
 		return studentList;
 	}
 

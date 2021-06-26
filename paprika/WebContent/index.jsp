@@ -2,12 +2,19 @@
 <%@ page import="java.util.*"%>
 <%
 	List<Map<String, Object>> studentList = null;
-	studentList = (List<Map<String, Object>>) request.getAttribute("studentList");
-	int size = 0;
-	if(studentList != null && studentList.size() > 0) {
-		size = studentList.size();
-		out.print(size);
+studentList = (List<Map<String, Object>>) request.getAttribute("studentList");
+int size = 0;
+
+if (studentList != null && studentList.size() > 0) {
+	size = studentList.size();
+	out.print(size);
+	out.print("<br>");
+
+	for (Map<String, Object> index : studentList) {
+		out.print(index.get("SUBJECT_NAME"));
+		out.print("<br>");
 	}
+}
 %>
 <!DOCTYPE html>
 <html>

@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.ac.paprika.mybatis.mapper.studentInfo">
-	<select id="getStudentInfo" parameterType="map" resultType="map">
-		SELECT * FROM STUDENT
+	<resultMap type="java.util.Map" id="testMap" />
+	<select id="getStudentInfo" parameterType="map" statementType="CALLABLE">
+		{CALL PROC_STU_TOTAL_INFO(#{STUDENT_NUMBER}, #{cursor, jdbcType=CURSOR,	mode=OUT, resultMap=testMap})}
+	</select>
+
+	<select id="getCourse" parameterType="map" statementType="CALLABLE">
+		{CALL PROC_COURSE('일어일문학과', 0, '전체', '전체', '', #{cursor, jdbcType=CURSOR,	mode=OUT, resultMap=testMap})}
 	</select>
 </mapper>
