@@ -3,10 +3,12 @@ package kr.ac.paprika.mvc;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
 
 public class CourseDao {
-	private SqlSessionTemplate sqlSessionTemplate = null;
+	private SqlSessionTemplate	sqlSessionTemplate	= null;
+	Logger						logger				= Logger.getLogger(StudentInfoController.class);
 
 	/**
 	 * 스프링으로부터 DI를 받기 위한 setter
@@ -24,8 +26,9 @@ public class CourseDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> getCourseList(Map<String, Object> pMap) {
-
-		return null;
+		List<Map<String, Object>> courseList = null;
+		courseList = sqlSessionTemplate.selectList("getCourseList", pMap);
+		return courseList;
 	}
 
 	/**
@@ -35,8 +38,9 @@ public class CourseDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> getLectureList(Map<String, Object> pMap) {
-
-		return null;
+		List<Map<String, Object>> lectureList = null;
+		lectureList = sqlSessionTemplate.selectList("getLectureList", pMap);
+		return lectureList;
 	}
 
 	/**
@@ -46,8 +50,9 @@ public class CourseDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> getLectureDetail(Map<String, Object> pMap) {
-
-		return null;
+		List<Map<String, Object>> lectureDetail = null;
+		lectureDetail = sqlSessionTemplate.selectList("getLectureDetail", pMap);
+		return lectureDetail;
 	}
 
 	/**
@@ -56,9 +61,11 @@ public class CourseDao {
 	 * @param pMap
 	 * @return
 	 */
-	public int homoworkInsert(Map<String, Object> pMap) {
-
-		return 0;
+	public int homeworkInsert(Map<String, Object> pMap) {
+		int result = 0;
+		result = 1;
+		sqlSessionTemplate.insert("homeworkInsert", pMap);
+		return result;
 	}
 
 	/**
@@ -68,19 +75,10 @@ public class CourseDao {
 	 * @return
 	 */
 	public int homeworkUpdate(Map<String, Object> pMap) {
-
-		return 0;
-	}
-
-	/**
-	 * 시험답안지제출 메서드 (한 번 제출하면 수정할 수 없음)
-	 * 
-	 * @param pMap
-	 * @return
-	 */
-	public int answerInsert(Map<String, Object> pMap) {
-
-		return 0;
+		int result = 0;
+		result = 1;
+		sqlSessionTemplate.update("homeworkUpdate", pMap);
+		return result;
 	}
 
 	/**
@@ -90,7 +88,9 @@ public class CourseDao {
 	 * @return
 	 */
 	public int feedbackInsert(Map<String, Object> pMap) {
-
-		return 0;
+		int result = 0;
+		result = 1;
+		sqlSessionTemplate.insert("feedbackInsert", pMap);
+		return result;
 	}
 }
