@@ -19,11 +19,12 @@ public class CurriculumLogic {
 	 * 개설강좌조회 메서드
 	 * 
 	 * @param pMap
-	 * @return
+	 * @return courseList
 	 */
 	public List<Map<String, Object>> getOpenCourse(Map<String, Object> pMap) {
-
-		return null;
+		List<Map<String, Object>> courseList = null;
+		courseList = curriculumDao.getOpenCourse(pMap);
+		return courseList;
 	}
 
 	/**
@@ -33,7 +34,8 @@ public class CurriculumLogic {
 	 * @return
 	 */
 	public List<Map<String, Object>> getCurriculum(Map<String, Object> pMap) {
-
-		return null;
+		List<Map<String, Object>> curriculumList = null;
+		curriculumList = curriculumDao.getCurriculum(pMap);
+		return curriculumList;
 	}
 }

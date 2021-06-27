@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.ac.paprika.mybatis.mapper.curriculum">
-
+	<resultMap type="java.util.Map" id="courseMap" />
+	<select id="getCourse" parameterType="map" statementType="CALLABLE">
+		{CALL PROC_COURSE(#{p_COLLEGE_NAME}, #{p_SUBJECT_GRADE}, #{p_SUBJECT_DIVISION}, #{p_COURSE_DAY}
+						, #{p_SUBJECT_NAME}, #{cursor, jdbcType=CURSOR, mode=OUT, resultMap=courseMap})}
+	</select>
+	<select id="getCurriculum" parameterType="map" statementType="CALLABLE">
+		{CALL PROC_CURRICULUM(15224001, '2021', #{cursor, jdbcType=CURSOR, mode=OUT, resultMap=courseMap})}
+	</select>
 </mapper>

@@ -6,7 +6,5 @@
 		{CALL PROC_STU_TOTAL_INFO(#{STUDENT_NUMBER}, #{cursor, jdbcType=CURSOR,	mode=OUT, resultMap=testMap})}
 	</select>
 
-	<select id="getCourse" parameterType="map" statementType="CALLABLE">
-		{CALL PROC_COURSE('일어일문학과', 0, '전체', '전체', '', #{cursor, jdbcType=CURSOR,	mode=OUT, resultMap=testMap})}
-	</select>
+	
 </mapper>
