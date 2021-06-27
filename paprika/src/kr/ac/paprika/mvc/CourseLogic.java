@@ -63,7 +63,7 @@ public class CourseLogic {
 	public int homeworkInsert(Map<String, Object> pMap) {
 		int result = 0;
 		result = courseDao.homeworkInsert(pMap);
-		return result;	
+		return result;
 	}
 
 	/**
@@ -75,18 +75,7 @@ public class CourseLogic {
 	public int homeworkUpdate(Map<String, Object> pMap) {
 		int result = 0;
 		result = courseDao.homeworkUpdate(pMap);
-		return result;	
-	}
-
-	/**
-	 * 시험답안지제출 메서드 (한 번 제출하면 수정할 수 없음)
-	 * 
-	 * @param pMap
-	 * @return
-	 */
-	public int answerInsert(Map<String, Object> pMap) {
-
-		return 0;
+		return result;
 	}
 
 	/**
@@ -98,7 +87,7 @@ public class CourseLogic {
 	public int feedbackInsert(Map<String, Object> pMap) {
 		int result = 0;
 		result = courseDao.feedbackInsert(pMap);
-		return result;	
+		return result;
 
 	}
 }

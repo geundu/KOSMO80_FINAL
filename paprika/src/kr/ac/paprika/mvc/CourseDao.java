@@ -26,15 +26,8 @@ public class CourseDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> getCourseList(Map<String, Object> pMap) {
-		/*List<Map<String, Object>> courseList = null;
-		sqlSessionTemplate.selectList("getCourse", pMap);
-		logger.info(pMap);
-		courseList = (List<Map<String, Object>>) pMap.get("cursor");
-		logger.info(courseList);
-		return courseList;*/
-		
 		List<Map<String, Object>> courseList = null;
-		courseList = sqlSessionTemplate.selectList("getCourseList",pMap);
+		courseList = sqlSessionTemplate.selectList("getCourseList", pMap);
 		return courseList;
 	}
 
@@ -46,7 +39,7 @@ public class CourseDao {
 	 */
 	public List<Map<String, Object>> getLectureList(Map<String, Object> pMap) {
 		List<Map<String, Object>> lectureList = null;
-		lectureList = sqlSessionTemplate.selectList("getLectureList",pMap);
+		lectureList = sqlSessionTemplate.selectList("getLectureList", pMap);
 		return lectureList;
 	}
 
@@ -58,7 +51,7 @@ public class CourseDao {
 	 */
 	public List<Map<String, Object>> getLectureDetail(Map<String, Object> pMap) {
 		List<Map<String, Object>> lectureDetail = null;
-		lectureDetail = sqlSessionTemplate.selectList("getLectureDetail",pMap);
+		lectureDetail = sqlSessionTemplate.selectList("getLectureDetail", pMap);
 		return lectureDetail;
 	}
 
@@ -71,7 +64,7 @@ public class CourseDao {
 	public int homeworkInsert(Map<String, Object> pMap) {
 		int result = 0;
 		result = 1;
-		sqlSessionTemplate.insert("homeworkInsert",pMap);
+		sqlSessionTemplate.insert("homeworkInsert", pMap);
 		return result;
 	}
 
@@ -84,19 +77,8 @@ public class CourseDao {
 	public int homeworkUpdate(Map<String, Object> pMap) {
 		int result = 0;
 		result = 1;
-		sqlSessionTemplate.update("homeworkUpdate",pMap);
+		sqlSessionTemplate.update("homeworkUpdate", pMap);
 		return result;
-	}
-
-	/**
-	 * 시험답안지제출 메서드 (한 번 제출하면 수정할 수 없음)
-	 * 
-	 * @param pMap
-	 * @return
-	 */
-	public int answerInsert(Map<String, Object> pMap) {
-
-		return 0;
 	}
 
 	/**
@@ -108,7 +90,7 @@ public class CourseDao {
 	public int feedbackInsert(Map<String, Object> pMap) {
 		int result = 0;
 		result = 1;
-		sqlSessionTemplate.insert("feedbackInsert",pMap);
+		sqlSessionTemplate.insert("feedbackInsert", pMap);
 		return result;
 	}
 }
