@@ -5,8 +5,31 @@
 	<select id="getStudentInfo" parameterType="map" statementType="CALLABLE">
 		{CALL PROC_STU_TOTAL_INFO(#{STUDENT_NUMBER}, #{cursor, jdbcType=CURSOR,	mode=OUT, resultMap=testMap})}
 	</select>
+	<select id="studentInfoUpdate" parameterType="map" statementType="CALLABLE">
+		{CALL PROC_PRO_STUDENT_CUD(#{TR_CODE},#{STUDENT_NAME},#{STUDENT_ENG_NAME},#{STUDENT_PHONE},#{COLLEGE_NUMBER},#{STUDENT_ENTER_YEAR},#{STUDENT_EMAIL},#{STUDENT_BIRTH},#{GUARDIAN_NAME},#{GUARDIAN_PHONE},#{MEMO},#{STUDENT_NUMBER},#{REGISTER_NUMBER})}
+	</select>
+
+	<select id="getRegisterRecord" parameterType="map" statementType="CALLABLE">
+		{CALL PROC_STU_REGISTER_SELECT(#{STUDENT_NUMBER}, #{cursor, jdbcType=CURSOR,	mode=OUT, resultMap=testMap})}
+	</select>
+	
+	<select id="getCourseHistory" parameterType="map" statementType="CALLABLE">
+		{CALL PROC_STUDENT_COURSE_SELECT(#{STUDENT_NUMBER},#{SEMESTER}, #{cursor, jdbcType=CURSOR,	mode=OUT, resultMap=testMap})}
+	</select>
+	
+	<select id="getGradeHistory" parameterType="map" statementType="CALLABLE">
+		{CALL PROC_STU_YEAR_SEM_SUBJ_SCORE(#{STUDENT_NUMBER}, #{cursor, jdbcType=CURSOR,	mode=OUT, resultMap=testMap})}
+	</select>
+	
+	<select id="getGradeHistoryDetail" parameterType="map" statementType="CALLABLE">
+		{CALL PROC_SUBJECT_SCORE_SELECT(#{STUDENT_NUMBER},#{SEMESTER}, #{cursor, jdbcType=CURSOR,	mode=OUT, resultMap=testMap})}
+	</select>
 
 	<select id="getCourse" parameterType="map" statementType="CALLABLE">
 		{CALL PROC_COURSE('일어일문학과', 0, '전체', '전체', '', #{cursor, jdbcType=CURSOR,	mode=OUT, resultMap=testMap})}
+	</select>
+	
+	<select id="getTuition" parameterType="map" statementType="CALLABLE">
+		{CALL PROC_TUITION_SELECT(#{STUDENT_NUMBER},#{SEMESTER}, #{cursor, jdbcType=CURSOR,	mode=OUT, resultMap=testMap})}
 	</select>
 </mapper>
