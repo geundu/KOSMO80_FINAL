@@ -7,6 +7,7 @@
 						, #{p_SUBJECT_NAME}, #{cursor, jdbcType=CURSOR, mode=OUT, resultMap=courseMap})}
 	</select>
 	<select id="getCurriculum" parameterType="map" statementType="CALLABLE">
-		{CALL PROC_CURRICULUM(15224001, '2021', #{cursor, jdbcType=CURSOR, mode=OUT, resultMap=courseMap})}
+		{CALL PROC_CURRICULUM(#{p_STU_NUMBER}, #{p_COLLEGE_NAME}
+							, #{cursor, jdbcType=CURSOR, mode=OUT, resultMap=courseMap})}
 	</select>
 </mapper>
