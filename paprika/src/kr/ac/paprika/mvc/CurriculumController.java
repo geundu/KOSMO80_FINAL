@@ -71,7 +71,7 @@ public class CurriculumController extends MultiActionController {
 	/**
 	 * 커리큘럼조회 메서드
 	 * @사용프로시저 PROC_CURRICULUM
-	 * @param req - p_STU_NUMBER 			학생번호
+	 * @param req - p_STUDENT_NUMBER 			학생번호
 	 * 				, p_YEAR 				검색연도
 	 * @param res
 	 * @throws IOException
