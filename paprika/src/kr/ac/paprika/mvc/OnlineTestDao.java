@@ -1,0 +1,35 @@
+package kr.ac.paprika.mvc;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
+import org.mybatis.spring.SqlSessionTemplate;
+
+public class OnlineTestDao {
+	private SqlSessionTemplate	sqlSessionTemplate	= null;
+	Logger						logger				= Logger.getLogger(OnlineTestController.class);
+
+	public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
+		this.sqlSessionTemplate = sqlSessionTemplate;
+	}
+
+	public List<Map<String, Object>> getOnlineTest(Map<String, Object> pMap) {
+		List<Map<String, Object>> onlineTest = null;
+		onlineTest = sqlSessionTemplate.selectList("getLectureList", pMap);
+		return onlineTest;
+	}
+
+	/**
+	 * 시험답안지제출 메서드 (한 번 제출하면 수정할 수 없음)
+	 * 
+	 * @param pMap
+	 * @return
+	 */
+	public int answerInsert(Map<String, Object> pMap) {
+		int result = 0;
+		result = 1;
+		sqlSessionTemplate.insert("answerInsert", pMap);
+		return result;
+	}
+}
