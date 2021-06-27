@@ -3,8 +3,11 @@ package kr.ac.paprika.mvc;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 public class CourseLogic {
-	private CourseDao courseDao = null;
+	private CourseDao	courseDao	= null;
+	Logger				logger		= Logger.getLogger(StudentInfoController.class);
 
 	/**
 	 * 스프링으로부터 DI를 받기 위한 setter
@@ -22,8 +25,9 @@ public class CourseLogic {
 	 * @return
 	 */
 	public List<Map<String, Object>> getCourseList(Map<String, Object> pMap) {
-
-		return null;
+		List<Map<String, Object>> courseList = null;
+		courseList = courseDao.getCourseList(pMap);
+		return courseList;
 	}
 
 	/**
@@ -33,8 +37,9 @@ public class CourseLogic {
 	 * @return
 	 */
 	public List<Map<String, Object>> getLectureList(Map<String, Object> pMap) {
-
-		return null;
+		List<Map<String, Object>> lectureList = null;
+		lectureList = courseDao.getLectureList(pMap);
+		return lectureList;
 	}
 
 	/**
@@ -44,8 +49,9 @@ public class CourseLogic {
 	 * @return
 	 */
 	public List<Map<String, Object>> getLectureDetail(Map<String, Object> pMap) {
-
-		return null;
+		List<Map<String, Object>> lectureDetail = null;
+		lectureDetail = courseDao.getLectureDetail(pMap);
+		return lectureDetail;
 	}
 
 	/**
@@ -54,9 +60,10 @@ public class CourseLogic {
 	 * @param pMap
 	 * @return
 	 */
-	public int homoworkInsert(Map<String, Object> pMap) {
-
-		return 0;
+	public int homeworkInsert(Map<String, Object> pMap) {
+		int result = 0;
+		result = courseDao.homeworkInsert(pMap);
+		return result;	
 	}
 
 	/**
@@ -66,8 +73,9 @@ public class CourseLogic {
 	 * @return
 	 */
 	public int homeworkUpdate(Map<String, Object> pMap) {
-
-		return 0;
+		int result = 0;
+		result = courseDao.homeworkUpdate(pMap);
+		return result;	
 	}
 
 	/**
@@ -88,7 +96,9 @@ public class CourseLogic {
 	 * @return
 	 */
 	public int feedbackInsert(Map<String, Object> pMap) {
+		int result = 0;
+		result = courseDao.feedbackInsert(pMap);
+		return result;	
 
-		return 0;
 	}
 }
