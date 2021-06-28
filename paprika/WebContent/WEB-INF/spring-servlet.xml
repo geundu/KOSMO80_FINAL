@@ -78,6 +78,7 @@
 				<prop key="/paprika/getRegisterRecord.do">studentinfo-controller</prop>
 				<prop key="/paprika/getCourseHistory.do">studentinfo-controller</prop>
 				<prop key="/paprika/getGradeHistory.do">studentinfo-controller</prop>
+				<prop key="/paprika/getGradeHistoryDetail.do">studentinfo-controller</prop>
 				<prop key="/paprika/getTuition.do">studentinfo-controller</prop>
 			</props>
 		</property>
@@ -158,6 +159,7 @@
 				<prop key="/paprika/getRegisterRecord.do">getRegisterRecord</prop>
 				<prop key="/paprika/getCourseHistory.do">getCourseHistory</prop>
 				<prop key="/paprika/getGradeHistory.do">getGradeHistory</prop>
+				<prop key="/paprika/getGradeHistoryDetail.do">getGradeHistoryDetail</prop>
 				<prop key="/paprika/getTuition.do">getTuition</prop>
 			</props>
 		</property>
