@@ -11,15 +11,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import kr.ac.paprika.common.HashMapBinder;
 
-public class OnlineTestController {
-	Logger					logger			= Logger.getLogger(CourseController.class);
-	private OnlineTestLogic	onlinetestLogic	= null;
+public class OnlineTestController extends MultiActionController {
+	Logger					logger			= Logger.getLogger(OnlineTestController.class);
+	private OnlineTestLogic	onlineTestLogic	= null;
 
-	public void setCourseLogic(OnlineTestLogic onlinetestLogic) {
-		this.onlinetestLogic = onlinetestLogic;
+	public void setOnlineTestLogic(OnlineTestLogic onlineTestLogic) {
+		this.onlineTestLogic = onlineTestLogic;
 	}
 
 	/**
@@ -51,7 +52,7 @@ public class OnlineTestController {
 
 		hmb.bind(pMap);
 		List<Map<String, Object>> onlineTest = null;
-		onlineTest = onlinetestLogic.getOnlineTest(pMap);
+		onlineTest = onlineTestLogic.getOnlineTest(pMap);
 		logger.info(pMap);
 		logger.info(onlineTest);
 		RequestDispatcher dispatcher = req.getRequestDispatcher("../index.jsp");
@@ -103,7 +104,7 @@ public class OnlineTestController {
 
 		hmb.bind(pmap);
 		int result = 0;
-		result = onlinetestLogic.answerInsert(pmap);
+		result = onlineTestLogic.answerInsert(pmap);
 
 		if (result == 1) {
 			res.sendRedirect("../index.jsp");

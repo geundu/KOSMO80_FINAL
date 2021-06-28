@@ -27,6 +27,12 @@
 		<property name="memberLogic" ref="member-logic" />
 	</bean>
 
+	<!-- 온라인시험 컨트롤러 -->
+	<bean id="onlinetest-controller" class="kr.ac.paprika.mvc.OnlineTestController">
+		<property name="methodNameResolver" ref="onlinetest-resolver" />
+		<property name="onlineTestLogic" ref="onlinetest-logic" />
+	</bean>
+
 	<!-- 시간표 컨트롤러 -->
 	<bean id="schedule-controller" class="kr.ac.paprika.mvc.ScheduleController">
 		<property name="methodNameResolver" ref="schedule-resolver" />
@@ -61,6 +67,9 @@
 
 				<prop key="/paprika/signIn.do">member-controller</prop>
 				<prop key="/paprika/getPassword.do">member-controller</prop>
+
+				<prop key="/paprika/getOnlineTest.do">onlinetest-controller</prop>
+				<prop key="/paprika/answerInsert.do">onlinetest-controller</prop>
 
 				<prop key="/paprika/getSchedule.do">schedule-controller</prop>
 
@@ -117,6 +126,16 @@
 			<props>
 				<prop key="/paprika/signIn.do">signIn</prop>
 				<prop key="/paprika/getPassword.do">getPassword</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- 온라인시험 컨트롤러의 메서드 매핑 -->
+	<bean id="onlinetest-resolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+		<property name="mappings">
+			<props>
+				<prop key="/paprika/getOnlineTest.do">getOnlineTest</prop>
+				<prop key="/paprika/answerInsert.do">answerInsert</prop>
 			</props>
 		</property>
 	</bean>

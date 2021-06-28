@@ -8,12 +8,16 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 public class OnlineTestDao {
 	private SqlSessionTemplate	sqlSessionTemplate	= null;
-	Logger						logger				= Logger.getLogger(OnlineTestController.class);
+	Logger						logger				= Logger.getLogger(OnlineTestDao.class);
 
 	public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
 		this.sqlSessionTemplate = sqlSessionTemplate;
 	}
 
+	/**
+	 * @param pMap
+	 * @return
+	 */
 	public List<Map<String, Object>> getOnlineTest(Map<String, Object> pMap) {
 		List<Map<String, Object>> onlineTest = null;
 		onlineTest = sqlSessionTemplate.selectList("getLectureList", pMap);

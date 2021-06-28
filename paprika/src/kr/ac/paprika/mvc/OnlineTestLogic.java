@@ -6,12 +6,23 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 public class OnlineTestLogic {
-	private OnlineTestDao	onlinetestDao	= null;
-	Logger					logger			= Logger.getLogger(StudentInfoController.class);
+	private OnlineTestDao	onlineTestDao	= null;
+	Logger					logger			= Logger.getLogger(OnlineTestLogic.class);
 
+	/**
+	 * @param onlineTestDao
+	 */
+	public void setOnlineTestDao(OnlineTestDao onlineTestDao) {
+		this.onlineTestDao = onlineTestDao;
+	}
+
+	/**
+	 * @param pMap
+	 * @return
+	 */
 	public List<Map<String, Object>> getOnlineTest(Map<String, Object> pMap) {
 		List<Map<String, Object>> onlineTest = null;
-		onlineTest = onlinetestDao.getOnlineTest(pMap);
+		onlineTest = onlineTestDao.getOnlineTest(pMap);
 		return onlineTest;
 	}
 
@@ -23,7 +34,8 @@ public class OnlineTestLogic {
 	 */
 	public int answerInsert(Map<String, Object> pMap) {
 		int result = 0;
-		result = onlinetestDao.answerInsert(pMap);
+		result = onlineTestDao.answerInsert(pMap);
 		return result;
 	}
+
 }

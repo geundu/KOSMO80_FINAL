@@ -8,5 +8,6 @@
 		<mapper resource="kr/ac/paprika/mybatis/mapper/member.xml" />
 		<mapper resource="kr/ac/paprika/mybatis/mapper/schedule.xml" />
 		<mapper resource="kr/ac/paprika/mybatis/mapper/studentInfo.xml" />
+		<mapper resource="kr/ac/paprika/mybatis/mapper/onlineTest.xml" />
 	</mappers>
 </configuration>
