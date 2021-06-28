@@ -6,8 +6,8 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 public class CourseLogic {
+	Logger				logger		= Logger.getLogger(CourseLogic.class);
 	private CourseDao	courseDao	= null;
-	Logger				logger		= Logger.getLogger(StudentInfoController.class);
 
 	/**
 	 * 스프링으로부터 DI를 받기 위한 setter
@@ -89,5 +89,27 @@ public class CourseLogic {
 		result = courseDao.feedbackInsert(pMap);
 		return result;
 
+	}
+
+	/**
+	 * 교수) 과제를 채점하고 UPDATE하는 메서드
+	 * 
+	 * @param pMap
+	 * @return
+	 */
+	public int homeworkGrading(Map<String, Object> pMap) {
+
+		return 0;
+	}
+
+	/**
+	 * 교수) 제출된 과제 리스트를 확인하는 메서드
+	 * 
+	 * @param pMap
+	 * @return
+	 */
+	public List<Map<String, Object>> getHomeworkList(Map<String, Object> pMap) {
+
+		return null;
 	}
 }

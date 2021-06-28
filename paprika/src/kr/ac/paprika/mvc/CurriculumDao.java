@@ -7,8 +7,8 @@ import org.apache.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
 
 public class CurriculumDao {
+	Logger						logger				= Logger.getLogger(CurriculumDao.class);
 	private SqlSessionTemplate	sqlSessionTemplate	= null;
-	Logger						logger				= Logger.getLogger(StudentInfoDao.class);
 
 	/**
 	 * 스프링으로부터 DI를 받기 위한 setter

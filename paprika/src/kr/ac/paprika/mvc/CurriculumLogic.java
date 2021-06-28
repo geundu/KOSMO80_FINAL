@@ -3,8 +3,11 @@ package kr.ac.paprika.mvc;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 public class CurriculumLogic {
-	private CurriculumDao curriculumDao = null;
+	Logger					logger			= Logger.getLogger(CurriculumLogic.class);
+	private CurriculumDao	curriculumDao	= null;
 
 	/**
 	 * 스프링으로부터 DI를 받기 위한 setter

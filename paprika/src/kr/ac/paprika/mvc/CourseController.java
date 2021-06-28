@@ -229,4 +229,28 @@ public class CourseController extends MultiActionController {
 			res.sendRedirect("등록실패 페이지 이동처리");
 		}
 	}
+
+	/**
+	 * 교수) 과제를 채점하고 UPDATE하는 메서드
+	 * 
+	 * @param req
+	 * @param res
+	 * @throws IOException
+	 * @throws ServletException
+	 */
+	public void homeworkGrading(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+
+	}
+
+	/**
+	 * 교수) 제출된 과제 리스트를 확인하는 메서드
+	 * 
+	 * @param req
+	 * @param res
+	 * @throws IOException
+	 * @throws ServletException
+	 */
+	public void getHomeworkList(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+
+	}
 }
