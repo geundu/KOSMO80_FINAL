@@ -4,7 +4,7 @@
 <%
 	request.setCharacterEncoding("utf-8");
 	request.getAttribute("studentList");
-	/* String sid = session.getAttribute("getSession"); */
+	String sid = "15722001";
 %>
 <!DOCTYPE html>
 <html>
@@ -21,6 +21,7 @@
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/style.css">
+			
 </head>
 <body>
 	<!-- main frame wrapper 시작 -->
@@ -34,7 +35,7 @@
 		<div id="content" class="p-1 p-md-1">
 	
 		<!-- if문을 쓰고 , 최상단에 request,getparam(/?) 메뉴마다 쿼리스트링을 주고 . if문 써가지고 jsp action 태그를 넣고 ajax를 들어내고 .   -->
-			<%-- <jsp:include page="pageContent/Schedule.jsp"></jsp:include> --%>
+			<%-- <jsp:include page="pageContent/Schedule.jsp"></jsp:include> --%> 
 			
 			<%@ include file="pageContent/Schedule.jsp" %>
 			
@@ -46,12 +47,13 @@
 	<!-- main frame wrapper end -->
 
 	<!-- <script src="js/jquery.min.js"></script> -->
+			<%@ include file="Factory.jsp" %> 
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/popper.js"></script>
+	<!-- <script src="js/popper.js"></script> -->
 	<!-- <script type="module" src="js/main.js"></script> -->
 	<!-- <script src="js/toggleAction.js"></script>  -->
-	<script src="js/jspInclude.js"></script>
+	<!-- <script src="js/jspInclude.js"></script> -->
 	<script src="js/menuTemplate.js"></script>
         <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
   <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
