@@ -253,4 +253,16 @@ public class CourseController extends MultiActionController {
 	public void getHomeworkList(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
 	}
+
+	/**
+	 * 교수) 받은 피드백 목록 확인
+	 * 
+	 * @param req
+	 * @param res
+	 * @throws IOException
+	 * @throws ServletException
+	 */
+	public void getFeedbackList(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+
+	}
 }

@@ -113,4 +113,28 @@ public class OnlineTestController extends MultiActionController {
 			res.sendRedirect("등록실패 페이지 이동처리");
 		}
 	}
+
+	/**
+	 * 시험문제 INSERT 메서드
+	 * 
+	 * @param req
+	 * @param res
+	 * @throws IOException
+	 * @throws ServletException
+	 */
+	public void onlineTestInsert(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+
+	}
+
+	/**
+	 * 시험문제 채점하고 UPDATE하는 메서드
+	 * 
+	 * @param req
+	 * @param res
+	 * @throws IOException
+	 * @throws ServletException
+	 */
+	public void TestGrading(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+
+	}
 }

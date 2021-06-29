@@ -36,4 +36,26 @@ public class OnlineTestDao {
 		sqlSessionTemplate.insert("answerInsert", pMap);
 		return result;
 	}
+
+	/**
+	 * 시험문제 INSERT 메서드
+	 * 
+	 * @param pMap
+	 * @return
+	 */
+	public int onlineTestInsert(Map<String, Object> pMap) {
+
+		return 0;
+	}
+
+	/**
+	 * 시험문제 채점하고 UPDATE하는 메서드
+	 * 
+	 * @param pMap
+	 * @return
+	 */
+	public int TestGrading(Map<String, Object> pMap) {
+
+		return 0;
+	}
 }

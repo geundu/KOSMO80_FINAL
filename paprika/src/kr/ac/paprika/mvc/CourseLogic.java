@@ -112,4 +112,15 @@ public class CourseLogic {
 
 		return null;
 	}
+
+	/**
+	 * 교수) 받은 피드백 목록 확인
+	 * 
+	 * @param pMap
+	 * @return
+	 */
+	public List<Map<String, Object>> getFeedbackList(Map<String, Object> pMap) {
+
+		return null;
+	}
 }

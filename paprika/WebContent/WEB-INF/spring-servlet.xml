@@ -54,8 +54,10 @@
 				<prop key="/paprika/getLectureDetail.do">course-controller</prop>
 				<prop key="/paprika/homeworkInsert.do">course-controller</prop>
 				<prop key="/paprika/homeworkUpdate.do">course-controller</prop>
-				<prop key="/paprika/answerInsert.do">course-controller</prop>
 				<prop key="/paprika/feedbackInsert.do">course-controller</prop>
+				<prop key="/paprika/homeworkGrading.do">course-controller</prop>
+				<prop key="/paprika/getHomeworkList.do">course-controller</prop>
+				<prop key="/paprika/getFeedbackList.do">course-controller</prop>
 
 				<prop key="/paprika/getOpenCourse.do">curriculum-controller</prop>
 				<prop key="/paprika/getCurriculum.do">curriculum-controller</prop>
@@ -68,15 +70,14 @@
 				<prop key="/paprika/signIn.do">member-controller</prop>
 				<prop key="/paprika/getPassword.do">member-controller</prop>
 
-				<prop key="/paprika/getOnlineTest.do">onlinetest-controller</prop>
 				<prop key="/paprika/answerInsert.do">onlinetest-controller</prop>
+				<prop key="/paprika/getOnlineTest.do">onlinetest-controller</prop>
+				<prop key="/paprika/onlineTestInsert.do">onlinetest-controller</prop>
+				<prop key="/paprika/TestGrading.do">onlinetest-controller</prop>
 
 				<prop key="/paprika/getSchedule.do">schedule-controller</prop>
 
 				<prop key="/paprika/getStudentInfo.do">studentinfo-controller</prop>
-				<!--  -->
-				<prop key="/paprika/jsonGetStudentInfo.do">studentinfo-controller</prop>
-				<!--  -->
 				<prop key="/paprika/studentInfoUpdate.do">studentinfo-controller</prop>
 				<prop key="/paprika/getRegisterRecord.do">studentinfo-controller</prop>
 				<prop key="/paprika/getCourseHistory.do">studentinfo-controller</prop>
@@ -96,8 +97,10 @@
 				<prop key="/paprika/getLectureDetail.do">getLectureDetail</prop>
 				<prop key="/paprika/homeworkInsert.do">homeworkInsert</prop>
 				<prop key="/paprika/homeworkUpdate.do">homeworkUpdate</prop>
-				<prop key="/paprika/answerInsert.do">answerInsert</prop>
 				<prop key="/paprika/feedbackInsert.do">feedbackInsert</prop>
+				<prop key="/paprika/homeworkGrading.do">homeworkGrading</prop>
+				<prop key="/paprika/getHomeworkList.do">getHomeworkList</prop>
+				<prop key="/paprika/getFeedbackList.do">getFeedbackList</prop>
 			</props>
 		</property>
 	</bean>
@@ -138,8 +141,10 @@
 	<bean id="onlinetest-resolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
 		<property name="mappings">
 			<props>
-				<prop key="/paprika/getOnlineTest.do">getOnlineTest</prop>
 				<prop key="/paprika/answerInsert.do">answerInsert</prop>
+				<prop key="/paprika/getOnlineTest.do">getOnlineTest</prop>
+				<prop key="/paprika/onlineTestInsert.do">onlineTestInsert</prop>
+				<prop key="/paprika/TestGrading.do">TestGrading</prop>
 			</props>
 		</property>
 	</bean>
