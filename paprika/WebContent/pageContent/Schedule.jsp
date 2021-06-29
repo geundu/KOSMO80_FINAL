@@ -1,8 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*" %> 
 <%
 	request.setCharacterEncoding("utf-8");
+  
+StringBuilder path = new StringBuilder(request.getContextPath());
+path.append("/");
+List<Map<String,Object>> scheduleList = null;
+scheduleList = (List<Map<String,Object>>)request.getAttribute("scheduleList");
+int size = 0;
+
+
+
 %>
 
 

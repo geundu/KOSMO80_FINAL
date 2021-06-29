@@ -24,7 +24,12 @@ public class ScheduleDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> getSchedule(Map<String, Object> pMap) {
-
-		return null;
+		List<Map<String, Object>> scheduleList = null;
+		sqlSessionTemplate.selectList("getSchedule", pMap);
+		scheduleList = (List<Map<String, Object>>) pMap.get("cursor");
+		return scheduleList;
+		
+		
+		
 	}
 }
