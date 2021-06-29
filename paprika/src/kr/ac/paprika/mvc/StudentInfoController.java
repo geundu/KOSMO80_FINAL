@@ -257,7 +257,7 @@ public class StudentInfoController extends MultiActionController {
 		gradeHistoryDetail = studentInfoLogic.getGradeHistoryDetail(pMap);
 		logger.info(pMap);
 		logger.info(gradeHistoryDetail);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("../index.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/StuInfo/StuScore.jsp");
 		req.setAttribute("gradeHistoryDetail", gradeHistoryDetail);
 		dispatcher.forward(req, res);
 	}

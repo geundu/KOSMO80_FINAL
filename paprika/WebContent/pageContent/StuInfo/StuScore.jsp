@@ -1,9 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
 <%
 	request.setCharacterEncoding("utf-8");
 %>
+<%
+ StringBuilder path = new StringBuilder(request.getContextPath());
+path.append("/");
+
+List<Map<String, Object>> gradeHistoryList = null;
+gradeHistoryList = (List<Map<String, Object>>) request.getAttribute("gradeHistoryList");
+int size = 0;
+
+if (gradeHistoryList != null) {
+	size = gradeHistoryList.size();
+}
+%>
+<script>
+console.log(<%=size%>);
+</script>
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5"> -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -70,51 +86,41 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<th scope="row">2020-1</th>
-						<td>3.85</td>
-						<td>16</td>
-						<td>13</td>
-						<td>0</td>
-
+				<% 
+				Map<String,Double> totalMap = new HashMap<>();
+				Double totalAvg = 0.0;
+				Double totalSummitScore = 0.0;
+				Double totalPassScore = 0.0;
+				Double totalFScore = 0.0;
+				for(int i=0;i<size;i++){
+					Map<String,Object> rmap = gradeHistoryList.get(i);
+ 					totalAvg = totalAvg 
+												+ Double.parseDouble(rmap.get("MARK_AVG").toString());
+					totalSummitScore = totalSummitScore 
+												+ Double.parseDouble(rmap.get("SUMMITEDSCORE").toString());
+					totalPassScore = totalPassScore 
+												+ Double.parseDouble(rmap.get("PASSSCORE").toString());
+					totalFScore = totalFScore 
+												+ Double.parseDouble(rmap.get("F_SCORE").toString());
+				totalMap.put("totalAvg", totalAvg/size);
+				totalMap.put("totalSummitScore", totalSummitScore/size );
+				totalMap.put("totalPassScore", totalPassScore/size );
+				totalMap.put("F_SCORE", totalFScore/size );
+				
+				%>
+					<tr id="course_table"> 
+						<th scope="row"><%=rmap.get("COURSE_SEMESTER") %></th>
+						<td><%=rmap.get("MARK_AVG") %></td>
+						<td><%=rmap.get("SUMMITEDSCORE") %></td>
+						<td><%=rmap.get("PASSSCORE") %></td>
+						<td><%=rmap.get("F_SCORE") %></td>
+				<%}; %>
 					</tr>
-					<tr>
-						<th scope="row">2020-1</th>
-						<td>3.85</td>
-						<td>16</td>
-						<td>13</td>
-						<td>0</td>
-
-					</tr>
-					<tr>
-						<th scope="row">2020-1</th>
-						<td>3.85</td>
-						<td>16</td>
-						<td>13</td>
-						<td>0</td>
-					</tr>
-
-					<tr>
-						<th scope="row">2020-1</th>
-						<td>3.85</td>
-						<td>16</td>
-						<td>13</td>
-						<td>0</td>
-
-					</tr>
-					<tr>
-						<th scope="row">2020-1</th>
-						<td>3.85</td>
-						<td>16</td>
-						<td>13</td>
-						<td>0</td>
-					</tr>
-					<tr>
 						<th scope="row">성적 총계</th>
-						<td>4.45</td>
-						<td>130</td>
-						<td>127</td>
-						<td>3</td>
+						<td> <%=totalMap.get("totalAvg")%> </td>
+						<td> <%=Math.round((totalMap.get("totalSummitScore"))*100/100)%> </td>
+						<td> <%=Math.round((totalMap.get("totalPassScore"))*100/100) %> </td>
+						<td> <%=Math.round((totalMap.get("F_SCORE"))*100/100) %> </td>
 
 					</tr>
 				</tbody>
@@ -251,5 +257,35 @@
 	</div>
 </div>
 <script src="./js/toggleAction.js"></script>
+<script>
+$(function() {
+	
+	'use strict';
+	
+	$(document).ready(function () {
+		console.log('readyEvent');
+		initClickEvent();
+	});
+	function onClickMenu2_3__2(e){
+		console.log('onClickMenu2_3__2');
+		e.preventDefault();
+		$.ajax({
+			type :'get',
+			/* url:'pageContent/StuInfo/StuScore.jsp', */
+			url:'/paprika/getGradeHistoryDetail.do?STUDENT_NUMBER='+sid,
+			dataType:'html',
+			success: function(data){
+				$content.html(data).trigger("create");
+			}
+		});
+		return false;
+		
+}
+	function initClickEvent(){
+		$('#course_table').click(onClickMenu2_3__2);
+	}	
+
+});
+</script>
 <!-- </div> -->
 <!-- Page Content end -->

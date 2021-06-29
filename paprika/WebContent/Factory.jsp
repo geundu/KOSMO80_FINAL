@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
-	String sessionId = "15722001";
+String sessionId = "15722001";
 %>
-   <script>
+<script>
    let sid = <%=sessionId%>;
    $(function() {
 		
@@ -63,20 +63,22 @@
 			});
 			return false;
 		}
-				function onClickMenu2_3(e){
-			console.log('onClickMenu2_3');
+				
+			function onClickMenu2_3__1(e){
+			console.log('onClickMenu2_3__1');
 			e.preventDefault();
 			$.ajax({
 				type :'get',
-				url:'pageContent/StuInfo/StuScore.jsp',
-				/* url:'paprika/getGradeHistory.do?STUDENT_NUMBER='+sid, */
+				/* url:'pageContent/StuInfo/StuScore.jsp',*/
+				url:'paprika/getGradeHistory.do?STUDENT_NUMBER='+sid,
 				dataType:'html',
 				success: function(data){
 					$content.html(data).trigger("create");
 				}
 			});
-			return false;
+			return false; 
 		}
+			
 				function onClickMenu2_4(e){
 			console.log('onClickMenu2_4');
 			e.preventDefault();
@@ -110,7 +112,7 @@
 			e.preventDefault();
 			$.ajax({
 				type :'get',
-				url:'pageContent/Curriculum/Curriculum.jsp',
+				url:'pageContent/Course/Curriculum.jsp',
 				/* url:'paprika/getCurriculum.do?STUDENT_NUMBER='+sid, */
 				dataType:'html',
 				success: function(data){
@@ -446,7 +448,8 @@
 			$('#sideButton_1_0').click(onClickMenu1_0);
 			$('#sideButton_2_1').click(onClickMenu2_1);
 			$('#sideButton_2_2').click(onClickMenu2_2);
-			$('#sideButton_2_3').click(onClickMenu2_3);
+			$('#sideButton_2_3').click(onClickMenu2_3__1);
+			/* $('#course_table').click(onClickMenu2_3__2); */
 			$('#sideButton_2_4').click(onClickMenu2_4);
 			$('#sideButton_3_1').click(onClickMenu3_1);
 			$('#sideButton_3_2').click(onClickMenu3_2);
