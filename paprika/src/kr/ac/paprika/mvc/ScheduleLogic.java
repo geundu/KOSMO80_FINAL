@@ -3,7 +3,10 @@ package kr.ac.paprika.mvc;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 public class ScheduleLogic {
+	Logger				logger		= Logger.getLogger(ScheduleLogic.class);
    private ScheduleDao scheduleDao = null;
 
    /**
@@ -22,8 +25,10 @@ public class ScheduleLogic {
     * @return
     */
    public List<Map<String, Object>> getSchedule(Map<String, Object> pMap) {
-      List<Map<String, Object>> scheduleList = null;
+	   logger.info("로직 시작했다."); 
+	  List<Map<String, Object>> scheduleList = null;
       scheduleList = scheduleDao.getSchedule(pMap);
+	   logger.info("로직 시작했다. ==> 다오 갔다왔다."); 
       return scheduleList;      
       
    }
