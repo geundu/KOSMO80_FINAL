@@ -1,6 +1,7 @@
 package kr.ac.paprika.mvc;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
+
+import com.google.gson.Gson;
 
 import kr.ac.paprika.common.HashMapBinder;
 
@@ -57,16 +60,36 @@ public class StudentInfoController extends MultiActionController {
 		HashMapBinder		hmb		= new HashMapBinder(req);
 		Map<String, Object>	pMap	= new HashMap<String, Object>();
 		res.setContentType("text/plain;charset=utf-8");
-
 		hmb.bind(pMap);
 		List<Map<String, Object>> studentList = null;
 		studentList = studentInfoLogic.getStudentInfo(pMap);
 		logger.info(pMap);
 		logger.info(studentList);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("../index.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/StuInfo/StuTotalInfo.jsp");
 		req.setAttribute("studentList", studentList);
 		dispatcher.forward(req, res);
 	}
+//================================================================
+	public void jsonGetStudentInfo(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+		logger.info("jsonGetStudentInfo");
+		HashMapBinder		hmb		= new HashMapBinder(req);
+		Map<String, Object>	pMap	= new HashMap<String, Object>();
+		/*res.setContentType("text/plain;charset=utf-8");*/
+		res.setContentType("application/json;charset=utf-8");
+		hmb.bind(pMap);
+		List<Map<String, Object>> studentList = null;
+		studentList = studentInfoLogic.getStudentInfo(pMap);
+		logger.info(pMap);
+		logger.info(studentList);
+		Gson g = new Gson();
+		String outString = g.toJson(studentList);
+		/*RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/StuInfo/StuTotalInfo.jsp");*/
+		/*req.setAttribute("studentList", studentList);
+		dispatcher.forward(req, res);*/
+		PrintWriter out = res.getWriter();
+		out.print(outString);
+	}
+//================================================================
 	//
 
 	/**
