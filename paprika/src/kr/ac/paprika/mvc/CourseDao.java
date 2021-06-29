@@ -27,7 +27,8 @@ public class CourseDao {
 	 */
 	public List<Map<String, Object>> getCourseList(Map<String, Object> pMap) {
 		List<Map<String, Object>> courseList = null;
-		courseList = sqlSessionTemplate.selectList("getCourseList", pMap);
+		sqlSessionTemplate.selectList("getCourse",pMap);
+		courseList = (List<Map<String,Object>>) pMap.get("cursor");
 		return courseList;
 	}
 
@@ -39,7 +40,8 @@ public class CourseDao {
 	 */
 	public List<Map<String, Object>> getLectureList(Map<String, Object> pMap) {
 		List<Map<String, Object>> lectureList = null;
-		lectureList = sqlSessionTemplate.selectList("getLectureList", pMap);
+		sqlSessionTemplate.selectList("getCourse",pMap);
+		lectureList = (List<Map<String,Object>>) pMap.get("cursor");
 		return lectureList;
 	}
 
@@ -51,7 +53,8 @@ public class CourseDao {
 	 */
 	public List<Map<String, Object>> getLectureDetail(Map<String, Object> pMap) {
 		List<Map<String, Object>> lectureDetail = null;
-		lectureDetail = sqlSessionTemplate.selectList("getLectureDetail", pMap);
+		sqlSessionTemplate.selectList("getCourse",pMap);
+		lectureDetail = (List<Map<String,Object>>) pMap.get("cursor");
 		return lectureDetail;
 	}
 
@@ -63,8 +66,10 @@ public class CourseDao {
 	 */
 	public int homeworkInsert(Map<String, Object> pMap) {
 		int result = 0;
+		List<Map<String, Object>> homeworkInsert = null;
+		sqlSessionTemplate.selectList("homeworkInsert", pMap);
+		homeworkInsert = (List<Map<String, Object>>) pMap.get("cursor");
 		result = 1;
-		sqlSessionTemplate.insert("homeworkInsert", pMap);
 		return result;
 	}
 
@@ -76,8 +81,10 @@ public class CourseDao {
 	 */
 	public int homeworkUpdate(Map<String, Object> pMap) {
 		int result = 0;
+		List<Map<String, Object>> homeworkUpdate = null;
+		sqlSessionTemplate.selectList("homeworkUpdate", pMap);
+		homeworkUpdate = (List<Map<String, Object>>) pMap.get("cursor");
 		result = 1;
-		sqlSessionTemplate.update("homeworkUpdate", pMap);
 		return result;
 	}
 
@@ -89,8 +96,10 @@ public class CourseDao {
 	 */
 	public int feedbackInsert(Map<String, Object> pMap) {
 		int result = 0;
+		List<Map<String, Object>> feedbackInsert = null;
+		sqlSessionTemplate.selectList("feedbackInsert", pMap);
+		feedbackInsert = (List<Map<String, Object>>) pMap.get("cursor");
 		result = 1;
-		sqlSessionTemplate.insert("feedbackInsert", pMap);
 		return result;
 	}
 
@@ -101,8 +110,12 @@ public class CourseDao {
 	 * @return
 	 */
 	public int homeworkGrading(Map<String, Object> pMap) {
-
-		return 0;
+		int result = 0;
+		List<Map<String, Object>> homeworkGrading = null;
+		sqlSessionTemplate.selectList("homeworkGrading", pMap);
+		homeworkGrading = (List<Map<String, Object>>) pMap.get("cursor");
+		result = 1;
+		return result;
 	}
 
 	/**
@@ -112,7 +125,9 @@ public class CourseDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> getHomeworkList(Map<String, Object> pMap) {
-
-		return null;
+		List<Map<String, Object>> getHomeworkList = null;
+		sqlSessionTemplate.selectList("getCourse",pMap);
+		getHomeworkList = (List<Map<String,Object>>) pMap.get("cursor");
+		return getHomeworkList;
 	}
 }

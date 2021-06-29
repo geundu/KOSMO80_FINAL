@@ -43,6 +43,10 @@ public class CourseController extends MultiActionController {
 	 * 
 	 * @throws IOException
 	 * @throws ServletException
+	 * 
+	 * **포트 주의 
+	 * http://localhost:7002/paprika/getCourseList.do?STUDENT_NUMBER=13222001
+	 *
 	 */
 	public void getCourseList(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		HashMapBinder		hmb		= new HashMapBinder(req);
@@ -54,7 +58,7 @@ public class CourseController extends MultiActionController {
 		courseList = courseLogic.getCourseList(pMap);
 		logger.info(pMap);
 		logger.info(courseList);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("../index.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/frameForm.jsp");
 		req.setAttribute("courseList", courseList);
 		dispatcher.forward(req, res);
 	}
@@ -79,6 +83,9 @@ public class CourseController extends MultiActionController {
 	 * 
 	 * @throws IOException
 	 * @throws ServletException
+	 * 
+	 * **포트 주의 
+	 * http://localhost:7002/paprika/getLectureList.do?STUDENT_NUMBER=13222001
 	 */
 	public void getLectureList(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		HashMapBinder		hmb		= new HashMapBinder(req);
@@ -90,7 +97,7 @@ public class CourseController extends MultiActionController {
 		lectureList = courseLogic.getLectureList(pMap);
 		logger.info(pMap);
 		logger.info(lectureList);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("../index.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/Online/Lecture.jsp");
 		req.setAttribute("courseList", lectureList);
 		dispatcher.forward(req, res);
 	}
@@ -112,6 +119,8 @@ public class CourseController extends MultiActionController {
 	 * 
 	 * @throws IOException
 	 * @throws ServletException
+	 * 
+	 * 
 	 */
 	public void getLectureDetail(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		HashMapBinder		hmb		= new HashMapBinder(req);
