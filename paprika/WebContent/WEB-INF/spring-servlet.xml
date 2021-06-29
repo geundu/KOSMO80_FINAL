@@ -74,6 +74,9 @@
 				<prop key="/paprika/getSchedule.do">schedule-controller</prop>
 
 				<prop key="/paprika/getStudentInfo.do">studentinfo-controller</prop>
+				<!--  -->
+				<prop key="/paprika/jsonGetStudentInfo.do">studentinfo-controller</prop>
+				<!--  -->
 				<prop key="/paprika/studentInfoUpdate.do">studentinfo-controller</prop>
 				<prop key="/paprika/getRegisterRecord.do">studentinfo-controller</prop>
 				<prop key="/paprika/getCourseHistory.do">studentinfo-controller</prop>
@@ -155,6 +158,11 @@
 		<property name="mappings">
 			<props>
 				<prop key="/paprika/getStudentInfo.do">getStudentInfo</prop>
+				
+				<!--  -->
+				<prop key="/paprika/jsonGetStudentInfo.do">jsonGetStudentInfo</prop>
+				<!--  -->
+				
 				<prop key="/paprika/studentInfoUpdate.do">studentInfoUpdate</prop>
 				<prop key="/paprika/getRegisterRecord.do">getRegisterRecord</prop>
 				<prop key="/paprika/getCourseHistory.do">getCourseHistory</prop>
@@ -167,7 +175,8 @@
 
 	<!-- url 접두&접미사 설정 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/" />
+		<!-- <property name="prefix" value="/WEB-INF/" /> -->
+		<property name="prefix" value="/pageContent/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
 

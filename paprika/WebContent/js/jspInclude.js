@@ -1,4 +1,5 @@
-$(function() {
+$(function(sessionID) {
+	
 	'use strict';
 	
 	$(document).ready(function () {
@@ -21,12 +22,14 @@ $(function() {
 		});
 		return false;
 	}
-		function onClickMenu2_1(e){
+		
+		function onClickMenu2_1(e,sessionID){
 		console.log('onClickMenu2_1');
 		e.preventDefault();
 		$.ajax({
 			type :'get',
-			url:'pageContent/StuInfo/StuTotalInfo.jsp',
+			/*url:'pageContent/StuInfo/StuTotalInfo.jsp',*/
+			url:'paprika/getStudentInfo.do?STUDENT_NUMBER=15722001',
 			dataType:'html',
 			success: function(data){
 				$content.html(data).trigger("create");
@@ -34,6 +37,7 @@ $(function() {
 		});
 		return false;
 	}
+	
 			function onClickMenu2_2(e){
 		console.log('onClickMenu2_2');
 		e.preventDefault();
@@ -402,6 +406,7 @@ $(function() {
 		console.log('initClickEvent');
 		$('#sideButton_1_0').click(onClickMenu1_0);
 		$('#sideButton_2_1').click(onClickMenu2_1);
+		/*$('#sideButton_2_1').click(              );*/
 		$('#sideButton_2_2').click(onClickMenu2_2);
 		$('#sideButton_2_3').click(onClickMenu2_3);
 		$('#sideButton_2_4').click(onClickMenu2_4);

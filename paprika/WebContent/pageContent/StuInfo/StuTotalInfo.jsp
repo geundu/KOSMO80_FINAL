@@ -1,11 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
 <%
 	request.setCharacterEncoding("utf-8");
 %>
+<%
+
+	StringBuilder path = new StringBuilder(request.getContextPath());
+path.append("/");
+
+List<Map<String, Object>> studentList = null;
+studentList = (List<Map<String, Object>>) request.getAttribute("studentList");
+int size = 0;
+Map<String,Object> tmap = studentList.get(0);
+
+if (studentList != null) {
+	size = studentList.size();
+	for(int i=0;i<size;i++){
+	Map<String, Object> rmap = studentList.get(i);
+	}
+}
+/* out.print("size:" + size); */
+%>
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5"> -->
+<script>
+console.log(<%=size%>);
+
+</script>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 	<div class="container-fluid" stlye="float:left;">
 
@@ -94,7 +117,7 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon3">대학</span>
 						</div>
-						<input type="text" class="form-control" placeholder="인문사회대학"
+						<input type="text" class="form-control" readonly value=<%=tmap.get("COL")%>
 							id="COL" aria-describedby="basic-addon3">
 					</div>
 				</div>
