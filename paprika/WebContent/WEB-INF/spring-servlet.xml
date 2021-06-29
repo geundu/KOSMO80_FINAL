@@ -158,11 +158,6 @@
 		<property name="mappings">
 			<props>
 				<prop key="/paprika/getStudentInfo.do">getStudentInfo</prop>
-				
-				<!--  -->
-				<prop key="/paprika/jsonGetStudentInfo.do">jsonGetStudentInfo</prop>
-				<!--  -->
-				
 				<prop key="/paprika/studentInfoUpdate.do">studentInfoUpdate</prop>
 				<prop key="/paprika/getRegisterRecord.do">getRegisterRecord</prop>
 				<prop key="/paprika/getCourseHistory.do">getCourseHistory</prop>

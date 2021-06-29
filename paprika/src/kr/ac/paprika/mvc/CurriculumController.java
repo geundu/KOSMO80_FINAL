@@ -56,7 +56,7 @@ public class CurriculumController extends MultiActionController {
 		logger.info(pMap);
 		logger.info(courseList);
 
-		RequestDispatcher dispatcher = req.getRequestDispatcher("../index.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/Course/Course.jsp");
 		req.setAttribute("courseList", courseList);
 
 		dispatcher.forward(req, res);
@@ -87,7 +87,7 @@ public class CurriculumController extends MultiActionController {
 		logger.info(pMap);
 		logger.info(curriculumList);
 
-		RequestDispatcher dispatcher = req.getRequestDispatcher("../index.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/Curriculum/Curriculum.jsp");
 		req.setAttribute("curriculumList", curriculumList);
 
 		dispatcher.forward(req, res);

@@ -69,7 +69,7 @@
 			<table class="table table-bordered">
 				<thead class="thead-team">
 					<tr>
-						<th scope="col">연도</th>
+						<th scope="col">연도<% %></th>
 						<th scope="col">구분</th>
 						<th scope="col">시행사유</th>
 						<th scope="col">비고</th>

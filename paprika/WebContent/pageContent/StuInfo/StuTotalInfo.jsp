@@ -6,29 +6,27 @@
 	request.setCharacterEncoding("utf-8");
 %>
 <%
-
-	StringBuilder path = new StringBuilder(request.getContextPath());
+StringBuilder path = new StringBuilder(request.getContextPath());
 path.append("/");
 
 List<Map<String, Object>> studentList = null;
 studentList = (List<Map<String, Object>>) request.getAttribute("studentList");
 int size = 0;
-Map<String,Object> tmap = studentList.get(0);
+Map<String,Object> rmap = new HashMap<>();
 
 if (studentList != null) {
 	size = studentList.size();
 	for(int i=0;i<size;i++){
-	Map<String, Object> rmap = studentList.get(i);
+    rmap = studentList.get(i);
 	}
 }
-/* out.print("size:" + size); */
+out.print("size:" + size);
 %>
-<!-- Page Content start -->
-<!-- <div id="content" class="p-4 p-md-5"> -->
 <script>
 console.log(<%=size%>);
-
 </script>
+<!-- Page Content start -->
+<!-- <div id="content" class="p-4 p-md-5"> -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 	<div class="container-fluid" stlye="float:left;">
 
@@ -96,7 +94,7 @@ console.log(<%=size%>);
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon3">이름</span>
 						</div>
-						<input type="text" class="form-control" placeholder="이름을 입력해주세요"
+						<input type="text" class="form-control" readonly value=<%=rmap.get("STUDENT_NAME")%>
 							id="STUDENT_NAME" aria-describedby="basic-addon3">
 					</div>
 				</div>
@@ -106,7 +104,7 @@ console.log(<%=size%>);
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon3">학번</span>
 						</div>
-						<input type="text" class="form-control" placeholder="학번을 입력해주세요"
+						<input type="text" class="form-control" readonly value=<%=rmap.get("STUDENT_NUMBER")%>
 							id="STUDENT_NUMBER" aria-describedby="basic-addon3">
 					</div>
 				</div>
@@ -117,7 +115,7 @@ console.log(<%=size%>);
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon3">대학</span>
 						</div>
-						<input type="text" class="form-control" readonly value=<%=tmap.get("COL")%>
+						<input type="text" class="form-control" readonly value=<%=rmap.get("COL")%>
 							id="COL" aria-describedby="basic-addon3">
 					</div>
 				</div>
@@ -126,7 +124,7 @@ console.log(<%=size%>);
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon3">학부</span>
 						</div>
-						<input type="text" class="form-control" placeholder="외국어학"
+						<input type="text" class="form-control" readonly value=<%=rmap.get("DEPT")%>
 							id="DEPT" aria-describedby="basic-addon3">
 					</div>
 				</div>
@@ -135,7 +133,7 @@ console.log(<%=size%>);
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon3">학과</span>
 						</div>
-						<input type="text" class="form-control" placeholder="컴퓨터공학과"
+						<input type="text" class="form-control" readonly value=<%=rmap.get("MAJOR")%>
 							id="MAJOR" aria-describedby="basic-addon3">
 					</div>
 				</div>
@@ -144,7 +142,7 @@ console.log(<%=size%>);
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon3">구분</span>
 						</div>
-						<input type="text" class="form-control" placeholder="대학생/교수"
+						<input type="text" class="form-control" readonly placeholder="대학생"
 							id="basic-url" aria-describedby="basic-addon3">
 						<!-- 대학생/교수 칼럼이 없어서 일단 보류  -->
 					</div>
@@ -156,7 +154,7 @@ console.log(<%=size%>);
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon3">학적상태</span>
 						</div>
-						<input type="text" class="form-control" placeholder="재학"
+						<input type="text" class="form-control" readonly value=<%=rmap.get("REG_STATUS")%>
 							id="REG_STATUS" aria-describedby="basic-addon3">
 					</div>
 				</div>
@@ -165,7 +163,7 @@ console.log(<%=size%>);
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon3">최근학적변동일자</span>
 						</div>
-						<input type="text" class="form-control" placeholder="2020-02-02"
+						<input type="text" class="form-control" readonly value=<%=rmap.get("DATE_LASTEST_REG")%>
 							id="DATE_LASTEST_REG" aria-describedby="basic-addon3">
 					</div>
 				</div>
@@ -176,7 +174,7 @@ console.log(<%=size%>);
 								및 학기</span>
 						</div>
 						<input type="text" class="form-control"
-							placeholder="최종 이수 학년 및 학기" id="REGISTER_CONTENT"
+							readonly value=<%=rmap.get("PASSEDGRADE")+"학년"+rmap.get("PASSEDSEMESTER")+"학기"%> id="REGISTER_CONTENT"
 							aria-describedby="basic-addon3">
 						<!-- 칼럼이 학년,학기 나눠져있음. -->
 						<!-- PASSEDGRADE PASSEDSEMESTER -->
@@ -194,7 +192,7 @@ console.log(<%=size%>);
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon3">입학일자</span>
 						</div>
-						<input type="text" class="form-control" placeholder="2002-03-01"
+						<input type="text" class="form-control" readonly value=<%=rmap.get("STUDENT_ENTER_YEAR")%>
 							id="STUDENT_ENTER_YEAR" aria-describedby="basic-addon3">
 					</div>
 				</div>
@@ -213,7 +211,7 @@ console.log(<%=size%>);
 							<span class="input-group-text" id="basic-addon3">영문성명</span>
 						</div>
 						<input type="text" class="form-control"
-							placeholder="Park Jeong Ho" id="STUDENT_ENG_NAME"
+							placeholder="Park Jeong Ho" value=<%=rmap.get("STUDENT_ENG_NAME")%>
 							aria-describedby="basic-addon3">
 					</div>
 				</div>
@@ -223,7 +221,7 @@ console.log(<%=size%>);
 							<span class="input-group-text" id="basic-addon3">연락처</span>
 						</div>
 						<input type="text" class="form-control"
-							placeholder="010-5454-5454" id="STUDENT_PHONE"
+							placeholder="010-5454-5454" value=<%=rmap.get("STUDENT_PHONE")%>
 							aria-describedby="basic-addon3">
 					</div>
 				</div>
@@ -233,7 +231,7 @@ console.log(<%=size%>);
 							<span class="input-group-text" id="basic-addon3">이메일</span>
 						</div>
 						<input type="text" class="form-control"
-							placeholder="comback@fdfdf.com" id="STUDENT_EMAIL"
+							placeholder="comback@fdfdf.com" value=<%=rmap.get("STUDENT_EMAIL")%>
 							aria-describedby="basic-addon3">
 					</div>
 				</div>
@@ -256,7 +254,7 @@ console.log(<%=size%>);
 							<span class="input-group-text" id="basic-addon3">보호자 성명</span>
 						</div>
 						<input type="text" class="form-control"
-							placeholder="Park Jeong Ho" id="GUARDIAN_NAME"
+							placeholder="Park Jeong Ho" value=<%=rmap.get("GUARDIAN_NAME")%>
 							aria-describedby="basic-addon3">
 					</div>
 				</div>
@@ -266,7 +264,7 @@ console.log(<%=size%>);
 							<span class="input-group-text" id="basic-addon3">보호자 연락처</span>
 						</div>
 						<input type="text" class="form-control"
-							placeholder="010-5454-5454" id="GUARDIAN_PHONE"
+							placeholder="010-5454-5454" value=<%=rmap.get("GUARDIAN_PHONE")%>
 							aria-describedby="basic-addon3">
 					</div>
 				</div>

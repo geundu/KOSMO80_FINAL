@@ -42,7 +42,8 @@ public class StudentInfoController extends MultiActionController {
 	 *@STUDENT_NAME          	이름            
 	 *@STUDENT_ENG_NAME      	영어이름          
 	 *@STUDENT_ENTER_YEAR    	입학연도          
-	 *@STUDENT_EMAIL         	메일            
+	 *@STUDENT_EMAIL         	메일
+	 *@STUDENT_PHONE         	학생연락처                   
 	 *@GUARDIAN_NAME         	보호자이름         
 	 *@GUARDIAN_PHONE        	보호자연락처        
 	 *@MAJOR                  	학과           
@@ -54,7 +55,7 @@ public class StudentInfoController extends MultiActionController {
 	 *@PASSEDSEMESTER           최종이수학기    
 	 *@throws IOException
 	 *@throws ServletException
-	 * //http://localhost:8000/paprika/getStudentInfo.do?STUDENT_NUMBER=15722001
+	 * //http://localhost:8000/paprika/getStudentInfo.do?STUDENT_NUMBER=15722001Q
 	 */
 	public void getStudentInfo(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		HashMapBinder		hmb		= new HashMapBinder(req);
@@ -69,28 +70,6 @@ public class StudentInfoController extends MultiActionController {
 		req.setAttribute("studentList", studentList);
 		dispatcher.forward(req, res);
 	}
-//================================================================
-	public void jsonGetStudentInfo(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-		logger.info("jsonGetStudentInfo");
-		HashMapBinder		hmb		= new HashMapBinder(req);
-		Map<String, Object>	pMap	= new HashMap<String, Object>();
-		/*res.setContentType("text/plain;charset=utf-8");*/
-		res.setContentType("application/json;charset=utf-8");
-		hmb.bind(pMap);
-		List<Map<String, Object>> studentList = null;
-		studentList = studentInfoLogic.getStudentInfo(pMap);
-		logger.info(pMap);
-		logger.info(studentList);
-		Gson g = new Gson();
-		String outString = g.toJson(studentList);
-		/*RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/StuInfo/StuTotalInfo.jsp");*/
-		/*req.setAttribute("studentList", studentList);
-		dispatcher.forward(req, res);*/
-		PrintWriter out = res.getWriter();
-		out.print(outString);
-	}
-//================================================================
-	//
 
 	/**
 	 * 신상정보수정 메서드
@@ -166,7 +145,7 @@ public class StudentInfoController extends MultiActionController {
 		registerRecordList = studentInfoLogic.getRegisterRecord(pMap);
 		logger.info(pMap);
 		logger.info(registerRecordList);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("../index.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/StuInfo/StuRegister.jsp");
 		req.setAttribute("registerRecordList", registerRecordList);
 		dispatcher.forward(req, res);
 	}
@@ -240,7 +219,7 @@ public class StudentInfoController extends MultiActionController {
 		gradeHistoryList = studentInfoLogic.getGradeHistory(pMap);
 		logger.info(pMap);
 		logger.info(gradeHistoryList);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("../index.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/StuInfo/StuScore.jsp");
 		req.setAttribute("gradeHistoryList", gradeHistoryList);
 		dispatcher.forward(req, res);
 	
@@ -278,7 +257,7 @@ public class StudentInfoController extends MultiActionController {
 		gradeHistoryDetail = studentInfoLogic.getGradeHistoryDetail(pMap);
 		logger.info(pMap);
 		logger.info(gradeHistoryDetail);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("../index.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/StuInfo/StuScore.jsp");
 		req.setAttribute("gradeHistoryDetail", gradeHistoryDetail);
 		dispatcher.forward(req, res);
 	}
@@ -313,7 +292,7 @@ public class StudentInfoController extends MultiActionController {
 		tuitionList = studentInfoLogic.getTuition(pMap);
 		logger.info(pMap);
 		logger.info(tuitionList);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("../index.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/Tuition.jsp");
 		req.setAttribute("tuitionList", tuitionList);
 		dispatcher.forward(req, res);
 	}

@@ -1,4 +1,4 @@
-$(function(sessionID) {
+$(function() {
 	
 	'use strict';
 	
@@ -23,7 +23,7 @@ $(function(sessionID) {
 		return false;
 	}
 		
-		function onClickMenu2_1(e,sessionID){
+		function onClickMenu2_1(e){
 		console.log('onClickMenu2_1');
 		e.preventDefault();
 		$.ajax({

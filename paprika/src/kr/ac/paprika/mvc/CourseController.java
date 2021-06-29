@@ -54,7 +54,7 @@ public class CourseController extends MultiActionController {
 		courseList = courseLogic.getCourseList(pMap);
 		logger.info(pMap);
 		logger.info(courseList);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("../index.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/Online_Course.jsp");
 		req.setAttribute("courseList", courseList);
 		dispatcher.forward(req, res);
 	}
@@ -90,7 +90,7 @@ public class CourseController extends MultiActionController {
 		lectureList = courseLogic.getLectureList(pMap);
 		logger.info(pMap);
 		logger.info(lectureList);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("../index.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/Online/Lecture.jsp");
 		req.setAttribute("courseList", lectureList);
 		dispatcher.forward(req, res);
 	}
@@ -121,7 +121,7 @@ public class CourseController extends MultiActionController {
 		hmb.bind(pMap);
 		List<Map<String, Object>> lectureDetail = null;
 		lectureDetail = courseLogic.getLectureList(pMap);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("../index.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/Online/LectureDetail.jsp");
 		req.setAttribute("courseList", lectureDetail);
 		dispatcher.forward(req, res);
 	}
@@ -223,7 +223,7 @@ public class CourseController extends MultiActionController {
 		result = courseLogic.feedbackInsert(pmap);
 
 		if (result == 1) {
-			res.sendRedirect("../index.jsp");
+			res.sendRedirect("../pageContent/Online/Feedback.jsp");
 		}
 		else {
 			res.sendRedirect("등록실패 페이지 이동처리");
