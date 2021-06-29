@@ -27,7 +27,7 @@ public class CourseDao {
 	 */
 	public List<Map<String, Object>> getCourseList(Map<String, Object> pMap) {
 		List<Map<String, Object>> courseList = null;
-		sqlSessionTemplate.selectList("getCourse",pMap);
+		sqlSessionTemplate.selectList("getCourseList",pMap);
 		courseList = (List<Map<String,Object>>) pMap.get("cursor");
 		return courseList;
 	}
@@ -40,7 +40,7 @@ public class CourseDao {
 	 */
 	public List<Map<String, Object>> getLectureList(Map<String, Object> pMap) {
 		List<Map<String, Object>> lectureList = null;
-		sqlSessionTemplate.selectList("getCourse",pMap);
+		sqlSessionTemplate.selectList("getLectureList",pMap);
 		lectureList = (List<Map<String,Object>>) pMap.get("cursor");
 		return lectureList;
 	}
@@ -53,7 +53,7 @@ public class CourseDao {
 	 */
 	public List<Map<String, Object>> getLectureDetail(Map<String, Object> pMap) {
 		List<Map<String, Object>> lectureDetail = null;
-		sqlSessionTemplate.selectList("getCourse",pMap);
+		sqlSessionTemplate.selectList("getLectureDetail",pMap);
 		lectureDetail = (List<Map<String,Object>>) pMap.get("cursor");
 		return lectureDetail;
 	}
@@ -125,9 +125,9 @@ public class CourseDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> getHomeworkList(Map<String, Object> pMap) {
-		List<Map<String, Object>> getHomeworkList = null;
-		sqlSessionTemplate.selectList("getCourse",pMap);
-		getHomeworkList = (List<Map<String,Object>>) pMap.get("cursor");
-		return getHomeworkList;
+		List<Map<String, Object>> homeworkList = null;
+		sqlSessionTemplate.selectList("getHomeworkList",pMap);
+		homeworkList = (List<Map<String,Object>>) pMap.get("cursor");
+		return homeworkList;
 	}
 }

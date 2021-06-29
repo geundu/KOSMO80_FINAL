@@ -98,8 +98,9 @@ public class CourseLogic {
 	 * @return
 	 */
 	public int homeworkGrading(Map<String, Object> pMap) {
-
-		return 0;
+		int result = 0;
+		result = courseDao.homeworkGrading(pMap);
+		return result;
 	}
 
 	/**
@@ -109,7 +110,8 @@ public class CourseLogic {
 	 * @return
 	 */
 	public List<Map<String, Object>> getHomeworkList(Map<String, Object> pMap) {
-
-		return null;
+		List<Map<String, Object>> homeworkList = null;
+		homeworkList = courseDao.getHomeworkList(pMap);
+		return homeworkList;
 	}
 }

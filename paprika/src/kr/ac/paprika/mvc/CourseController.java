@@ -56,9 +56,7 @@ public class CourseController extends MultiActionController {
 		hmb.bind(pMap);
 		List<Map<String, Object>> courseList = null;
 		courseList = courseLogic.getCourseList(pMap);
-		logger.info(pMap);
-		logger.info(courseList);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/frameForm.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/Course/Course.jsp");
 		req.setAttribute("courseList", courseList);
 		dispatcher.forward(req, res);
 	}
@@ -95,10 +93,8 @@ public class CourseController extends MultiActionController {
 		hmb.bind(pMap);
 		List<Map<String, Object>> lectureList = null;
 		lectureList = courseLogic.getLectureList(pMap);
-		logger.info(pMap);
-		logger.info(lectureList);
 		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/Online/Lecture.jsp");
-		req.setAttribute("courseList", lectureList);
+		req.setAttribute("lectureList", lectureList);
 		dispatcher.forward(req, res);
 	}
 
@@ -120,7 +116,7 @@ public class CourseController extends MultiActionController {
 	 * @throws IOException
 	 * @throws ServletException
 	 * 
-	 * 
+	 * lectureDetail
 	 */
 	public void getLectureDetail(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		HashMapBinder		hmb		= new HashMapBinder(req);
@@ -130,8 +126,8 @@ public class CourseController extends MultiActionController {
 		hmb.bind(pMap);
 		List<Map<String, Object>> lectureDetail = null;
 		lectureDetail = courseLogic.getLectureList(pMap);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("../index.jsp");
-		req.setAttribute("courseList", lectureDetail);
+		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/Online/LectureDetail.jsp");
+		req.setAttribute("lectureDetail", lectureDetail);
 		dispatcher.forward(req, res);
 	}
 
@@ -241,25 +237,62 @@ public class CourseController extends MultiActionController {
 
 	/**
 	 * 교수) 과제를 채점하고 UPDATE하는 메서드
+	 * @PROC_PRO_ONLINE_HOMEWORK_CONF
+	 * 
 	 * 
 	 * @param req
+	 * @P_STUDENT_NUMBER  in NUMBER 학생번호
+	 * 
 	 * @param res
+	 * 
 	 * @throws IOException
 	 * @throws ServletException
 	 */
 	public void homeworkGrading(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+		HashMapBinder		hmb		= new HashMapBinder(req);
+		Map<String, Object>	pmap	= new HashMap<String, Object>();
 
+		hmb.bind(pmap);
+		int result = 0;
+		result = courseLogic.homeworkGrading(pmap);
+
+		if (result == 1) {
+			res.sendRedirect("../index.jsp");
+		}
+		else {
+			res.sendRedirect("등록실패 페이지 이동처리");
+		}
 	}
 
 	/**
 	 * 교수) 제출된 과제 리스트를 확인하는 메서드
+	 * @procedure
+	 * @ PROC_PRO_ONLINE_LEC_HOMEWORK
+	 * 
 	 * 
 	 * @param req
+	 * @P_ONLINE_LECTURE_NUMBER IN number 강의번호
+	 * 
 	 * @param res
+	 *  @rownum,                            순번
+     *	@stu.STUDENT_NAME                   학생이름
+     *	@hk.STUDENT_NUMBER                  학생번호
+     *	@hk.HOMEWORK_FILE                   업로드과제파일
+     *	@hk.HOMEWORK_CONFIRM                과제 확인 여부
+     *	@hk.HOMEWORK_UPLOAD_DATE            과제 업로드 날짜
 	 * @throws IOException
 	 * @throws ServletException
 	 */
 	public void getHomeworkList(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+		HashMapBinder		hmb		= new HashMapBinder(req);
+		Map<String, Object>	pMap	= new HashMap<String, Object>();
+		res.setContentType("text/plain;charset=utf-8");
 
+		hmb.bind(pMap);
+		List<Map<String, Object>> homeworkList = null;
+		homeworkList = courseLogic.getHomeworkList(pMap);
+		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/frameForm.jsp");
+		req.setAttribute("courseList", homeworkList);
+		dispatcher.forward(req, res);
 	}
 }
