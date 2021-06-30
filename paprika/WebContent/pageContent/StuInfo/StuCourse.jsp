@@ -5,7 +5,20 @@
 <%
 	request.setCharacterEncoding("utf-8");
 %>
+<%
+	List<Map<String, Object>> courseCbxList = null;
+    courseCbxList = (List<Map<String,Object>>) request.getAttribute("cbBoxCourseHistoryList");
+	int sizeCbx = 0;
+	
+	if( courseCbxList !=null){
+		sizeCbx	= courseCbxList.size();
+	}
 
+	String[] CourseSemester = new String[sizeCbx];
+%>
+<script>
+console.log(<%=sizeCbx%>);
+</script>
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5"> -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -60,11 +73,18 @@
 		<!-- 메인 프레임 1 시작 -->
 		<div class="screen1"
 			style="width: 100%; height: auto%; text-align: center; background-color: E8EBEE;">
-			<select class="custom-select" style="width: auto;">
-				<option>2020/1학기</option>
-				<option>2020/2학기</option>
-				<option>2021/1학기</option>
-				<option>2021/2학기</option>
+			<select class="custom-select" id="select00"style="width: auto;">
+			
+			
+			<%
+			for(int i=0; i<sizeCbx;i++ ){ 
+			Map<String, Object> rmap = courseCbxList.get(i);
+			CourseSemester[i] = (rmap.get("COURSE_SEMESTER")).toString();
+			}
+			%>
+			<%for(int i=0;i<sizeCbx;i++){%>
+				<option><%=CourseSemester[i]%></option>
+			<%}%>
 			</select>
 			<p></p>
 		</div>
@@ -74,7 +94,7 @@
 			style="width: 100%; height: 100%; background-color: E8EBEE;">
 			<h1 class="mb-4"></h1>
 			<p>
-			<table class="table table-bordered">
+			<table class="table table-bordered" id="CourseTable">
 				<thead class="thead-team">
 					<tr>
 						<th scope="col">순번</th>
@@ -91,110 +111,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<th scope="row">1</th>
-						<td>2020</td>
-						<td>1학기</td>
-						<td>(09353)외국어 강의론</td>
-						<td>3학점</td>
-						<td>일본어 학과</td>
-						<td>1학년</td>
-						<td>월1~3</td>
-						<td>강찬영 교슈</td>
-						<td>전공교수</td>
-						<td>해당없음</td>
-					</tr>
-					<tr>
-						<th scope="row">1</th>
-						<td>2020</td>
-						<td>1학기</td>
-						<td>(09353)외국어 강의론</td>
-						<td>3학점</td>
-						<td>일본어 학과</td>
-						<td>1학년</td>
-						<td>월1~3</td>
-						<td>강찬영 교슈</td>
-						<td>전공교수</td>
-						<td>해당없음</td>
-					</tr>
-					<tr>
-						<th scope="row">1</th>
-						<td>2020</td>
-						<td>1학기</td>
-						<td>(09353)외국어 강의론</td>
-						<td>3학점</td>
-						<td>일본어 학과</td>
-						<td>1학년</td>
-						<td>월1~3</td>
-						<td>강찬영 교슈</td>
-						<td>전공교수</td>
-						<td>해당없음</td>
-					</tr>
-					<tr>
-						<th scope="row">1</th>
-						<td>2020</td>
-						<td>1학기</td>
-						<td>(09353)외국어 강의론</td>
-						<td>3학점</td>
-						<td>일본어 학과</td>
-						<td>1학년</td>
-						<td>월1~3</td>
-						<td>강찬영 교슈</td>
-						<td>전공교수</td>
-						<td>해당없음</td>
-					</tr>
-					<tr>
-						<th scope="row">1</th>
-						<td>2020</td>
-						<td>1학기</td>
-						<td>(09353)외국어 강의론</td>
-						<td>3학점</td>
-						<td>일본어 학과</td>
-						<td>1학년</td>
-						<td>월1~3</td>
-						<td>강찬영 교슈</td>
-						<td>전공교수</td>
-						<td>해당없음</td>
-					</tr>
-					<tr>
-						<th scope="row">1</th>
-						<td>2020</td>
-						<td>1학기</td>
-						<td>(09353)외국어 강의론</td>
-						<td>3학점</td>
-						<td>일본어 학과</td>
-						<td>1학년</td>
-						<td>월1~3</td>
-						<td>강찬영 교슈</td>
-						<td>전공교수</td>
-						<td>해당없음</td>
-					</tr>
-					<tr>
-						<th scope="row">1</th>
-						<td>2020</td>
-						<td>1학기</td>
-						<td>(09353)외국어 강의론</td>
-						<td>3학점</td>
-						<td>일본어 학과</td>
-						<td>1학년</td>
-						<td>월1~3</td>
-						<td>강찬영 교슈</td>
-						<td>전공교수</td>
-						<td>해당없음</td>
-					</tr>
-					<tr>
-						<th scope="row">1</th>
-						<td>2020</td>
-						<td>1학기</td>
-						<td>(09353)외국어 강의론</td>
-						<td>3학점</td>
-						<td>일본어 학과</td>
-						<td>1학년</td>
-						<td>월1~3</td>
-						<td>강찬영 교슈</td>
-						<td>전공교수</td>
-						<td>해당없음</td>
-					</tr>
+				
 				</tbody>
 			</table>
 			</p>
@@ -202,5 +119,86 @@
 	</div>
 </div>
 <script src="./js/toggleAction.js"></script>
+<script>
+$(function() {
+	'use strict';
+	var $courseTable = $('#CourseTable');
+	var selectedOption;
+	$(document).ready(function () {
+		 console.log('readyEvent');
+		 initClickEvent();
+	});
+	
+
+	
+	function selectbox(){
+	$('#select00').on('change', function(e){
+	e.preventDefault();
+	console.log($(this).find("option:selected").val());
+	
+	selectedOption = $(this).find("option:selected").val();
+	CourseTableInput();
+	/* $(this).fined("option:selected").val().remove(); */
+	});
+	
+	}
+	
+	
+	function CourseTableInput(){
+		console.log('CourseTableInput');
+		$courseTable.bootstrapTable('destroy')
+		$courseTable.bootstrapTable({
+			url:'/paprika/jsonGetCourseHistory.do?STUDENT_NUMBER='+sid+'&'+
+			'SEMESTER='+selectedOption,
+			columns: [{
+				field:'ROWNUM',
+				title:'순번'
+			}, {
+				field:'COURSE_SEMESTER',
+				title:'년도-학기'
+			}, {
+				field:'SUBJECT_NAME',
+				title:'교과목'
+			}, {
+				field:'SUBJECT_CREDIT',
+				title:'학점'
+			}, {
+				field:'COLLEGE_NAME',
+				title:'개설학과'
+			}, {
+				field:'SUBJECT_GRADE',
+				title:'대상학년'
+			}, {
+				field:'COURSE_DAY',
+				title:'요일'
+			}, {
+				field:'COURSE_BEGIN_TIME',
+				title:'시작교시'
+			}, {
+				field:'COURSE_END_TIME',
+				title:'종료교시'
+			}, {
+				field:'PROFESSOR_NAME',
+				title:'담당교수'
+			}, {
+				field:'SUBJECT_DIVISION',
+				title:'이수구분'
+			}, {
+				field:'MAKE_IS_RETAKE',
+				title:'재수강'
+			}]
+		});
+		
+		return false;
+	}
+	function initClickEvent(){
+		console.log('initClickEvent');
+		$('#select00').click(selectbox);
+		
+	}
+	
+});
+	
+</script>
 <!-- </div> -->
 <!-- Page Content end -->

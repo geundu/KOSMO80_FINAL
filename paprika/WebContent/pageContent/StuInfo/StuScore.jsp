@@ -12,7 +12,6 @@ path.append("/");
 List<Map<String, Object>> gradeHistoryList = null;
 List<Map<String, Object>> gradeHistoryDetail = null;
 gradeHistoryList = (List<Map<String, Object>>) request.getAttribute("gradeHistoryList");
-gradeHistoryDetail = (List<Map<String, Object>>) request.getAttribute("gradeHistoryDetail");
 int sizeList = 0;
 int sizeDetail = 0;
 
@@ -165,7 +164,7 @@ console.log(<%=sizeDetail%>);
 							for (int i = 0; i < sizeDetail; i++) {
 								Map<String, Object> rmap = gradeHistoryDetail.get(i);
 						%>
-						<tr>
+<%-- 						<tr>
 							<th scope="row"><%=rmap.get("NUM")%></th>
 							<td><%=rmap.get("SUBJECT_NAME")%></td>
 							<td><%=rmap.get("SUBJECT_DIVISION")%></td>
@@ -175,7 +174,8 @@ console.log(<%=sizeDetail%>);
 							<td><%=rmap.get("RETAKE")%></td>
 							<td><%=rmap.get("REPASS")%></td>
 							<td><%=rmap.get("REPASS_SEMESTER")%></td>
-						</tr>
+						</tr> --%>
+						<!-- 안쓰는 코드이지만 구분을 위해 남겨놓았습니다. -->
 						<%
 							}
 						} else {
@@ -257,10 +257,10 @@ $(function() {
 			width:"100%",
 			columns: [{
 			    field: 'NUM',
-			    title: '순번'
+			    title: '번호'
 			  }, {
 			    field: 'SUBJECT_NAME',
-			    title: '과목명',
+			    title: '과목이름',
 			  }, {
 				    field: 'SUBJECT_DIVISION',
 				    title: '이수구분',
@@ -275,7 +275,7 @@ $(function() {
 				    title: '등급',
 			  }, {
 				    field: 'RETAKE',
-				    title: '재수강삭제구분',
+				    title: '성적삭제구분',
 			  }, {
 				    field: 'REPASS',
 				    title: '재이수여부',

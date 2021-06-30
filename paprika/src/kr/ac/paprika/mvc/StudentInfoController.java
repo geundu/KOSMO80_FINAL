@@ -55,7 +55,7 @@ public class StudentInfoController extends MultiActionController {
 	 *@PASSEDSEMESTER           최종이수학기    
 	 *@throws IOException
 	 *@throws ServletException
-	 * //http://localhost:8000/paprika/getStudentInfo.do?STUDENT_NUMBER=15722001Q
+	 * //http://localhost:8000/paprika/getStudentInfo.do?STUDENT_NUMBER=15722001
 	 */
 	public void getStudentInfo(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		HashMapBinder		hmb		= new HashMapBinder(req);
@@ -174,7 +174,7 @@ public class StudentInfoController extends MultiActionController {
 	 * 
 	 * @throws IOException
 	 * @throws ServletException
-	 * //http://localhost:8000/paprika/getCourseHistory.do?STUDENT_NUMBER=13222001&SEMESTER=2021-1
+	 * //http://localhost:9050/paprika/getCourseHistory.do?STUDENT_NUMBER=13222001
 	 */
 	public void getCourseHistory(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		HashMapBinder		hmb		= new HashMapBinder(req);
@@ -182,14 +182,56 @@ public class StudentInfoController extends MultiActionController {
 		res.setContentType("text/plain;charset=utf-8");
 
 		hmb.bind(pMap);
-		List<Map<String, Object>> courseHistoryList = null;
-		courseHistoryList = studentInfoLogic.getCourseHistory(pMap);
+		List<Map<String, Object>> cbBoxCourseHistoryList = null;
+		cbBoxCourseHistoryList = studentInfoLogic.getCourseHistory(pMap);
 		logger.info(pMap);
-		logger.info(courseHistoryList);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("../index.jsp");
-		req.setAttribute("courseHistoryList", courseHistoryList);
+		logger.info(cbBoxCourseHistoryList);
+		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/StuInfo/StuCourse.jsp");
+		req.setAttribute("cbBoxCourseHistoryList", cbBoxCourseHistoryList);
 		dispatcher.forward(req, res);
 	
+	}
+	
+	/**
+	 * 수강목록 조회 메서드 콤보박스 체크 시 이전 학기 수강목록 조회 가능
+	 * PROC_STUDENT_COURSE_SELECT
+	 * @param req
+	 * @STUDENT_NUMBER   number    학생번호
+     * @SEMESTER         varchar2    학기
+	 * 
+	 * @param res
+	 * @rownum                    순번     
+	 * @COURSE_SEMESTER        	  년도        
+	 * @COURSE_NUMBER          수강강좌이름    
+	 * @SUBJECT_NAME          	  교과목        
+	 * @SUBJECT_CREDIT            학점         
+	 * @COLLEGE_NAME              개설학과       
+	 * @SUBJECT_GRADE             학년         
+	 * @COURSE_DAY                시간-월      
+	 * @COURSE_BEGIN_TIME         시간-시작시간   
+	 * @COURSE_END_TIME           시간-종료시간   
+	 * @PROFESSOR_NAME            교수명        
+	 * @SUBJECT_DIVISION          이수구분       
+	 * @MARK_IS_RETAKE            재수강여부     
+	 * 
+	 * @throws IOException
+	 * @throws ServletException
+	 *http://localhost:9050/paprika/jsonGetCourseHistory.do?STUDENT_NUMBER=13222001&SEMESTER=2021-1
+	 */
+	public void jsonGetCourseHistory(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+		HashMapBinder		hmb		= new HashMapBinder(req);
+		Map<String, Object>	pMap	= new HashMap<String, Object>();
+		res.setContentType("text/plain;charset=utf-8");
+
+		hmb.bind(pMap);
+		List<Map<String, Object>> courseHistoryList = null;
+		courseHistoryList = studentInfoLogic.jsonGetCourseHistory(pMap);
+		logger.info(pMap);
+		logger.info(courseHistoryList);
+		Gson g = new Gson();
+		String outString = g.toJson(courseHistoryList);
+		PrintWriter out = res.getWriter();
+		out.print(outString);
 	}
 
 	/**
@@ -222,8 +264,8 @@ public class StudentInfoController extends MultiActionController {
 		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/StuInfo/StuScore.jsp");
 		req.setAttribute("gradeHistoryList", gradeHistoryList);
 		dispatcher.forward(req, res);
-	
 	}
+
 	/**
 	 * 수강성적조회 메서드, 우측 상세조회도 포함해야 할지 고려해야 함
 	 * PROC_SUBJECT_SCORE_SELECT
