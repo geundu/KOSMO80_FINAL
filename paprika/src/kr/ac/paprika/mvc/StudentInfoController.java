@@ -257,9 +257,25 @@ public class StudentInfoController extends MultiActionController {
 		gradeHistoryDetail = studentInfoLogic.getGradeHistoryDetail(pMap);
 		logger.info(pMap);
 		logger.info(gradeHistoryDetail);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/StuInfo/StuScore.jsp");
+		/*RequestDispatcher dispatcher = req.getRequestDispatcher("../");*/
 		req.setAttribute("gradeHistoryDetail", gradeHistoryDetail);
-		dispatcher.forward(req, res);
+		/*dispatcher.forward(req, res);*/
+	}
+	//http://localhost:9050/paprika/jsonGetGradeHistoryDetail.do?STUDENT_NUMBER=13222001&SEMESTER=2021-1
+	public void jsonGetGradeHistoryDetail(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+		HashMapBinder		hmb		= new HashMapBinder(req);
+		Map<String, Object>	pMap	= new HashMap<String, Object>();
+		res.setContentType("application/json;charset=utf-8");
+
+		hmb.bind(pMap);
+		List<Map<String, Object>> gradeHistoryDetail = null;
+		gradeHistoryDetail = studentInfoLogic.getGradeHistoryDetail(pMap);
+		logger.info(pMap);
+		logger.info(gradeHistoryDetail);
+		Gson g = new Gson();
+		String outString = g.toJson(gradeHistoryDetail);
+		PrintWriter out = res.getWriter();
+		out.print(outString);
 	}
 
 	/**
