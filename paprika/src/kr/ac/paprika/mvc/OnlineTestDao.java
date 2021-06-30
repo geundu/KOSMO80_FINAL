@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.dao.DataAccessException;
 
 public class OnlineTestDao {
 	private SqlSessionTemplate	sqlSessionTemplate	= null;
@@ -18,7 +19,7 @@ public class OnlineTestDao {
 	 * @param pMap
 	 * @return
 	 */
-	public List<Map<String, Object>> getOnlineTest(Map<String, Object> pMap) {
+	public List<Map<String, Object>> getOnlineTest(Map<String, Object> pMap){
 		List<Map<String, Object>> onlineTest = null;
 		onlineTest = sqlSessionTemplate.selectList("getLectureList", pMap);
 		return onlineTest;
@@ -30,7 +31,7 @@ public class OnlineTestDao {
 	 * @param pMap
 	 * @return
 	 */
-	public int answerInsert(Map<String, Object> pMap) {
+	public int answerInsert(Map<String, Object> pMap) throws DataAccessException{
 		int result = 0;
 		result = 1;
 		sqlSessionTemplate.insert("answerInsert", pMap);

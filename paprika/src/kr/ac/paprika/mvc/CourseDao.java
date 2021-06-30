@@ -5,10 +5,11 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.dao.DataAccessException;
 
 public class CourseDao {
-	Logger						logger				= Logger.getLogger(CourseDao.class);
-	private SqlSessionTemplate	sqlSessionTemplate	= null;
+	Logger logger = Logger.getLogger(CourseDao.class);
+	private SqlSessionTemplate sqlSessionTemplate = null;
 
 	/**
 	 * 스프링으로부터 DI를 받기 위한 setter
@@ -27,8 +28,8 @@ public class CourseDao {
 	 */
 	public List<Map<String, Object>> getCourseList(Map<String, Object> pMap) {
 		List<Map<String, Object>> courseList = null;
-		sqlSessionTemplate.selectList("getCourseList",pMap);
-		courseList = (List<Map<String,Object>>) pMap.get("cursor");
+		sqlSessionTemplate.selectList("getCourseList", pMap);
+		courseList = (List<Map<String, Object>>) pMap.get("cursor");
 		return courseList;
 	}
 
@@ -40,8 +41,8 @@ public class CourseDao {
 	 */
 	public List<Map<String, Object>> getLectureList(Map<String, Object> pMap) {
 		List<Map<String, Object>> lectureList = null;
-		sqlSessionTemplate.selectList("getLectureList",pMap);
-		lectureList = (List<Map<String,Object>>) pMap.get("cursor");
+		sqlSessionTemplate.selectList("getLectureList", pMap);
+		lectureList = (List<Map<String, Object>>) pMap.get("cursor");
 		return lectureList;
 	}
 
@@ -53,8 +54,8 @@ public class CourseDao {
 	 */
 	public List<Map<String, Object>> getLectureDetail(Map<String, Object> pMap) {
 		List<Map<String, Object>> lectureDetail = null;
-		sqlSessionTemplate.selectList("getLectureDetail",pMap);
-		lectureDetail = (List<Map<String,Object>>) pMap.get("cursor");
+		sqlSessionTemplate.selectList("getLectureDetail", pMap);
+		lectureDetail = (List<Map<String, Object>>) pMap.get("cursor");
 		return lectureDetail;
 	}
 
@@ -64,7 +65,7 @@ public class CourseDao {
 	 * @param pMap
 	 * @return
 	 */
-	public int homeworkInsert(Map<String, Object> pMap) {
+	public int homeworkInsert(Map<String, Object> pMap) throws DataAccessException {
 		int result = 0;
 		List<Map<String, Object>> homeworkInsert = null;
 		sqlSessionTemplate.selectList("homeworkInsert", pMap);
@@ -79,7 +80,7 @@ public class CourseDao {
 	 * @param pMap
 	 * @return
 	 */
-	public int homeworkUpdate(Map<String, Object> pMap) {
+	public int homeworkUpdate(Map<String, Object> pMap) throws DataAccessException {
 		int result = 0;
 		List<Map<String, Object>> homeworkUpdate = null;
 		sqlSessionTemplate.selectList("homeworkUpdate", pMap);
@@ -94,7 +95,7 @@ public class CourseDao {
 	 * @param pMap
 	 * @return
 	 */
-	public int feedbackInsert(Map<String, Object> pMap) {
+	public int feedbackInsert(Map<String, Object> pMap) throws DataAccessException {
 		int result = 0;
 		List<Map<String, Object>> feedbackInsert = null;
 		sqlSessionTemplate.selectList("feedbackInsert", pMap);
@@ -109,7 +110,7 @@ public class CourseDao {
 	 * @param pMap
 	 * @return
 	 */
-	public int homeworkGrading(Map<String, Object> pMap) {
+	public int homeworkGrading(Map<String, Object> pMap) throws DataAccessException {
 		int result = 0;
 		List<Map<String, Object>> homeworkGrading = null;
 		sqlSessionTemplate.selectList("homeworkGrading", pMap);
@@ -126,8 +127,8 @@ public class CourseDao {
 	 */
 	public List<Map<String, Object>> getHomeworkList(Map<String, Object> pMap) {
 		List<Map<String, Object>> homeworkList = null;
-		sqlSessionTemplate.selectList("getHomeworkList",pMap);
-		homeworkList = (List<Map<String,Object>>) pMap.get("cursor");
+		sqlSessionTemplate.selectList("getHomeworkList", pMap);
+		homeworkList = (List<Map<String, Object>>) pMap.get("cursor");
 		return homeworkList;
 	}
 }
