@@ -31,7 +31,6 @@ String sessionId = "15722001";
 			});
 			return false;
 		}
-			
 			function onClickMenu2_1(e){
 			console.log('onClickMenu2_1');
 			console.log(<%=sessionId%>);

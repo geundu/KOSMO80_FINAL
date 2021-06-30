@@ -24,7 +24,7 @@
 
 <body class="my-login-page">
 	<div class="wrapper">
-		<form class="login">
+    		<form class="login">
 			<p class="title">Pprk. Login</p>
 			<input type="text" placeholder="ID(학번)" name="id" autofocus />
 			<i class="fa fa-user"></i>

@@ -18,7 +18,7 @@ $('.login').on('submit', function (e) {
 		setTimeout(function () {
 			$state.html('Log in');
 			$this.removeClass('ok loading');
-			 $(location).attr('href', "http://localhost:9010/project/frameForm.jsp");
+			 $(location).attr('href', "http://localhost:9050/frameForm.jsp");
 			working = false;
 		}, 4000);
 	}, 3000);
