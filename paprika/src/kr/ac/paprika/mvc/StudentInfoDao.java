@@ -73,6 +73,23 @@ public class StudentInfoDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> getCourseHistory(Map<String, Object> pMap) {
+		List<Map<String, Object>> cbBoxCourseHistoryList = null;
+		
+		sqlSessionTemplate.selectList("cbBoxCourseHistory", pMap);
+		
+		logger.info(pMap);
+		cbBoxCourseHistoryList = (List<Map<String, Object>>) pMap.get("cursor");
+		logger.info(cbBoxCourseHistoryList);
+		return cbBoxCourseHistoryList;
+	}//http://localhost:8000/paprika/getCourseHistory.do?STUDENT_NUMBER=13222001
+	
+	/**
+	 * 수강목록 조회 메서드 콤보박스 체크 시 이전 학기 수강목록 조회 가능
+	 * 
+	 * @param pMap
+	 * @return
+	 */
+	public List<Map<String, Object>> jsonGetCourseHistory(Map<String, Object> pMap) {
 		List<Map<String, Object>> courseHistoryList = null;
 		sqlSessionTemplate.selectList("getCourseHistory", pMap);
 		logger.info(pMap);
@@ -80,6 +97,7 @@ public class StudentInfoDao {
 		logger.info(courseHistoryList);
 		return courseHistoryList;
 	}//http://localhost:8000/paprika/getCourseHistory.do?STUDENT_NUMBER=13222001
+	
 
 	/**
 	 * 수강성적조회 메서드, 우측 상세조회도 포함해야 할지 고려해야 함

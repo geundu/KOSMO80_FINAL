@@ -6,19 +6,26 @@
 	request.setCharacterEncoding("utf-8");
 %>
 <%
- StringBuilder path = new StringBuilder(request.getContextPath());
+	StringBuilder path = new StringBuilder(request.getContextPath());
 path.append("/");
 
 List<Map<String, Object>> gradeHistoryList = null;
+List<Map<String, Object>> gradeHistoryDetail = null;
 gradeHistoryList = (List<Map<String, Object>>) request.getAttribute("gradeHistoryList");
-int size = 0;
+int sizeList = 0;
+int sizeDetail = 0;
 
 if (gradeHistoryList != null) {
-	size = gradeHistoryList.size();
+	sizeList = gradeHistoryList.size();
 }
+if (gradeHistoryDetail != null) {
+	sizeDetail = gradeHistoryDetail.size();
+}
+String[] semesterarr = new String[sizeList];
 %>
 <script>
-console.log(<%=size%>);
+console.log(<%=sizeList%>);
+console.log(<%=sizeDetail%>);
 </script>
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5"> -->
@@ -86,42 +93,44 @@ console.log(<%=size%>);
 					</tr>
 				</thead>
 				<tbody>
-				<% 
-				Map<String,Double> totalMap = new HashMap<>();
-				Double totalAvg = 0.0;
-				Double totalSummitScore = 0.0;
-				Double totalPassScore = 0.0;
-				Double totalFScore = 0.0;
-				for(int i=0;i<size;i++){
-					Map<String,Object> rmap = gradeHistoryList.get(i);
- 					totalAvg = totalAvg 
-												+ Double.parseDouble(rmap.get("MARK_AVG").toString());
-					totalSummitScore = totalSummitScore 
-												+ Double.parseDouble(rmap.get("SUMMITEDSCORE").toString());
-					totalPassScore = totalPassScore 
-												+ Double.parseDouble(rmap.get("PASSSCORE").toString());
-					totalFScore = totalFScore 
-												+ Double.parseDouble(rmap.get("F_SCORE").toString());
-				totalMap.put("totalAvg", totalAvg/size);
-				totalMap.put("totalSummitScore", totalSummitScore/size );
-				totalMap.put("totalPassScore", totalPassScore/size );
-				totalMap.put("F_SCORE", totalFScore/size );
-				
-				%>
-					<tr id="course_table"> 
-						<th scope="row"><%=rmap.get("COURSE_SEMESTER") %></th>
-						<td><%=rmap.get("MARK_AVG") %></td>
-						<td><%=rmap.get("SUMMITEDSCORE") %></td>
-						<td><%=rmap.get("PASSSCORE") %></td>
-						<td><%=rmap.get("F_SCORE") %></td>
-				<%}; %>
+					<%
+					Map<String, Double> totalMap = new HashMap<>();
+					Double totalAvg = 0.0;
+					Double totalSummitScore = 0.0;
+					Double totalPassScore = 0.0;
+					Double totalFScore = 0.0;
+					for (int i = 0; i < sizeList; i++) {
+						Map<String, Object> rmap = gradeHistoryList.get(i);
+						totalAvg = totalAvg + Double.parseDouble(rmap.get("MARK_AVG").toString());
+						totalSummitScore = totalSummitScore + Double.parseDouble(rmap.get("SUMMITEDSCORE").toString());
+						totalPassScore = totalPassScore + Double.parseDouble(rmap.get("PASSSCORE").toString());
+						totalFScore = totalFScore + Double.parseDouble(rmap.get("F_SCORE").toString());
+						totalMap.put("totalAvg", totalAvg / sizeList);
+						totalMap.put("totalSummitScore", totalSummitScore / sizeList);
+						totalMap.put("totalPassScore", totalPassScore / sizeList);
+						totalMap.put("F_SCORE", totalFScore / sizeList);
+					%>
+					<tr id="course_table<%=i%>">
+						<%
+							semesterarr[i] = String.valueOf(rmap.get("COURSE_SEMESTER"));
+						%>
+						<th scope="row"><%=rmap.get("COURSE_SEMESTER")%></th>
+						<td><%=rmap.get("MARK_AVG")%></td>
+						<td><%=rmap.get("SUMMITEDSCORE")%></td>
+						<td><%=rmap.get("PASSSCORE")%></td>
+						<td><%=rmap.get("F_SCORE")%></td>
 					</tr>
+					<%
+						} ;
+					%>
+					<tr>
 						<th scope="row">성적 총계</th>
-						<td> <%=totalMap.get("totalAvg")%> </td>
-						<td> <%=Math.round((totalMap.get("totalSummitScore"))*100/100)%> </td>
-						<td> <%=Math.round((totalMap.get("totalPassScore"))*100/100) %> </td>
-						<td> <%=Math.round((totalMap.get("F_SCORE"))*100/100) %> </td>
-
+						<td><%=totalMap.get("totalAvg")%></td>
+						<td><%=Math.round((totalMap.get("totalSummitScore")) * 100 / 100)%>
+						</td>
+						<td><%=Math.round((totalMap.get("totalPassScore")) * 100 / 100)%>
+						</td>
+						<td><%=Math.round((totalMap.get("F_SCORE")) / 1)%></td>
 					</tr>
 				</tbody>
 			</table>
@@ -135,80 +144,48 @@ console.log(<%=size%>);
 					조회</div>
 			</h3>
 			<p>
-			<table class="table table-bordered">
+			<table class="table table-bordered" id="detailTable">
 				<thead class="thead-team">
-					<tr>
-						<th scope="col">번호</th>
-						<th scope="col">(과목코드)과목명</th>
-						<th scope="col">이수구분</th>
-						<th scope="col">학점</th>
-						<th scope="col">평점</th>
-						<th scope="col">등급</th>
-						<th scope="col">성적삭제구분</th>
-						<th scope="col">재이수여부</th>
-						<th scope="col">재이수학기</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<th scope="row">1</th>
-						<td>(000851) 일본문화</td>
-						<td>전필</td>
-						<td>3</td>
-						<td>4</td>
-						<td>A0</td>
-						<td>재수강삭제</td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<th scope="row">2</th>
-						<td>(000851) 일본문화</td>
-						<td>전필</td>
-						<td>3</td>
-
-						<td>4</td>
-						<td>A0</td>
-						<td>재수강삭제</td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<th scope="row">3</th>
-						<td>(000851) 일본문화</td>
-						<td>전필</td>
-						<td>3</td>
-
-						<td>4</td>
-						<td>A0</td>
-						<td>재수강삭제</td>
-						<td>재이수</td>
-						<td>2020-2</td>
-					</tr>
-					<tr>
-						<th scope="row">4</th>
-						<td>(000851) 일본문화</td>
-						<td>전필</td>
-						<td>3</td>
-
-						<td>4</td>
-						<td>A0</td>
-						<td>재수강삭제</td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<th scope="row">5</th>
-						<td>(000851) 일본문화</td>
-						<td>전필</td>
-						<td>3</td>
-
-						<td>4</td>
-						<td>A0</td>
-						<td>재수강삭제</td>
-						<td></td>
-						<td></td>
-					</tr>
+						<tr>
+							<th scope="col">번호</th>
+							<th scope="col">(과목코드)과목명</th>
+							<th scope="col">이수구분</th>
+							<th scope="col">학점</th>
+							<th scope="col">평점</th>
+							<th scope="col">등급</th>
+							<th scope="col">성적삭제구분</th>
+							<th scope="col">재이수여부</th>
+							<th scope="col">재이수학기</th>
+						</tr>
+					</thead>
+					<tbody>
+				<%
+							if (sizeDetail != 0) {
+							for (int i = 0; i < sizeDetail; i++) {
+								Map<String, Object> rmap = gradeHistoryDetail.get(i);
+						%>
+<%-- 						<tr>
+							<th scope="row"><%=rmap.get("NUM")%></th>
+							<td><%=rmap.get("SUBJECT_NAME")%></td>
+							<td><%=rmap.get("SUBJECT_DIVISION")%></td>
+							<td><%=rmap.get("SUBJECT_CREDIT")%></td>
+							<td><%=rmap.get("SCORE")%></td>
+							<td><%=rmap.get("MARK")%></td>
+							<td><%=rmap.get("RETAKE")%></td>
+							<td><%=rmap.get("REPASS")%></td>
+							<td><%=rmap.get("REPASS_SEMESTER")%></td>
+						</tr> --%>
+						<!-- 안쓰는 코드이지만 구분을 위해 남겨놓았습니다. -->
+						<%
+							}
+						} else {
+						%>
+						<tr>
+							<th colspan="9">선택된 학기가 없습니다.</th>
+						</tr>
+						<%
+							}
+						%>
 				</tbody>
 			</table>
 			</p>
@@ -216,7 +193,6 @@ console.log(<%=size%>);
 		<!-- 두번쨰 끝-->
 		<!--세번째 시작-->
 		<div class="screen3" style="width: 100%; height: 100%;">
-
 			<table class="table table-bordered"
 				style="width: 70%; text-align: center; margin: auto">
 				<thead class="thead-team ">
@@ -257,35 +233,69 @@ console.log(<%=size%>);
 	</div>
 </div>
 <script src="./js/toggleAction.js"></script>
+<!-- Factory.jsp로부터 가져온 함수  -->
 <script>
 $(function() {
-	
 	'use strict';
-	
 	$(document).ready(function () {
 		console.log('readyEvent');
 		initClickEvent();
 	});
-	function onClickMenu2_3__2(e){
-		console.log('onClickMenu2_3__2');
+	
+	var $detailTable = $('#detailTable');
+	
+	<%for (int i = 0; i < sizeList; i++) {%>
+	let semester<%=i%>= <%=semesterarr[i]%>;
+	function onClickRow_StuScore<%=i%>(e){
+		console.log('onClickRow_StuScore'+<%=i%>);
 		e.preventDefault();
-		$.ajax({
-			type :'get',
-			/* url:'pageContent/StuInfo/StuScore.jsp', */
-			url:'/paprika/getGradeHistoryDetail.do?STUDENT_NUMBER='+sid,
-			dataType:'html',
-			success: function(data){
-				$content.html(data).trigger("create");
-			}
+		$detailTable.bootstrapTable('destroy')
+		$detailTable.bootstrapTable({
+			url:'/paprika/jsonGetGradeHistoryDetail.do?STUDENT_NUMBER='+sid+'&'+
+			'SEMESTER='+'<%=semesterarr[i]%>',
+			height:"100%",
+			width:"100%",
+			columns: [{
+			    field: 'NUM',
+			    title: '번호'
+			  }, {
+			    field: 'SUBJECT_NAME',
+			    title: '과목이름',
+			  }, {
+				    field: 'SUBJECT_DIVISION',
+				    title: '이수구분',
+			  }, {
+				    field: 'SUBJECT_CREDIT',
+				    title: '학점',
+			  }, {
+				    field: 'SCORE',
+				    title: '평점',
+			  }, {
+				    field: 'MARK',
+				    title: '등급',
+			  }, {
+				    field: 'RETAKE',
+				    title: '성적삭제구분',
+			  }, {
+				    field: 'REPASS',
+				    title: '재이수여부',
+			  }, {
+				    field: 'REPASS_SEMESTER',
+				    title: '재이수학기',
+			  }]
 		});
 		return false;
-		
-}
+	}
+<%}%>  
 	function initClickEvent(){
-		$('#course_table').click(onClickMenu2_3__2);
+		<%for (int i = 0; i < sizeList; i++) {%>
+		$('#course_table<%=i%>').click(onClickRow_StuScore<%=i%>);
+		<%}%>
 	}	
-
+	
+<!-- Factory.jsp로부터 가져온 함수  -->
 });
+
 </script>
 <!-- </div> -->
 <!-- Page Content end -->
