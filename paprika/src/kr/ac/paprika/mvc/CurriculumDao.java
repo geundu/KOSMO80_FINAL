@@ -99,6 +99,22 @@ public class CurriculumDao {
 	 */
 	public List<Map<String, Object>> getCurriculum(Map<String, Object> pMap) {
 
+		List<Map<String, Object>> cbBoxCurriculum = null;
+		sqlSessionTemplate.selectList("cbBoxCurriculum", pMap);
+		logger.info(pMap);
+		cbBoxCurriculum = (List<Map<String, Object>>) pMap.get("cursor");
+		logger.info(cbBoxCurriculum);
+		return cbBoxCurriculum;
+	}
+	
+	/**
+	 * 커리큘럼조회 메서드
+	 * 
+	 * @param pMap
+	 * @return curriculumList
+	 */
+	public List<Map<String, Object>> jsonGetCurriculum(Map<String, Object> pMap) {
+
 		List<Map<String, Object>> curriculumList = null;
 		sqlSessionTemplate.selectList("getCurriculum", pMap);
 		logger.info(pMap);

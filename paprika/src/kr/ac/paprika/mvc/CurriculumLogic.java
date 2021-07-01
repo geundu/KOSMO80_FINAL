@@ -1,5 +1,6 @@
 package kr.ac.paprika.mvc;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,31 +34,32 @@ public class CurriculumLogic {
 	 * 
 	 * @return cbxList
 	 */
-	public Map<String, List<Map<String, Object>>> openCourse(Map<String, Object> pMap) {
+	public Map<String, List<Map<String, Object>>> getOpenCourse(Map<String, Object> pMap) {
 		
-		Map<String, List<Map<String, Object>>> cbxList = null;
+		Map<String, List<Map<String, Object>>> cbxMapList = new HashMap<>();
 		
 		if(pMap.get("CBX_COLLEGE_NAME")!= null) {
 			List<Map<String, Object>> deptList = null;
 			deptList = curriculumDao.getDeptList(pMap);
-			cbxList.put("deptList", deptList);
+			cbxMapList.put("deptList", deptList);
 		}
 		
 		if(pMap.get("CBX_DEPT_NAME")!= null) {
 			List<Map<String, Object>> majorList = null;
 			majorList = curriculumDao.getMajorList(pMap);
-			cbxList.put("majorList", majorList);
+			cbxMapList.put("majorList", majorList);
 		}
 		
 		List<Map<String, Object>> collegeList = null;
 		collegeList = curriculumDao.getCollegeList(pMap);
-		cbxList.put("collegeList", collegeList);
+		logger.info(collegeList);
+		cbxMapList.put("collegeList", collegeList);
 		
 		List<Map<String, Object>> divisionList = null;
-		divisionList = curriculumDao.getCollegeList(pMap);
-		cbxList.put("divisionList", divisionList);
+		divisionList = curriculumDao.getDivisionList(pMap);
+		cbxMapList.put("divisionList", divisionList);
 		
-		return cbxList;
+		return cbxMapList;
 	}
 
 	/**
@@ -79,8 +81,19 @@ public class CurriculumLogic {
 	 * @return
 	 */
 	public List<Map<String, Object>> getCurriculum(Map<String, Object> pMap) {
+		List<Map<String, Object>> cbBoxCurriculum = null;
+		cbBoxCurriculum = curriculumDao.getCurriculum(pMap);
+		return cbBoxCurriculum;
+	}
+	/**
+	 * 커리큘럼조회 메서드
+	 * 
+	 * @param pMap
+	 * @return
+	 */
+	public List<Map<String, Object>> jsonGetCurriculum(Map<String, Object> pMap) {
 		List<Map<String, Object>> curriculumList = null;
-		curriculumList = curriculumDao.getCurriculum(pMap);
+		curriculumList = curriculumDao.jsonGetCurriculum(pMap);
 		return curriculumList;
 	}
 }

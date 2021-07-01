@@ -1,9 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
 <%
 	request.setCharacterEncoding("utf-8");
 %>
+<%
+StringBuilder path = new StringBuilder(request.getContextPath());
+path.append("/");
+
+List<Map<String, Object>> registerRecordList = null;
+registerRecordList = (List<Map<String, Object>>) request.getAttribute("registerRecordList");
+int RecordListSize = 0;
+Map<String,Object> rmap = new HashMap<>();
+
+if (registerRecordList != null) {
+	RecordListSize = registerRecordList.size();
+	for(int i=0;i<RecordListSize;i++){
+    rmap = registerRecordList.get(i);
+	}
+}
+out.print("RecordListSize:" + RecordListSize);
+%>
+<script>
+console.log(<%=RecordListSize%>);
+</script>
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5"> -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -57,7 +78,7 @@
 		<div class="screen1"
 			style="width: 100%; height: auto%; background-color: ;">
 			<h3>
-				<div style="text-align: center;"><% %>오세현 님의 학적 변동 조회</div>
+				<div style="text-align: center;"><%=rmap.get("STUDENT_NAME")%> 님의 학적 변동 조회</div>
 			</h3>
 			<p></p>
 		</div>
@@ -69,61 +90,30 @@
 			<table class="table table-bordered">
 				<thead class="thead-team">
 					<tr>
-						<th scope="col">연도<% %></th>
+						<th scope="col">연도, 학기</th>
 						<th scope="col">구분</th>
 						<th scope="col">시행사유</th>
 						<th scope="col">비고</th>
 					</tr>
 				</thead>
 				<tbody>
+				<%
+				for(int i =0 ; i < RecordListSize ; i++) {
+					rmap = registerRecordList.get(i);
+					String REMARK =String.valueOf(rmap.get("REMARK"));
+					if(REMARK.equals("null")){
+						REMARK=" ";
+					}
+				%>
 					<tr>
-						<th scope="row">2020.03.02</th>
-						<td>입학</td>
-						<td>등록에 따른 입학</td>
-						<td>비고사항 없음</td>
+						<th scope="row"><%=rmap.get("YEAR")%>년 <%=rmap.get("SEMESTER")%>학기</th>
+						<td><%=rmap.get("REGISTER_NAME")%></td>
+						<td><%=rmap.get("REGISTER_CONTENT")%></td>
+						<td><%=REMARK%></td>
 					</tr>
-					<tr>
-						<th scope="row">2020.06.02</th>
-						<td>휴학</td>
-						<td>등록에따른 입학</td>
-						<td>비고사항 없음</td>
-					</tr>
-					<tr>
-						<th scope="row">2020.03.02</th>
-						<td>복학</td>
-						<td>등록에따른 입학</td>
-						<td>비고사항 없음</td>
-					</tr>
-					<tr>
-						<th scope="row">2020.03.02</th>
-						<td>복학</td>
-						<td>등록에따른 입학</td>
-						<td>비고사항 없음</td>
-					</tr>
-					<tr>
-						<th scope="row">2020.03.02</th>
-						<td>복학</td>
-						<td>등록에따른 입학</td>
-						<td>비고사항 없음</td>
-					</tr>
-					<tr>
-						<th scope="row">2020.03.02</th>
-						<td>복학</td>
-						<td>등록에따른 입학</td>
-						<td>비고사항 없음</td>
-					</tr>
-					<tr>
-						<th scope="row">2020.03.02</th>
-						<td>복학</td>
-						<td>등록에따른 입학</td>
-						<td>비고사항 없음</td>
-					</tr>
-					<tr>
-						<th scope="row">2020.03.02</th>
-						<td>복학</td>
-						<td>등록에따른 입학</td>
-						<td>비고사항 없음</td>
-					</tr>
+					<%
+					} 
+					%>
 
 				</tbody>
 			</table>
