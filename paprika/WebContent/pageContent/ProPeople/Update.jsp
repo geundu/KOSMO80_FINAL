@@ -28,7 +28,7 @@
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a
-							href="http://localhost:9010/project/frameForm.jsp">Pprk.Main()</a></li>
+							onClick="window.location.reload()">Pprk.Main()</a></li>
 						<li class="breadcrumb-item active" aria-current="page">관리자-조회,
 							추가, 수정</li>
 						<li class="breadcrumb-item active" aria-current="page">학생,교직원

@@ -153,7 +153,7 @@ String sessionId = "15722001";
 			e.preventDefault();
 			$.ajax({
 				type :'get',
-				url:'pageContent/Online_Course.jsp',
+				url:'pageContent/Online/Course.jsp',
 				/* url:'/paprika/getCourseList.do?STUDENT_NUMBER='+sid, */
 				dataType:'html',
 				success: function(data){

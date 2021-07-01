@@ -51,7 +51,7 @@ console.log(<%=sizeDetail%>);
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a
-							href="http://localhost:9010/project/frameForm.jsp">Pprk.Main()</a></li>
+							onClick="window.location.reload()">Pprk.Main()</a></li>
 						<li class="breadcrumb-item active" aria-current="page">종합정보조회</li>
 						<li class="breadcrumb-item active" aria-current="page">수강성적조회</li>
 					</ol>
