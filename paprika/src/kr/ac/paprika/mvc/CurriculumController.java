@@ -27,6 +27,48 @@ public class CurriculumController extends MultiActionController {
 	public void setCurriculumLogic(CurriculumLogic curriculumLogic) {
 		this.curriculumLogic = curriculumLogic;
 	}
+	
+	/**
+	 * 개설강좌조회 페이지 이동, 콤보박스 리스트 셀렉 메소드
+	 * 
+	 * @사용DML cbBoxCollege, (대학을 골랐을시)cbBoxDept, (부서를 골랐을시)cbBoxMajor, cbBoxDivision
+	 * @param req - (콤보박스에서 고른 대학이름 변수, 전단계 미선택시 생성되지 않음.) CBX_COLLEGE_NAME
+	 * 				,(콤보박스에서 고른 학부이름 변소, 전단계 미선택시 생성되지 않음.) CBX_DEPT_NAME
+	 * 
+	 * @param res
+	 * @throws IOException
+	 * @throws ServletException
+	 * 
+	 * Map<String, List<Map<String, Object>>>
+	 * @cbxList의 value들은 아래와 같다
+	 * 
+	 * List<Map<String, Object>>
+	 * @collegeList - 대학단위 리스트
+	 * @deptList - 학부단위 리스트 (상위 콤보박스 선택했을시에 생성)
+	 * @majorList - 학과단위 리스트 (상위 콤보박스 선택했을시에 생성)
+	 * @divisionList - 이수구분 리스트
+	 * 
+	 */
+	public void openCourse(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+		HashMapBinder		hmb		= new HashMapBinder(req);
+		Map<String, Object>	pMap	= new HashMap<String, Object>();
+		res.setContentType("text/plain;charset=utf-8");
+		hmb.bind(pMap);
+		
+		Map<String, List<Map<String, Object>>> cbxList = null;
+		cbxList = curriculumLogic.openCourse(pMap);
+
+		logger.info(pMap);
+		logger.info("collegeList : "+cbxList.get("collegeList"));
+		logger.info("deptList : "+cbxList.get("deptList"));
+		logger.info("majorList : "+cbxList.get("majorList"));
+		logger.info("divisionList : "+cbxList.get("divisionList"));
+
+		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/Course/Course.jsp");
+		req.setAttribute("cbxList", cbxList);
+
+		dispatcher.forward(req, res);
+	}
 
 	/**
 	 * 개설강좌조회 메서드
@@ -44,22 +86,22 @@ public class CurriculumController extends MultiActionController {
 	 *             ,COURSE_END_TIME 종료교시 ,PROFESSOR_NAME 담당교수
 	 * 
 	 */
-	public void getOpenCourse(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+	public void getOpenCourseList(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		HashMapBinder		hmb		= new HashMapBinder(req);
 		Map<String, Object>	pMap	= new HashMap<String, Object>();
 		res.setContentType("text/plain;charset=utf-8");
 		hmb.bind(pMap);
 
 		List<Map<String, Object>> courseList = null;
-		courseList = curriculumLogic.getOpenCourse(pMap);
+		courseList = curriculumLogic.getOpenCourseList(pMap);
 
 		logger.info(pMap);
 		logger.info(courseList);
 
-		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/Course/Course.jsp");
+		//RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/Course/Course.jsp");
 		req.setAttribute("courseList", courseList);
 
-		dispatcher.forward(req, res);
+		//dispatcher.forward(req, res);
 	}
 
 	/**
