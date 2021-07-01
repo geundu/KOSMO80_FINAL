@@ -4,7 +4,7 @@
 <%
 	request.setCharacterEncoding("utf-8");
 	request.getAttribute("studentList");
-	String sid = "15722001";
+	String sid = (String) session.getAttribute("STUDENT_NUMBER");
 %>
 <!DOCTYPE html>
 <html>

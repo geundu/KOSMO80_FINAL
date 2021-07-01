@@ -3,8 +3,11 @@ package kr.ac.paprika.mvc;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 public class MemberLogic {
-	private MemberDao memberDao = null;
+	Logger				logger		= Logger.getLogger(MemberLogic.class);
+	private MemberDao	memberDao	= null;
 
 	/**
 	 * 스프링으로부터 DI를 받기 위한 setter
@@ -21,9 +24,10 @@ public class MemberLogic {
 	 * @param pMap
 	 * @return
 	 */
-	public List<Map<String, Object>> signIn(Map<String, Object> pMap) {
-
-		return null;
+	public void signIn(Map<String, Object> pMap) {
+		logger.info("MemberLogic ==> signIn() 호출 성공");
+		memberDao.signIn(pMap);
+		logger.info("MemberLogic ==> " + pMap);
 	}
 
 	/**
