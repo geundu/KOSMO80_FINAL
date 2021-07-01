@@ -193,7 +193,7 @@ public class CourseController extends MultiActionController {
 		int result = 0;
 		result = courseLogic.homeworkUpdate(pMap);
 		if(result == 1) {
-			res.sendRedirect("../index.jsp");
+			res.sendRedirect("../pageContent/Online/LectureDetail.jsp");
 		}else {
 			res.sendRedirect("등록실패 페이지 이동처리");
 		}
@@ -228,7 +228,7 @@ public class CourseController extends MultiActionController {
 		int result = 0;
 		result = courseLogic.feedbackInsert(pMap);
 		if(result == 1) {
-			res.sendRedirect("../index.jsp");
+			res.sendRedirect("../pageContent/Online/Feedback.jsp");
 		}else {
 			res.sendRedirect("등록실패 페이지 이동처리");
 		}
@@ -256,7 +256,7 @@ public class CourseController extends MultiActionController {
 		int result = 0;
 		result = courseLogic.homeworkGrading(pMap);
 		if(result == 1) {
-			res.sendRedirect("../index.jsp");
+			res.sendRedirect("../pageContent/ProOnline/HomeworkCheck.jsp");
 		}else {
 			res.sendRedirect("등록실패 페이지 이동처리");
 		}
@@ -290,20 +290,39 @@ public class CourseController extends MultiActionController {
 		hmb.bind(pMap);
 		List<Map<String, Object>> homeworkList = null;
 		homeworkList = courseLogic.getHomeworkList(pMap);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/frameForm.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/ProOnline/HomeworkCheck.jsp");
 		req.setAttribute("courseList", homeworkList);
 		dispatcher.forward(req, res);
 	}
 
 	/**
 	 * 교수) 받은 피드백 목록 확인
+	 * @procedure
+	 * @PROC_PRO_ONLINE_FEEDBACK
 	 * 
 	 * @param req
+	 * @ONLINE_LECTURE_NUMBER    온라인 강의 번호
+	 * 
+	 * 
 	 * @param res
+	 * @sub.SUBJECT_NAME             과목 / 강좌 이름
+     *  @ol.ONLINE_LECTURE_NUMBER     강의번호
+     *  @ol.ONLINE_LECTURE_TITLE      강의 제목
+     *  @fb.FEEDBACK_TITLE            피드백 제목
+     *  @fb.FEEDBACK_CONTENT          피드백 내용
 	 * @throws IOException
 	 * @throws ServletException
 	 */
 	public void getFeedbackList(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+		HashMapBinder		hmb		= new HashMapBinder(req);
+		Map<String, Object>	pMap	= new HashMap<String, Object>();
+		res.setContentType("text/plain;charset=utf-8");
 
+		hmb.bind(pMap);
+		List<Map<String, Object>> feedbackList = null;
+		feedbackList = courseLogic.getFeedbackList(pMap);
+		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/ProOnline/FeedbackCheck.jsp");
+		req.setAttribute("courseList", feedbackList);
+		dispatcher.forward(req, res);
 	}
 }

@@ -45,8 +45,10 @@ public class OnlineTestDao {
 	 * @return
 	 */
 	public int onlineTestInsert(Map<String, Object> pMap) {
-
-		return 0;
+		int result = 0;
+		result = 1;
+		sqlSessionTemplate.insert("onlineTestInsert", pMap);
+		return result;
 	}
 
 	/**
@@ -55,8 +57,10 @@ public class OnlineTestDao {
 	 * @param pMap
 	 * @return
 	 */
-	public int TestGrading(Map<String, Object> pMap) {
-
-		return 0;
+	public int testGrading(Map<String, Object> pMap) {
+		int result = 0;
+		result = 1;
+		sqlSessionTemplate.update("testGrading", pMap);
+		return result;
 	}
 }

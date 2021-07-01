@@ -68,7 +68,7 @@ public class CourseDao {
 	public int homeworkInsert(Map<String, Object> pMap) throws DataAccessException {
 		int result = 0;
 		List<Map<String, Object>> homeworkInsert = null;
-		sqlSessionTemplate.selectList("homeworkInsert", pMap);
+		sqlSessionTemplate.insert("homeworkInsert", pMap);
 		homeworkInsert = (List<Map<String, Object>>) pMap.get("cursor");
 		result = 1;
 		return result;
@@ -83,7 +83,7 @@ public class CourseDao {
 	public int homeworkUpdate(Map<String, Object> pMap) throws DataAccessException {
 		int result = 0;
 		List<Map<String, Object>> homeworkUpdate = null;
-		sqlSessionTemplate.selectList("homeworkUpdate", pMap);
+		sqlSessionTemplate.update("homeworkUpdate", pMap);
 		homeworkUpdate = (List<Map<String, Object>>) pMap.get("cursor");
 		result = 1;
 		return result;
@@ -98,7 +98,7 @@ public class CourseDao {
 	public int feedbackInsert(Map<String, Object> pMap) throws DataAccessException {
 		int result = 0;
 		List<Map<String, Object>> feedbackInsert = null;
-		sqlSessionTemplate.selectList("feedbackInsert", pMap);
+		sqlSessionTemplate.insert("feedbackInsert", pMap);
 		feedbackInsert = (List<Map<String, Object>>) pMap.get("cursor");
 		result = 1;
 		return result;
@@ -113,7 +113,7 @@ public class CourseDao {
 	public int homeworkGrading(Map<String, Object> pMap) throws DataAccessException {
 		int result = 0;
 		List<Map<String, Object>> homeworkGrading = null;
-		sqlSessionTemplate.selectList("homeworkGrading", pMap);
+		sqlSessionTemplate.update("homeworkGrading", pMap);
 		homeworkGrading = (List<Map<String, Object>>) pMap.get("cursor");
 		result = 1;
 		return result;
@@ -139,7 +139,9 @@ public class CourseDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> getFeedbackList(Map<String, Object> pMap) {
-
-		return null;
+		List<Map<String, Object>> feedbackList = null;
+		sqlSessionTemplate.selectList("getFeedbackList", pMap);
+		feedbackList = (List<Map<String, Object>>) pMap.get("cursor");
+		return feedbackList;
 	}
 }

@@ -67,6 +67,7 @@ public class CourseLogic {
 			courseDao.homeworkInsert(pMap);
 			result = 1;
 		} catch (Exception e) {
+			result = 0;
 			throw e;
 		}
 		return result;
@@ -84,6 +85,7 @@ public class CourseLogic {
 			courseDao.homeworkUpdate(pMap);
 			result = 1;
 		} catch (Exception e) {
+			result = 0;
 			throw e;
 		}
 		return result;
@@ -102,6 +104,7 @@ public class CourseLogic {
 			courseDao.feedbackInsert(pMap);
 			result = 1;
 		} catch (Exception e) {
+			result = 0;
 			throw e;
 		}
 		return result;
@@ -120,6 +123,7 @@ public class CourseLogic {
 			courseDao.homeworkGrading(pMap);
 			result = 1;
 		} catch (Exception e) {
+			result = 0;
 			throw e;
 		}
 		return result;
@@ -145,7 +149,8 @@ public class CourseLogic {
 	 * @return
 	 */
 	public List<Map<String, Object>> getFeedbackList(Map<String, Object> pMap) {
-
-		return null;
+		List<Map<String, Object>> feedbackList = null;
+		feedbackList = courseDao.getFeedbackList(pMap);
+		return feedbackList;
 	}
 }
