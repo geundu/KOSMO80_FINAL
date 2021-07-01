@@ -18,17 +18,73 @@ public class CurriculumDao {
 	public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
 		this.sqlSessionTemplate = sqlSessionTemplate;
 	}
+	
+	/**
+	 * 대학단위 리스트 콤보박스
+	 * 
+	 * @param pMap
+	 * @return collegeList
+	 */
+	public List<Map<String, Object>> getCollegeList(Map<String, Object> pMap) {
+		List<Map<String, Object>> collegeList = null;
+		collegeList = sqlSessionTemplate.selectList("cbBoxCollege", pMap);
+		logger.info(pMap);
+		logger.info(collegeList);
+		return collegeList;
+	}
+	
+	/**
+	 * 학부단위 리스트 콤보박스
+	 * 
+	 * @param pMap
+	 * @return deptList
+	 */
+	public List<Map<String, Object>> getDeptList(Map<String, Object> pMap) {
+		List<Map<String, Object>> deptList = null;
+		deptList = sqlSessionTemplate.selectList("cbBoxDept", pMap);
+		logger.info(pMap);
+		logger.info(deptList);
+		return deptList;
+	}
+	
+	/**
+	 * 학과단위 리스트 콤보박스
+	 * 
+	 * @param pMap
+	 * @return majorList
+	 */
+	public List<Map<String, Object>> getMajorList(Map<String, Object> pMap) {
+		List<Map<String, Object>> majorList = null;
+		majorList = sqlSessionTemplate.selectList("cbBoxMajor", pMap);
+		logger.info(pMap);
+		logger.info(majorList);
+		return majorList;
+	}
+	
+	/**
+	 * 이수구분 리스트 콤보박스
+	 * 
+	 * @param pMap
+	 * @return divisionList
+	 */
+	public List<Map<String, Object>> getDivisionList(Map<String, Object> pMap) {
+		List<Map<String, Object>> divisionList = null;
+		divisionList = sqlSessionTemplate.selectList("cbBoxDivision", pMap);
+		logger.info(pMap);
+		logger.info(divisionList);
+		return divisionList;
+	}
 
 	/**
 	 * 개설강좌조회 메서드
 	 * 
 	 * @param pMap
-	 * @return
+	 * @return courseList
 	 */
-	public List<Map<String, Object>> getOpenCourse(Map<String, Object> pMap) {
+	public List<Map<String, Object>> getOpenCourseList(Map<String, Object> pMap) {
 
 		List<Map<String, Object>> courseList = null;
-		sqlSessionTemplate.selectList("getCourse", pMap);
+		sqlSessionTemplate.selectList("getCourseList", pMap);
 		logger.info(pMap);
 		courseList = (List<Map<String, Object>>) pMap.get("cursor");
 		logger.info(courseList);
@@ -39,7 +95,7 @@ public class CurriculumDao {
 	 * 커리큘럼조회 메서드
 	 * 
 	 * @param pMap
-	 * @return
+	 * @return curriculumList
 	 */
 	public List<Map<String, Object>> getCurriculum(Map<String, Object> pMap) {
 
