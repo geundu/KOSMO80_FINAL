@@ -58,7 +58,7 @@ public class CourseController extends MultiActionController {
 		hmb.bind(pMap);
 		List<Map<String, Object>> courseList = null;
 		courseList = courseLogic.getCourseList(pMap);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("../index.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/Online/Course.jsp");
 		req.setAttribute("courseList", courseList);
 		logger.info(courseList);
 		dispatcher.forward(req, res);
@@ -93,7 +93,7 @@ public class CourseController extends MultiActionController {
 		hmb.bind(pMap);
 		List<Map<String, Object>> lectureList = null;
 		lectureList = courseLogic.getLectureList(pMap);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("../index.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/Online/Lecture.jsp");
 		req.setAttribute("lectureList", lectureList);
 		logger.info(lectureList);
 		dispatcher.forward(req, res);
@@ -127,7 +127,7 @@ public class CourseController extends MultiActionController {
 		hmb.bind(pMap);
 		List<Map<String, Object>> lectureDetail = null;
 		lectureDetail = courseLogic.getLectureDetail(pMap);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("../index.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/Online/LectureDetail.jsp");
 		req.setAttribute("lectureDetail", lectureDetail);
 		dispatcher.forward(req, res);
 	}
