@@ -83,8 +83,8 @@ String sessionId = "15722001";
 			e.preventDefault();
 			$.ajax({
 				type :'get',
-				url:'pageContent/StuInfo/StuRegister.jsp',
-				/* url:'paprika/getRegisterRecord.do?STUDENT_NUMBER='+sid, */
+				/* url:'pageContent/StuInfo/StuRegister.jsp', */
+				url:'paprika/getRegisterRecord.do?STUDENT_NUMBER='+sid,
 				dataType:'html',
 				success: function(data){
 					$content.html(data).trigger("create");
@@ -97,8 +97,8 @@ String sessionId = "15722001";
 			e.preventDefault();
 			$.ajax({
 				type :'get',
-				url:'pageContent/Course/Course.jsp',
-				/* url:'paprika/getOpenCourse.do?STUDENT_NUMBER='+sid, */
+				/* url:'pageContent/Course/Course.jsp', */
+				url:'/paprika/getOpenCourse.do',
 				dataType:'html',
 				success: function(data){
 					$content.html(data).trigger("create");
@@ -111,8 +111,8 @@ String sessionId = "15722001";
 			e.preventDefault();
 			$.ajax({
 				type :'get',
-				url:'pageContent/Course/Curriculum.jsp',
-				/* url:'paprika/getCurriculum.do?STUDENT_NUMBER='+sid, */
+				/* url:'pageContent/Course/Curriculum.jsp', */
+				url:'paprika/getCurriculum.do?STUDENT_NUMBER='+sid,
 				dataType:'html',
 				success: function(data){
 					$content.html(data).trigger("create");

@@ -1,9 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
 <%
 	request.setCharacterEncoding("utf-8");
+
 %>
+<%
+	List<Map<String, Object>> cbBoxCurriculum = null;
+cbBoxCurriculum = (List<Map<String,Object>>) request.getAttribute("cbBoxCurriculum");
+	int sizeCbx = 0;
+	
+	if( cbBoxCurriculum !=null){
+		sizeCbx	= cbBoxCurriculum.size();
+	}
+
+	String[] cbBoxCurriculumArr = new String[sizeCbx];
+%>
+<script>
+console.log(<%=sizeCbx%>);
+</script>
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5"> -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -59,145 +75,119 @@
 			style="width: 100%; height: auto; text-align: center; background-color: ;">
 
 			<div class="btn-group" style="text-align: center;">
-				<select class="custom-select form-control-sm" style=""width:auto; padding:auto;">
-					<option selected>입학년도(학번) : 2012
-						<%
-						out.print("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+				<select class="custom-select form-control-sm" id="CurriculumSelect00" style=""width:auto; padding:auto;">
+				
+				
+					<option selected>입학년도를 선택해주세요.	</option>
+					<%
+					for(int i=0; i<sizeCbx ; i++){
+						Map<String, Object> rmap = cbBoxCurriculum.get(i);
+						cbBoxCurriculumArr[i] = (rmap.get("YEAR")).toString();
+					}
 					%>
-					</option>
-					<option>입학년도(학번) : 2013
-						<%
-						out.print("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
-					%>
-					</option>
-					<option>입학년도(학번) : 2014
-						<%
-						out.print("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
-					%>
-					</option>
-					<option>입학년도(학번) : 2015
-						<%
-						out.print("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
-					%>
-					</option>
+					<%for (int i=0; i<sizeCbx ; i++){ %>
+					<option><%=cbBoxCurriculumArr[i]%></option>
+					<%} %>
 
 				</select> <br>
 			</div>
 		</div>
-		<div class="screen2"
-			style="width: 100%; height: auto; background-color: white; text-align: center;">
-			<button class="btn btn-primary">조회</button>
-		</div>
 		<div class="screen3"
 			style="width: 100%; height: auto%; background-color: ;">
-			<table class="table table-bordered">
+			<table class="table table-bordered" id="CurriculumTable">
 				<thead class="thead-team">
 					<tr>
 						<th scope="col">학년</th>
 						<th scope="col">학기</th>
 						<th scope="col">과목코드</th>
 						<th scope="col">이수구분</th>
-						<th scope="col">학기</th>
-						<th scope="col">과목코드</th>
-						<th scope="col">이수구분</th>
+						<th scope="col">교과목명</th>
+						<th scope="col">학점</th>
+						<th scope="col">담당교수</th>
+						<th scope="col">비고</th>
 					</tr>
 				</thead>
 				<tbody class="text-center">
-					<tr>
-						<td>1</td>
-						<td>2</td>
-						<td>00514</td>
-						<td>전공필수</td>
-						<td>일본의문화</td>
-						<td>3</td>
-						<td>-</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>2</td>
-						<td>00514</td>
-						<td>전공필수</td>
-						<td>일본의문화</td>
-						<td>3</td>
-						<td>-</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>2</td>
-						<td>00514</td>
-						<td>전공필수</td>
-						<td>일본의문화</td>
-						<td>3</td>
-						<td>-</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>2</td>
-						<td>00514</td>
-						<td>전공필수</td>
-						<td>일본의문화</td>
-						<td>3</td>
-						<td>-</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>2</td>
-						<td>00514</td>
-						<td>전공필수</td>
-						<td>일본의문화</td>
-						<td>3</td>
-						<td>-</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>2</td>
-						<td>00514</td>
-						<td>전공필수</td>
-						<td>일본의문화</td>
-						<td>3</td>
-						<td>-</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>2</td>
-						<td>00514</td>
-						<td>전공필수</td>
-						<td>일본의문화</td>
-						<td>3</td>
-						<td>-</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>2</td>
-						<td>00514</td>
-						<td>전공필수</td>
-						<td>일본의문화</td>
-						<td>3</td>
-						<td>-</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>2</td>
-						<td>00514</td>
-						<td>전공필수</td>
-						<td>일본의문화</td>
-						<td>3</td>
-						<td>-</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>2</td>
-						<td>00514</td>
-						<td>전공필수</td>
-						<td>일본의문화</td>
-						<td>3</td>
-						<td>-</td>
-					</tr>
+				
 				</tbody>
 			</table>
 		</div>
 	</div>
 </div>
 <script src="./js/toggleAction.js"></script>
+<script>
+$(function() {
+	'use strict';
+	var $CurriculumTable = $('#CurriculumTable');
+	var selectedOption;
+	$(document).ready(function () {
+		 console.log('readyEvent');
+		 initClickEvent();
+	});
+	
+
+	
+	function selectbox(){
+	$('#CurriculumSelect00').on('change', function(e){
+	e.preventDefault();
+	console.log($(this).find("option:selected").val());
+	
+	selectedOption = $(this).find("option:selected").val();
+	CourseTableInput();
+	/* $(this).fined("option:selected").val().remove(); */
+	});
+	
+	}
+	
+	
+	function CourseTableInput(){
+		console.log('CourseTableInput');
+		$CurriculumTable.bootstrapTable('destroy')
+		$CurriculumTable.bootstrapTable({
+			url:'/paprika/jsonGetCurriculum.do?STUDENT_NUMBER='+sid+'&'+
+			'YEAR='+selectedOption,
+			columns: [{
+				field:'SUBJECT_GRADE',
+				title:'대상학년'
+			}, {
+				field:'COURSE_SEMESTER',
+				title:'학기'
+			}, {
+				field:'SUBJECT_NUMBER',
+				title:'과목코드'
+			}, {
+				field:'SUBJECT_DIVISION',
+				title:'이수구분'
+			}, {
+				field:'SUBJECT_NAME',
+				title:'과목명'
+			}, {
+				field:'SUBJECT_CREDIT',
+				title:'학점'
+			}, {
+				field:'PROFESSOR_NAME',
+				title:'담당교수'
+			}, {
+				field:'COURSE_REMARK',
+				title:'비고'
+			}]
+		});
+		
+		return false;
+	}
+/* 	function initClickEvent(){
+		console.log('initClickEvent');
+		$('#CurriculumSelect00').click(selectbox);
+		
+	} */
+	function initClickEvent(){
+		console.log('initClickEvent');
+		$('#CurriculumSelect00').unbind('click').bind('click',selectbox());
+		
+	}
+	
+});
+	
+</script>
 <!-- </div> -->
 <!-- Page Content end -->

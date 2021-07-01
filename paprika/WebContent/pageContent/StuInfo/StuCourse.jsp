@@ -6,12 +6,12 @@
 	request.setCharacterEncoding("utf-8");
 %>
 <%
-	List<Map<String, Object>> courseCbxList = null;
-    courseCbxList = (List<Map<String,Object>>) request.getAttribute("cbBoxCourseHistoryList");
+	List<Map<String, Object>> cbxCourse = null;
+cbxCourse = (List<Map<String,Object>>) request.getAttribute("cbBoxCourseHistory");
 	int sizeCbx = 0;
 	
-	if( courseCbxList !=null){
-		sizeCbx	= courseCbxList.size();
+	if( cbxCourse !=null){
+		sizeCbx	= cbxCourse.size();
 	}
 
 	String[] CourseSemester = new String[sizeCbx];
@@ -73,12 +73,11 @@ console.log(<%=sizeCbx%>);
 		<!-- 메인 프레임 1 시작 -->
 		<div class="screen1"
 			style="width: 100%; height: auto%; text-align: center; background-color: E8EBEE;">
-			<select class="custom-select" id="select00"style="width: auto;">
-			
-			
+			<select class="custom-select" id="StuCourseSelect00"style="width: auto;">
+			<option selected>학기를 선택해주세요.</option>
 			<%
 			for(int i=0; i<sizeCbx;i++ ){ 
-			Map<String, Object> rmap = courseCbxList.get(i);
+			Map<String, Object> rmap = cbxCourse.get(i);
 			CourseSemester[i] = (rmap.get("COURSE_SEMESTER")).toString();
 			}
 			%>
@@ -132,7 +131,7 @@ $(function() {
 
 	
 	function selectbox(){
-	$('#select00').on('change', function(e){
+	$('#StuCourseSelect00').on('change', function(e){
 	e.preventDefault();
 	console.log($(this).find("option:selected").val());
 	
@@ -193,7 +192,7 @@ $(function() {
 	}
 	function initClickEvent(){
 		console.log('initClickEvent');
-		$('#select00').click(selectbox);
+		$('#StuCourseSelect00').unbind('click').bind('click',selectbox());
 		
 	}
 	

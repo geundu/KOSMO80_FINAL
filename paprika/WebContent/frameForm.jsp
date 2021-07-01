@@ -38,6 +38,7 @@
 			<%-- <jsp:include page="pageContent/Schedule.jsp"></jsp:include> --%> 
 			
 			<%@ include file="pageContent/Schedule.jsp" %>
+			<%-- <c:import url="/paprika/answerInsert.do?STUDENT_NUMBER=123456"/> --%>
 			
 		<!-- 현재 쓴게 include action 태그인데 이떄는 부모창에서 선언된 값들이 왔다갔다 하지 못하니 directive include를 써야 변수를 범용적으로 global하게 쓸 수 있다.  -->
 	

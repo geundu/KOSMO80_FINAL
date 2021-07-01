@@ -61,6 +61,7 @@
 
 				<prop key="/paprika/getOpenCourse.do">curriculum-controller</prop>
 				<prop key="/paprika/getCurriculum.do">curriculum-controller</prop>
+				<prop key="/paprika/jsonGetCurriculum.do">curriculum-controller</prop>
 
 				<prop key="/paprika/getMeetingRoomList.do">meetingroom-controller</prop>
 				<prop key="/paprika/meetingRoomInsert.do">meetingroom-controller</prop>
@@ -113,6 +114,7 @@
 			<props>
 				<prop key="/paprika/getOpenCourse.do">getOpenCourse</prop>
 				<prop key="/paprika/getCurriculum.do">getCurriculum</prop>
+				<prop key="/paprika/jsonGetCurriculum.do">jsonGetCurriculum</prop>
 			</props>
 		</property>
 	</bean>

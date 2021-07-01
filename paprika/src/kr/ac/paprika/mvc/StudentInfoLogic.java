@@ -59,9 +59,9 @@ public class StudentInfoLogic {
 	 * @return
 	 */
 	public List<Map<String, Object>> getCourseHistory(Map<String, Object> pMap) {
-		List<Map<String, Object>> cbBoxCourseHistoryList = null;
-		cbBoxCourseHistoryList = studentInfoDao.getCourseHistory(pMap);
-		return cbBoxCourseHistoryList;
+		List<Map<String, Object>> cbBoxCourseHistory = null;
+		cbBoxCourseHistory = studentInfoDao.getCourseHistory(pMap);
+		return cbBoxCourseHistory;
 	}
 	
 	/**

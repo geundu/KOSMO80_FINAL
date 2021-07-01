@@ -73,14 +73,14 @@ public class StudentInfoDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> getCourseHistory(Map<String, Object> pMap) {
-		List<Map<String, Object>> cbBoxCourseHistoryList = null;
+		List<Map<String, Object>> cbBoxCourseHistory = null;
 		
 		sqlSessionTemplate.selectList("cbBoxCourseHistory", pMap);
 		
 		logger.info(pMap);
-		cbBoxCourseHistoryList = (List<Map<String, Object>>) pMap.get("cursor");
-		logger.info(cbBoxCourseHistoryList);
-		return cbBoxCourseHistoryList;
+		cbBoxCourseHistory = (List<Map<String, Object>>) pMap.get("cursor");
+		logger.info(cbBoxCourseHistory);
+		return cbBoxCourseHistory;
 	}//http://localhost:8000/paprika/getCourseHistory.do?STUDENT_NUMBER=13222001
 	
 	/**

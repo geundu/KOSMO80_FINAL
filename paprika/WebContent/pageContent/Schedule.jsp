@@ -12,7 +12,6 @@ scheduleList = (List<Map<String,Object>>)request.getAttribute("scheduleList");
 int size = 0;
 
 
-
 %>
 
 
@@ -163,7 +162,6 @@ int size = 0;
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="./js/toggleAction.js"></script>
-
 <script src="./project/js/controllers.js"></script>
 <script src="./project/js/menuTemplate.js"></script>
 <!-- 오른쪽 메인 프레임 끝-->

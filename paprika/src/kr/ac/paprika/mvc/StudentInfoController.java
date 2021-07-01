@@ -182,12 +182,12 @@ public class StudentInfoController extends MultiActionController {
 		res.setContentType("text/plain;charset=utf-8");
 
 		hmb.bind(pMap);
-		List<Map<String, Object>> cbBoxCourseHistoryList = null;
-		cbBoxCourseHistoryList = studentInfoLogic.getCourseHistory(pMap);
+		List<Map<String, Object>> cbBoxCourseHistory = null;
+		cbBoxCourseHistory = studentInfoLogic.getCourseHistory(pMap);
 		logger.info(pMap);
-		logger.info(cbBoxCourseHistoryList);
+		logger.info(cbBoxCourseHistory);
 		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/StuInfo/StuCourse.jsp");
-		req.setAttribute("cbBoxCourseHistoryList", cbBoxCourseHistoryList);
+		req.setAttribute("cbBoxCourseHistory", cbBoxCourseHistory);
 		dispatcher.forward(req, res);
 	
 	}
