@@ -25,7 +25,7 @@
               <!-- 현재보고있는 nav item은 calss active를 줄것. -->
               <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="http://localhost:9010/project/frameForm.jsp">Pprk.Main()</a></li>
+    <li class="breadcrumb-item"><a onClick="window.location.reload()">Pprk.Main()</a></li>
     <li class="breadcrumb-item active" aria-current="page">커뮤니티</li>
   </ol>
               

@@ -28,7 +28,7 @@
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a
-							href="http://localhost:9010/project/frameForm.jsp">Pprk.Main()</a></li>
+							onClick="window.location.reload()">Pprk.Main()</a></li>
 						<li class="breadcrumb-item active" aria-current="page">등록금조회</li>
 					</ol>
 
