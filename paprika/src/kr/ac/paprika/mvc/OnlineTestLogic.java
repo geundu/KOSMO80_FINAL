@@ -39,6 +39,7 @@ public class OnlineTestLogic {
 			onlineTestDao.answerInsert(pMap);
 			result = 1;
 		}catch(Exception e) {
+			result = 0;
 			throw e;
 		}
 		return result;
@@ -51,8 +52,15 @@ public class OnlineTestLogic {
 	 * @return
 	 */
 	public int onlineTestInsert(Map<String, Object> pMap) {
-
-		return 0;
+		int result = 0;
+		try {
+			onlineTestDao.onlineTestInsert(pMap);
+			result = 1;
+		}catch(Exception e) {
+			result = 0;
+			throw e;
+		}
+		return result;
 	}
 
 	/**
@@ -61,8 +69,15 @@ public class OnlineTestLogic {
 	 * @param pMap
 	 * @return
 	 */
-	public int TestGrading(Map<String, Object> pMap) {
-
-		return 0;
+	public int testGrading(Map<String, Object> pMap) {
+		int result = 0;
+		try {
+			onlineTestDao.testGrading(pMap);
+			result = 1;
+		}catch(Exception e) {
+			result = 0;
+			throw e;
+		}
+		return result;
 	}
 }

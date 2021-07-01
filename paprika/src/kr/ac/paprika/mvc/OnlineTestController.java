@@ -55,7 +55,7 @@ public class OnlineTestController extends MultiActionController {
 		onlineTest = onlineTestLogic.getOnlineTest(pMap);
 		logger.info(pMap);
 		logger.info(onlineTest);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("../index.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/Online/Test.jsp");
 		req.setAttribute("onlineTestList", onlineTest);
 		dispatcher.forward(req, res);
 	}
@@ -107,7 +107,7 @@ public class OnlineTestController extends MultiActionController {
 		result = onlineTestLogic.answerInsert(pmap);
 
 		if (result == 1) {
-			res.sendRedirect("../index.jsp");
+			res.sendRedirect("../pageContent/ProOnline/Test.jsp");
 		}
 		else {
 			res.sendRedirect("등록실패 페이지 이동처리");
@@ -117,24 +117,70 @@ public class OnlineTestController extends MultiActionController {
 	/**
 	 * 시험문제 INSERT 메서드
 	 * 
-	 * @param req
+	 * @procedure
+	 * @PROC_ONLINE_TEST_Q_CUD
+	 * 
+	 * @param req 
+	 * @TR_CODE IN varchar2, 						cud 구분
+	 * @P_ONLINE_TEST_QUESTION_NUMBER 				시험문제번호
+	 * @P_ONLINE_TEST_NUMBER NUMBER,				시험번호
+	 * @P_ONLINE_TEST_QUESTION_DIV VARCHAR2,		주/객관식분류
+	 * @P_ONLINE_TEST_QUESTION_QNUMBER NUMBER,		문제번호
+	 * @P_ONLINE_TEST_QUESTION_CONTENT VARCHAR2,	문제내용
+	 * @P_ONLINE_TEST_QUESTION_ANSWER1 VARCHAR2,	선택지
+	 * @P_ONLINE_TEST_QUESTION_ANSWER2 VARCHAR2,
+	 * @P_ONLINE_TEST_QUESTION_ANSWER3 VARCHAR2,
+	 * @P_ONLINE_TEST_QUESTION_ANSWER4 VARCHAR2,
+	 * @P_ONLINE_TEST_QUESTION_CORRECT NUMBER,		문제정답
+	 * @P_ONLINE_TEST_QUESTION_PICTURE VARCHAR2,	문제그림링크
+	 * @P_ONLINE_TEST_QUESTION_POINT NUMBER			문제배점
 	 * @param res
 	 * @throws IOException
 	 * @throws ServletException
 	 */
 	public void onlineTestInsert(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+		HashMapBinder		hmb		= new HashMapBinder(req);
+		Map<String, Object>	pmap	= new HashMap<String, Object>();
 
+		hmb.bind(pmap);
+		int result = 0;
+		result = onlineTestLogic.onlineTestInsert(pmap);
+
+		if (result == 1) {
+			res.sendRedirect("../pageContent/ProOnline/TestInsert.jsp");
+		}
+		else {
+			res.sendRedirect("등록실패 페이지 이동처리");
+		}
 	}
 
 	/**
 	 * 시험문제 채점하고 UPDATE하는 메서드
-	 * 
+	 * @procedure
+	 * @PROC_PRO_MARK_UPDATE
 	 * @param req
-	 * @param res
+	 * @P_SCORE                점수
+     * @P_STUDENT_NUMBER       학생번호
+     * @P_MARK_DIV              시험구분
+     * @P_ONLINE_TEST_NUMBER     시험정보번호
+     * @P_COURSE_NUMBER         강좌번호
+	 * 
 	 * @throws IOException
 	 * @throws ServletException
 	 */
-	public void TestGrading(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+	public void testGrading(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+		HashMapBinder		hmb		= new HashMapBinder(req);
+		Map<String, Object>	pmap	= new HashMap<String, Object>();
 
+		hmb.bind(pmap);
+		int result = 0;
+		result = onlineTestLogic.testGrading(pmap);
+
+		if (result == 1) {
+			res.sendRedirect("../pageContent/ProOnline/TestGrading.jsp");
+		}
+		else {
+			res.sendRedirect("등록실패 페이지 이동처리");
+		}
 	}
 }
