@@ -11,8 +11,8 @@
 	</aop:config>
 	<tx:advice id="tx-advice" transaction-manager="transactionManager">
 		<tx:attributes>
-			<tx:method name="do*" />
-			<tx:method name="cud*" />
+			<tx:method name="*Insert" />
+			<tx:method name="*Update" />
 		</tx:attributes>
 	</tx:advice>
 
@@ -30,6 +30,10 @@
 
 	<bean id="member-logic" class="kr.ac.paprika.mvc.MemberLogic">
 		<property name="memberDao" ref="member-dao"></property>
+	</bean>
+	
+	<bean id="onlinetest-logic" class="kr.ac.paprika.mvc.OnlineTestLogic">
+		<property name="onlineTestDao" ref="onlinetest-dao"></property>
 	</bean>
 
 	<bean id="schedule-logic" class="kr.ac.paprika.mvc.ScheduleLogic">

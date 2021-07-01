@@ -52,6 +52,10 @@
 	<bean id="member-dao" class="kr.ac.paprika.mvc.MemberDao">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 	</bean>
+	
+	<bean id="onlinetest-dao" class="kr.ac.paprika.mvc.OnlineTestDao">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
 
 	<bean id="schedule-dao" class="kr.ac.paprika.mvc.ScheduleDao">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />

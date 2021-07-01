@@ -3,7 +3,11 @@ package kr.ac.paprika.mvc;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+import org.springframework.dao.DataAccessException;
+
 public class CourseLogic {
+	Logger logger = Logger.getLogger(CourseLogic.class);
 	private CourseDao courseDao = null;
 
 	/**
@@ -22,8 +26,9 @@ public class CourseLogic {
 	 * @return
 	 */
 	public List<Map<String, Object>> getCourseList(Map<String, Object> pMap) {
-
-		return null;
+		List<Map<String, Object>> courseList = null;
+		courseList = courseDao.getCourseList(pMap);
+		return courseList;
 	}
 
 	/**
@@ -33,8 +38,9 @@ public class CourseLogic {
 	 * @return
 	 */
 	public List<Map<String, Object>> getLectureList(Map<String, Object> pMap) {
-
-		return null;
+		List<Map<String, Object>> lectureList = null;
+		lectureList = courseDao.getLectureList(pMap);
+		return lectureList;
 	}
 
 	/**
@@ -44,8 +50,9 @@ public class CourseLogic {
 	 * @return
 	 */
 	public List<Map<String, Object>> getLectureDetail(Map<String, Object> pMap) {
-
-		return null;
+		List<Map<String, Object>> lectureDetail = null;
+		lectureDetail = courseDao.getLectureDetail(pMap);
+		return lectureDetail;
 	}
 
 	/**
@@ -54,9 +61,16 @@ public class CourseLogic {
 	 * @param pMap
 	 * @return
 	 */
-	public int homoworkInsert(Map<String, Object> pMap) {
-
-		return 0;
+	public int homeworkInsert(Map<String, Object> pMap) {
+		int result = 0;
+		try {
+			courseDao.homeworkInsert(pMap);
+			result = 1;
+		} catch (Exception e) {
+			result = 0;
+			throw e;
+		}
+		return result;
 	}
 
 	/**
@@ -66,19 +80,16 @@ public class CourseLogic {
 	 * @return
 	 */
 	public int homeworkUpdate(Map<String, Object> pMap) {
+		int result = 0;
+		try {
+			courseDao.homeworkUpdate(pMap);
+			result = 1;
+		} catch (Exception e) {
+			result = 0;
+			throw e;
+		}
+		return result;
 
-		return 0;
-	}
-
-	/**
-	 * 시험답안지제출 메서드 (한 번 제출하면 수정할 수 없음)
-	 * 
-	 * @param pMap
-	 * @return
-	 */
-	public int answerInsert(Map<String, Object> pMap) {
-
-		return 0;
 	}
 
 	/**
@@ -88,7 +99,58 @@ public class CourseLogic {
 	 * @return
 	 */
 	public int feedbackInsert(Map<String, Object> pMap) {
+		int result = 0;
+		try {
+			courseDao.feedbackInsert(pMap);
+			result = 1;
+		} catch (Exception e) {
+			result = 0;
+			throw e;
+		}
+		return result;
 
-		return 0;
+	}
+
+	/**
+	 * 교수) 과제를 채점하고 UPDATE하는 메서드
+	 * 
+	 * @param pMap
+	 * @return
+	 */
+	public int homeworkGrading(Map<String, Object> pMap) {
+		int result = 0;
+		try {
+			courseDao.homeworkGrading(pMap);
+			result = 1;
+		} catch (Exception e) {
+			result = 0;
+			throw e;
+		}
+		return result;
+
+	}
+
+	/**
+	 * 교수) 제출된 과제 리스트를 확인하는 메서드
+	 * 
+	 * @param pMap
+	 * @return
+	 */
+	public List<Map<String, Object>> getHomeworkList(Map<String, Object> pMap) {
+		List<Map<String, Object>> homeworkList = null;
+		homeworkList = courseDao.getHomeworkList(pMap);
+		return homeworkList;
+	}
+
+	/**
+	 * 교수) 받은 피드백 목록 확인
+	 * 
+	 * @param pMap
+	 * @return
+	 */
+	public List<Map<String, Object>> getFeedbackList(Map<String, Object> pMap) {
+		List<Map<String, Object>> feedbackList = null;
+		feedbackList = courseDao.getFeedbackList(pMap);
+		return feedbackList;
 	}
 }

@@ -27,6 +27,12 @@
 		<property name="memberLogic" ref="member-logic" />
 	</bean>
 
+	<!-- 온라인시험 컨트롤러 -->
+	<bean id="onlinetest-controller" class="kr.ac.paprika.mvc.OnlineTestController">
+		<property name="methodNameResolver" ref="onlinetest-resolver" />
+		<property name="onlineTestLogic" ref="onlinetest-logic" />
+	</bean>
+
 	<!-- 시간표 컨트롤러 -->
 	<bean id="schedule-controller" class="kr.ac.paprika.mvc.ScheduleController">
 		<property name="methodNameResolver" ref="schedule-resolver" />
@@ -48,11 +54,14 @@
 				<prop key="/paprika/getLectureDetail.do">course-controller</prop>
 				<prop key="/paprika/homeworkInsert.do">course-controller</prop>
 				<prop key="/paprika/homeworkUpdate.do">course-controller</prop>
-				<prop key="/paprika/answerInsert.do">course-controller</prop>
 				<prop key="/paprika/feedbackInsert.do">course-controller</prop>
+				<prop key="/paprika/homeworkGrading.do">course-controller</prop>
+				<prop key="/paprika/getHomeworkList.do">course-controller</prop>
+				<prop key="/paprika/getFeedbackList.do">course-controller</prop>
 
 				<prop key="/paprika/getOpenCourse.do">curriculum-controller</prop>
 				<prop key="/paprika/getCurriculum.do">curriculum-controller</prop>
+				<prop key="/paprika/jsonGetCurriculum.do">curriculum-controller</prop>
 
 				<prop key="/paprika/getMeetingRoomList.do">meetingroom-controller</prop>
 				<prop key="/paprika/meetingRoomInsert.do">meetingroom-controller</prop>
@@ -62,13 +71,21 @@
 				<prop key="/paprika/signIn.do">member-controller</prop>
 				<prop key="/paprika/getPassword.do">member-controller</prop>
 
+				<prop key="/paprika/answerInsert.do">onlinetest-controller</prop>
+				<prop key="/paprika/getOnlineTest.do">onlinetest-controller</prop>
+				<prop key="/paprika/onlineTestInsert.do">onlinetest-controller</prop>
+				<prop key="/paprika/TestGrading.do">onlinetest-controller</prop>
+
 				<prop key="/paprika/getSchedule.do">schedule-controller</prop>
 
 				<prop key="/paprika/getStudentInfo.do">studentinfo-controller</prop>
 				<prop key="/paprika/studentInfoUpdate.do">studentinfo-controller</prop>
 				<prop key="/paprika/getRegisterRecord.do">studentinfo-controller</prop>
 				<prop key="/paprika/getCourseHistory.do">studentinfo-controller</prop>
+				<prop key="/paprika/jsonGetCourseHistory.do">studentinfo-controller</prop>
 				<prop key="/paprika/getGradeHistory.do">studentinfo-controller</prop>
+				<prop key="/paprika/getGradeHistoryDetail.do">studentinfo-controller</prop>
+				<prop key="/paprika/jsonGetGradeHistoryDetail.do">studentinfo-controller</prop>
 				<prop key="/paprika/getTuition.do">studentinfo-controller</prop>
 			</props>
 		</property>
@@ -83,8 +100,10 @@
 				<prop key="/paprika/getLectureDetail.do">getLectureDetail</prop>
 				<prop key="/paprika/homeworkInsert.do">homeworkInsert</prop>
 				<prop key="/paprika/homeworkUpdate.do">homeworkUpdate</prop>
-				<prop key="/paprika/answerInsert.do">answerInsert</prop>
 				<prop key="/paprika/feedbackInsert.do">feedbackInsert</prop>
+				<prop key="/paprika/homeworkGrading.do">homeworkGrading</prop>
+				<prop key="/paprika/getHomeworkList.do">getHomeworkList</prop>
+				<prop key="/paprika/getFeedbackList.do">getFeedbackList</prop>
 			</props>
 		</property>
 	</bean>
@@ -95,6 +114,7 @@
 			<props>
 				<prop key="/paprika/getOpenCourse.do">getOpenCourse</prop>
 				<prop key="/paprika/getCurriculum.do">getCurriculum</prop>
+				<prop key="/paprika/jsonGetCurriculum.do">jsonGetCurriculum</prop>
 			</props>
 		</property>
 	</bean>
@@ -121,6 +141,18 @@
 		</property>
 	</bean>
 
+	<!-- 온라인시험 컨트롤러의 메서드 매핑 -->
+	<bean id="onlinetest-resolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+		<property name="mappings">
+			<props>
+				<prop key="/paprika/answerInsert.do">answerInsert</prop>
+				<prop key="/paprika/getOnlineTest.do">getOnlineTest</prop>
+				<prop key="/paprika/onlineTestInsert.do">onlineTestInsert</prop>
+				<prop key="/paprika/TestGrading.do">TestGrading</prop>
+			</props>
+		</property>
+	</bean>
+
 	<!-- 시간표 컨트롤러의 메서드 매핑 -->
 	<bean id="schedule-resolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
 		<property name="mappings">
@@ -138,7 +170,10 @@
 				<prop key="/paprika/studentInfoUpdate.do">studentInfoUpdate</prop>
 				<prop key="/paprika/getRegisterRecord.do">getRegisterRecord</prop>
 				<prop key="/paprika/getCourseHistory.do">getCourseHistory</prop>
+				<prop key="/paprika/jsonGetCourseHistory.do">jsonGetCourseHistory</prop>
 				<prop key="/paprika/getGradeHistory.do">getGradeHistory</prop>
+				<prop key="/paprika/getGradeHistoryDetail.do">getGradeHistoryDetail</prop>
+				<prop key="/paprika/jsonGetGradeHistoryDetail.do">jsonGetGradeHistoryDetail</prop>
 				<prop key="/paprika/getTuition.do">getTuition</prop>
 			</props>
 		</property>
@@ -146,7 +181,8 @@
 
 	<!-- url 접두&접미사 설정 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/" />
+		<!-- <property name="prefix" value="/WEB-INF/" /> -->
+		<property name="prefix" value="/pageContent/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
 

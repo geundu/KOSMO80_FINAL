@@ -1,16 +1,25 @@
 package kr.ac.paprika.mvc;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
+import kr.ac.paprika.common.HashMapBinder;
+
 public class ScheduleController extends MultiActionController {
-	private ScheduleLogic scheduleLogic = null;
+	Logger					logger			= Logger.getLogger(ScheduleController.class);
+
+	private ScheduleLogic	scheduleLogic	= null;
 
 	/**
 	 * 스프링으로부터 DI를 받기 위한 setter
@@ -29,7 +38,23 @@ public class ScheduleController extends MultiActionController {
 	 * @throws IOException
 	 * @throws ServletException
 	 */
+	//http://localhost:8000/paprika/getSchedule.do?STUDENT_NUMBER=15722001&SEMESTER=2021-1
 	public void getSchedule(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-
+		logger.info(" getSchedule ==> controller 들어왔다 ");
+		HashMapBinder		hmb		= new HashMapBinder(req);
+		Map<String, Object>	pMap	= new HashMap<String, Object>();
+		res.setContentType("text/plain;charset=utf-8");
+		logger.info(" getSchedule ==> HashMapBinder갔다왔다 ");
+		hmb.bind(pMap);
+		List<Map<String, Object>> scheduleList = null;
+		logger.info(" getSchedule ==> 로직 들어가기전이다 여긴 컨트롤러다. ");
+		scheduleList = scheduleLogic.getSchedule(pMap);
+		logger.info(pMap);
+		logger.info(scheduleList);
+		logger.info("디비 갔다왔다 여긴 컨트롤러다.");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/pageContent/Schedule.jsp");
+		req.setAttribute("scheduleList", scheduleList);
+		logger.info("setAttribute 했다.");
+		dispatcher.forward(req, res);
 	}
 }

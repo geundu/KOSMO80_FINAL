@@ -3,10 +3,12 @@ package kr.ac.paprika.mvc;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
 
 public class MemberDao {
-	private SqlSessionTemplate sqlSessionTemplate = null;
+	Logger						logger				= Logger.getLogger(MemberDao.class);
+	private SqlSessionTemplate	sqlSessionTemplate	= null;
 
 	/**
 	 * 스프링으로부터 DI를 받기 위한 setter
@@ -23,9 +25,10 @@ public class MemberDao {
 	 * @param pMap
 	 * @return
 	 */
-	public List<Map<String, Object>> signIn(Map<String, Object> pMap) {
-
-		return null;
+	public void signIn(Map<String, Object> pMap) {
+		logger.info("MemberDao ==> signIn() 호출 성공");
+		sqlSessionTemplate.selectOne("signIn", pMap);
+		logger.info("MemberDao ==> " + pMap);
 	}
 
 	/**
