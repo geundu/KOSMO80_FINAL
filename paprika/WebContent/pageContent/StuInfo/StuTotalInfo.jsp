@@ -96,7 +96,7 @@ console.log(<%=size%>);
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon3">이름</span>
 						</div>
-						<input type="text" class="form-control" placeholder="이름을 입력해주세요"
+						<input type="text" class="form-control" readonly value=<%=tmap.get("STUDENT_NAME")%>
 							id="STUDENT_NAME" aria-describedby="basic-addon3">
 					</div>
 				</div>
@@ -106,7 +106,7 @@ console.log(<%=size%>);
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon3">학번</span>
 						</div>
-						<input type="text" class="form-control" placeholder="학번을 입력해주세요"
+						<input type="text" class="form-control" readonly value=<%=tmap.get("STUDENT_NUMBER")%>
 							id="STUDENT_NUMBER" aria-describedby="basic-addon3">
 					</div>
 				</div>
@@ -126,7 +126,7 @@ console.log(<%=size%>);
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon3">학부</span>
 						</div>
-						<input type="text" class="form-control" placeholder="외국어학"
+						<input type="text" class="form-control" readonly value=<%=tmap.get("DEPT")%>
 							id="DEPT" aria-describedby="basic-addon3">
 					</div>
 				</div>
@@ -135,7 +135,7 @@ console.log(<%=size%>);
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon3">학과</span>
 						</div>
-						<input type="text" class="form-control" placeholder="컴퓨터공학과"
+						<input type="text" class="form-control" readonly value=<%=tmap.get("MAJOR")%>
 							id="MAJOR" aria-describedby="basic-addon3">
 					</div>
 				</div>
@@ -156,7 +156,7 @@ console.log(<%=size%>);
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon3">학적상태</span>
 						</div>
-						<input type="text" class="form-control" placeholder="재학"
+						<input type="text" class="form-control" readonly value=<%=tmap.get("REG_STATUS")%>
 							id="REG_STATUS" aria-describedby="basic-addon3">
 					</div>
 				</div>
