@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.springframework.dao.DataAccessException;
 
 public class OnlineTestLogic {
 	private OnlineTestDao	onlineTestDao	= null;
@@ -20,7 +21,7 @@ public class OnlineTestLogic {
 	 * @param pMap
 	 * @return
 	 */
-	public List<Map<String, Object>> getOnlineTest(Map<String, Object> pMap) {
+	public List<Map<String, Object>> getOnlineTest(Map<String, Object> pMap){
 		List<Map<String, Object>> onlineTest = null;
 		onlineTest = onlineTestDao.getOnlineTest(pMap);
 		return onlineTest;
@@ -32,10 +33,36 @@ public class OnlineTestLogic {
 	 * @param pMap
 	 * @return
 	 */
-	public int answerInsert(Map<String, Object> pMap) {
+	public int answerInsert(Map<String, Object> pMap) throws DataAccessException{
 		int result = 0;
-		result = onlineTestDao.answerInsert(pMap);
+		try {
+			onlineTestDao.answerInsert(pMap);
+			result = 1;
+		}catch(Exception e) {
+			throw e;
+		}
 		return result;
 	}
 
+	/**
+	 * 시험문제 INSERT 메서드
+	 * 
+	 * @param pMap
+	 * @return
+	 */
+	public int onlineTestInsert(Map<String, Object> pMap) {
+
+		return 0;
+	}
+
+	/**
+	 * 시험문제 채점하고 UPDATE하는 메서드
+	 * 
+	 * @param pMap
+	 * @return
+	 */
+	public int TestGrading(Map<String, Object> pMap) {
+
+		return 0;
+	}
 }

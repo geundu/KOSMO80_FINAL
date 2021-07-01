@@ -42,7 +42,8 @@ public class StudentInfoController extends MultiActionController {
 	 *@STUDENT_NAME          	이름            
 	 *@STUDENT_ENG_NAME      	영어이름          
 	 *@STUDENT_ENTER_YEAR    	입학연도          
-	 *@STUDENT_EMAIL         	메일            
+	 *@STUDENT_EMAIL         	메일
+	 *@STUDENT_PHONE         	학생연락처                   
 	 *@GUARDIAN_NAME         	보호자이름         
 	 *@GUARDIAN_PHONE        	보호자연락처        
 	 *@MAJOR                  	학과           
@@ -69,28 +70,6 @@ public class StudentInfoController extends MultiActionController {
 		req.setAttribute("studentList", studentList);
 		dispatcher.forward(req, res);
 	}
-//================================================================
-	public void jsonGetStudentInfo(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-		logger.info("jsonGetStudentInfo");
-		HashMapBinder		hmb		= new HashMapBinder(req);
-		Map<String, Object>	pMap	= new HashMap<String, Object>();
-		/*res.setContentType("text/plain;charset=utf-8");*/
-		res.setContentType("application/json;charset=utf-8");
-		hmb.bind(pMap);
-		List<Map<String, Object>> studentList = null;
-		studentList = studentInfoLogic.getStudentInfo(pMap);
-		logger.info(pMap);
-		logger.info(studentList);
-		Gson g = new Gson();
-		String outString = g.toJson(studentList);
-		/*RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/StuInfo/StuTotalInfo.jsp");*/
-		/*req.setAttribute("studentList", studentList);
-		dispatcher.forward(req, res);*/
-		PrintWriter out = res.getWriter();
-		out.print(outString);
-	}
-//================================================================
-	//
 
 	/**
 	 * 신상정보수정 메서드
@@ -166,7 +145,7 @@ public class StudentInfoController extends MultiActionController {
 		registerRecordList = studentInfoLogic.getRegisterRecord(pMap);
 		logger.info(pMap);
 		logger.info(registerRecordList);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("../index.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/StuInfo/StuRegister.jsp");
 		req.setAttribute("registerRecordList", registerRecordList);
 		dispatcher.forward(req, res);
 	}
@@ -195,7 +174,7 @@ public class StudentInfoController extends MultiActionController {
 	 * 
 	 * @throws IOException
 	 * @throws ServletException
-	 * //http://localhost:8000/paprika/getCourseHistory.do?STUDENT_NUMBER=13222001&SEMESTER=2021-1
+	 * //http://localhost:9050/paprika/getCourseHistory.do?STUDENT_NUMBER=13222001
 	 */
 	public void getCourseHistory(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		HashMapBinder		hmb		= new HashMapBinder(req);
@@ -203,14 +182,56 @@ public class StudentInfoController extends MultiActionController {
 		res.setContentType("text/plain;charset=utf-8");
 
 		hmb.bind(pMap);
-		List<Map<String, Object>> courseHistoryList = null;
-		courseHistoryList = studentInfoLogic.getCourseHistory(pMap);
+		List<Map<String, Object>> cbBoxCourseHistoryList = null;
+		cbBoxCourseHistoryList = studentInfoLogic.getCourseHistory(pMap);
 		logger.info(pMap);
-		logger.info(courseHistoryList);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("../index.jsp");
-		req.setAttribute("courseHistoryList", courseHistoryList);
+		logger.info(cbBoxCourseHistoryList);
+		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/StuInfo/StuCourse.jsp");
+		req.setAttribute("cbBoxCourseHistoryList", cbBoxCourseHistoryList);
 		dispatcher.forward(req, res);
 	
+	}
+	
+	/**
+	 * 수강목록 조회 메서드 콤보박스 체크 시 이전 학기 수강목록 조회 가능
+	 * PROC_STUDENT_COURSE_SELECT
+	 * @param req
+	 * @STUDENT_NUMBER   number    학생번호
+     * @SEMESTER         varchar2    학기
+	 * 
+	 * @param res
+	 * @rownum                    순번     
+	 * @COURSE_SEMESTER        	  년도        
+	 * @COURSE_NUMBER          수강강좌이름    
+	 * @SUBJECT_NAME          	  교과목        
+	 * @SUBJECT_CREDIT            학점         
+	 * @COLLEGE_NAME              개설학과       
+	 * @SUBJECT_GRADE             학년         
+	 * @COURSE_DAY                시간-월      
+	 * @COURSE_BEGIN_TIME         시간-시작시간   
+	 * @COURSE_END_TIME           시간-종료시간   
+	 * @PROFESSOR_NAME            교수명        
+	 * @SUBJECT_DIVISION          이수구분       
+	 * @MARK_IS_RETAKE            재수강여부     
+	 * 
+	 * @throws IOException
+	 * @throws ServletException
+	 *http://localhost:9050/paprika/jsonGetCourseHistory.do?STUDENT_NUMBER=13222001&SEMESTER=2021-1
+	 */
+	public void jsonGetCourseHistory(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+		HashMapBinder		hmb		= new HashMapBinder(req);
+		Map<String, Object>	pMap	= new HashMap<String, Object>();
+		res.setContentType("text/plain;charset=utf-8");
+
+		hmb.bind(pMap);
+		List<Map<String, Object>> courseHistoryList = null;
+		courseHistoryList = studentInfoLogic.jsonGetCourseHistory(pMap);
+		logger.info(pMap);
+		logger.info(courseHistoryList);
+		Gson g = new Gson();
+		String outString = g.toJson(courseHistoryList);
+		PrintWriter out = res.getWriter();
+		out.print(outString);
 	}
 
 	/**
@@ -240,11 +261,11 @@ public class StudentInfoController extends MultiActionController {
 		gradeHistoryList = studentInfoLogic.getGradeHistory(pMap);
 		logger.info(pMap);
 		logger.info(gradeHistoryList);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("../index.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/StuInfo/StuScore.jsp");
 		req.setAttribute("gradeHistoryList", gradeHistoryList);
 		dispatcher.forward(req, res);
-	
 	}
+
 	/**
 	 * 수강성적조회 메서드, 우측 상세조회도 포함해야 할지 고려해야 함
 	 * PROC_SUBJECT_SCORE_SELECT
@@ -278,9 +299,25 @@ public class StudentInfoController extends MultiActionController {
 		gradeHistoryDetail = studentInfoLogic.getGradeHistoryDetail(pMap);
 		logger.info(pMap);
 		logger.info(gradeHistoryDetail);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("../index.jsp");
+		/*RequestDispatcher dispatcher = req.getRequestDispatcher("../");*/
 		req.setAttribute("gradeHistoryDetail", gradeHistoryDetail);
-		dispatcher.forward(req, res);
+		/*dispatcher.forward(req, res);*/
+	}
+	//http://localhost:9050/paprika/jsonGetGradeHistoryDetail.do?STUDENT_NUMBER=13222001&SEMESTER=2021-1
+	public void jsonGetGradeHistoryDetail(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+		HashMapBinder		hmb		= new HashMapBinder(req);
+		Map<String, Object>	pMap	= new HashMap<String, Object>();
+		res.setContentType("application/json;charset=utf-8");
+
+		hmb.bind(pMap);
+		List<Map<String, Object>> gradeHistoryDetail = null;
+		gradeHistoryDetail = studentInfoLogic.getGradeHistoryDetail(pMap);
+		logger.info(pMap);
+		logger.info(gradeHistoryDetail);
+		Gson g = new Gson();
+		String outString = g.toJson(gradeHistoryDetail);
+		PrintWriter out = res.getWriter();
+		out.print(outString);
 	}
 
 	/**
@@ -313,7 +350,7 @@ public class StudentInfoController extends MultiActionController {
 		tuitionList = studentInfoLogic.getTuition(pMap);
 		logger.info(pMap);
 		logger.info(tuitionList);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("../index.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/Tuition.jsp");
 		req.setAttribute("tuitionList", tuitionList);
 		dispatcher.forward(req, res);
 	}

@@ -22,6 +22,8 @@
 
 ## 공개 주소 ✨
 
+--- 아직 준비되지 않았습니다 ---
+<br>
 배포 URL : http://xxx /<br>
 데모 영상 : http://xxx / 
 
@@ -29,7 +31,6 @@
 ## 파프리카는 어떤 프로젝트인가요? 🐥
 - 기본적인 학사관리와 함께 
 - TIMELINE을 가지고 있는 SNS
-- SNS속에 녹아든 15영상 shorts / 음성채팅을 즐길수 있는 Sound House
 - 코로나시대에 맞춰 지원하는 E-Learning 강의 수강 시스템을 지원하는 프로젝트입니다.
 
 ## [➡️위키 보러가기 ](https://github.com/geundu/KOSMO80_FINAL/wiki)
@@ -40,42 +41,47 @@
 ## 🗂 디렉토리 구조
 
 ```text
-.
-├── .github
-│   ├── ISSUE_TEMPLATE
+KOSMO80_FINAL
+├── .gitignore
+├── .project
+├── .README.md
+├── .git
 │   └── workflows
 │
-├── client
-│   ├── dist
-│   ├── assets
-│   └── src
-│       ├── index.html
-│       ├── index.tsx
-│       ├── App.tsx
-│       ├── store.ts
-│       ├── components
-│       │   ├── containers
-│       │   └── presentational
-│       ├── routes
-│       ├── utils
-│       ├── slices
-│       ├── constants
-│       ├── queries
-│       └── pages
-│
-└── server
-    ├── dist
+└── paprika
+    ├── .settings
+    ├── build
+    ├── WebContent
+    │   ├── css
+    │   ├── fonts
+    │   ├── images
+    │   ├── img
+    │   ├── js
+    │   ├── META-INF
+    │   ├── scss
+    │   ├── pageContent
+    │   │    ├── Course.folder
+    │   │    ├── Online.folder
+    │   │    ├── ProOnline.folder
+    │   │    ├── ProPeople.folder
+    │   │    └── StuInfo.folder
+    │   ├── Community.jsp
+    │   ├── MeetingRoom.jsp
+    │   ├── Schedule.jsp
+    │   ├── Tuition.jsp
+    │   └── WEB-INF
+    │        ├── lib
+    │        ├── mybatis-config.xml
+    │        ├── spring-data.xml
+    │        ├── spring-service.xml
+    │        └── spring-servlet.xml
     └── src
-        ├── app.ts
-        ├── graphql
-        │   ├── resolvers
-        │   ├── directives
-        │   └── types
-        ├── passprot
-        ├── services
-        ├── repositories
-        ├── utils
-        └── models
+        ├── kr.ac.paprika.common 
+        ├── kr.ac.paprika.mvc
+        ├── kr.ac.paprika.mybatis.mapper
+        └── log4j.properties
+
+
 ```
 
 ## Development Stack ⚙️

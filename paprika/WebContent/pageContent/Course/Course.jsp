@@ -16,7 +16,7 @@
 	}
 	out.print("size:" + size);
 %>
-%>
+
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5"> -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">

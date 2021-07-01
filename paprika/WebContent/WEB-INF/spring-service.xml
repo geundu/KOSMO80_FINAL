@@ -11,8 +11,8 @@
 	</aop:config>
 	<tx:advice id="tx-advice" transaction-manager="transactionManager">
 		<tx:attributes>
-			<tx:method name="do*" />
-			<tx:method name="cud*" />
+			<tx:method name="*Insert" />
+			<tx:method name="*Update" />
 		</tx:attributes>
 	</tx:advice>
 

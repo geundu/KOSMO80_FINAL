@@ -59,8 +59,20 @@ public class StudentInfoLogic {
 	 * @return
 	 */
 	public List<Map<String, Object>> getCourseHistory(Map<String, Object> pMap) {
+		List<Map<String, Object>> cbBoxCourseHistoryList = null;
+		cbBoxCourseHistoryList = studentInfoDao.getCourseHistory(pMap);
+		return cbBoxCourseHistoryList;
+	}
+	
+	/**
+	 * 수강목록 조회 메서드 콤보박스 체크 시 이전 학기 수강목록 조회 가능
+	 * 
+	 * @param pMap
+	 * @return
+	 */
+	public List<Map<String, Object>> jsonGetCourseHistory(Map<String, Object> pMap) {
 		List<Map<String, Object>> courseHistoryList = null;
-		courseHistoryList = studentInfoDao.getCourseHistory(pMap);
+		courseHistoryList = studentInfoDao.jsonGetCourseHistory(pMap);
 		return courseHistoryList;
 	}
 

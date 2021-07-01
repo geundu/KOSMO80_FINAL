@@ -4,10 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.springframework.dao.DataAccessException;
 
 public class CourseLogic {
-	Logger				logger		= Logger.getLogger(CourseLogic.class);
-	private CourseDao	courseDao	= null;
+	Logger logger = Logger.getLogger(CourseLogic.class);
+	private CourseDao courseDao = null;
 
 	/**
 	 * 스프링으로부터 DI를 받기 위한 setter
@@ -62,7 +63,12 @@ public class CourseLogic {
 	 */
 	public int homeworkInsert(Map<String, Object> pMap) {
 		int result = 0;
-		result = courseDao.homeworkInsert(pMap);
+		try {
+			courseDao.homeworkInsert(pMap);
+			result = 1;
+		} catch (Exception e) {
+			throw e;
+		}
 		return result;
 	}
 
@@ -74,8 +80,14 @@ public class CourseLogic {
 	 */
 	public int homeworkUpdate(Map<String, Object> pMap) {
 		int result = 0;
-		result = courseDao.homeworkUpdate(pMap);
+		try {
+			courseDao.homeworkUpdate(pMap);
+			result = 1;
+		} catch (Exception e) {
+			throw e;
+		}
 		return result;
+
 	}
 
 	/**
@@ -86,7 +98,12 @@ public class CourseLogic {
 	 */
 	public int feedbackInsert(Map<String, Object> pMap) {
 		int result = 0;
-		result = courseDao.feedbackInsert(pMap);
+		try {
+			courseDao.feedbackInsert(pMap);
+			result = 1;
+		} catch (Exception e) {
+			throw e;
+		}
 		return result;
 
 	}
@@ -98,8 +115,15 @@ public class CourseLogic {
 	 * @return
 	 */
 	public int homeworkGrading(Map<String, Object> pMap) {
+		int result = 0;
+		try {
+			courseDao.homeworkGrading(pMap);
+			result = 1;
+		} catch (Exception e) {
+			throw e;
+		}
+		return result;
 
-		return 0;
 	}
 
 	/**
@@ -109,6 +133,18 @@ public class CourseLogic {
 	 * @return
 	 */
 	public List<Map<String, Object>> getHomeworkList(Map<String, Object> pMap) {
+		List<Map<String, Object>> homeworkList = null;
+		homeworkList = courseDao.getHomeworkList(pMap);
+		return homeworkList;
+	}
+
+	/**
+	 * 교수) 받은 피드백 목록 확인
+	 * 
+	 * @param pMap
+	 * @return
+	 */
+	public List<Map<String, Object>> getFeedbackList(Map<String, Object> pMap) {
 
 		return null;
 	}
