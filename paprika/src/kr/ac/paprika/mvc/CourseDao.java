@@ -26,11 +26,11 @@ public class CourseDao {
 	 * @param pMap
 	 * @return
 	 */
-	public List<Map<String, Object>> getCourseList(Map<String, Object> pMap) {
-		List<Map<String, Object>> courseList = null;
+	public List<Map<String, Object>> getOnlineCourseList(Map<String, Object> pMap) {
+		List<Map<String, Object>> onlineCourseList = null;
 		sqlSessionTemplate.selectList("getCourseList", pMap);
-		courseList = (List<Map<String, Object>>) pMap.get("cursor");
-		return courseList;
+		onlineCourseList = (List<Map<String, Object>>) pMap.get("cursor");
+		return onlineCourseList;
 	}
 
 	/**

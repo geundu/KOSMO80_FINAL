@@ -25,10 +25,10 @@ public class CourseLogic {
 	 * @param pMap
 	 * @return
 	 */
-	public List<Map<String, Object>> getCourseList(Map<String, Object> pMap) {
-		List<Map<String, Object>> courseList = null;
-		courseList = courseDao.getCourseList(pMap);
-		return courseList;
+	public List<Map<String, Object>> getOnlineCourseList(Map<String, Object> pMap) {
+		List<Map<String, Object>> onlineCourseList = null;
+		onlineCourseList = courseDao.getOnlineCourseList(pMap);
+		return onlineCourseList;
 	}
 
 	/**

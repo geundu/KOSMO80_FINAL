@@ -94,11 +94,6 @@ console.log(<%=sizeDetail%>);
 				</thead>
 				<tbody>
 					<%
-					Map<String, Double> totalMap = new HashMap<>();
-					Double totalAvg = 0.0;
-					Double totalSummitScore = 0.0;
-					Double totalPassScore = 0.0;
-					Double totalFScore = 0.0;
 					for (int i = 0; i < sizeList; i++) {
 						Map<String, Object> rmap = gradeHistoryList.get(i);
 					%>
