@@ -21,7 +21,7 @@ public class CourseLogic {
 
 	/**
 	 * 강좌조회 메서드 eg) 알고리즘, 자료구조, 어셈블리어, ...
-	 * 
+	 *  
 	 * @param pMap
 	 * @return
 	 */
