@@ -54,7 +54,7 @@ public class CourseController extends MultiActionController {
       Map<String, Object>   pMap   = new HashMap<String, Object>();
       res.setContentType("text/plain;charset=utf-8");
 
-      hmb.bind(pMap);
+      hmb.bind(pMap); 
       List<Map<String, Object>> courseList = null;
       courseList = courseLogic.getOnlineCourseList(pMap);
       RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/Online/Course.jsp");

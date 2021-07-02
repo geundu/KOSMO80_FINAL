@@ -30,7 +30,7 @@ public class CourseDao {
       List<Map<String, Object>> courseList = null;
       sqlSessionTemplate.selectList("getOnlineCourseList", pMap);
       courseList = (List<Map<String, Object>>) pMap.get("cursor");
-      return courseList;
+      return courseList; 
    }
 
    /**

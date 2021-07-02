@@ -76,7 +76,7 @@ public class CourseLogic {
    public int homeworkUpdate(Map<String, Object> pMap) {
       int result = 0;
       result = courseDao.homeworkUpdate(pMap);
-      return result;
+      return result; 
 
    }
 
