@@ -28,9 +28,9 @@
 	</select>
 	<!-- ============================ 강좌조회 - 개설강좌조회 콤보박스 DML 끝 ================================ -->
 	<!-- ============================ 강좌조회 - 개설강좌조회 프로시저  시작 ================================== -->
-	<select id="getCourseList" parameterType="map" statementType="CALLABLE">
+	<select id="jsonGetCourseList" parameterType="map" statementType="CALLABLE">
 		{CALL PROC_COURSE(#{COLLEGE_NAME}, #{SUBJECT_GRADE}, #{SUBJECT_DIVISION}, #{COURSE_DAY}
-						, #{SUBJECT_NAME}, #{cursor, jdbcType=CURSOR, mode=OUT, resultMap=courseMap})}
+						, #{cursor, jdbcType=CURSOR, mode=OUT, resultMap=courseMap})}
 	</select>
 	<!-- ============================ 강좌조회 - 개설강좌조회 프로시저  끝 ================================== -->
 	<!-- ============================ 강좌조회 - 커리큘럼조회 프로시저  시작 ================================== -->

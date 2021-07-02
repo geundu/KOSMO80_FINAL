@@ -18,22 +18,32 @@
 	if (cbxMapList != null) {
 		cbxCollegeSize = cbxMapList.get("collegeList").size();
 		cbxDivisionSize = cbxMapList.get("divisionList").size();
+		if(cbxMapList.get("deptList")!=null){
+		cbxDeptSize = cbxMapList.get("deptList").size();
+		}
+		if(cbxMapList.get("majorList")!=null){
+		cbxMajorSize = 	cbxMapList.get("majorList").size();
+		}
 	}
 	String[] cbxCollegeArr = new String[cbxCollegeSize];
 	String[] cbxDivisionArr = new String[cbxDivisionSize];
-
-	/* cbxMajorSize = cbxMapList.get("majorList").size(); */
-	
 	String[] cbxDeptArr = new String[cbxDeptSize];
 	String[] cbxMajorArr = new String[cbxMajorSize];
+	
 	out.print("collegeSize:" + cbxCollegeSize);
 	out.print("divisionSize:" + cbxDivisionSize);
+	
 %>
+<%=request.getParameter("CBX_COLLEGE_NAME")%>
+<%=request.getParameter("CBX_DEPT_NAME")%>
+
+
+
 <script>
-console.log(<%=cbxCollegeSize   %>);
-console.log(<%=cbxDivisionSize   %>);
-console.log(<%=cbxDeptSize   %>);
-console.log(<%=cbxMajorSize   %>);
+console.log(cbxCollegeSize=<%=cbxCollegeSize   %>);
+console.log(cbxDivisionSize=<%=cbxDivisionSize   %>);
+console.log(cbxDeptSize=<%=cbxDeptSize   %>);
+console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 </script>
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5"> -->
@@ -88,75 +98,127 @@ console.log(<%=cbxMajorSize   %>);
 	<div class="container">
 		<div class="screen1"
 			style="width: 100%; height: auto; text-align: center; background-color:  ;">
-			<select class="custom-select"
-				style="width: auto;" id="CourseSelect00">
-					<option> ⇓개설년도⇓   </option>
-			</select>
-			<select class="custom-select" style="width: auto;"id="CourseSelect01">
-				<option>⇓개설학기⇓</option>
+			<select class="custom-select" style="width: auto;"id="CourseSelect01" value="<%=request.getParameter("COURSE_SEMESTER")%>">
+				<option>개설년도-학기</option>
+				<option value="2015-1">2015-1</option>
+				<option value="2015-2">2015-2</option>
+				<option value="2016-1">2016-1</option>
+				<option value="2016-2">2016-2</option>
+				<option value="2017-1">2017-1</option>
+				<option value="2017-2">2017-2</option>
+				<option value="2018-1">2018-1</option>
+				<option value="2018-2">2018-2</option>
+				<option value="2019-1">2019-1</option>
+				<option value="2019-2">2019-2</option>
+				<option value="2020-1">2020-1</option>
+				<option value="2020-2">2020-2</option>
+				<option value="2021-1">2021-1</option>
+				<option value="2021-2">2021-2</option>
 			</select> 
-			<select class="custom-select" style="width: auto;"id="CourseSelect02">
-				<option>⇓요일⇓</option>
-				<option>월요일</option>
-				<option>화요일</option>
-				<option>수요일</option>
-				<option>목요일</option>
-				<option>금요일</option>
+			<select class="custom-select" style="width: auto;"id="CourseSelect02" value="<%=request.getParameter("COURSE_DAY")%>">
+				<option>전체</option>
+				<option value="월">월</option>
+				<option value="화">화</option>
+				<option value="수">수</option>
+				<option value="목">목</option>
+				<option value="금">금</option>
 			</select> 
-			<select class="custom-select" style="width: auto;" id="CourseSelect03">
+<!-- 			<select class="custom-select" style="width: auto;" id="CourseSelect03"> -->
+			<%if(cbxDeptSize > 0){  %>
+<select class="custom-select" style="width:auto;" id="CourseSelect03" value="<%=request.getParameter("CBX_COLLEGE_NAME")%>">
+<% } else {%>
+<select class="custom-select" style="width:auto;" id="CourseSelect03">
+<% }%>
 				<option>⇓대학⇓</option>
-			<%for(int i=0; i< cbxCollegeSize ; i++){
-					Map<String, Object> rmap = cbxMapList.get("collegeList").get(i); 
-					cbxCollegeArr[i] = (rmap.get("COLLEGE_NAME")).toString();
-				}%>
-			<%for (int i =0 ; i< cbxCollegeSize ; i++){	%>
-				<option><%=cbxCollegeArr[i]%></option>
-			<%}%>	
+			<%
+				for(int i=0; i< cbxCollegeSize ; i++){
+						Map<String, Object> rmap = cbxMapList.get("collegeList").get(i);
+						cbxCollegeArr[i] = (rmap.get("COLLEGE_NAME")).toString();
+					}
+			%>
+			<%for (int i =0 ; i< cbxCollegeSize ; i++){
+				if(cbxCollegeArr[i].equals(request.getParameter("CBX_COLLEGE_NAME"))) {
+				%>
+				<option value="<%=cbxCollegeArr[i]%>" selected><%=cbxCollegeArr[i]%></option>
+				<%}else { %>
+				<option value="<%=cbxCollegeArr[i]%>"><%=cbxCollegeArr[i]%></option>
+			<%
+				}
+			}%>	
 			</select> 
-			<select class="custom-select" style="width: auto;" id="CourseSelect04">
-				<option>⇓학부⇓</option>
-				<option>학부:건축학부</option>
-				<%for(int i=0; i< cbxDeptSize ; i++){
-					Map<String, Object> rmap = cbxMapList.get("deptList").get(i); 
-					cbxDeptSize = cbxMapList.get("deptList").size();
-					cbxDeptArr[i] = (rmap.get("COLLEGE_NAME")).toString();
-				}%>
-			<%for (int i =0 ; i< cbxDeptSize ; i++){	%>
-				<option><%=cbxDeptArr[i]%></option>
-			<%}%>	
+			
+			<!-- <select class="custom-select" style="width: auto;" id="CourseSelect04"> -->
+			<%if(cbxMajorSize > 0){  %>
+<select class="custom-select" style="width:auto;" id="CourseSelect04" value="<%=request.getParameter("CBX_DEPT_NAME")%>">
+<% } else {%>
+<select class="custom-select" style="width:auto;" id="CourseSelect04">
+<% }%>
+				<option>학부</option>
+				<%
+				for(int i=0; i< cbxDeptSize ; i++){
+						Map<String, Object> rmap = cbxMapList.get("deptList").get(i);
+						cbxDeptArr[i] = (rmap.get("COLLEGE_NAME")).toString();
+					}
+			%>
+			<%for (int i =0 ; i< cbxDeptSize ; i++){
+				if(cbxDeptArr[i].equals(request.getParameter("CBX_DEPT_NAME"))) {
+				%>
+				<option value="<%=cbxDeptArr[i]%>" selected><%=cbxDeptArr[i]%></option>
+				<%}else { %>
+				<option value="<%=cbxDeptArr[i]%>"><%=cbxDeptArr[i]%></option>
+			<%
+				}
+			}%>	
+				
 			</select> 
-			<select class="custom-select" style="width: auto;" id="CourseSelect05">
-				<option>⇓학과⇓</option>
-				<option>학과:컴퓨터공학</option>
-				<option>학과:기계공학</option>
+			
+			<!-- <select class="custom-select" style="width: auto;" id="CourseSelect05"> -->
+					<%if(cbxMajorSize > 0){  %>
+<select class="custom-select" style="width:auto;" id="CourseSelect05" value="<%=request.getParameter("MAJOR") %>" >
+<% } else {%>
+<select class="custom-select" style="width:auto;" id="CourseSelect05">
+<% }%>
+				<option>학과</option>
+				<%
+				for(int i=0; i< cbxMajorSize ; i++){
+						Map<String, Object> rmap = cbxMapList.get("majorList").get(i);
+						cbxMajorArr[i] = (rmap.get("COLLEGE_NAME")).toString();
+					}
+			%>
+			<%for (int i =0 ; i< cbxMajorSize ; i++){
+				if(cbxMajorArr[i].equals(request.getParameter("CBX_DEPT_NAME"))) {
+				%>
+				<option value="<%=cbxMajorArr[i]%>" selected><%=cbxMajorArr[i]%></option>
+				<%}else { %>
+				<option value="<%=cbxMajorArr[i]%>"><%=cbxMajorArr[i]%></option>
+			<%
+				}
+			}%>	
 			</select> 
-			<select class="custom-select" style="width: auto;" id="CourseSelect06">
-				<option>⇓학년⇓</option>
-				<option>학년:1학년</option>
-				<option>학년:2학년</option>
-				<option>학년:3학년</option>
-				<option>학년:4학년</option>
+			
+			<select class="custom-select" style="width: auto;" id="CourseSelect06" value="<%=request.getParameter("HAKNUN")%>">
+				<option>0</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
 			</select> 
-<!-- 			<select class="custom-select" style="width: auto;">
-				<option>교과목명:외국문화이해</option>
-				<option>교과목명:c언어</option>
-				<option>교과목명:공학수학</option>
-				<option>교과목명:성경개론</option>
-			</select>  -->
-			<select class="custom-select" style="width: auto;" id="CourseSelect07">
-				<option>⇓이수구분⇓</option>
-				<option>이수구분:전공필수</option>
-				<option>이수구분:교양필수</option>
-				<option>이수구분:전공</option>
+			
+			<select class="custom-select" style="width: auto;" id="CourseSelect07" value="<%=request.getParameter("GUBUN")%>">
+				<option>전체</option>
+				<option value="전필">전필</option>
+				<option value="전선">전선</option>
+				<option value="교필">교필</option>
+				<option value="교선">교선</option>
 			</select>
 		</div>
 		<div class="screen2"
 			style="width: 100%; height: auto; background-color: white; text-align: center;">
-			<button class="btn btn-primary">검색</button>
+			<button class="btn btn-primary" id="CourseSearchButton">검색</button>
 		</div>
 		<div class="screen3"
 			style="width: 100%; height: auto; background-color: ;">
-			<table class="table table-bordered">
+			<table class="table table-bordered" id="CourseTable2">
 				<thead class="thead-team">
 					<tr>
 						<th scope="col">순번</th>
@@ -171,127 +233,8 @@ console.log(<%=cbxMajorSize   %>);
 						<th scope="col">책임교수</th>
 					</tr>
 				</thead>
-				<tbody class="text-center">
-					<tr>
-						<td>1</td>
-						<td>10222</td>
-						<td>일본의문화</td>
-						<td>이러닝수업</td>
-						<td>전공필수</td>
-						<td>3</td>
-						<td>인문사회대학-외국어학부-일어일문학</td>
-						<td>3</td>
-						<td>월 1,2,3</td>
-						<td>강찬영 강사</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>10222</td>
-						<td>일본의문화</td>
-						<td>이러닝수업</td>
-						<td>전공필수</td>
-						<td>3</td>
-						<td>인문사회대학-외국어학부-일어일문학</td>
-						<td>3</td>
-						<td>월 1,2,3</td>
-						<td>강찬영 강사</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>10222</td>
-						<td>일본의문화</td>
-						<td>이러닝수업</td>
-						<td>전공필수</td>
-						<td>3</td>
-						<td>인문사회대학-외국어학부-일어일문학</td>
-						<td>3</td>
-						<td>월 1,2,3</td>
-						<td>강찬영 강사</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>10222</td>
-						<td>일본의문화</td>
-						<td>이러닝수업</td>
-						<td>전공필수</td>
-						<td>3</td>
-						<td>인문사회대학-외국어학부-일어일문학</td>
-						<td>3</td>
-						<td>월 1,2,3</td>
-						<td>강찬영 강사</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>10222</td>
-						<td>일본의문화</td>
-						<td>이러닝수업</td>
-						<td>전공필수</td>
-						<td>3</td>
-						<td>인문사회대학-외국어학부-일어일문학</td>
-						<td>3</td>
-						<td>월 1,2,3</td>
-						<td>강찬영 강사</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>10222</td>
-						<td>일본의문화</td>
-						<td>이러닝수업</td>
-						<td>전공필수</td>
-						<td>3</td>
-						<td>인문사회대학-외국어학부-일어일문학</td>
-						<td>3</td>
-						<td>월 1,2,3</td>
-						<td>강찬영 강사</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>10222</td>
-						<td>일본의문화</td>
-						<td>이러닝수업</td>
-						<td>전공필수</td>
-						<td>3</td>
-						<td>인문사회대학-외국어학부-일어일문학</td>
-						<td>3</td>
-						<td>월 1,2,3</td>
-						<td>강찬영 강사</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>10222</td>
-						<td>일본의문화</td>
-						<td>이러닝수업</td>
-						<td>전공필수</td>
-						<td>3</td>
-						<td>인문사회대학-외국어학부-일어일문학</td>
-						<td>3</td>
-						<td>월 1,2,3</td>
-						<td>강찬영 강사</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>10222</td>
-						<td>일본의문화</td>
-						<td>이러닝수업</td>
-						<td>전공필수</td>
-						<td>3</td>
-						<td>인문사회대학-외국어학부-일어일문학</td>
-						<td>3</td>
-						<td>월 1,2,3</td>
-						<td>강찬영 강사</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>10222</td>
-						<td>일본의문화</td>
-						<td>이러닝수업</td>
-						<td>전공필수</td>
-						<td>3</td>
-						<td>인문사회대학-외국어학부-일어일문학</td>
-						<td>3</td>
-						<td>월 1,2,3</td>
-						<td>강찬영 강사</td>
-					</tr>
+				<tbody>
+
 				</tbody>
 			</table>
 		</div>
@@ -301,58 +244,297 @@ console.log(<%=cbxMajorSize   %>);
 <script>
 $(function() {
 	'use strict';
-	var $CurriculumTable = $('#CurriculumTable');
-	var selectedOption00;
-	var selectedOption01;
-	var selectedOption02;
-	var selectedOption03;
-	var selectedOption04;
-	var selectedOption05;
-	var selectedOption06;
-	var selectedOption07;
-	
+	var $CourseTable2 = $('#CourseTable2');
 	$(document).ready(function () {
 		 console.log('readyEvent');
 		 initClickEvent();
 	});
 	
-	function selectbox00(){}
-	function selectbox01(){}
-	function selectbox02(){}
-	function selectbox03(){}
-	function selectbox04(){}
+	
+	
+	
+	function CourseSearchButtonClick(){
+		console.log('CourseSearchButtonClick');
+		console.log(selectedOption04);
+		console.log(selectedOption05);
+			if(selectedOption04!=='학부'){
+				selectedOption03=selectedOption04;
+			}
+			if(!selectedOption05!=='학과'){
+				selectedOption03=selectedOption05;
+			}
+		console.log(selectedOption03+selectedOption06+selectedOption07+selectedOption02)
+		$CourseTable2.bootstrapTable('destroy')
+		$CourseTable2.bootstrapTable({
+			url : '/paprika/jsonGetOpenCourseList.do?COLLEGE_NAME='+selectedOption03+'&'+
+					'SUBJECT_GRADE='+selectedOption06+'&'+
+					'SUBJECT_DIVISION='+selectedOption07+'&'+
+					'COURSE_DAY='+selectedOption02,
+			columns: [{
+				field: 'ROWNUM',
+				title: '순번'
+			},{
+				field: 'SUBJECT_NUMBER',
+				title: '과목코드',
+			},{ 
+				field: 'SUBJECT_NAME',
+				title: '과목명',
+			},{
+				field: 'COURSE_IS_ONLINE',
+				title: '이러닝여부',
+			},{
+				field: 'SUBJECT_DIVISION',
+				title: '이수구분',
+			},{
+				field: 'SUBJECT_CREDIT',
+				title: '학점',
+			},{
+				field: 'COLLEGE_NAME',
+				title: '개설학과',
+			},{
+				field: 'SUBJECT_GRADE',
+				title: '대상학년',
+			},{
+				field: 'COURSE_BEGIN_TIME',
+				title: '시작교시',
+			},{
+				field: 'COURSE_END_TIME',
+				title: '종료교시',
+			},{
+				field: 'PROFESSOR_NAME',
+				title: '담당교수',
+			}]
+		});
+		return false;
+	}
+	
+	var selectedOption01;
+	let selectedOption02 = '전체';
+	var selectedOption03;
+	var selectedOption04;
+	var selectedOption05;
+	let selectedOption06 = '0';
+	let selectedOption07 = '전체';
+	
+	$.cookie('selectItem01','00');
+	$.cookie('selectItem02','00');
+	$.cookie('selectItem06','00');
+	$.cookie('selectItem07','00');
+	
+	$.removeCookie('selectItem01');
+	$.removeCookie('selectItem02');
+	$.removeCookie('selectItem06');
+	$.removeCookie('selectItem07');
+	$('#CourseSelect00').on('change', function(e){
+		e.preventDefault();
+		console.log($(this).find("option:selected").val());
+		$.removeCookie('selectItem00'); 
+		selectedOption00 = $(this).find("option:selected").val();
+		$.cookie('selectItem00',selectedOption00);
+		
+		selectedOption01 = $('#CourseSelect01').find("option:selected").val();
+		selectedOption01 = $.cookie('selectItem01');
+		selectedOption02 = $('#CourseSelect02').find("option:selected").val();
+		selectedOption02 = $.cookie('selectItem02');
+		
+		selectedOption03 = $('#CourseSelect03').find("option:selected").val();
+		selectedOption04 = $('#CourseSelect04').find("option:selected").val();
+		selectedOption05 = $('#CourseSelect05').find("option:selected").val();
+		selectedOption05 = $.cookie('selectItem05');
+		
+		selectedOption06 = $('#CourseSelect06').find("option:selected").val();
+		selectedOption06 = $.cookie('selectItem06');
+		selectedOption07 = $('#CourseSelect07').find("option:selected").val();
+		selectedOption07 = $.cookie('selectItem07');
+		
+	});
+	
+	$('#CourseSelect01').on('change', function(e){
+		e.preventDefault();
+		console.log($(this).find("option:selected").val());
+		$.removeCookie('selectItem01'); 
+		selectedOption01 = $(this).find("option:selected").val();
+		$.cookie('selectItem01',selectedOption01);
+		selectedOption02 = $('#CourseSelect02').find("option:selected").val();
+		selectedOption02 = $.cookie('selectItem02');
+		
+		selectedOption03 = $('#CourseSelect03').find("option:selected").val();
+		selectedOption04 = $('#CourseSelect04').find("option:selected").val();
+		selectedOption05 = $('#CourseSelect05').find("option:selected").val();
+		
+		selectedOption06 = $('#CourseSelect06').find("option:selected").val();
+		selectedOption06 = $.cookie('selectItem06');
+		selectedOption07 = $('#CourseSelect07').find("option:selected").val();
+		selectedOption07 = $.cookie('selectItem07');
+		
+	});
+	
+	$('#CourseSelect02').on('change', function(e){
+		e.preventDefault();
+		console.log($(this).find("option:selected").val());
+		selectedOption01 = $('#CourseSelect01').find("option:selected").val();
+		selectedOption01 = $.cookie('selectItem01');
+		$.removeCookie('selectItem02'); 
+		selectedOption02 = $(this).find("option:selected").val();
+		$.cookie('selectItem02',selectedOption02);
+		
+		selectedOption03 = $('#CourseSelect03').find("option:selected").val();
+		selectedOption04 = $('#CourseSelect04').find("option:selected").val();
+		selectedOption05 = $('#CourseSelect05').find("option:selected").val();
+		
+		selectedOption06 = $('#CourseSelect06').find("option:selected").val();
+		selectedOption06 = $.cookie('selectItem06');
+		selectedOption07 = $('#CourseSelect07').find("option:selected").val();
+		selectedOption07 = $.cookie('selectItem07');
+		
+		
+	});
+	
+	$('#CourseSelect03').on('change', function(e){
+	e.preventDefault();
+	console.log($(this).find("option:selected").val());
+
+	selectedOption01 = $('#CourseSelect01').find("option:selected").val();
+	selectedOption01 = $.cookie('selectItem01');
+	selectedOption02 = $('#CourseSelect02').find("option:selected").val();
+	selectedOption02 = $.cookie('selectItem02');
+	
+	selectedOption03 = $(this).find("option:selected").val();
+	selectedOption04 = $('#CourseSelect04').find("option:selected").val();
+	selectedOption05 = $('#CourseSelect05').find("option:selected").val();
+	
+	selectedOption06 = $('#CourseSelect06').find("option:selected").val();
+	selectedOption06 = $.cookie('selectItem06');
+	selectedOption07 = $('#CourseSelect07').find("option:selected").val();
+	selectedOption07 = $.cookie('selectItem07');
+	console.log("s1="+$.cookie('selectItem01')+"s2="+$.cookie('selectItem02')+"s6="
+			+$.cookie('selectItem06')+"s7="+$.cookie('selectItem07'));
+		$.ajax({
+			type :'get',
+// 			/* url:'pageContent/Course/Course.jsp', */
+			url:'/paprika/getOpenCourse.do?CBX_COLLEGE_NAME='+selectedOption03,
+			dataType:'html',
+			success: function(data){
+				$('#content').html(data).trigger("create");
+		}
+		});
+		selectedOption01 = $('#CourseSelect01').find("option:selected").val();
+		selectedOption01 = $.cookie('selectItem01');
+		selectedOption02 = $('#CourseSelect02').find("option:selected").val();
+		selectedOption02 = $.cookie('selectItem02');
+		
+		selectedOption03 = $(this).find("option:selected").val();
+		selectedOption04 = $('#CourseSelect04').find("option:selected").val();
+		selectedOption05 = $('#CourseSelect05').find("option:selected").val();
+		
+		selectedOption06 = $('#CourseSelect06').find("option:selected").val();
+		selectedOption06 = $.cookie('selectItem06');
+		selectedOption07 = $('#CourseSelect07').find("option:selected").val();
+		selectedOption07 = $.cookie('selectItem07');
+	});
+	
 	$('#CourseSelect04').on('change', function(e){
 	e.preventDefault();
 	console.log($(this).find("option:selected").val());
+	selectedOption01 = $('#CourseSelect01').find("option:selected").val();
+	selectedOption01 = $.cookie('selectItem01');
+	selectedOption02 = $('#CourseSelect02').find("option:selected").val();
+	selectedOption02 = $.cookie('selectItem02');
+	
+	selectedOption03 = $('#CourseSelect03').find("option:selected").val();
 	selectedOption04 = $(this).find("option:selected").val();
+	selectedOption05 = $('#CourseSelect05').find("option:selected").val();
+	
+	selectedOption06 = $('#CourseSelect06').find("option:selected").val();
+	selectedOption06 = $.cookie('selectItem06');
+	selectedOption07 = $('#CourseSelect07').find("option:selected").val();
+	selectedOption07 = $.cookie('selectItem07');
+	$.ajax({
+		type :'get',
+		/* url:'pageContent/Course/Course.jsp', */
+		url:'/paprika/getOpenCourse.do?CBX_COLLEGE_NAME='+selectedOption03+'&CBX_DEPT_NAME='+selectedOption04,
+		dataType:'html',
+		success: function(data){
+			$('#content').html(data).trigger("create");
+		}
+		});
 	});
 	
-	function selectbox05(){
 	$('#CourseSelect05').on('change', function(e){
-	e.prevetnDEFAULT();
-	console.log($(this).fine("option:selected").val());
-	selectedOption05 = $(this).find("option:selected").val();
+		e.preventDefault();
+		console.log($(this).find("option:selected").val());
+		selectedOption01 = $('#CourseSelect01').find("option:selected").val();
+		selectedOption01 = $.cookie('selectItem01');
+		selectedOption02 = $('#CourseSelect02').find("option:selected").val();
+		selectedOption02 = $.cookie('selectItem02');
+		
+		selectedOption03 = $('#CourseSelect03').find("option:selected").val();
+		selectedOption04 = $('#CourseSelect04').find("option:selected").val();
+		
+		$.removeCookie('selectItem05'); 
+		selectedOption05 = $(this).find("option:selected").val();
+		$.cookie('selectItem05',selectedOption05);
+		
+		selectedOption06 = $('#CourseSelect06').find("option:selected").val();
+		selectedOption06 = $.cookie('selectItem06');
+		selectedOption07 = $('#CourseSelect07').find("option:selected").val();
+		selectedOption07 = $.cookie('selectItem07');
 	
-	});		
-;
-	}
+	
+	});
+	
+	$('#CourseSelect06').on('change', function(e){
+		e.preventDefault();
+		console.log($(this).find("option:selected").val());
+		selectedOption01 = $('#CourseSelect01').find("option:selected").val();
+		selectedOption01 = $.cookie('selectItem01');
+		selectedOption02 = $('#CourseSelect02').find("option:selected").val();
+		selectedOption02 = $.cookie('selectItem02');
+		
+		selectedOption03 = $('#CourseSelect03').find("option:selected").val();
+		selectedOption04 = $('#CourseSelect04').find("option:selected").val();
+		selectedOption05 = $('#CourseSelect05').find("option:selected").val();
+		
+		$.removeCookie('selectItem6'); 
+		selectedOption06 = $(this).find("option:selected").val();
+		$.cookie('selectItem06',selectedOption06);
+		selectedOption07 = $('#CourseSelect07').find("option:selected").val();
+		selectedOption07 = $.cookie('selectItem07');
+		
+		
+	});
+	$('#CourseSelect07').on('change', function(e){
+		e.preventDefault();
+		console.log($(this).find("option:selected").val());
+		selectedOption01 = $('#CourseSelect01').find("option:selected").val();
+		selectedOption01 = $.cookie('selectItem01');
+		selectedOption02 = $('#CourseSelect02').find("option:selected").val();
+		selectedOption02 = $.cookie('selectItem02');
+		
+		selectedOption03 = $('#CourseSelect03').find("option:selected").val();
+		selectedOption04 = $('#CourseSelect04').find("option:selected").val();
+		selectedOption05 = $('#CourseSelect05').find("option:selected").val();
+		
+		selectedOption06 = $('#CourseSelect06').find("option:selected").val();
+		selectedOption06 = $.cookie('selectItem06');
+		$.removeCookie('selectItem7'); 
+		selectedOption07 = $(this).find("option:selected").val();
+		$.cookie('selectItem07',selectedOption07);
+		
+		
+	});
 	
 	
-	function selectbox06(){}
-	function selectbox07(){}
+	
+	
 	
 	function initClickEvent(){
 		console.log('initClickEvent');
-		$('#CourseSelect00').unbind('click').bind('click',selectbox00());
-		$('#CourseSelect01').unbind('click').bind('click',selectbox01());
-		$('#CourseSelect02').unbind('click').bind('click',selectbox02());
-		$('#CourseSelect03').unbind('click').bind('click',selectbox03());
-		$('#CourseSelect04').unbind('click').bind('click',selectbox04());
-		$('#CourseSelect05').unbind('click').bind('click',selectbox05());
-		$('#CourseSelect06').unbind('click').bind('click',selectbox06());
-		$('#CourseSelect07').unbind('click').bind('click',selectbox07());
+		$('#CourseSearchButton').click(CourseSearchButtonClick);
+		
 		
 	}
 });
+</script>
 <!-- </div> -->
 <!-- Page Content end -->

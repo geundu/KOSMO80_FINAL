@@ -81,10 +81,10 @@ public class CurriculumDao {
 	 * @param pMap
 	 * @return courseList
 	 */
-	public List<Map<String, Object>> getOpenCourseList(Map<String, Object> pMap) {
+	public List<Map<String, Object>> jsonGetOpenCourseList(Map<String, Object> pMap) {
 
 		List<Map<String, Object>> courseList = null;
-		sqlSessionTemplate.selectList("getCourseList", pMap);
+		sqlSessionTemplate.selectList("jsonGetCourseList", pMap);
 		logger.info(pMap);
 		courseList = (List<Map<String, Object>>) pMap.get("cursor");
 		logger.info(courseList);

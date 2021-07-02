@@ -43,13 +43,13 @@ public class CurriculumLogic {
 			deptList = curriculumDao.getDeptList(pMap);
 			cbxMapList.put("deptList", deptList);
 		}
-		
+
 		if(pMap.get("CBX_DEPT_NAME")!= null) {
 			List<Map<String, Object>> majorList = null;
 			majorList = curriculumDao.getMajorList(pMap);
 			cbxMapList.put("majorList", majorList);
 		}
-		
+
 		List<Map<String, Object>> collegeList = null;
 		collegeList = curriculumDao.getCollegeList(pMap);
 		logger.info(collegeList);
@@ -68,9 +68,9 @@ public class CurriculumLogic {
 	 * @param pMap
 	 * @return courseList
 	 */
-	public List<Map<String, Object>> getOpenCourseList(Map<String, Object> pMap) {
+	public List<Map<String, Object>> jsonGetOpenCourseList(Map<String, Object> pMap) {
 		List<Map<String, Object>> courseList = null;
-		courseList = curriculumDao.getOpenCourseList(pMap);
+		courseList = curriculumDao.jsonGetOpenCourseList(pMap);
 		return courseList;
 	}
 

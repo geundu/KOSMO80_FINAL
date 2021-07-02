@@ -60,6 +60,7 @@
 				<prop key="/paprika/getFeedbackList.do">course-controller</prop>
 
 				<prop key="/paprika/getOpenCourse.do">curriculum-controller</prop>
+				<prop key="/paprika/jsonGetOpenCourseList.do">curriculum-controller</prop>
 				<prop key="/paprika/getCurriculum.do">curriculum-controller</prop>
 				<prop key="/paprika/jsonGetCurriculum.do">curriculum-controller</prop>
 
@@ -113,6 +114,7 @@
 		<property name="mappings">
 			<props>
 				<prop key="/paprika/getOpenCourse.do">getOpenCourse</prop>
+				<prop key="/paprika/jsonGetOpenCourseList.do">jsonGetOpenCourseList</prop>
 				<prop key="/paprika/getCurriculum.do">getCurriculum</prop>
 				<prop key="/paprika/jsonGetCurriculum.do">jsonGetCurriculum</prop>
 			</props>

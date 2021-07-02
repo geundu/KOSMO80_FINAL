@@ -77,7 +77,7 @@ console.log(<%=sizeDetail%>);
 </nav>
 <div class="d-flex justify-content-center">
 	<div class="container">
-		<div class="screen1" style="width: 35%; height: 100%; float: left;">
+		<div class="screen1" style="width: 35%; height: auto%; float: left;">
 			<h3>
 				<div class="dropdown" style="text-align: center;">수강 목록 조회</div>
 			</h3>
@@ -101,14 +101,6 @@ console.log(<%=sizeDetail%>);
 					Double totalFScore = 0.0;
 					for (int i = 0; i < sizeList; i++) {
 						Map<String, Object> rmap = gradeHistoryList.get(i);
-						totalAvg = totalAvg + Double.parseDouble(rmap.get("MARK_AVG").toString());
-						totalSummitScore = totalSummitScore + Double.parseDouble(rmap.get("SUMMITEDSCORE").toString());
-						totalPassScore = totalPassScore + Double.parseDouble(rmap.get("PASSSCORE").toString());
-						totalFScore = totalFScore + Double.parseDouble(rmap.get("F_SCORE").toString());
-						totalMap.put("totalAvg", totalAvg / sizeList);
-						totalMap.put("totalSummitScore", totalSummitScore / sizeList);
-						totalMap.put("totalPassScore", totalPassScore / sizeList);
-						totalMap.put("F_SCORE", totalFScore / sizeList);
 					%>
 					<tr id="course_table<%=i%>">
 						<%
@@ -123,22 +115,13 @@ console.log(<%=sizeDetail%>);
 					<%
 						} ;
 					%>
-					<tr>
-						<th scope="row">성적 총계</th>
-						<td><%=totalMap.get("totalAvg")%></td>
-						<td><%=Math.round((totalMap.get("totalSummitScore")) * 100 / 100)%>
-						</td>
-						<td><%=Math.round((totalMap.get("totalPassScore")) * 100 / 100)%>
-						</td>
-						<td><%=Math.round((totalMap.get("F_SCORE")) / 1)%></td>
-					</tr>
 				</tbody>
 			</table>
 			</p>
 		</div>
 		<!--두번째 시작-->
 		<div class="screen2"
-			style="width: 60%; height: 100%; float: right; padding-left: 4px;">
+			style="width: 60%; height: auto%; float: right; padding-left: 4px;">
 			<h3>
 				<div class="dropdown" style="text-align: center;">교과목별 성적 상세
 					조회</div>
@@ -192,7 +175,7 @@ console.log(<%=sizeDetail%>);
 		</div>
 		<!-- 두번쨰 끝-->
 		<!--세번째 시작-->
-		<div class="screen3" style="width: 100%; height: 100%;">
+ 		<div class="screen3" style="width: 100%; height: 100%;">
 			<table class="table table-bordered"
 				style="width: 70%; text-align: center; margin: auto">
 				<thead class="thead-team ">
@@ -229,12 +212,13 @@ console.log(<%=sizeDetail%>);
 				</tbody>
 			</table>
 			</p>
-		</div>
+		</div> 
 	</div>
 </div>
 <script src="./js/toggleAction.js"></script>
-<!-- Factory.jsp로부터 가져온 함수  -->
+
 <script>
+
 $(function() {
 	'use strict';
 	$(document).ready(function () {
@@ -245,7 +229,7 @@ $(function() {
 	var $detailTable = $('#detailTable');
 	
 	<%for (int i = 0; i < sizeList; i++) {%>
-	let semester<%=i%>= <%=semesterarr[i]%>;
+	let semester<%=i%>= '<%=semesterarr[i]%>';
 	function onClickRow_StuScore<%=i%>(e){
 		console.log('onClickRow_StuScore'+<%=i%>);
 		e.preventDefault();
@@ -293,7 +277,7 @@ $(function() {
 		<%}%>
 	}	
 	
-<!-- Factory.jsp로부터 가져온 함수  -->
+
 });
 
 </script>
