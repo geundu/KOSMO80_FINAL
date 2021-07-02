@@ -6,5 +6,21 @@
 <select id="getSchedule" parameterType="map" statementType="CALLABLE">
 {CALL PROC_MAINPAGE(#{STUDENT_NUMBER}, #{SEMESTER}, #{cursor, jdbcType=CURSOR, mode=OUT, resultMap=scheduleMap})}
 	</select>
-
+<select id="getSchedule2" parameterType="map" resultType="map">
+	SELECT CEIL(NO/5) RNO
+      ,course_begin_time
+      ,course_end_time
+      , NVL(MIN(DECODE(MOD(no,5),1,subject_name)), '   ') mon
+      , NVL(MIN(DECODE(MOD(no,5),2,subject_name)), '   ') thu
+      , NVL(MIN(DECODE(MOD(no,5),3,subject_name)), '   ') wen
+      , NVL(MIN(DECODE(MOD(no,5),4,subject_name)), '   ') thi
+      , NVL(MIN(DECODE(MOD(no,5),0,subject_name)), '   ') fri
+  FROM (
+        SELECT rownum no
+              ,subject_name,course_begin_time,course_end_time
+          FROM sigan
+       )
+GROUP BY CEIL(NO/5),course_begin_time, course_end_time
+ORDER BY RNO
+</select>
 </mapper>

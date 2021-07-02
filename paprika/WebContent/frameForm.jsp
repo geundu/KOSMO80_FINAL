@@ -37,9 +37,8 @@
 		<!-- if문을 쓰고 , 최상단에 request,getparam(/?) 메뉴마다 쿼리스트링을 주고 . if문 써가지고 jsp action 태그를 넣고 ajax를 들어내고 .   -->
 			<%-- <jsp:include page="pageContent/Schedule.jsp"></jsp:include> --%> 
 			
-			<%@ include file="pageContent/Schedule.jsp" %>
-			<%-- <c:import url="/paprika/answerInsert.do?STUDENT_NUMBER=123456"/> --%>
-			
+			<%-- <%@ include page="pageContent/Schedule.jsp" %> --%>
+			<c:import url="/paprika/getSchedule.do?STUDENT_NUMBER=15722001&SEMESTER=2021-1"/>
 		<!-- 현재 쓴게 include action 태그인데 이떄는 부모창에서 선언된 값들이 왔다갔다 하지 못하니 directive include를 써야 변수를 범용적으로 global하게 쓸 수 있다.  -->
 	
 		</div>

@@ -46,7 +46,7 @@ out.print("로우수:"+size);
               <!-- 현재보고있는 nav item은 calss active를 줄것. -->
               <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a onClick="window.location.reload()">Pprk.Main()</a></li>
+    <li class="breadcrumb-item"><a href="http://localhost:9010/project/frameForm.jsp">Pprk.Main()</a></li>
   </ol>
               
               </nav>
@@ -116,44 +116,12 @@ for(int i=0;i<size;i++){
 	
 %>					
 					</td>
-					<td align="center">
-<%
-int end_time = Integer.parseInt(rmap.get("COURSE_END_TIME").toString());
-int start_time = Integer.parseInt(rmap.get("COURSE_BEGIN_TIME").toString());
-int num = (end_time-start_time);
-for(int x=0;x<num;x++){					
-					out.print(MON);
-					out.print("<br>");
-	if(x==1){
-		out.print("(09:00~10:00)");
-	}
-}		
-%>									
-					</td>
-					
-					<td>			
-					<%
-end_time = Integer.parseInt(rmap.get("COURSE_END_TIME").toString());
-start_time = Integer.parseInt(rmap.get("COURSE_BEGIN_TIME").toString());
-num = (end_time-start_time);
-for(int x=0;x<num;x++){					
-					out.print(THU);
-					out.print("<br>");
-	if(x==1){
-		out.print("(09:00~10:00)");
-	}
-	if(x==2){
-		out.print("(10:00~11:00)");
-	}
-}		
-
-%>						
-					</td>
+					<td><%=MON %></td>
+					<td><%=THU %></td>
 					<td><%=WEN %></td>
 					<td><%=THI %></td>
 					<td><%=FRI %></td>
-
-
+</td>                     
 				</tr>
 <%
 }
@@ -173,6 +141,7 @@ for(int x=0;x<num;x++){
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="./js/toggleAction.js"></script>
+
 <script src="./project/js/controllers.js"></script>
 <script src="./project/js/menuTemplate.js"></script>
 <!-- 오른쪽 메인 프레임 끝-->

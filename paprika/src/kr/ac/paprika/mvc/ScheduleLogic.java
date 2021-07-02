@@ -27,7 +27,7 @@ public class ScheduleLogic {
    public List<Map<String, Object>> getSchedule(Map<String, Object> pMap) {
 	   logger.info("로직 시작했다."); 
 	  List<Map<String, Object>> scheduleList = null;
-      scheduleList = scheduleDao.getSchedule(pMap);
+      scheduleList = scheduleDao.getSchedule2(pMap);
 	   logger.info("로직 시작했다. ==> 다오 갔다왔다."); 
       return scheduleList;      
       
