@@ -34,8 +34,12 @@ public class ScheduleDao {
 		scheduleList = (List<Map<String, Object>>) pMap.get("cursor");
 		logger.info("scheduleList");
 		return scheduleList;
-		
-		
-		
+	}
+	public List<Map<String, Object>> getSchedule2(Map<String, Object> pMap) {
+		logger.info("getSchedule2");
+		List<Map<String, Object>> scheduleList = null;
+		scheduleList = sqlSessionTemplate.selectList("getSchedule2", pMap);
+		logger.info("scheduleList.size()==>"+scheduleList.size());
+		return scheduleList;
 	}
 }
