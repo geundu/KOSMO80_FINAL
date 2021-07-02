@@ -8,8 +8,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.dao.DataAccessException;
 
 public class CourseDao {
-	Logger logger = Logger.getLogger(CourseDao.class);
-	private SqlSessionTemplate sqlSessionTemplate = null;
+	Logger						logger				= Logger.getLogger(CourseDao.class);
+	private SqlSessionTemplate	sqlSessionTemplate	= null;
 
 	/**
 	 * 스프링으로부터 DI를 받기 위한 setter
@@ -28,7 +28,7 @@ public class CourseDao {
 	 */
 	public List<Map<String, Object>> getCourseList(Map<String, Object> pMap) {
 		List<Map<String, Object>> courseList = null;
-		sqlSessionTemplate.selectList("getCourseList", pMap);
+		sqlSessionTemplate.selectList("getCourseList1", pMap);
 		courseList = (List<Map<String, Object>>) pMap.get("cursor");
 		return courseList;
 	}
@@ -67,7 +67,7 @@ public class CourseDao {
 	 */
 	public int homeworkInsert(Map<String, Object> pMap) throws DataAccessException {
 		int result = 0;
-		result = sqlSessionTemplate.insert("homeworkInsert", pMap);
+		result = sqlSessionTemplate.insert("homeworkCU", pMap);
 		logger.info(result);
 		logger.info(pMap);
 		return result;
@@ -81,7 +81,7 @@ public class CourseDao {
 	 */
 	public int homeworkUpdate(Map<String, Object> pMap) throws DataAccessException {
 		int result = 0;
-		result = sqlSessionTemplate.update("homeworkUpdate", pMap);
+		result = sqlSessionTemplate.update("homeworkCU", pMap);
 		return result;
 	}
 
@@ -104,8 +104,8 @@ public class CourseDao {
 	 * @return
 	 */
 	public int homeworkGrading(Map<String, Object> pMap) throws DataAccessException {
-		int result = 0;	
-		result =sqlSessionTemplate.update("homeworkGrading", pMap);		
+		int result = 0;
+		result = sqlSessionTemplate.update("homeworkGrading", pMap);
 		return result;
 	}
 
