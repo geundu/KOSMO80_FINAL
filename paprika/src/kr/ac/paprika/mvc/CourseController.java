@@ -46,8 +46,8 @@ public class CourseController extends MultiActionController {
 	 * @throws IOException
 	 * @throws ServletException
 	 * 
-	 * **포트 주의 
-	 * http://localhost:7002/paprika/getCourseList.do?STUDENT_NUMBER=13222001
+	 *                          **포트 주의
+	 *                          http://localhost:7002/paprika/getCourseList.do?STUDENT_NUMBER=13222001
 	 *
 	 */
 	public void getOnlineCourseList(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
@@ -74,16 +74,17 @@ public class CourseController extends MultiActionController {
 	 * @COURSE_NUMBER 강좌번
 	 * 
 	 * @param
-	 * @ol.ONLINE_LECTURE_FILE         강의파일 --> 페이지 양식과 달라서 빼놓
-     * @ROWNUM                         순번
-     * @ol.ONLINE_LECTURE_TITLE        강의제목
-     * @ol.ONLINE_REMARK               비고
+	 * @ol.ONLINE_LECTURE_FILE 강의파일 --> 페이지 양식과 달라서 빼놓
+	 * @ROWNUM 순번
+	 * @ol.ONLINE_LECTURE_TITLE 강의제목
+	 * @ol.ONLINE_REMARK 비고
 	 *
 	 * 
 	 * @throws IOException
 	 * @throws ServletException
 	 * 
-	 * **포트 주의 
+	 *                          **포트 주의
+	 *                          http://localhost:7002/paprika/getLectureList.do?STUDENT_NUMBER=13222001
 	 */
 	public void getLectureList(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		HashMapBinder		hmb		= new HashMapBinder(req);
@@ -93,7 +94,7 @@ public class CourseController extends MultiActionController {
 		hmb.bind(pMap);
 		List<Map<String, Object>> lectureList = null;
 		lectureList = courseLogic.getLectureList(pMap);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("../index.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/Online/Lecture.jsp");
 		req.setAttribute("lectureList", lectureList);
 		logger.info(lectureList);
 		dispatcher.forward(req, res);
@@ -117,7 +118,7 @@ public class CourseController extends MultiActionController {
 	 * @throws IOException
 	 * @throws ServletException
 	 * 
-	 * http://localhost:7002/paprika/getLectureDetail.do?ONLINE_LECTURE_NUMBER=3001&STUDENT_NUMBER=13222001
+	 *                          http://localhost:7002/paprika/getLectureDetail.do?ONLINE_LECTURE_NUMBER=3001&STUDENT_NUMBER=13222001
 	 */
 	public void getLectureDetail(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		HashMapBinder		hmb		= new HashMapBinder(req);
@@ -127,7 +128,7 @@ public class CourseController extends MultiActionController {
 		hmb.bind(pMap);
 		List<Map<String, Object>> lectureDetail = null;
 		lectureDetail = courseLogic.getLectureDetail(pMap);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("../index.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/Online/LectureDetail.jsp");
 		req.setAttribute("lectureDetail", lectureDetail);
 		dispatcher.forward(req, res);
 	}
@@ -146,9 +147,11 @@ public class CourseController extends MultiActionController {
 	 * @P_HOMEWORK_FILE 과제파일
 	 * 
 	 * @param res
-	 * 
+	 *  
 	 * @throws IOException
 	 * @throws ServletException
+	 * 
+	 *                          http://localhost:7002/paprika/homeworkCU.do?cud=c&HOMEWORK_NUMBER=1&ONLINE_LECTURE_NUMBER=3001&STUDENT_NUMBER=41&HOMEWORK_FILE=%ED%85%8C%EC%8A%A4%ED%8A%B8
 	 */
 	public void homeworkInsert(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		HashMapBinder		hmb		= new HashMapBinder(req);
@@ -162,7 +165,7 @@ public class CourseController extends MultiActionController {
 			res.sendRedirect("../pageContent/Online/LectureDetail.jsp");
 		}
 		else {
-			res.sendRedirect("등록실패 페이지 이동처리");
+			res.sendRedirect("/pageContent/Course/fail.jsp");
 		}
 	}
 
@@ -184,6 +187,8 @@ public class CourseController extends MultiActionController {
 	 * 
 	 * @throws IOException
 	 * @throws ServletException
+	 * 
+	 *                          http://localhost:7002/paprika/homeworkCU.do?cud=u&HOMEWORK_NUMBER=1&ONLINE_LECTURE_NUMBER=3001&STUDENT_NUMBER=41&HOMEWORK_FILE=%ED%85%8C%EC%8A%A4%ED%8A%B8
 	 */
 	public void homeworkUpdate(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		HashMapBinder		hmb		= new HashMapBinder(req);
@@ -192,13 +197,14 @@ public class CourseController extends MultiActionController {
 		hmb.bind(pMap);
 		int result = 0;
 		result = courseLogic.homeworkUpdate(pMap);
-		if(result == 1) {
+
+		if (result == 1) {
 			res.sendRedirect("../pageContent/Online/LectureDetail.jsp");
-		}else {
-			res.sendRedirect("등록실패 페이지 이동처리");
 		}
-		
-		
+		else {
+			res.sendRedirect("/pageContent/Course/fail.jsp");
+		}
+
 	}
 
 	/**
@@ -227,26 +233,31 @@ public class CourseController extends MultiActionController {
 		hmb.bind(pMap);
 		int result = 0;
 		result = courseLogic.feedbackInsert(pMap);
-		if(result == 1) {
+
+		if (result == 1) {
 			res.sendRedirect("../pageContent/Online/Feedback.jsp");
-		}else {
-			res.sendRedirect("등록실패 페이지 이동처리");
 		}
-		
+		else {
+			res.sendRedirect("/pageContent/Course/fail.jsp");
+		}
+
 	}
 
 	/**
 	 * 교수) 과제를 채점하고 UPDATE하는 메서드
+	 * 
 	 * @PROC_PRO_ONLINE_HOMEWORK_CONF
 	 * 
 	 * 
 	 * @param req
-	 * @P_STUDENT_NUMBER  in NUMBER 학생번호
+	 * @P_STUDENT_NUMBER in NUMBER 학생번호
 	 * 
 	 * @param res
 	 * 
 	 * @throws IOException
 	 * @throws ServletException
+	 * 
+	 *                          http://localhost:7002/paprika/homeworkGrading.do?STUDENT_NUMBER=41
 	 */
 	public void homeworkGrading(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		HashMapBinder		hmb		= new HashMapBinder(req);
@@ -255,32 +266,35 @@ public class CourseController extends MultiActionController {
 		hmb.bind(pMap);
 		int result = 0;
 		result = courseLogic.homeworkGrading(pMap);
-		if(result == 1) {
+
+		if (result == 1) {
 			res.sendRedirect("../pageContent/ProOnline/HomeworkCheck.jsp");
-		}else {
-			res.sendRedirect("등록실패 페이지 이동처리");
 		}
-		
+		else {
+			res.sendRedirect("/pageContent/Course/fail.jsp");
+		}
+
 	}
 
 	/**
 	 * 교수) 제출된 과제 리스트를 확인하는 메서드
-	 * @procedure
-	 * @ PROC_PRO_ONLINE_LEC_HOMEWORK
+	 * 
+	 * @procedure @ PROC_PRO_ONLINE_LEC_HOMEWORK
 	 * 
 	 * 
 	 * @param req
 	 * @P_ONLINE_LECTURE_NUMBER IN number 강의번호
 	 * 
-	 * @param res
-	 *  @rownum,                            순번
-     *	@stu.STUDENT_NAME                   학생이름
-     *	@hk.STUDENT_NUMBER                  학생번호
-     *	@hk.HOMEWORK_FILE                   업로드과제파일
-     *	@hk.HOMEWORK_CONFIRM                과제 확인 여부
-     *	@hk.HOMEWORK_UPLOAD_DATE            과제 업로드 날짜
+	 * @param res @rownum, 순번
+	 * @stu.STUDENT_NAME 학생이름
+	 * @hk.STUDENT_NUMBER 학생번호
+	 * @hk.HOMEWORK_FILE 업로드과제파일
+	 * @hk.HOMEWORK_CONFIRM 과제 확인 여부
+	 * @hk.HOMEWORK_UPLOAD_DATE 과제 업로드 날짜
 	 * @throws IOException
 	 * @throws ServletException
+	 * 
+	 *                          http://localhost:7002/paprika/getHomeworkList.do?ONLINE_LECTURE_NUMBER=3001
 	 */
 	public void getHomeworkList(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		HashMapBinder		hmb		= new HashMapBinder(req);
@@ -297,21 +311,24 @@ public class CourseController extends MultiActionController {
 
 	/**
 	 * 교수) 받은 피드백 목록 확인
+	 * 
 	 * @procedure
 	 * @PROC_PRO_ONLINE_FEEDBACK
 	 * 
 	 * @param req
-	 * @ONLINE_LECTURE_NUMBER    온라인 강의 번호
+	 * @ONLINE_LECTURE_NUMBER 온라인 강의 번호
 	 * 
 	 * 
 	 * @param res
-	 * @sub.SUBJECT_NAME             과목 / 강좌 이름
-     *  @ol.ONLINE_LECTURE_NUMBER     강의번호
-     *  @ol.ONLINE_LECTURE_TITLE      강의 제목
-     *  @fb.FEEDBACK_TITLE            피드백 제목
-     *  @fb.FEEDBACK_CONTENT          피드백 내용
+	 * @sub.SUBJECT_NAME 과목 / 강좌 이름
+	 * @ol.ONLINE_LECTURE_NUMBER 강의번호
+	 * @ol.ONLINE_LECTURE_TITLE 강의 제목
+	 * @fb.FEEDBACK_TITLE 피드백 제목
+	 * @fb.FEEDBACK_CONTENT 피드백 내용
 	 * @throws IOException
 	 * @throws ServletException
+	 * 
+	 *                          http://localhost:7002/paprika/getFeedbackList.do?ONLINE_LECTURE_NUMBER=3001
 	 */
 	public void getFeedbackList(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		HashMapBinder		hmb		= new HashMapBinder(req);

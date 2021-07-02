@@ -7,8 +7,8 @@ import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 
 public class CourseLogic {
-	Logger logger = Logger.getLogger(CourseLogic.class);
-	private CourseDao courseDao = null;
+	Logger				logger		= Logger.getLogger(CourseLogic.class);
+	private CourseDao	courseDao	= null;
 
 	/**
 	 * 스프링으로부터 DI를 받기 위한 setter
@@ -21,7 +21,7 @@ public class CourseLogic {
 
 	/**
 	 * 강좌조회 메서드 eg) 알고리즘, 자료구조, 어셈블리어, ...
-	 * 
+	 *  
 	 * @param pMap
 	 * @return
 	 */
@@ -63,10 +63,12 @@ public class CourseLogic {
 	 */
 	public int homeworkInsert(Map<String, Object> pMap) {
 		int result = 0;
+
 		try {
 			courseDao.homeworkInsert(pMap);
 			result = 1;
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			result = 0;
 			throw e;
 		}
@@ -81,10 +83,12 @@ public class CourseLogic {
 	 */
 	public int homeworkUpdate(Map<String, Object> pMap) {
 		int result = 0;
+
 		try {
 			courseDao.homeworkUpdate(pMap);
 			result = 1;
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			result = 0;
 			throw e;
 		}
@@ -100,10 +104,12 @@ public class CourseLogic {
 	 */
 	public int feedbackInsert(Map<String, Object> pMap) {
 		int result = 0;
+
 		try {
 			courseDao.feedbackInsert(pMap);
 			result = 1;
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			result = 0;
 			throw e;
 		}
@@ -119,10 +125,12 @@ public class CourseLogic {
 	 */
 	public int homeworkGrading(Map<String, Object> pMap) {
 		int result = 0;
+
 		try {
 			courseDao.homeworkGrading(pMap);
 			result = 1;
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			result = 0;
 			throw e;
 		}

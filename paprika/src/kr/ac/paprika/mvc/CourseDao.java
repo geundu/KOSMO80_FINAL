@@ -8,8 +8,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.dao.DataAccessException;
 
 public class CourseDao {
-	Logger logger = Logger.getLogger(CourseDao.class);
-	private SqlSessionTemplate sqlSessionTemplate = null;
+	Logger						logger				= Logger.getLogger(CourseDao.class);
+	private SqlSessionTemplate	sqlSessionTemplate	= null;
 
 	/**
 	 * 스프링으로부터 DI를 받기 위한 setter
@@ -67,25 +67,21 @@ public class CourseDao {
 	 */
 	public int homeworkInsert(Map<String, Object> pMap) throws DataAccessException {
 		int result = 0;
-		List<Map<String, Object>> homeworkInsert = null;
-		sqlSessionTemplate.insert("homeworkInsert", pMap);
-		homeworkInsert = (List<Map<String, Object>>) pMap.get("cursor");
-		result = 1;
+		result = sqlSessionTemplate.insert("homeworkCU", pMap);
+		logger.info(result);
+		logger.info(pMap);
 		return result;
 	}
 
 	/**
 	 * 제출한 과제 변경 메서드
-	 * 
+	 *  
 	 * @param pMap
 	 * @return
 	 */
 	public int homeworkUpdate(Map<String, Object> pMap) throws DataAccessException {
 		int result = 0;
-		List<Map<String, Object>> homeworkUpdate = null;
-		sqlSessionTemplate.update("homeworkUpdate", pMap);
-		homeworkUpdate = (List<Map<String, Object>>) pMap.get("cursor");
-		result = 1;
+		result = sqlSessionTemplate.update("homeworkCU", pMap);
 		return result;
 	}
 
@@ -97,10 +93,7 @@ public class CourseDao {
 	 */
 	public int feedbackInsert(Map<String, Object> pMap) throws DataAccessException {
 		int result = 0;
-		List<Map<String, Object>> feedbackInsert = null;
-		sqlSessionTemplate.insert("feedbackInsert", pMap);
-		feedbackInsert = (List<Map<String, Object>>) pMap.get("cursor");
-		result = 1;
+		result = sqlSessionTemplate.insert("feedbackInsert", pMap);
 		return result;
 	}
 
@@ -112,10 +105,7 @@ public class CourseDao {
 	 */
 	public int homeworkGrading(Map<String, Object> pMap) throws DataAccessException {
 		int result = 0;
-		List<Map<String, Object>> homeworkGrading = null;
-		sqlSessionTemplate.update("homeworkGrading", pMap);
-		homeworkGrading = (List<Map<String, Object>>) pMap.get("cursor");
-		result = 1;
+		result = sqlSessionTemplate.update("homeworkGrading", pMap);
 		return result;
 	}
 
