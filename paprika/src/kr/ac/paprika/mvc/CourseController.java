@@ -50,17 +50,17 @@ public class CourseController extends MultiActionController {
 	 * http://localhost:7002/paprika/getCourseList.do?STUDENT_NUMBER=13222001
 	 *
 	 */
-	public void getCourseList(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+	public void getOnlineCourseList(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		HashMapBinder		hmb		= new HashMapBinder(req);
 		Map<String, Object>	pMap	= new HashMap<String, Object>();
 		res.setContentType("text/plain;charset=utf-8");
 
 		hmb.bind(pMap);
-		List<Map<String, Object>> courseList = null;
-		courseList = courseLogic.getCourseList(pMap);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("../index.jsp");
-		req.setAttribute("courseList", courseList);
-		logger.info(courseList);
+		List<Map<String, Object>> onlineCourseList = null;
+		onlineCourseList = courseLogic.getOnlineCourseList(pMap);
+		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/Online/Course.jsp");
+		req.setAttribute("onlineCourseList", onlineCourseList);
+		logger.info(onlineCourseList);
 		dispatcher.forward(req, res);
 	}
 

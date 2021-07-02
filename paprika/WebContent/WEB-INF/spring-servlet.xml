@@ -49,7 +49,7 @@
 	<bean id="url-mapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
 			<props>
-				<prop key="/paprika/getCourseList.do">course-controller</prop>
+				<prop key="/paprika/getOnlineCourseList.do">course-controller</prop>
 				<prop key="/paprika/getLectureList.do">course-controller</prop>
 				<prop key="/paprika/getLectureDetail.do">course-controller</prop>
 				<prop key="/paprika/homeworkInsert.do">course-controller</prop>
@@ -60,6 +60,7 @@
 				<prop key="/paprika/getFeedbackList.do">course-controller</prop>
 
 				<prop key="/paprika/getOpenCourse.do">curriculum-controller</prop>
+				<prop key="/paprika/jsonGetOpenCourseList.do">curriculum-controller</prop>
 				<prop key="/paprika/getCurriculum.do">curriculum-controller</prop>
 				<prop key="/paprika/jsonGetCurriculum.do">curriculum-controller</prop>
 
@@ -95,7 +96,7 @@
 	<bean id="course-resolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
 		<property name="mappings">
 			<props>
-				<prop key="/paprika/getCourseList.do">getCourseList</prop>
+				<prop key="/paprika/getOnlineCourseList.do">getOnlineCourseList</prop>
 				<prop key="/paprika/getLectureList.do">getLectureList</prop>
 				<prop key="/paprika/getLectureDetail.do">getLectureDetail</prop>
 				<prop key="/paprika/homeworkInsert.do">homeworkInsert</prop>
@@ -113,6 +114,7 @@
 		<property name="mappings">
 			<props>
 				<prop key="/paprika/getOpenCourse.do">getOpenCourse</prop>
+				<prop key="/paprika/jsonGetOpenCourseList.do">jsonGetOpenCourseList</prop>
 				<prop key="/paprika/getCurriculum.do">getCurriculum</prop>
 				<prop key="/paprika/jsonGetCurriculum.do">jsonGetCurriculum</prop>
 			</props>

@@ -91,23 +91,25 @@ public class CurriculumController extends MultiActionController {
 	 *             ,COURSE_END_TIME 종료교시 ,PROFESSOR_NAME 담당교수
 	 * 
 	 */
-	public void getOpenCourseList(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+	public void jsonGetOpenCourseList(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		HashMapBinder		hmb		= new HashMapBinder(req);
 		Map<String, Object>	pMap	= new HashMap<String, Object>();
 		res.setContentType("text/plain;charset=utf-8");
 		hmb.bind(pMap);
 
 		List<Map<String, Object>> courseList = null;
-		courseList = curriculumLogic.getOpenCourseList(pMap);
+		courseList = curriculumLogic.jsonGetOpenCourseList(pMap);
 
 		logger.info(pMap);
 		logger.info(courseList);
 
-		//RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/Course/Course.jsp");
-		req.setAttribute("courseList", courseList);
-
-		//dispatcher.forward(req, res);
+		Gson g = new Gson();
+		String outString = g.toJson(courseList);
+		PrintWriter out = res.getWriter();
+		out.print(outString);
 	}
+	
+
 	/**
 	 * 커리큘럼조회 메서드
 	 * 

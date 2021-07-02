@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
-String sessionId = "15722001";
+String sessionId = "21915014";
 %>
 <script>
    let sid = <%=sessionId%>;
@@ -153,8 +153,8 @@ String sessionId = "15722001";
 			e.preventDefault();
 			$.ajax({
 				type :'get',
-				url:'pageContent/Online/Course.jsp',
-				/* url:'/paprika/getCourseList.do?STUDENT_NUMBER='+sid, */
+				/* url:'pageContent/Online/Course.jsp', */
+				url:'/paprika/getOnlineCourseList.do?STUDENT_NUMBER='+sid,
 				dataType:'html',
 				success: function(data){
 					$content.html(data).trigger("create");
