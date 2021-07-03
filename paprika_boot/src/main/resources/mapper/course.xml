@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.ac.paprika.mybatis.mapper.course">
+
+   <select id="getOnlineCourseList" parameterType="map"
+      statementType="CALLABLE">
+      {CALL PROC_STU_SELECT_ONLINE_COURSE(#{STUDENT_NUMBER},
+      #{cursor, jdbcType=CURSOR, mode=OUT, resultMap=testMap})}
+   </select>
+
+   <select id="getLectureList" parameterType="map"
+      statementType="CALLABLE">
+      {CALL PROC_ONLINE_LECTURE(#{STUDENT_NUMBER}, #{cursor,
+      jdbcType=CURSOR, mode=OUT, resultMap=testMap})}
+   </select>
+   <select id="getLectureDetail" parameterType="map"
+      statementType="CALLABLE">
+      {CALL
+      PROC_STU_ONLINE_LECTURE_DETAIL(#{ONLINE_LECTURE_NUMBER},#{STUDENT_NUMBER},
+      #{cursor,
+      jdbcType=CURSOR, mode=OUT, resultMap=testMap})}
+   </select>
+   <select id="homeworkCU" parameterType="map">
+      {CALL
+      PROC_HOMEWORK_CUD(#{cud},#{HOMEWORK_NUMBER},#{ONLINE_LECTURE_NUMBER},#{STUDENT_NUMBER},#{HOMEWORK_FILE})}
+   </select>
+   
+   <select id="feedbackInsert" parameterType="map">
+      {CALL
+      PROC_STU_FEEDBACK_SEND_INSERT(#{ONLINE_LECTURE_NUMBER},#{STUDENT_NUMBER},#{FEEDBACK_CONTENT},
+      #{FEEDBACK_TITLE})}
+   </select>
+   <select id="homeworkGrading" parameterType="map">
+      {CALL
+      PROC_PRO_ONLINE_HOMEWORK_CONF(#{STUDENT_NUMBER})}
+   </select>
+   <select id="getHomeworkList" parameterType="map" statementType="CALLABLE">
+      {CALL
+      PROC_PRO_ONLINE_LEC_HOMEWORK(#{ONLINE_LECTURE_NUMBER},#{cursor,
+      jdbcType=CURSOR, mode=OUT, resultMap=testMap})}
+   </select>
+   <select id="getFeedbackList" parameterType="map" statementType="CALLABLE">
+      {CALL
+      PROC_PRO_ONLINE_FEEDBACK(#{ONLINE_LECTURE_NUMBER},#{cursor,
+      jdbcType=CURSOR, mode=OUT, resultMap=testMap})}
+   </select>
+</mapper>

@@ -1,0 +1,43 @@
+plugins {
+	id 'org.springframework.boot' version '2.4.9-SNAPSHOT'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id 'war'
+}
+
+group = 'kr.ac.paprika'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+	maven { url 'https://repo.spring.io/milestone' }
+	maven { url 'https://repo.spring.io/snapshot' }
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-aop'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '2.4.7'
+    implementation group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '2.1.4'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-log4j2', version: '2.4.7'
+    testImplementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.13.3'
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.13.3'
+    implementation group: 'com.zaxxer', name: 'HikariCP', version: '3.4.5'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+//	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.7'	
+	compile fileTree(dir: '/src/main/webapp/WEB-INF/lib', includes: ['*.jar'])
+	compile('org.apache.tomcat.embed:tomcat-embed-jasper')
+	compile('javax.servlet:jstl:1.2')	
+}
+
+configurations {
+    compile.exclude module: 'spring-boot-starter-logging'
+}
+
+test {
+	useJUnitPlatform()
+}

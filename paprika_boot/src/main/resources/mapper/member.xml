@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.ac.paprika.member">
+	<select id="signIn" parameterType="map" statementType="CALLABLE">
+		{CALL PROC_LOGIN(#{p_student_number}, #{p_student_pw}, #{result, jdbcType=VARCHAR, mode=OUT})}
+	</select>
+</mapper>
