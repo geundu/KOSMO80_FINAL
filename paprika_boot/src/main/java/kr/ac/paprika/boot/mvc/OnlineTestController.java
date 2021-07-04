@@ -155,7 +155,7 @@ public class OnlineTestController {
     * 
     * @procedure
     * @PROC_PRO_MARK_UPDATE
-    * @param req
+    * @param req 
     * @P_SCORE 점수
     * @P_STUDENT_NUMBER 학생번호
     * @P_MARK_DIV 시험구분

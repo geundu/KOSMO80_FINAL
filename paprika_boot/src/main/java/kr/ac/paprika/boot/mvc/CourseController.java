@@ -29,7 +29,7 @@ public class CourseController {
 	 * 
 	 * @param req
 	 * @P_STUDENT_NUMBER IN NUMBER
-	 * 
+	 *  
 	 * @param res
 	 * @STUDENT_NAME 학생이름
 	 * @SUBJECT_NAME 온라인 강좌이름
