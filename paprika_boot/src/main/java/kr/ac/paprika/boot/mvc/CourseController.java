@@ -177,7 +177,7 @@ public class CourseController {
 		int result = 0;
 		result = courseLogic.homeworkUpdate(pMap);
 
-		if (result == -1) {
+		if (result == 1) {
 			return "redirect:../pageContent/Online/LectureDetail.jsp";
 		}
 		else {
@@ -212,7 +212,7 @@ public class CourseController {
 		int result = 0;
 		result = courseLogic.feedbackInsert(pMap);
 
-		if (result == -1) {
+		if (result == 1) {
 			return "redirect:../pageContent/Online/Feedback.jsp";
 		}
 		else {
@@ -242,7 +242,7 @@ public class CourseController {
 		int result = 0;
 		result = courseLogic.homeworkGrading(pMap);
 
-		if (result == -1) {
+		if (result == 1) {
 			return "redirect:../pageContent/ProOnline/HomeworkCheck.jsp";
 		}
 		else {
