@@ -44,14 +44,11 @@ public class ScheduleController extends MultiActionController {
 		HashMapBinder		hmb		= new HashMapBinder(req);
 		Map<String, Object>	pMap	= new HashMap<String, Object>();
 		res.setContentType("text/plain;charset=utf-8");
-		logger.info(" getSchedule ==> HashMapBinder갔다왔다 ");
 		hmb.bind(pMap);
 		List<Map<String, Object>> scheduleList = null;
-		logger.info(" getSchedule ==> 로직 들어가기전이다 여긴 컨트롤러다. ");
 		scheduleList = scheduleLogic.getSchedule(pMap);
 		logger.info(pMap);
 		logger.info(scheduleList);
-		logger.info("디비 갔다왔다 여긴 컨트롤러다.");
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/pageContent/Schedule.jsp");
 		req.setAttribute("scheduleList", scheduleList);
 		logger.info("setAttribute 했다.");

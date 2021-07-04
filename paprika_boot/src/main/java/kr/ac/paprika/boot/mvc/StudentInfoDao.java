@@ -147,12 +147,29 @@ public class StudentInfoDao {
 	 */
 	public List<Map<String, Object>> getTuition(Map<String, Object> pMap) {
 		logger.info("StudentInfoDao ==> getTuition() 호출 성공");
-		List<Map<String, Object>> tuitionList = null;
-		sqlSessionTemplate.selectList("getTuition", pMap);
+		List<Map<String, Object>> cbBoxGetTuition = null;
+		sqlSessionTemplate.selectList("cbBoxGetTuition", pMap);
 		logger.info(pMap);
-		tuitionList = (List<Map<String, Object>>) pMap.get("cursor");
-		logger.info(tuitionList);
+		cbBoxGetTuition = (List<Map<String, Object>>) pMap.get("cursor");
+		logger.info(cbBoxGetTuition);
 
-		return tuitionList;
+		return cbBoxGetTuition;
+	}
+	
+	/**
+	 * 등록금 조회 메서드
+	 * 
+	 * @param pMap
+	 * @return
+	 */
+	public List<Map<String, Object>> jsonGetTuitionHistory(Map<String, Object> pMap) {
+		logger.info("StudentInfoDao ==> jsonGetTuitionHistory() 호출 성공");
+		List<Map<String, Object>> jsonGetTuitionHistory = null;
+		sqlSessionTemplate.selectList("jsonGetTuitionHistory", pMap);
+		logger.info(pMap);
+		jsonGetTuitionHistory = (List<Map<String, Object>>) pMap.get("cursor");
+		logger.info(jsonGetTuitionHistory);
+
+		return jsonGetTuitionHistory;
 	}
 }

@@ -27,10 +27,8 @@ public class ScheduleDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> getSchedule(Map<String, Object> pMap) {
-		logger.info("다오왔다");
 		List<Map<String, Object>> scheduleList = null;
 		sqlSessionTemplate.selectList("getSchedule", pMap);
-		logger.info("다오에서 디비 갔다왔다.");
 		scheduleList = (List<Map<String, Object>>) pMap.get("cursor");
 		logger.info("scheduleList");
 		return scheduleList;

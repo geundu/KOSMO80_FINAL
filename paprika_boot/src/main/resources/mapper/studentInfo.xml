@@ -34,7 +34,10 @@
 		{CALL PROC_SUBJECT_SCORE_SELECT(#{STUDENT_NUMBER},#{SEMESTER}, #{cursor, jdbcType=CURSOR,	mode=OUT, resultMap=testMap})}
 	</select>
 
-	<select id="getTuition" parameterType="map" statementType="CALLABLE">
+	<select id="cbBoxGetTuition" parameterType="map" statementType="CALLABLE">
+		{CALL PROC_TUITION_COMBOBOX(#{STUDENT_NUMBER}, #{cursor, jdbcType=CURSOR,	mode=OUT, resultMap=testMap})}
+	</select>
+	<select id="jsonGetTuitionHistory" parameterType="map" statementType="CALLABLE">
 		{CALL PROC_TUITION_SELECT(#{STUDENT_NUMBER},#{SEMESTER}, #{cursor, jdbcType=CURSOR,	mode=OUT, resultMap=testMap})}
 	</select>
 </mapper>

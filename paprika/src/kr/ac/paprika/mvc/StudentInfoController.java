@@ -340,18 +340,32 @@ public class StudentInfoController extends MultiActionController {
 	 * @throws ServletException
 	 * //http://localhost:8000/paprika/getTuition.do?STUDENT_NUMBER=13222001&SEMESTER=2013-1
 	 */
+	
 	public void getTuition(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		HashMapBinder		hmb		= new HashMapBinder(req);
 		Map<String, Object>	pMap	= new HashMap<String, Object>();
 		res.setContentType("text/plain;charset=utf-8");
-
 		hmb.bind(pMap);
-		List<Map<String, Object>> tuitionList = null;
-		tuitionList = studentInfoLogic.getTuition(pMap);
+		List<Map<String, Object>> cbBoxTuitionList = null;
+		cbBoxTuitionList = studentInfoLogic.getTuition(pMap);
 		logger.info(pMap);
-		logger.info(tuitionList);
+		logger.info(cbBoxTuitionList);
 		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/Tuition.jsp");
-		req.setAttribute("tuitionList", tuitionList);
+		req.setAttribute("tuitionList", cbBoxTuitionList);
+		dispatcher.forward(req, res);
+	}
+	
+	public void jsonGetTuitionHistory(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+		HashMapBinder		hmb		= new HashMapBinder(req);
+		Map<String, Object>	pMap	= new HashMap<String, Object>();
+		res.setContentType("text/plain;charset=utf-8");
+		hmb.bind(pMap);
+		List<Map<String, Object>> jsonGetTuitionHistory = null;
+		jsonGetTuitionHistory = studentInfoLogic.jsonGetTuitionHistory(pMap);
+		logger.info(pMap);
+		logger.info(jsonGetTuitionHistory);
+		RequestDispatcher dispatcher = req.getRequestDispatcher("../pageContent/Tuition.jsp");
+		req.setAttribute("jsonGetTuitionHistory", jsonGetTuitionHistory);
 		dispatcher.forward(req, res);
 	}
 }

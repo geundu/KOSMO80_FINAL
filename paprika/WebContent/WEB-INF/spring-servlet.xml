@@ -88,6 +88,7 @@
 				<prop key="/paprika/getGradeHistoryDetail.do">studentinfo-controller</prop>
 				<prop key="/paprika/jsonGetGradeHistoryDetail.do">studentinfo-controller</prop>
 				<prop key="/paprika/getTuition.do">studentinfo-controller</prop>
+				<prop key="/paprika/jsonGetTuitionHistory.do">studentinfo-controller</prop>
 			</props>
 		</property>
 	</bean>
@@ -177,6 +178,7 @@
 				<prop key="/paprika/getGradeHistoryDetail.do">getGradeHistoryDetail</prop>
 				<prop key="/paprika/jsonGetGradeHistoryDetail.do">jsonGetGradeHistoryDetail</prop>
 				<prop key="/paprika/getTuition.do">getTuition</prop>
+				<prop key="/paprika/jsonGetTuitionHistory.do">jsonGetTuitionHistory</prop>
 			</props>
 		</property>
 	</bean>

@@ -2,7 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
-String sessionId = String.valueOf(session.getAttribute("STUDENT_NUMBER"));
+/* String sessionId = String.valueOf(session.getAttribute("STUDENT_NUMBER")); */
+String sessionId = "15722001";
 %>
 <script>
    let sid = <%=sessionId%>;
@@ -125,8 +126,8 @@ String sessionId = String.valueOf(session.getAttribute("STUDENT_NUMBER"));
 			e.preventDefault();
 			$.ajax({
 				type :'get',
-				url:'pageContent/Tuition.jsp',
-				/* url:'paprika/getTuition.do?STUDENT_NUMBER='+sid,, */
+				/* url:'pageContent/Tuition.jsp', */
+				url:'/student/getTuition?STUDENT_NUMBER='+sid,
 				dataType:'html',
 				success: function(data){
 					$content.html(data).trigger("create");

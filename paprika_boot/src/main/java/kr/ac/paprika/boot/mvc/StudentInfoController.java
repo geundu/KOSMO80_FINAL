@@ -59,7 +59,6 @@ public class StudentInfoController {
 		String STUDENT_NUMBER = String.valueOf(studentList.get(0).get("STUDENT_NUMBER"));
 		session.setAttribute("STUDENT_NUMBER", STUDENT_NUMBER);
 		req.setAttribute("studentList", studentList);
-
 		return "forward:../pageContent/StuInfo/StuTotalInfo.jsp";
 	}
 
@@ -260,6 +259,35 @@ public class StudentInfoController {
 	}
 
 	/**
+	 * 등록금 조회 메서드 PROC_TUITION_COMBOBOX
+	 * 
+	 * @param req
+	 * @STU_NUMBER NUMBER 학생번호
+	 * @SEMESTER 학기
+	 * @YEAR VARCHAR2 검색연도
+	 * 
+	 * @param res
+	 * @STUDENT_NUMBER 학생번호
+	 * @STUDENT_NAME 학생이름
+	 * @COLLEGE_NAME 학과명
+	 * @TUITION_CONTENT 등록금내용
+	 * @TUITION_FEE 금액
+	 * @TUITION_TOTAL_FEE 계
+	 * 
+	 * @throws IOException
+	 * @throws ServletException //http://localhost:8000/paprika/getTuition.do?STUDENT_NUMBER=13222001&SEMESTER=2013-1
+	 */
+	@RequestMapping("/getTuition")
+	public String getTuition(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
+		logger.info("StudentInfoController ==> getTuition() 호출 성공");
+		List<Map<String, Object>> cbBoxGetTuition = null;
+		cbBoxGetTuition = studentInfoLogic.getTuition(pMap);
+		req.setAttribute("tuitionList", cbBoxGetTuition);
+
+		return "forward:../pageContent/Tuition.jsp";
+	}
+	
+	/**
 	 * 등록금 조회 메서드 PROC_TUITION_SELECT
 	 * 
 	 * @param req
@@ -278,13 +306,13 @@ public class StudentInfoController {
 	 * @throws IOException
 	 * @throws ServletException //http://localhost:8000/paprika/getTuition.do?STUDENT_NUMBER=13222001&SEMESTER=2013-1
 	 */
-	@RequestMapping("/getTuition")
-	public String getTuition(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
-		logger.info("StudentInfoController ==> getTuition() 호출 성공");
-		List<Map<String, Object>> tuitionList = null;
-		tuitionList = studentInfoLogic.getTuition(pMap);
-		req.setAttribute("tuitionList", tuitionList);
-
-		return "forward:../pageContent/Tuition.jsp";
+	@RequestMapping("/jsonGetTuitionHistory")
+	public @ResponseBody String jsonGetTuitionHistory(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
+		logger.info("StudentInfoController ==> jsonGetTuitionHistory() 호출 성공");
+		List<Map<String, Object>> jsonGetTuitionHistory = null;
+		jsonGetTuitionHistory = studentInfoLogic.jsonGetTuitionHistory(pMap);
+		Gson	gson	= new Gson();
+		String	temp	= gson.toJson(jsonGetTuitionHistory);
+		return temp;
 	}
 }
