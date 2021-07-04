@@ -1,5 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.ac.paprika.onlineTest">
-
+<mapper namespace="kr.ac.paprika.mybatis.mapper.onlineTest">
+   <select id="getOnlineTest" parameterType="map"
+      statementType="CALLABLE">
+      {CALL PROC_STU_ONLINE_TEST_Q_SEL(#{COURSE_NUMBER},
+      #{cursor, jdbcType=CURSOR, mode=OUT, resultMap=testMap})}
+   </select>
+   <select id="answerInsert" parameterType="map">
+      {CALL PROC_STU_ONLINE_TEST_ANSWER(#{ONLINE_TEST_NUMBER},
+      #{STUDENT_NUMBER},
+      #{COURSE_NUMBER},
+      #{ONLINE_TEST_ANSWER_SUBMIT1},
+      #{ONLINE_TEST_ANSWER_SUBMIT2},
+      #{ONLINE_TEST_ANSWER_SUBMIT3},
+      #{ONLINE_TEST_ANSWER_SUBMIT4},
+      #{ONLINE_TEST_ANSWER_SUBMIT5},
+      #{ONLINE_TEST_ANSWER_SUBMIT6},
+      #{ONLINE_TEST_ANSWER_SUBMIT7},
+      #{ONLINE_TEST_ANSWER_SUBMIT8},
+      #{ONLINE_TEST_ANSWER_SUBMIT9},
+      #{ONLINE_TEST_ANSWER_SUBMIT10},
+      #{ONLINE_TEST_ANSWER_SUBMIT11},
+      #{ONLINE_TEST_ANSWER_SUBMIT12},
+      #{ONLINE_TEST_ANSWER_SUBMIT13},
+      #{ONLINE_TEST_ANSWER_SUBMIT14},
+      #{ONLINE_TEST_ANSWER_SUBMIT15},
+      #{ONLINE_TEST_ANSWER_SUBMIT16},
+      #{ONLINE_TEST_ANSWER_SUBMIT17},
+      #{ONLINE_TEST_ANSWER_SUBMIT18},
+      #{ONLINE_TEST_ANSWER_SUBMIT19},
+      #{ONLINE_TEST_ANSWER_FILE})}
+   </select>
+   <select id="onlineTestInsert" parameterType="map">
+      {CALL PROC_ONLINE_TEST_Q_CUD(#{TR_CODE},
+      #{ONLINE_TEST_NUMBER},
+      #{ONLINE_TEST_QUESTION_DIV},
+      #{ONLINE_TEST_QUESTION_QNUMBER},
+      #{ONLINE_TEST_QUESTION_CONTENT},
+      #{ONLINE_TEST_QUESTION_ANSWER1},
+      #{ONLINE_TEST_QUESTION_ANSWER2},
+      #{ONLINE_TEST_QUESTION_ANSWER3},
+      #{ONLINE_TEST_QUESTION_ANSWER4},
+      #{ONLINE_TEST_QUESTION_CORRECT},
+      #{ONLINE_TEST_QUESTION_PICTURE},
+      #{ONLINE_TEST_QUESTION_POINT}
+      )}
+   </select>
+   <select id="testGrading" parameterType="map">
+      {CALL PROC_PRO_MARK_UPDATE(
+       #{SCORE},
+       #{STUDENT_NUMBER},
+       #{MARK_DIV},
+       #{ONLINE_TEST_NUMBER},
+       #{COURSE_NUMBER}
+       )}
+   </select>
+   
 </mapper>
