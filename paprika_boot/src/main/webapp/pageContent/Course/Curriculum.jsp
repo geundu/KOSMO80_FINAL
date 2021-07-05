@@ -97,14 +97,14 @@ console.log(<%=sizeCbx%>);
 			<table class="table table-bordered" id="CurriculumTable">
 				<thead class="thead-team">
 					<tr>
-						<th scope="col">학년</th>
+<!-- 						<th scope="col">학년</th>
 						<th scope="col">학기</th>
 						<th scope="col">과목코드</th>
 						<th scope="col">이수구분</th>
 						<th scope="col">교과목명</th>
 						<th scope="col">학점</th>
 						<th scope="col">담당교수</th>
-						<th scope="col">비고</th>
+						<th scope="col">비고</th> -->
 					</tr>
 				</thead>
 				<tbody class="text-center">

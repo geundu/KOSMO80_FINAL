@@ -149,18 +149,24 @@ String sessionId = "15722001";
 			});
 			return false;
 		}
+				function onClickMenu6_0(e){
+					console.log('onClickMenu6_0');
+					e.preventDefault();
+					$(location).attr('href', './E_LearningPage.jsp')
+				}
+				
 				function onClickMenu6_1(e){
 			console.log('onClickMenu6_1');
 			e.preventDefault();
-			$.ajax({
+		 	$.ajax({
 				type :'get',
-				/* url:'pageContent/Online/Course.jsp', */
+				 url:'pageContent/Online/Course.jsp', 
 				url:'/course/getOnlineCourseList?STUDENT_NUMBER='+sid,
 				dataType:'html',
 				success: function(data){
 					$content.html(data).trigger("create");
 				}
-			});
+			}); 
 			return false;
 		}
 				function onClickMenu6_2(e){
@@ -219,20 +225,24 @@ String sessionId = "15722001";
 			});
 			return false;
 		}
-				function onClickMenu7_0(e){
+/* 				function onClickMenu7_0(e){
 			console.log('onClickMenu7_0');
 			e.preventDefault();
 			$.ajax({
 				type :'get',
 				url:'pageContent/Community.jsp',
-				/* url:'pageContent/Community.jsp', */
 				dataType:'html',
 				success: function(data){
 					$content.html(data).trigger("create");
 				}
 			});
 			return false;
-		}
+		} */
+				function onClickMenu8_0(e){
+						console.log('onClickMenu8_0');
+						e.preventDefault();
+						$(location).attr('href', './ProPeoplePage.jsp')
+				}
 				function onClickMenu8_1(e){
 			console.log('onClickMenu8_1');
 			e.preventDefault();
@@ -455,12 +465,14 @@ String sessionId = "15722001";
 			$('#sideButton_3_2').click(onClickMenu3_2);
 			$('#sideButton_4_0').click(onClickMenu4_0);
 			$('#sideButton_5_0').click(onClickMenu5_0);
+			$('#sideButton_6_0').click(onClickMenu6_0);
 			$('#sideButton_6_1').click(onClickMenu6_1);
 			$('#sideButton_6_2').click(onClickMenu6_2);
 			$('#sideButton_6_3').click(onClickMenu6_3);
 			$('#sideButton_6_4').click(onClickMenu6_4);
 			$('#sideButton_6_5').click(onClickMenu6_5);
-			$('#sideButton_7_0').click(onClickMenu7_0);
+			/* $('#sideButton_7_0').click(onClickMenu7_0); */
+			$('#sideButton_8_0').click(onClickMenu8_0);
 			$('#sideButton_8_1').click(onClickMenu8_1);
 			$('#sideButton_8_2').click(onClickMenu8_2);
 			$('#sideButton_8_3').click(onClickMenu8_3);
