@@ -54,22 +54,7 @@ out.print("onlineCourseSize:" + onlineCourseSize);
 						<li class="breadcrumb-item active" aria-current="page">e-Learning</li>
 						<li class="breadcrumb-item active" aria-current="page">DashBoard</li>
 					</ol>
-
 				</nav>
-
-				<!--               <li class="nav-item active">
-                <a class="nav-link" href="#">Page Content Header menu -1</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Page Content Header menu -2</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Page Content Header menu -3</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Page Content Header menu -4</a>
-              </li>
-            </ul> -->
 		</div>
 		<!-- Page Content Header end -->
 	</div>
@@ -103,7 +88,7 @@ out.print("onlineCourseSize:" + onlineCourseSize);
 					for (int j = 0; j < length; j++) {
 						Map<String, Object> tmap = onlineCourseList.get(j + 4 * i);
 					%>
-					<td scope="row" style="width: 25%;">
+					<td scope="row" style="width: 25%;" id="CourseDashBoard<%=i+""+j%>">
 						<div class="card text-white bg-teamcolor mb-3"
 							style="max-width: 100%;">
 							<div class="card-header h6"><%=tmap.get("SUBJECT_NAME")%></div>
@@ -111,7 +96,7 @@ out.print("onlineCourseSize:" + onlineCourseSize);
 								<h5 class="card-title">
 									교수명 :
 									<%=tmap.get("PROFESSOR_NAME")%></h5>
-								<p class="card-text"><%=tmap.get("COURSE_CONTENT")%>
+								<p class="card-text"><%=tmap.get("COURSE_NUMBER")%>
 								</p>
 							</div>
 						</div>
@@ -130,30 +115,84 @@ out.print("onlineCourseSize:" + onlineCourseSize);
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script>
- var i = 0;
    /* $(document).ready(function(){}); == $() */
-   $(window).on('load', function() {
+   
+   $(window).on('load',function(){
+	   'use strict';
+	   var $content = $('#content');
+	   function initCourseAjax() {
+	         console.log('initCourseAjax');
+	         
+	         $.ajax({
+	            type : 'get',
+	            /* url:'pageContent/Online/Course.jsp', */
+	            url : '/course/getOnlineCourseList?STUDENT_NUMBER=' + sid,
+	            dataType : 'html',
+	            success : function(data) {
+	               $content.html(data).trigger("create");
+	            }
+	         });
+	         return false;
+	      }
+	   initCourseAjax();
+   });
+   
+   
+   $(function() {
+      $(document).ready(function () {
+    	 console.log('readyEvent');
+    	 initClickEvent();
+      });
       
-      'use strict';
+
+      <%
+		for (int i = 0; i <= onlineCourseSize + 1 / 4; i++) {
+			%>
+				<%
+				int length = 0;
+				if ((onlineCourseSize - i * 4) / 4 > 1) {
+					length = 4;
+				} else if ((onlineCourseSize - i * 4) / 4 == 0) {
+					length = (onlineCourseSize - i * 4) % 4;
+				} else if ((onlineCourseSize - i * 4) / 4 == 1) {
+					length = 4;
+				}
+				for (int j = 0; j < length; j++) {
+					Map<String, Object> tmap = onlineCourseList.get(j + 4 * i);
+				%>
+				
+				let CourseDashBoard<%=i+""+j%> = <%=i%>+""+<%=j%>;
+				console.log(CourseDashBoard<%=i+""+j%>)
+				function onClickDashBoard<%=i+""+j%>(){
+					console.log(<%=""+i+""+j%>);
+				}
+				<%}%>
+		<%}%>
       
-      var $content = $('#content');
       
-      function initCourseAjax() {
-         console.log('initCourseAjax');
-         
-         $.ajax({
-            type : 'get',
-            /* url:'pageContent/Online/Course.jsp', */
-            url : '/course/getOnlineCourseList?STUDENT_NUMBER=' + sid,
-            dataType : 'html',
-            success : function(data) {
-               $content.html(data).trigger("create");
-            }
-         });
-         return false;
+      
+      function initClickEvent(){
+    	  <%
+			for (int i = 0; i <= onlineCourseSize + 1 / 4; i++) {
+				%>
+					<%
+					int length = 0;
+					if ((onlineCourseSize - i * 4) / 4 > 1) {
+						length = 4;
+					} else if ((onlineCourseSize - i * 4) / 4 == 0) {
+						length = (onlineCourseSize - i * 4) % 4;
+					} else if ((onlineCourseSize - i * 4) / 4 == 1) {
+						length = 4;
+					}
+					for (int j = 0; j < length; j++) {
+						Map<String, Object> tmap = onlineCourseList.get(j + 4 * i);
+					%>
+					$('#CourseDashBoard<%=i+""+j%>').click(onClickDashBoard<%=i+""+j%>);
+					$()
+					
+					<%}%>
+			<%}%>
       }
-      initCourseAjax();
-      
    });
 </script>
 <script src="./js/toggleAction.js"></script>
