@@ -1,459 +1,477 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	request.setCharacterEncoding("utf-8");
+request.setCharacterEncoding("utf-8");
 /* String sessionId = String.valueOf(session.getAttribute("STUDENT_NUMBER")); */
-String sessionId = "15722001";
+String sessionId = "21915014";
 %>
 <script>
-   let sid = <%=sessionId%>;
-   $(function() {
-		
+	let sid =
+<%=sessionId%>
+	$(document).ready(function(){
+
 		'use strict';
-		
-		$(document).ready(function () {
+
+		$(document).ready(function() {
 			console.log('readyEvent');
 			initClickEvent();
 		});
-		
+
 		var $content = $('#content');
-		
-		function onClickMenu1_0(e){
+
+		function onClickMenu1_0(e) {
 			console.log('onClickMenu1_0');
 			e.preventDefault();
 			$.ajax({
-				type :'get',
-				url:'pageContent/Schedule.jsp',
+				type : 'get',
+				url : 'pageContent/Schedule.jsp',
 				/* url:'paprika/getSchedule.do?STUDENT_NUMBER='+sid, */
-				dataType:'html',
-				success: function(data){
+				dataType : 'html',
+				success : function(data) {
 					$content.html(data).trigger("create");
 				}
 			});
 			return false;
 		}
-			function onClickMenu2_1(e){
+		function onClickMenu2_1(e) {
 			console.log('onClickMenu2_1');
-			console.log(<%=sessionId%>);
+			console.log(
+<%=sessionId%>
+	);
 			console.log(sid);
 			e.preventDefault();
 			$.ajax({
-				type :'get',
+				type : 'get',
 				/*url:'pageContent/StuInfo/StuTotalInfo.jsp',*/
-				url:'/student/getStudentInfo?STUDENT_NUMBER='+sid,
-				dataType:'html',
-				success: function(data){
+				url : '/student/getStudentInfo?STUDENT_NUMBER=' + sid,
+				dataType : 'html',
+				success : function(data) {
 					$content.html(data).trigger("create");
 				}
 			});
 			return false;
 		}
-		
-				function onClickMenu2_2(e){
+
+		function onClickMenu2_2(e) {
 			console.log('onClickMenu2_2');
 			e.preventDefault();
 			$.ajax({
-				type :'get',
-				url:'/student/getCourseHistory?STUDENT_NUMBER='+sid,
+				type : 'get',
+				url : '/student/getCourseHistory?STUDENT_NUMBER=' + sid,
 				/* url:'pageContent/StuInfo/StuCourse.jsp', */
-				dataType:'html',
-				success: function(data){
+				dataType : 'html',
+				success : function(data) {
 					$content.html(data).trigger("create");
 				}
 			});
 			return false;
 		}
-				
-			function onClickMenu2_3__1(e){
+
+		function onClickMenu2_3__1(e) {
 			console.log('onClickMenu2_3__1');
 			e.preventDefault();
 			$.ajax({
-				type :'get',
+				type : 'get',
 				/* url:'pageContent/StuInfo/StuScore.jsp',*/
-				url:'/student/getGradeHistory?STUDENT_NUMBER='+sid,
-				dataType:'html',
-				success: function(data){
+				url : '/student/getGradeHistory?STUDENT_NUMBER=' + sid,
+				dataType : 'html',
+				success : function(data) {
 					$content.html(data).trigger("create");
 				}
 			});
-			return false; 
+			return false;
 		}
-			
-				function onClickMenu2_4(e){
+
+		function onClickMenu2_4(e) {
 			console.log('onClickMenu2_4');
 			e.preventDefault();
 			$.ajax({
-				type :'get',
+				type : 'get',
 				/* url:'pageContent/StuInfo/StuRegister.jsp', */
-				url:'/student/getRegisterRecord?STUDENT_NUMBER='+sid,
-				dataType:'html',
-				success: function(data){
+				url : '/student/getRegisterRecord?STUDENT_NUMBER=' + sid,
+				dataType : 'html',
+				success : function(data) {
 					$content.html(data).trigger("create");
 				}
 			});
 			return false;
 		}
-				function onClickMenu3_1(e){
+		function onClickMenu3_1(e) {
 			console.log('onClickMenu3_1');
 			e.preventDefault();
 			$.ajax({
-				type :'get',
+				type : 'get',
 				/* url:'pageContent/Course/Course.jsp', */
-				url:'/curriculum/getOpenCourse',
-				dataType:'html',
-				success: function(data){
+				url : '/curriculum/getOpenCourse',
+				dataType : 'html',
+				success : function(data) {
 					$content.html(data).trigger("create");
 				}
 			});
 			return false;
 		}
-				function onClickMenu3_2(e){
+		function onClickMenu3_2(e) {
 			console.log('onClickMenu3_2');
 			e.preventDefault();
 			$.ajax({
-				type :'get',
+				type : 'get',
 				/* url:'pageContent/Course/Curriculum.jsp', */
-				url:'/curriculum/getCurriculum?STUDENT_NUMBER='+sid,
-				dataType:'html',
-				success: function(data){
+				url : '/curriculum/getCurriculum?STUDENT_NUMBER=' + sid,
+				dataType : 'html',
+				success : function(data) {
 					$content.html(data).trigger("create");
 				}
 			});
 			return false;
 		}
-				function onClickMenu4_0(e){
+		function onClickMenu4_0(e) {
 			console.log('onClickMenu4_0');
 			e.preventDefault();
 			$.ajax({
-				type :'get',
+				type : 'get',
 				/* url:'pageContent/Tuition.jsp', */
-				url:'/student/getTuition?STUDENT_NUMBER='+sid,
-				dataType:'html',
-				success: function(data){
+				url : '/student/getTuition?STUDENT_NUMBER=' + sid,
+				dataType : 'html',
+				success : function(data) {
 					$content.html(data).trigger("create");
 				}
 			});
 			return false;
 		}
-				function onClickMenu5_0(e){
+		function onClickMenu5_0(e) {
 			console.log('onClickMenu5_0');
 			e.preventDefault();
 			$.ajax({
-				type :'get',
-				url:'pageContent/MeetingRoom.jsp',
+				type : 'get',
+				url : 'pageContent/MeetingRoom.jsp',
 				/* url:'paprika/getMeetingRoomList.do?STUDENT_NUMBER='+sid, */
-				dataType:'html',
-				success: function(data){
+				dataType : 'html',
+				success : function(data) {
 					$content.html(data).trigger("create");
 				}
 			});
 			return false;
 		}
-				function onClickMenu6_0(e){
-					console.log('onClickMenu6_0');
-					e.preventDefault();
-					$(location).attr('href', './E_LearningPage.jsp')
-				}
-				
-				function onClickMenu6_1(e){
+		function onClickMenu6_0(e) {
+			console.log('onClickMenu6_0');
+			e.preventDefault();
+			$(location).attr('href', './E_LearningPage.jsp').queue(function() {
+
+			/* 	$.ajax({
+					type : 'get',
+					 url:'pageContent/Online/Course.jsp', 
+					url : '/course/getOnlineCourseList?STUDENT_NUMBER=' + sid,
+					dataType : 'html',
+					success : function(data) {
+						$content.html(data).trigger("create");
+					}
+				}); */
+			});
+			return false;
+
+			/* 					$(location).attr('href', '/course/getOnlineCourseList?STUDENT_NUMBER='+sid)
+			 */}
+
+		function onClickMenu6_1(e) {
 			console.log('onClickMenu6_1');
 			e.preventDefault();
-		 	$.ajax({
-				type :'get',
-				 url:'pageContent/Online/Course.jsp', 
-				url:'/course/getOnlineCourseList?STUDENT_NUMBER='+sid,
-				dataType:'html',
-				success: function(data){
+			$.ajax({
+				type : 'get',
+				url : 'pageContent/Online/Course.jsp',
+				url : '/course/getOnlineCourseList?STUDENT_NUMBER=' + sid,
+				dataType : 'html',
+				success : function(data) {
 					$content.html(data).trigger("create");
 				}
-			}); 
+			});
 			return false;
 		}
-				function onClickMenu6_2(e){
+		function onClickMenu6_2(e) {
 			console.log('onClickMenu6_2');
 			e.preventDefault();
 			$.ajax({
-				type :'get',
-				url:'pageContent/Online/Lecture.jsp',
+				type : 'get',
+				url : 'pageContent/Online/Lecture.jsp',
 				/* url:'paprika/getLectureList.do?STUDENT_NUMBER'+sid, */
-				dataType:'html',
-				success: function(data){
+				dataType : 'html',
+				success : function(data) {
 					$content.html(data).trigger("create");
 				}
 			});
 			return false;
 		}
-				function onClickMenu6_3(e){
+		function onClickMenu6_3(e) {
 			console.log('onClickMenu6_3');
 			e.preventDefault();
 			$.ajax({
-				type :'get',
-				url:'pageContent/Online/LectureDetail.jsp',
+				type : 'get',
+				url : 'pageContent/Online/LectureDetail.jsp',
 				/* url:'paprika/getLectureDetail.do?STUDENT_NUMBER'+sid, */
-				dataType:'html',
-				success: function(data){
+				dataType : 'html',
+				success : function(data) {
 					$content.html(data).trigger("create");
 				}
 			});
 			return false;
 		}
-				function onClickMenu6_4(e){
+		function onClickMenu6_4(e) {
 			console.log('onClickMenu6_4');
 			e.preventDefault();
 			$.ajax({
-				type :'get',
-				url:'pageContent/Online/Feedback.jsp',
+				type : 'get',
+				url : 'pageContent/Online/Feedback.jsp',
 				/* url:'pageContent/Online/Feedback.jsp', */
-				dataType:'html',
-				success: function(data){
+				dataType : 'html',
+				success : function(data) {
 					$content.html(data).trigger("create");
 				}
 			});
 			return false;
 		}
-				function onClickMenu6_5(e){
+		function onClickMenu6_5(e) {
 			console.log('onClickMenu6_5');
 			e.preventDefault();
 			$.ajax({
-				type :'get',
-				url:'pageContent/Online/Test.jsp',
+				type : 'get',
+				url : 'pageContent/Online/Test.jsp',
 				/* url:'pageContent/Online/Test.jsp', */
-				dataType:'html',
-				success: function(data){
+				dataType : 'html',
+				success : function(data) {
 					$content.html(data).trigger("create");
 				}
 			});
 			return false;
 		}
-/* 				function onClickMenu7_0(e){
-			console.log('onClickMenu7_0');
+		/* 				function onClickMenu7_0(e){
+		 console.log('onClickMenu7_0');
+		 e.preventDefault();
+		 $.ajax({
+		 type :'get',
+		 url:'pageContent/Community.jsp',
+		 dataType:'html',
+		 success: function(data){
+		 $content.html(data).trigger("create");
+		 }
+		 });
+		 return false;
+		 } */
+		function onClickMenu8_0(e) {
+			console.log('onClickMenu8_0');
 			e.preventDefault();
-			$.ajax({
-				type :'get',
-				url:'pageContent/Community.jsp',
-				dataType:'html',
-				success: function(data){
-					$content.html(data).trigger("create");
-				}
-			});
-			return false;
-		} */
-				function onClickMenu8_0(e){
-						console.log('onClickMenu8_0');
-						e.preventDefault();
-						$(location).attr('href', './ProPeoplePage.jsp')
-				}
-				function onClickMenu8_1(e){
+			$(location).attr('href', './ProPeoplePage.jsp')
+		}
+		function onClickMenu8_1(e) {
 			console.log('onClickMenu8_1');
 			e.preventDefault();
 			$.ajax({
-				type :'get',
-				url:'pageContent/ProPeople/Select.jsp',
+				type : 'get',
+				url : 'pageContent/ProPeople/Select.jsp',
 				/* url:'pageContent/ProPeople/Select.jsp', */
-				dataType:'html',
-				success: function(data){
+				dataType : 'html',
+				success : function(data) {
 					$content.html(data).trigger("create");
 				}
 			});
 			return false;
-		}	
-					function onClickMenu8_2(e){
+		}
+		function onClickMenu8_2(e) {
 			console.log('onClickMenu8_2');
 			e.preventDefault();
 			$.ajax({
-				type :'get',
-				url:'pageContent/ProPeople/Insert.jsp',
+				type : 'get',
+				url : 'pageContent/ProPeople/Insert.jsp',
 				/* url:'pageContent/ProPeople/Insert.jsp', */
-				dataType:'html',
-				success: function(data){
+				dataType : 'html',
+				success : function(data) {
 					$content.html(data).trigger("create");
 				}
 			});
 			return false;
-		}	
-					function onClickMenu8_3(e){
+		}
+		function onClickMenu8_3(e) {
 			console.log('onClickMenu8_3');
 			e.preventDefault();
 			$.ajax({
-				type :'get',
-				url:'pageContent/ProPeople/Update.jsp',
+				type : 'get',
+				url : 'pageContent/ProPeople/Update.jsp',
 				/* url:'pageContent/ProPeople/Update.jsp', */
-				dataType:'html',
-				success: function(data){
+				dataType : 'html',
+				success : function(data) {
 					$content.html(data).trigger("create");
 				}
 			});
 			return false;
-		}	
-						function onClickMenu9_1(e){
+		}
+		function onClickMenu9_1(e) {
 			console.log('onClickMenu9_1');
 			e.preventDefault();
 			$.ajax({
-				type :'get',
-				url:'pageContent/ProOnline/Course.jsp',
+				type : 'get',
+				url : 'pageContent/ProOnline/Course.jsp',
 				/* url:'pageContent/ProOnline/Course.jsp', */
-				dataType:'html',
-				success: function(data){
+				dataType : 'html',
+				success : function(data) {
 					$content.html(data).trigger("create");
 				}
 			});
 			return false;
-		}	
-						function onClickMenu9_2(e){
+		}
+		function onClickMenu9_2(e) {
 			console.log('onClickMenu9_2');
 			e.preventDefault();
 			$.ajax({
-				type :'get',
-				url:'pageContent/ProOnline/MARK.jsp',
+				type : 'get',
+				url : 'pageContent/ProOnline/MARK.jsp',
 				/* url:'pageContent/ProOnline/MARK.jsp', */
-				dataType:'html',
-				success: function(data){
+				dataType : 'html',
+				success : function(data) {
 					$content.html(data).trigger("create");
 				}
 			});
 			return false;
-		}	
-						function onClickMenu9_3(e){
+		}
+		function onClickMenu9_3(e) {
 			console.log('onClickMenu9_3');
 			e.preventDefault();
 			$.ajax({
-				type :'get',
-				url:'pageContent/ProOnline/CourseCUD.jsp',
+				type : 'get',
+				url : 'pageContent/ProOnline/CourseCUD.jsp',
 				/* url:'pageContent/ProOnline/CourseCUD.jsp', */
-				dataType:'html',
-				success: function(data){
+				dataType : 'html',
+				success : function(data) {
 					$content.html(data).trigger("create");
 				}
 			});
 			return false;
-		}	
-						function onClickMenu9_4(e){
+		}
+		function onClickMenu9_4(e) {
 			console.log('onClickMenu9_4');
 			e.preventDefault();
 			$.ajax({
-				type :'get',
-				url:'pageContent/ProOnline/Lecture.jsp',
+				type : 'get',
+				url : 'pageContent/ProOnline/Lecture.jsp',
 				/* url:'pageContent/ProOnline/Lecture.jsp', */
-				dataType:'html',
-				success: function(data){
+				dataType : 'html',
+				success : function(data) {
 					$content.html(data).trigger("create");
 				}
 			});
 			return false;
-		}	
-						function onClickMenu9_5(e){
+		}
+		function onClickMenu9_5(e) {
 			console.log('onClickMenu9_5');
 			e.preventDefault();
 			$.ajax({
-				type :'get',
-				url:'pageContent/ProOnline/LectureDetail.jsp',
+				type : 'get',
+				url : 'pageContent/ProOnline/LectureDetail.jsp',
 				/* url:'pageContent/ProOnline/HomeworkCheck.jsp', */
-				dataType:'html',
-				success: function(data){
+				dataType : 'html',
+				success : function(data) {
 					$content.html(data).trigger("create");
 				}
 			});
 			return false;
-		}	
-						function onClickMenu9_6(e){
+		}
+		function onClickMenu9_6(e) {
 			console.log('onClickMenu9_6');
 			e.preventDefault();
 			$.ajax({
-				type :'get',
-				url:'pageContent/ProOnline/HomeworkCheck.jsp',
+				type : 'get',
+				url : 'pageContent/ProOnline/HomeworkCheck.jsp',
 				/* url:'pageContent/ProOnline/HomeworkCheck.jsp', */
-				dataType:'html',
-				success: function(data){
+				dataType : 'html',
+				success : function(data) {
 					$content.html(data).trigger("create");
 				}
 			});
 			return false;
-		}	
-						function onClickMenu9_7(e){
+		}
+		function onClickMenu9_7(e) {
 			console.log('onClickMenu9_7');
 			e.preventDefault();
 			$.ajax({
-				type :'get',
-				url:'pageContent/ProOnline/FeedbackCheck.jsp',
+				type : 'get',
+				url : 'pageContent/ProOnline/FeedbackCheck.jsp',
 				/* url:'pageContent/ProOnline/FeedbackCheck.jsp', */
-				dataType:'html',
-				success: function(data){
+				dataType : 'html',
+				success : function(data) {
 					$content.html(data).trigger("create");
 				}
 			});
 			return false;
-		}	
-						function onClickMenu9_8(e){
+		}
+		function onClickMenu9_8(e) {
 			console.log('onClickMenu9_8');
 			e.preventDefault();
 			$.ajax({
-				type :'get',
-				url:'pageContent/ProOnline/LectureCUD.jsp',
+				type : 'get',
+				url : 'pageContent/ProOnline/LectureCUD.jsp',
 				/* url:'pageContent/ProOnline/LectureCUD.jsp', */
-				dataType:'html',
-				success: function(data){
+				dataType : 'html',
+				success : function(data) {
 					$content.html(data).trigger("create");
 				}
 			});
 			return false;
-		}	
-						function onClickMenu9_9(e){
+		}
+		function onClickMenu9_9(e) {
 			console.log('onClickMenu9_9');
 			e.preventDefault();
 			$.ajax({
-				type :'get',
-				url:'pageContent/ProOnline/Test.jsp',
+				type : 'get',
+				url : 'pageContent/ProOnline/Test.jsp',
 				/* url:'pageContent/ProOnline/Test.jsp', */
-				dataType:'html',
-				success: function(data){
+				dataType : 'html',
+				success : function(data) {
 					$content.html(data).trigger("create");
 				}
 			});
 			return false;
-		}	
-						function onClickMenu9_10(e){
+		}
+		function onClickMenu9_10(e) {
 			console.log('onClickMenu9_10');
 			e.preventDefault();
 			$.ajax({
-				type :'get',
-				url:'pageContent/ProOnline/TestSelect.jsp',
+				type : 'get',
+				url : 'pageContent/ProOnline/TestSelect.jsp',
 				/* url:'pageContent/ProOnline/TestSelect.jsp', */
-				dataType:'html',
-				success: function(data){
+				dataType : 'html',
+				success : function(data) {
 					$content.html(data).trigger("create");
 				}
 			});
 			return false;
-		}					function onClickMenu9_11(e){
+		}
+		function onClickMenu9_11(e) {
 			console.log('onClickMenu9_11');
 			e.preventDefault();
 			$.ajax({
-				type :'get',
-				url:'pageContent/ProOnline/TestInsert.jsp',
+				type : 'get',
+				url : 'pageContent/ProOnline/TestInsert.jsp',
 				/* url:'pageContent/ProOnline/TestInsert.jsp', */
-				dataType:'html',
-				success: function(data){
+				dataType : 'html',
+				success : function(data) {
 					$content.html(data).trigger("create");
 				}
 			});
 			return false;
-		}	
-							function onClickMenu9_12(e){
+		}
+		function onClickMenu9_12(e) {
 			console.log('onClickMenu9_12');
 			e.preventDefault();
 			$.ajax({
-				type :'get',
-				url:'pageContent/ProOnline/TestGrading.jsp',
+				type : 'get',
+				url : 'pageContent/ProOnline/TestGrading.jsp',
 				/* url:'pageContent/ProOnline/TestGrading.jsp', */
-				dataType:'html',
-				success: function(data){
+				dataType : 'html',
+				success : function(data) {
 					$content.html(data).trigger("create");
 				}
 			});
 			return false;
-		}	
-		
-		function initClickEvent(){
+		}
+
+		function initClickEvent() {
 			console.log('initClickEvent');
 			$('#sideButton_1_0').click(onClickMenu1_0);
 			$('#sideButton_2_1').click(onClickMenu2_1);
@@ -488,10 +506,8 @@ String sessionId = "15722001";
 			$('#sideButton_9_10').click(onClickMenu9_10);
 			$('#sideButton_9_11').click(onClickMenu9_11);
 			$('#sideButton_9_12').click(onClickMenu9_12);
-			
-		}	
+
+		}
 
 	});
-   
-   
-   </script>
+</script>

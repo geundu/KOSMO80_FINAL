@@ -1,7 +1,7 @@
 let isCorrect = false;
 
 /*setTimeout (function locationPage(){
-	window.location = "http://localhost:9010/project/frameForm.jsp"
+	window.location = "http://localhost:7000/MainPage.jsp"
 	}, 5000);*/
 
 
@@ -33,7 +33,7 @@ $('#btn_login').on('click', function(e) {
 						setTimeout(function() {
 							$state.html('Log in');
 							$this.removeClass('ok loading');
-							$(location).attr('href', "/frameForm.jsp");
+							$(location).attr('href', "/MainPage.jsp");
 						}, 1000);
 					}, 2000);
 				}
