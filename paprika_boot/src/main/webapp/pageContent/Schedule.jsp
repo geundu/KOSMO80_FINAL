@@ -4,22 +4,22 @@
 <%@ page import="java.util.*" %> 
 <%
 	request.setCharacterEncoding("utf-8");
-  
+
 StringBuilder path = new StringBuilder(request.getContextPath());
 path.append("/");
 List<Map<String,Object>> scheduleList = null;
 scheduleList = (List<Map<String,Object>>)request.getAttribute("scheduleList");
+
 int size = 0;
 
 if (scheduleList != null) {
 	size = scheduleList.size();
 	for(int i=0;i<size;i++){
-	Map<String, Object> rmap = scheduleList.get(i);
-	
-	
+	Map<String, Object> rmap = scheduleList.get(i);	
 	}
 }
 out.print("로우수:"+size);
+
 %>
 
 
@@ -107,11 +107,6 @@ for(int i=0;i<size;i++){
 	if(THI.equals("null")){THI=" ";}
 	String FRI = String.valueOf(rmap.get("FRI"));
 	if(FRI.equals("null")){FRI=" ";}
-
-	
-	
-	
-	
 %>					
 					</td>
 					<td align="center">
@@ -127,8 +122,7 @@ for(int x=0;x<num;x++){
 	}
 }		
 %>									
-					</td>
-					
+					</td>					
 					<td>			
 					<%
 end_time = Integer.parseInt(rmap.get("COURSE_END_TIME").toString());
@@ -138,10 +132,10 @@ for(int x=0;x<num;x++){
 					out.print(THU);
 					out.print("<br>");
 	if(x==1){
-		out.print("(09:00~10:00)");
+		//out.print("(09:00~10:00)");
 	}
 	if(x==2){
-		out.print("(10:00~11:00)");
+		//out.print("(10:00~11:00)");
 	}
 }		
 
