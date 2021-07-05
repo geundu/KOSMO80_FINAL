@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.ac.paprika.mybatis.mapper.admin">
+<mapper namespace="kr.ac.paprika.admin">
 	<resultMap type="java.util.Map" id="adminMap" />
 	<select id="getMember" parameterType="map"
 		statementType="CALLABLE">

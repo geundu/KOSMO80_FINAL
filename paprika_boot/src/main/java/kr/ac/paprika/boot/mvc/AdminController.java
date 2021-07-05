@@ -75,6 +75,8 @@ public class AdminController {
 	 * @param req
 	 * @param pMap
 	 * @return PEXCEPMSG,  or pexcep;
+	 * localhost:7000/admin/memberInsert?TR_CODE=INSERT&STUDENT_NAME=오세현&STUDENT_ENG_NAME=OSEHYUN&STUDENT_PHONE=1034900928&COLLEGE_NUMBER=222&STUDENT_ENTER_YEAR=2013&STUDENT_EMAIL=rk51320928@gmail.com&STUDENT_BIRTH=19970911&GUARDIAN_NAME=윤석열&GUARDIAN_PHONE=1045788781&MEMO=수정&STUDENT_NUMBER=15222001&REGISTER_NUMBER=0
+
 	 */
 
 	@RequestMapping("/memberInsert")
@@ -103,7 +105,9 @@ public class AdminController {
 	 * @param req
 	 * @param pMap
 	 * @return PEXCEPMSG,  or pexcep;
+	 * localhost:7000/admin/memberUpdate?TR_CODE=UPDATE&STUDENT_NAME=오세현&STUDENT_ENG_NAME=OSEHYUN&STUDENT_PHONE=1034900928&COLLEGE_NUMBER=222&STUDENT_ENTER_YEAR=2013&STUDENT_EMAIL=rk51320928@gmail.com&STUDENT_BIRTH=19970911&GUARDIAN_NAME=윤석열&GUARDIAN_PHONE=1045788781&MEMO=수정&STUDENT_NUMBER=15222001&REGISTER_NUMBER=0
 	 */
+	
 	
 	@RequestMapping("/memberUpdate")
 	public String memberUpdate(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
