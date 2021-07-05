@@ -96,7 +96,7 @@ console.log(<%=sizeCbx%>);
 			<table class="table table-bordered" id="CourseTable">
 				<thead class="thead-team">
 					<tr>
-						<th scope="col">순번</th>
+<!-- 						<th scope="col">순번</th>
 						<th scope="col">년도</th>
 						<th scope="col">학기</th>
 						<th scope="col">교과목</th>
@@ -106,7 +106,7 @@ console.log(<%=sizeCbx%>);
 						<th scope="col">시간표</th>
 						<th scope="col">교수</th>
 						<th scope="col">전공교양</th>
-						<th scope="col">재수강</th>
+						<th scope="col">재수강</th> -->
 					</tr>
 				</thead>
 				<tbody>

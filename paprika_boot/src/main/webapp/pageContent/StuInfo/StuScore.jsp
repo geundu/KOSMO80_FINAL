@@ -85,11 +85,11 @@ console.log(<%=sizeDetail%>);
 			<table class="table table-bordered">
 				<thead class="thead-team">
 					<tr>
-						<th scope="col">학기</th>
+<!-- 						<th scope="col">학기</th>
 						<th scope="col">평점 평균</th>
 						<th scope="col">신청학점</th>
 						<th scope="col">취득학점</th>
-						<th scope="col">F학점</th>
+						<th scope="col">F학점</th> -->
 					</tr>
 				</thead>
 				<tbody>

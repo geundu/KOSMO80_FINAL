@@ -92,8 +92,8 @@ out.print("size:"+sizeCbx);
 			<table class="table table-bordered" id="TutionTable">
 				<thead class="thead-team">
 					<tr>
-						<th scope="col">년도-학기</th>
-						<th scope="col">금액 내역</th>
+<!-- 						<th scope="col">년도-학기</th>
+						<th scope="col">금액 내역</th> -->
 					</tr>
 				</thead>
 				<tbody class="text-center">
@@ -136,8 +136,11 @@ $(function() {
 				field:'SEMESTER',
 				title:'년도-학기'
 			}, {
-				field:'TUITION_TOTAL_FEE',
+				field:'TUITION_FEE',
 				title:'금액 내역 '
+			}, {
+				field:'TUITION_CONTENT',
+				title:'비고란'
 			}]
 		});
 		return false;
