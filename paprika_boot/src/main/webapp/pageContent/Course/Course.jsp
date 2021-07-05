@@ -99,7 +99,7 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 		<div class="screen1"
 			style="width: 100%; height: auto; text-align: center; background-color:  ;">
 			<select class="custom-select" style="width: auto;"id="CourseSelect01" value="<%=request.getParameter("COURSE_SEMESTER")%>">
-				<option>개설년도-학기</option>
+				<option selected>개설년도-학기</option>
 				<option value="2015-1">2015-1</option>
 				<option value="2015-2">2015-2</option>
 				<option value="2016-1">2016-1</option>
@@ -129,7 +129,7 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 <% } else {%>
 <select class="custom-select" style="width:auto;" id="CourseSelect03">
 <% }%>
-				<option>⇓대학⇓</option>
+				<option selected>⇓대학⇓</option>
 			<%
 				for(int i=0; i< cbxCollegeSize ; i++){
 						Map<String, Object> rmap = cbxMapList.get("collegeList").get(i);
@@ -153,7 +153,7 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 <% } else {%>
 <select class="custom-select" style="width:auto;" id="CourseSelect04">
 <% }%>
-				<option>학부</option>
+				<option selected>학부</option>
 				<%
 				for(int i=0; i< cbxDeptSize ; i++){
 						Map<String, Object> rmap = cbxMapList.get("deptList").get(i);
@@ -185,7 +185,7 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 					<%
 					}
 					%>
-					<option>학과</option>
+					<option selected>학과</option>
 					<%
 					for(int i=0; i< cbxMajorSize ; i++){
 						Map<String, Object> rmap = cbxMapList.get("majorList").get(i);
@@ -208,7 +208,7 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 			</select>
 			
 			<select class="custom-select" style="width: auto;" id="CourseSelect06" value="<%=request.getParameter("HAKNUN")%>">
-				<option>0</option>
+				<option selected>0</option>
 				<option value="1">1</option>
 				<option value="2">2</option>
 				<option value="3">3</option>
@@ -216,7 +216,7 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 			</select> 
 			
 			<select class="custom-select" style="width: auto;" id="CourseSelect07" value="<%=request.getParameter("GUBUN")%>">
-				<option>전체</option>
+				<option selected>전체</option>
 				<option value="전필">전필</option>
 				<option value="전선">전선</option>
 				<option value="교필">교필</option>
@@ -534,9 +534,6 @@ $(function() {
 		
 		
 	});
-	
-	
-	
 	
 	
 	function initClickEvent(){

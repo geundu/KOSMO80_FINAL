@@ -107,8 +107,21 @@ public class StudentInfoLogic {
 	 * @return
 	 */
 	public List<Map<String, Object>> getTuition(Map<String, Object> pMap) {
-		List<Map<String, Object>> tuitionList = null;
-		tuitionList = studentInfoDao.getTuition(pMap);
-		return tuitionList;
+		List<Map<String, Object>> cbBoxTuitionList = null;
+		cbBoxTuitionList = studentInfoDao.getTuition(pMap);
+		return cbBoxTuitionList;
 	}//http://localhost:8000/paprika/getTuition.do?STUDENT_NUMBER=13222001&SEMESTER=2013-1
+	
+
+	/**
+	 * 등록금 조회 메서드
+	 * 
+	 * @param pMap
+	 * @return
+	 */
+	public List<Map<String, Object>> jsonGetTuitionHistory(Map<String, Object> pMap) {
+		List<Map<String, Object>> jsonGetTuitionHistory = null;
+		jsonGetTuitionHistory = studentInfoDao.jsonGetTuitionHistory(pMap);
+		return jsonGetTuitionHistory;
+	}//http://localhost:8000/paprika/getTuition.do?STUDENT_NUMBER=13222001
 }

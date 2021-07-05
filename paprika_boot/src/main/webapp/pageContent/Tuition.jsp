@@ -1,8 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
 <%
 	request.setCharacterEncoding("utf-8");
+%>
+<%
+	StringBuilder path = new StringBuilder(request.getContextPath());
+	path.append("/");
+	
+	List<Map<String, Object>> cbBoxTuitionList = null;
+	cbBoxTuitionList = (List<Map<String, Object>>) request.getAttribute("tuitionList");
+	int sizeCbx = cbBoxTuitionList.size();
+	
+	String[] cbBoxTuitionListArr = new String[sizeCbx];
+	
+out.print("size:"+sizeCbx);
 %>
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5"> -->
@@ -55,38 +68,89 @@
 <div class="d-flex justify-content-center">
 	<div class="container">
 		<div class="screen1"
-			style="width: 100%; height: 5%; text-align: center; background-color: E8EBEE;">
+			style="width: 100%; height: auto%; text-align: center; background-color: E8EBEE;">
 			<div class="btn-group" style="width: 800px;">
-				<select class="custom-select" style="width: 800px;">
-					<option>콤보박스(년도-학기) : 2012-1</option>
-					<option>콤보박스(년도-학기) : 2012-2</option>
-					<option>콤보박스(년도-학기) : 2013-1</option>
-					<option>콤보박스(년도-학기) : 2013-2</option>
-					<option>콤보박스(년도-학기) : 2014-1</option>
-					<option>콤보박스(년도-학기) : 2014-2</option>
-					<option>콤보박스(년도-학기) : 2015-1</option>
-					<option>콤보박스(년도-학기) : 2015-2</option>
+				<select class="custom-select" style="width: 800px;" id="TuitionSelect00">
+					<option selected> 조회할 학기를 선택해주세요.</option>
+					<%
+					 for(int i =0; i<sizeCbx; i++){
+						 Map<String, Object> rmap = cbBoxTuitionList.get(i);
+						 cbBoxTuitionListArr[i] = String.valueOf(rmap.get("SEMESTER"));
+					} 
+					%>
+					<%for(int i=0; i<sizeCbx; i++){ %>
+						<option><%=cbBoxTuitionListArr[i]%></option>
+					<%}	%>
+					
+					</select>
 			</div>
 			<button class=" btn-sm btn-primary">조회</button>
 		</div>
-
- 		<div class="screen3"
-			style="width: 100%; height: 5%; text-align: center; background-color: E8EBEE;">
-			<div class="btn-group" style="width: 800px;">
-				<select class="custom-select" style="width: 800px;">
-			</div>
-			<a href="#" button type="button"
-				class="btn float-right btn-primary btn">조회</a>
-		</div> 
 		<div class="screen2"
-			style="width: 100%; height: 75%; background-color: E8EBEE;">
-			<img src="images/money.jpg"  class="rounded mx-auto d-block" style="height: 100%;">
+			style="width: 100%; height: auto; background-color: E8EBEE;">
+			<!-- <img id="TutionImage" src="images/money.jpg"  class="rounded mx-auto d-block" style="height: 100%;"> -->
+			<table class="table table-bordered" id="TutionTable">
+				<thead class="thead-team">
+					<tr>
+						<th scope="col">년도-학기</th>
+						<th scope="col">금액 내역</th>
+					</tr>
+				</thead>
+				<tbody class="text-center">
+				
+				</tbody>
+			</table>
 		</div>
 	</div>
 </div>
 
 
 <script src="./js/toggleAction.js"></script>
+<script>
+$(function() {
+	'use strict'
+	var $TutionTable = $('#TutionTable');
+	var selectedOption;
+	$(document).ready(function () {
+		console.log('readyEvent');
+		initClickEvent();
+	});
+	
+	function selectBox(){
+		console.log('selectBox');
+		$('#TuitionSelect00').on('change', function(e){
+		e.preventDefault();
+		console.log($(this).find("option:selected").val());
+		selectedOption = $(this).find("option:selected").val();
+		TutionTableInput();
+		});
+	}
+	
+	function TutionTableInput(){
+		console.log('TutionTableInput');
+		$TutionTable.bootstrapTable('destroy')
+		$TutionTable.bootstrapTable({
+			url:'/student/jsonGetTuitionHistory?STUDENT_NUMBER='+sid
+				+'&SEMESTER='+selectedOption,
+			columns: [{
+				field:'SEMESTER',
+				title:'년도-학기'
+			}, {
+				field:'TUITION_TOTAL_FEE',
+				title:'금액 내역 '
+			}]
+		});
+		return false;
+	}
+
+		
+	function initClickEvent(){
+		console.log('initClickEvent');
+		$('#TuitionSelect00').unbind('click').bind('click',selectBox());
+	}
+});
+
+</script>
 
 
 <!-- </div> -->
