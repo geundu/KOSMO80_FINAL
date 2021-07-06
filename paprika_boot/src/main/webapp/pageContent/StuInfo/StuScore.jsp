@@ -85,11 +85,11 @@ console.log(<%=sizeDetail%>);
 			<table class="table table-bordered">
 				<thead class="thead-team">
 					<tr>
-<!-- 						<th scope="col">학기</th>
+						<th scope="col">학기</th>
 						<th scope="col">평점 평균</th>
 						<th scope="col">신청학점</th>
 						<th scope="col">취득학점</th>
-						<th scope="col">F학점</th> -->
+						<th scope="col">F학점</th> 
 					</tr>
 				</thead>
 				<tbody>
@@ -125,7 +125,7 @@ console.log(<%=sizeDetail%>);
 			<table class="table table-bordered" id="detailTable">
 				<thead class="thead-team">
 						<tr>
-							<th scope="col">번호</th>
+							<!-- <th scope="col">번호</th>
 							<th scope="col">(과목코드)과목명</th>
 							<th scope="col">이수구분</th>
 							<th scope="col">학점</th>
@@ -133,7 +133,7 @@ console.log(<%=sizeDetail%>);
 							<th scope="col">등급</th>
 							<th scope="col">성적삭제구분</th>
 							<th scope="col">재이수여부</th>
-							<th scope="col">재이수학기</th>
+							<th scope="col">재이수학기</th> -->
 						</tr>
 					</thead>
 					<tbody>

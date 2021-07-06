@@ -10,8 +10,8 @@
 
    <select id="getLectureList" parameterType="map"
       statementType="CALLABLE">
-      {CALL PROC_ONLINE_LECTURE(#{STUDENT_NUMBER}, #{cursor,
-      jdbcType=CURSOR, mode=OUT, resultMap=testMap})}
+      {CALL PROC_STU_SELECT_ONLINE_LECTURE(#{COURSE_NUMBER}, 
+      #{cursor,jdbcType=CURSOR, mode=OUT, resultMap=testMap})}
    </select>
    <select id="getLectureDetail" parameterType="map"
       statementType="CALLABLE">

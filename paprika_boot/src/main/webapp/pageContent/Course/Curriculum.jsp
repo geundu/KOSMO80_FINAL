@@ -133,7 +133,7 @@ $(function() {
 	console.log($(this).find("option:selected").val());
 	
 	selectedOption = $(this).find("option:selected").val();
-	CourseTable Input();
+	CourseTableInput();
 	/* $(this).fined("option:selected").val().remove(); */
 	});
 	

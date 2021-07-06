@@ -1,10 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
 <%
 	request.setCharacterEncoding("utf-8");
 %>
+<%
+StringBuilder path = new StringBuilder(request.getContextPath());
+path.append("/");
 
+List<Map<String, Object>> feedbackList = null; 
+feedbackList = (List<Map<String, Object>>) request.getAttribute("feedbackList");
+int feedbackListSize = 0;
+Map<String,Object> rmap = new HashMap<>();
+
+if (feedbackList != null) {
+	feedbackListSize = feedbackList.size();
+	for(int i=0;i<feedbackListSize;i++){
+    rmap = feedbackList.get(i);
+	}
+}
+out.print("feedbackListSize:" + feedbackListSize);
+%>
+<script>
+console.log(<%=feedbackListSize%>);
+</script>
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5"> -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -36,22 +56,7 @@
 						<li class="breadcrumb-item active" aria-current="page">강좌시청</li>
 						<li class="breadcrumb-item active" aria-current="page">피드백보내기</li>
 					</ol>
-
 				</nav>
-
-				<!--               <li class="nav-item active">
-                <a class="nav-link" href="#">Page Content Header menu -1</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Page Content Header menu -2</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Page Content Header menu -3</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Page Content Header menu -4</a>
-              </li>
-            </ul> -->
 		</div>
 		<!-- Page Content Header end -->
 	</div>
@@ -62,7 +67,7 @@
 		<div class="screen1"
 			style="width: 100%; height: 40%; background-color: ;">
 			<div style="text-align: center;">
-				<h3>일본어문화 (피드백 보내는 강의 제목)</h3>
+				<h3><%=rmap.get("COURSE_NAME")%>-<%=rmap.get("LECTURE_NAME") %></h3>
 			</div>
 		</div>
 		<div class="screen2"
@@ -74,14 +79,21 @@
 		</div>
 
 		<div class="col text-center">
-		  <button href="#" class="btn btn-primary mr-5">피드백보내기</button>
+		  <button onClick="" class="btn btn-primary mr-5">피드백보내기</button>
 			
-		  <button href="#" class="btn btn-primary">작성취소</button>
+		  <button onClick="writeCancel()" class="btn btn-primary">작성취소</button>
 		</div>
 	</div>
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="js/toggleAction.js"></script>
+<script>
+	function writeCancel(){
+		if (confirm("작성을 취소하시겠습니까?")==true){
+			alert("작성이 취소되었습니다. Dashboard창으로 돌아갑니다.")
+		} 
+	};
+</script>
 <!-- </div> -->
 <!-- Page Content end -->
 

@@ -27,6 +27,7 @@ public class CourseDao {
 		List<Map<String, Object>> courseList = null;
 		sqlSessionTemplate.selectList("getOnlineCourseList", pMap);
 		courseList = (List<Map<String, Object>>) pMap.get("cursor");
+		logger.info(courseList);
 
 		return courseList;
 	}
@@ -42,7 +43,7 @@ public class CourseDao {
 		List<Map<String, Object>> lectureList = null;
 		sqlSessionTemplate.selectList("getLectureList", pMap);
 		lectureList = (List<Map<String, Object>>) pMap.get("cursor");
-
+		logger.info(lectureList);
 		return lectureList;
 	}
 
@@ -54,10 +55,12 @@ public class CourseDao {
 	 */
 	public List<Map<String, Object>> getLectureDetail(Map<String, Object> pMap) {
 		logger.info("getLectureDetail() 호출 성공");
+		logger.info(pMap);
 		List<Map<String, Object>> lectureDetail = null;
 		sqlSessionTemplate.selectList("getLectureDetail", pMap);
+		logger.info(pMap);
 		lectureDetail = (List<Map<String, Object>>) pMap.get("cursor");
-
+		logger.info(lectureDetail);
 		return lectureDetail;
 	}
 
@@ -73,7 +76,7 @@ public class CourseDao {
 		result = sqlSessionTemplate.insert("homeworkCU", pMap);
 		logger.info(result);
 		logger.info(pMap);
-
+		
 		return result;
 	}
 
@@ -89,7 +92,7 @@ public class CourseDao {
 		result = sqlSessionTemplate.update("homeworkCU", pMap);
 		logger.info(result);
 		logger.info(pMap);
-
+		
 		return result;
 	}
 
@@ -103,7 +106,7 @@ public class CourseDao {
 		logger.info("feedbackInsert() 호출 성공");
 		int result = 0;
 		result = sqlSessionTemplate.insert("feedbackInsert", pMap);
-
+		logger.info(result);
 		return result;
 	}
 
@@ -132,7 +135,7 @@ public class CourseDao {
 		List<Map<String, Object>> homeworkList = null;
 		sqlSessionTemplate.selectList("getHomeworkList", pMap);
 		homeworkList = (List<Map<String, Object>>) pMap.get("cursor");
-
+		logger.info(homeworkList);
 		return homeworkList;
 	}
 
@@ -147,7 +150,7 @@ public class CourseDao {
 		List<Map<String, Object>> feedbackList = null;
 		sqlSessionTemplate.selectList("getFeedbackList", pMap);
 		feedbackList = (List<Map<String, Object>>) pMap.get("cursor");
-
+		logger.info(feedbackList);
 		return feedbackList;
 	}
 }

@@ -1,8 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
 <%
 	request.setCharacterEncoding("utf-8");
+%>
+<%
+StringBuilder path = new StringBuilder(request.getContextPath());
+path.append("/");
+
+List<Map<String, Object>> onlineTestList = null; 
+onlineTestList = (List<Map<String, Object>>) request.getAttribute("onlineTest");
+int onlineTestListSize = 0;
+Map<String,Object> rmap = new HashMap<>();
+
+if (onlineTestList != null) {
+	onlineTestListSize = onlineTestList.size();
+	for(int i=0;i<onlineTestListSize;i++){
+    rmap = onlineTestList.get(i);
+	}
+}
+out.print("onlineTestListSize:" + onlineTestListSize);
 %>
 
 <!-- Page Content start -->
@@ -61,7 +79,7 @@
 		<div class="screen1"
 			style="width: 100%; height: auto%; background-color: E8EBEE;">
 			<div style="text-align: center;">
-				<h3><%  %>일본어 문화 강좌 // <%  %>기말고사</h3>
+				<h3><%=rmap.get("SUBJECT_NAME")%>일본어 문화 강좌 // <%=rmap.get("ONLINE_TEST_DIVISION")%>기말고사</h3>
 			</div>
 		</div>
 		<div class="screen2"
@@ -72,149 +90,36 @@
 				</thead>
 				<tbody>
 					<!-- 문제시작 -->
+					<%for(int i = 0 ; i < onlineTestListSize ; i++) { 
+						Map<String, Object> tmap = onlineTestList.get(i); %>
 					<tr>
-						<th scope="row">문제1 : 아리가또는 뭔가?</th>
+						<th scope="row">문제<%=i %>:<%=tmap.get("ONLINE_TEST_QUESTION_QNUMBER") %></th>
 					</tr>
 					<tr>
 						<th scope="row">
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="radio"
 									name="inlineRadioBox1" id="inlineRadioBox1" value="option1">
-								<label class="form-check-label" for="inlineRadioBox1">1.안녕</label>
+								<label class="form-check-label" for="inlineRadioBox1">1.<%=tmap.get("ONELINE_TEST_QUESTION_ANSWER1")%></label>
 							</div>
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="radio"
 									name="inlineRadioBox1" id="inlineRadioBox2" value="option2">
-								<label class="form-check-label" for="inlineRadioBox2">2.땡큐</label>
+								<label class="form-check-label" for="inlineRadioBox2">2.<%=tmap.get("ONELINE_TEST_QUESTION_ANSWER2")%></label>
 							</div>
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="radio"
 									name="inlineRadioBox1" id="inlineRadioBox3" value="option3">
-								<label class="form-check-label" for="inlineRadioBox3">3.니하오</label>
+								<label class="form-check-label" for="inlineRadioBox3">3.<%=tmap.get("ONELINE_TEST_QUESTION_ANSWER3")%></label>
 							</div>
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="radio"
 									name="inlineRadioBox1" id="inlineRadioBox4" value="option4">
-								<label class="form-check-label" for="inlineRadioBox4">4.헬로우</label>
+								<label class="form-check-label" for="inlineRadioBox4">4.<%=tmap.get("ONELINE_TEST_QUESTION_ANSWER4")%></label>
 							</div>
 						</th>
 					</tr>
-					<!-- 문제끝 -->
-					<!-- 문제시작 -->
-					<tr>
-						<th scope="row">문제2 : 아리가또는 뭔가?</th>
-					</tr>
-					<tr>
-						<th scope="row">
-							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio"
-									name="inlineRadioBox1" id="inlineRadioBox1" value="option1">
-								<label class="form-check-label" for="inlineRadioBox1">1.안녕</label>
-							</div>
-							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio"
-									name="inlineRadioBox1" id="inlineRadioBox2" value="option2">
-								<label class="form-check-label" for="inlineRadioBox2">2.땡큐</label>
-							</div>
-							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio"
-									name="inlineRadioBox1" id="inlineRadioBox3" value="option3">
-								<label class="form-check-label" for="inlineRadioBox3">3.니하오</label>
-							</div>
-							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio"
-									name="inlineRadioBox1" id="inlineRadioBox4" value="option4">
-								<label class="form-check-label" for="inlineRadioBox4">4.헬로우</label>
-							</div>
-						</th>
-					</tr>
-					<!-- 문제끝 -->
-					<!-- 문제시작 -->
-					<tr>
-						<th scope="row">문제3 : 아리가또는 뭔가?</th>
-					</tr>
-					<tr>
-						<th scope="row">
-							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio"
-									name="inlineRadioBox1" id="inlineRadioBox1" value="option1">
-								<label class="form-check-label" for="inlineRadioBox1">1.안녕</label>
-							</div>
-							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio"
-									name="inlineRadioBox1" id="inlineRadioBox2" value="option2">
-								<label class="form-check-label" for="inlineRadioBox2">2.땡큐</label>
-							</div>
-							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio"
-									name="inlineRadioBox1" id="inlineRadioBox3" value="option3">
-								<label class="form-check-label" for="inlineRadioBox3">3.니하오</label>
-							</div>
-							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio"
-									name="inlineRadioBox1" id="inlineRadioBox4" value="option4">
-								<label class="form-check-label" for="inlineRadioBox4">4.헬로우</label>
-							</div>
-						</th>
-					</tr>
-					<!-- 문제끝 -->
-					<!-- 문제시작 -->
-					<tr>
-						<th scope="row">문제4 : 아리가또는 뭔가?</th>
-					</tr>
-					<tr>
-						<th scope="row">
-							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio"
-									name="inlineRadioBox1" id="inlineRadioBox1" value="option1">
-								<label class="form-check-label" for="inlineRadioBox1">1.안녕</label>
-							</div>
-							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio"
-									name="inlineRadioBox1" id="inlineRadioBox2" value="option2">
-								<label class="form-check-label" for="inlineRadioBox2">2.땡큐</label>
-							</div>
-							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio"
-									name="inlineRadioBox1" id="inlineRadioBox3" value="option3">
-								<label class="form-check-label" for="inlineRadioBox3">3.니하오</label>
-							</div>
-							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio"
-									name="inlineRadioBox1" id="inlineRadioBox4" value="option4">
-								<label class="form-check-label" for="inlineRadioBox4">4.헬로우</label>
-							</div>
-						</th>
-					</tr>
-					<!-- 문제끝 -->
-					<!-- 문제시작 -->
-					<tr>
-						<th scope="row">문제5 : 아리가또는 뭔가?</th>
-					</tr>
-					<tr>
-						<th scope="row">
-							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio"
-									name="inlineRadioBox1" id="inlineRadioBox1" value="option1">
-								<label class="form-check-label" for="inlineRadioBox1">1.안녕</label>
-							</div>
-							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio"
-									name="inlineRadioBox1" id="inlineRadioBox2" value="option2">
-								<label class="form-check-label" for="inlineRadioBox2">2.땡큐</label>
-							</div>
-							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio"
-									name="inlineRadioBox1" id="inlineRadioBox3" value="option3">
-								<label class="form-check-label" for="inlineRadioBox3">3.니하오</label>
-							</div>
-							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio"
-									name="inlineRadioBox1" id="inlineRadioBox4" value="option4">
-								<label class="form-check-label" for="inlineRadioBox4">4.헬로우</label>
-							</div>
-						</th>
-					</tr>
+					<%} %>
 					<!-- 문제끝 -->
 				</tbody>
 			</table>
@@ -223,7 +128,12 @@
 			style="width: 100%; height: auto%; background-color: E8EBEE;">
 			<div style="text-align: center;">
 				<a href="#" button type="button" class="btn btn-primary mr-5">주관식
-					문제 다운로드</a>
+					문제 다운로드 + <%if(onlineTestList.get(0).get("OT.ONLINE_TEST_QUESTION_FILE")==null){
+						%> <%
+					}else{
+						onlineTestList.get(0).get("OT.ONLINE_TEST_QUESTION_FILE");
+					}
+					%></a>
 			</div>
 
 			<div class="col text-center">

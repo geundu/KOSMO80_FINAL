@@ -121,8 +121,19 @@ out.print("onlineCourseSize:" + onlineCourseSize);
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script>
 function tdClickEvent(course_number){
+	var $content = $('#content');
  	  console.log("tdClickEvent") 
  	  console.log("course_number : "+course_number);
+ 	 $.ajax({
+			type : 'get',
+			url : '/course/getLectureList?COURSE_NUMBER=' + course_number,
+			/* url:'pageContent/StuInfo/StuCourse.jsp', */
+			dataType : 'html',
+			success : function(data) {
+				$content.html(data).trigger("create");
+			}
+		});
+ 	  
  	}
    /* $(document).ready(function(){}); == $() */
    

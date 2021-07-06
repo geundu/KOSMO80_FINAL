@@ -1,9 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
 <%
 	request.setCharacterEncoding("utf-8");
 %>
+<%
+StringBuilder path = new StringBuilder(request.getContextPath());
+path.append("/");
+List<Map<String, Object>> lectureDetailList = null;
+lectureDetailList = (List<Map<String, Object>>) request.getAttribute("lectureDetail");
+int lectureDetailSize = 0;
+Map<String, Object> rmap = new HashMap<>();
+if (lectureDetailList != null) {
+	lectureDetailSize = lectureDetailList.size();
+	for (int i = 0; i < lectureDetailSize; i++) {
+		rmap = lectureDetailList.get(i);
+	}
+}
+out.print("lectureDetailSize:" + lectureDetailSize);
+%>
+<script>
+	console.log(
+<%=lectureDetailSize%>
+	);
+</script>
 
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5"> -->
@@ -59,9 +80,9 @@
 	<div class="container">
 		<div class="screen1"
 			style="width: 100%; height: auto%; background-color: ;">
-			<h3 style="text-align:center;">일본어 문화의 이해 <% %> <% %> 오리엔테이션</h3>
+			<h3 style="text-align:center;"><%=rmap.get("COURSE_NAME")%>-<%=rmap.get("LECTURE_NAME") %></h3>
 			<div class="col text-center" style="padding-bottom:10px;">
-				<button href="#" class="btn  btn-primary mr-5">피드백보내기</a>
+				<button class="btn  btn-primary mr-5" onClick="feedbackClickEvent()">피드백보내기</button>
 			</div>
 		</div>
 		<div class="screen2"
@@ -86,23 +107,11 @@
 		</div>
 	</div>
 </div>
-
-<script type="text/javascript">
-    $(window).resize(function () { resizeYoutube(); });
-    $(function () { resizeYoutube(); });
-    function resizeYoutube() { $("iframe").each(function () { if (/^https?:\/\/www.youtube.com\/embed\
-    		//g.test($(this).attr("src"))) { $(this).css("width", "100%"); $(this).css("height", Math.ceil(parseInt($(this).css("width")) * 480 / 854) + "px"); } }); }
-  </script>
-
 <script>
-    // Add the following code if you want the name of the file appear on select
-    $(".custom-file-input").on("change", function () {
-      var fileName = $(this).val().split("\\").pop();
-      $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-    });
-  </script>
-
-
+	function feedbackClickEvent(){
+		
+	}
+</script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="js/toggleAction.js"></script>
 <!--06/19  인터넷 강의 - 강좌 조회 끝-->

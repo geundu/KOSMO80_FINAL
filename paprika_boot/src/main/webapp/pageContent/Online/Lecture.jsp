@@ -1,9 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
 <%
 	request.setCharacterEncoding("utf-8");
 %>
+<%
+StringBuilder path = new StringBuilder(request.getContextPath());
+path.append("/");
+
+List<Map<String, Object>> lectureList = null;
+lectureList = (List<Map<String, Object>>) request.getAttribute("lectureList");
+int lectureListSize = 0;
+Map<String,Object> rmap = new HashMap<>();
+
+if (lectureList != null) {
+	lectureListSize = lectureList.size();
+	for(int i=0;i<lectureListSize;i++){
+    rmap = lectureList.get(i);
+	}
+}
+out.print("size:" + lectureListSize);
+%>
+<script>
+console.log(<%=lectureListSize%>);
+</script>
+
 
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5"> -->
@@ -92,93 +114,47 @@
 				<tr class="table table-bordered ">
 					<th scope="col"><a id="a_1" style="font-size: 1.2em;" href=#>순번</a></th>
 					<th scope="col"><a id="a_1" style="font-size: 1.2em;" href=#>강의제목</a></th>
-					<th scope="col"><a id="a_1" style="font-size: 1.2em;" href=#>비고</a></th>
+					<th scope="col"><a id="a_1" style="font-size: 1.2em;" href=#>강의번호</a></th>
 				</tr>
 
 			</thead>
 			<tbody class="table table-bordered ">
-				<tr>
-					<td>001</td>
-					<td>Otto</td>
-					<td>@mdo</td>
+			<%
+				for(int i =0 ; i < lectureListSize ; i++){
+					rmap = lectureList.get(i);
+				
+			%>
+				<tr onClick="lectureClickEvent(<%=rmap.get("ONLINE_LECTURE_NUMBER")%>)">
+					<td><%=rmap.get("ROWNUM") %></td>
+					<td><%=rmap.get("ONLINE_LECTURE_TITLE") %></td>
+					<td><%=rmap.get("ONLINE_LECTURE_NUMBER") %></td>
 				</tr>
-				<tr>
-					<td>002</td>
-					<td>Thornton</td>
-					<td>@fat</td>
-				</tr>
-				<tr>
-					<td>003</td>
-					<td>the Bird</td>
-					<td>@twitter</td>
-				</tr>
-				<tr>
-					<td>004</td>
-					<td>the Bird</td>
-					<td>@twitter</td>
-				</tr>
-				<tr>
-					<td>005</td>
-					<td>the Bird</td>
-					<td>@twitter</td>
-				</tr>
-				<tr>
-					<td>006</td>
-					<td>the Bird</td>
-					<td>@twitter</td>
-				</tr>
-				<tr>
-					<td>007</td>
-					<td>the Bird</td>
-					<td>@twitter</td>
-				</tr>
-				<tr>
-					<td>008</td>
-					<td>the Bird</td>
-					<td>@twitter</td>
-				</tr>
-				<tr>
-					<td>009</td>
-					<td>the Bird</td>
-					<td>@twitter</td>
-				</tr>
-				<tr>
-					<td>010</td>
-					<td>the Bird</td>
-					<td>@twitter</td>
-				</tr>
-				<tr>
-					<td>011</td>
-					<td>the Bird</td>
-					<td>@twitter</td>
-				</tr>
-				<tr>
-					<td>012</td>
-					<td>the Bird</td>
-					<td>@twitter</td>
-				</tr>
-				<tr>
-					<td>013</td>
-					<td>the Bird</td>
-					<td>@twitter</td>
-				</tr>
-				<tr>
-					<td>014</td>
-					<td>the Bird</td>
-					<td>@twitter</td>
-				</tr>
-				<tr>
-					<td>015</td>
-					<td>the Bird</td>
-					<td>@twitter</td>
-				</tr>
+			<%
+				}
+			%>
 			</tbody>
 		</table>
 	</div>
 </div>
-
-
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="js/toggleAction.js"></script>
+<script>
+	function lectureClickEvent(lecture_number){
+		var $content = $('#content');
+			console.log("lectureClickEvent");
+			console.log("lecture_number :"+lecture_number);
+		 	 $.ajax({
+					type : 'get',
+					url : '/course/getLectureDetail?ONLINE_LECTURE_NUMBER='+lecture_number+
+							'&STUDENT_NUMBER='+sid,
+					/* url:'pageContent/StuInfo/StuCourse.jsp', */
+					dataType : 'html',
+					success : function(data) {
+						$content.html(data).trigger("create");
+					}
+				});
+		
+	}
+</script>
 <!-- </div> -->
 <!-- Page Content end -->
