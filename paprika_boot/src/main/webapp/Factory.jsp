@@ -3,7 +3,7 @@
 <%
 request.setCharacterEncoding("utf-8");
 /* String sessionId = String.valueOf(session.getAttribute("STUDENT_NUMBER")); */
-String sessionId = "21915014";
+String sessionId = "13222001";
 %>
 <script>
 	let sid =

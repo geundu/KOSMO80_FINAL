@@ -72,11 +72,18 @@ out.print("onlineCourseSize:" + onlineCourseSize);
 				</tr>
 			</thead>
 			<tbody>
-				<%
+				<%-- <%
 				for (int i = 0; i <= onlineCourseSize + 1 / 4; i++) {
-				%>
+				%> --%>
+				<%
+         		for(int i=0; i < onlineCourseSize; i++){
+         		   if(i%4 == 0){
+       			%>
 				<tr class="table table-bordered">
-					<%
+		   <%
+            }
+         %>
+					<%-- <%
 					int length = 0;
 					if ((onlineCourseSize - i * 4) / 4 > 1) {
 						length = 4;
@@ -87,8 +94,10 @@ out.print("onlineCourseSize:" + onlineCourseSize);
 					}
 					for (int j = 0; j < length; j++) {
 						Map<String, Object> tmap = onlineCourseList.get(j + 4 * i);
-					%>
-					<td scope="row" style="width: 25%;" id="CourseDashBoard<%=i+""+j%>">
+					%> --%>
+					<%-- <td scope="row" style="width: 25%;" id="CourseDashBoard<%=i+""+j%>"> --%>
+					<%Map<String, Object> tmap = onlineCourseList.get(i); %>
+					<td scope="row" style="width: 25%;" id="CourseDashBoard<%=i%>" onClick="tdClickEvent(<%=tmap.get("COURSE_NUMBER")%>)">
 						<div class="card text-white bg-teamcolor mb-3"
 							style="max-width: 100%;">
 							<div class="card-header h6"><%=tmap.get("SUBJECT_NAME")%></div>
@@ -96,7 +105,7 @@ out.print("onlineCourseSize:" + onlineCourseSize);
 								<h5 class="card-title">
 									교수명 :
 									<%=tmap.get("PROFESSOR_NAME")%></h5>
-								<p class="card-text"><%=tmap.get("COURSE_NUMBER")%>
+								<p class="card-text"><%=tmap.get("COURSE_CONTENT")%>
 								</p>
 							</div>
 						</div>
@@ -105,19 +114,20 @@ out.print("onlineCourseSize:" + onlineCourseSize);
 					}
 					%>
 				</tr>
-				<%
-				}
-				%>
-
 			</tbody>
 		</table>
 	</div>
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script>
+function tdClickEvent(course_number){
+ 	  console.log("tdClickEvent") 
+ 	  console.log("course_number : "+course_number);
+ 	}
    /* $(document).ready(function(){}); == $() */
    
    $(window).on('load',function(){
+   /* $(function(){   */
 	   'use strict';
 	   var $content = $('#content');
 	   function initCourseAjax() {
@@ -134,7 +144,7 @@ out.print("onlineCourseSize:" + onlineCourseSize);
 	         });
 	         return false;
 	      }
-	   initCourseAjax();
+	   initCourseAjax();	
    });
    
    
@@ -144,8 +154,8 @@ out.print("onlineCourseSize:" + onlineCourseSize);
     	 initClickEvent();
       });
       
-
-      <%
+     
+<%--       <%
 		for (int i = 0; i <= onlineCourseSize + 1 / 4; i++) {
 			%>
 				<%
@@ -167,12 +177,12 @@ out.print("onlineCourseSize:" + onlineCourseSize);
 					console.log(<%=""+i+""+j%>);
 				}
 				<%}%>
-		<%}%>
+		<%}%> --%>
       
       
       
-      function initClickEvent(){
-    	  <%
+     function initClickEvent(){
+    	  <%--  <%
 			for (int i = 0; i <= onlineCourseSize + 1 / 4; i++) {
 				%>
 					<%
@@ -191,7 +201,7 @@ out.print("onlineCourseSize:" + onlineCourseSize);
 					$()
 					
 					<%}%>
-			<%}%>
+			<%}%> --%>
       }
    });
 </script>
