@@ -29,9 +29,9 @@ out.print("onlineCourseSize:" + onlineCourseSize);
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5"> -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<div class="container-fluid" stlye="float:left;">
+	<div class="container-fluid" style="float:left;">
 
-		<button type="button" id="sidebarCollapse" class="btn btn-primary">
+		<button type="button" id="sidebarCollapse" class="btn btn-primary ">
 			<i class="fa fa-bars"></i> <span class="sr-only">토글 버튼 위치(글씨출력
 				x)</span>
 		</button>
@@ -49,10 +49,7 @@ out.print("onlineCourseSize:" + onlineCourseSize);
 				<!-- 현재보고있는 nav item은 calss active를 줄것. -->
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a
-							onClick="window.location.reload()">Pprk.Main()</a></li>
-						<li class="breadcrumb-item active" aria-current="page">e-Learning</li>
-						<li class="breadcrumb-item active" aria-current="page">DashBoard</li>
+						<li class="breadcrumb-item"><a onClick="window.location.reload()" style="color: #5BB04F">DashBoard(강좌) in 'e-Learning'</a></li>
 					</ol>
 				</nav>
 		</div>

@@ -46,12 +46,9 @@ out.print("onlineTestListSize:" + onlineTestListSize);
 				<!-- 현재보고있는 nav item은 calss active를 줄것. -->
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a
-							onClick="window.location.reload()">Pprk.Main()</a></li>
-						<li class="breadcrumb-item active" aria-current="page">e-Learning</li>
-						<li class="breadcrumb-item active" aria-current="page">DashBoard</li>
-						<li class="breadcrumb-item active" aria-current="page">강좌조회</li>
-						<li class="breadcrumb-item active" aria-current="page">시험응시</li>
+						<li class="breadcrumb-item"><a onClick="window.location.reload()" style="color:'white'">DashBoard(강좌) in 'e-Learning'</a></li>
+						<li class="breadcrumb-item"><a onClick="window.location.reload()" style="color:'white'">강의목록</a></li>
+						<li class="breadcrumb-item active" aria-current="page" style="color: #5BB04F" >시험응시</li>
 					</ol>
 
 				</nav>

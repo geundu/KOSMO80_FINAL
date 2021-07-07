@@ -13,11 +13,11 @@
 	</h4>
 	<ul class="list-unstyled components mb-5">
 		<!--scroll1 시작-->
-<!-- 		<li class="active"><a id="sideButton_1_0" href=""> <i
+ 		<li class="active"><a href="./MainPage.jsp"> <i
 				class="fa fa-calendar"></i> Pprk.Main()
 		</a>
 			<ul class="collapse__menu">
-			</ul></li> -->
+			</ul></li> 
 		<!--scroll1 끝-->
 			<!--scroll6시작-->
 	<li class="active"><a id="sideButton_6_0_2" href="#scroll6"

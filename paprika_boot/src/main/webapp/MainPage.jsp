@@ -49,11 +49,6 @@ String sid = String.valueOf(session.getAttribute("STUDENT_NUMBER"));
 	<script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 
-	<!-- <script src="js/popper.js"></script> -->
-	<!-- <script type="module" src="js/main.js"></script> -->
-	<!-- <script src="js/toggleAction.js"></script>  -->
-	<!-- <script src="js/jspInclude.js"></script> -->
-	<script src="js/menuTemplate.js"></script>
 	<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
 	<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">

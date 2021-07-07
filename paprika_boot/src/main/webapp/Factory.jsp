@@ -258,8 +258,10 @@ String sessionId = "21915014";
 		function onClickMenu8_0(e) {
 			console.log('onClickMenu8_0');
 			e.preventDefault();
-			$(location).attr('href', './ProPeoplePage.jsp')
-		}
+			$(location).attr('href', './ProPeoplePage.jsp').queue(function() {
+		});
+			return false;
+		 }
 		function onClickMenu8_1(e) {
 			console.log('onClickMenu8_1');
 			e.preventDefault();

@@ -8,8 +8,9 @@
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5"> -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<div class="container-fluid" stlye="float:left;">
-		<button type="button" id="sidebarCollapse" class="btn btn-primary">
+	<div class="container-fluid" style="float:left;">
+
+		<button type="button" id="sidebarCollapse" class="btn btn-primary ">
 			<i class="fa fa-bars"></i> <span class="sr-only">토글 버튼 위치(글씨출력
 				x)</span>
 		</button>

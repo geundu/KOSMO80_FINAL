@@ -49,12 +49,9 @@ out.print("lectureDetailSize:" + lectureDetailSize);
 				<!-- 현재보고있는 nav item은 calss active를 줄것. -->
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a
-							onClick="window.location.reload()">Pprk.Main()</a></li>
-						<li class="breadcrumb-item active" aria-current="page">e-Learning</li>
-						<li class="breadcrumb-item active" aria-current="page">DashBoard</li>
-						<li class="breadcrumb-item active" aria-current="page">강좌조회</li>
-						<li class="breadcrumb-item active" aria-current="page">강좌시청</li>
+						<li class="breadcrumb-item"><a onClick="window.location.reload()" style="color:'white'">DashBoard(강좌) in 'e-Learning'</a></li>
+						<li class="breadcrumb-item"><a onClick="window.location.reload()" style="color:'white'">강의목록</a></li>
+						<li class="breadcrumb-item active" aria-current="page" style="color: #5BB04F" >강좌시청</li>
 					</ol>
 
 				</nav>
@@ -80,13 +77,13 @@ out.print("lectureDetailSize:" + lectureDetailSize);
 	<div class="container">
 		<div class="screen1"
 			style="width: 100%; height: auto%; background-color: ;">
-			<h3 style="text-align:center;"><%=rmap.get("COURSE_NAME")%>-<%=rmap.get("LECTURE_NAME") %></h3>
+			<h3 style="text-align:center;">강의<%=rmap.get("COURSE_NAME")%>-강좌<%=rmap.get("LECTURE_NAME") %></h3>
 			<div class="col text-center" style="padding-bottom:10px;">
 				<button class="btn  btn-primary mr-5" onClick="feedbackClickEvent()">피드백보내기</button>
 			</div>
 		</div>
 		<div class="screen2"
-			style="width: 100%; height: 90%; background-color: ;">
+			style="width: 100%; height: 80%; background-color: ;">
 			<div class="col text-center">
 				<iframe width="854" height="480"
 					src="https://www.youtube.com/embed/RD0OOKdUJTw" frameborder="0"

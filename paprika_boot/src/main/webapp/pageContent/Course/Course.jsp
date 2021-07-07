@@ -129,7 +129,7 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 <% } else {%>
 <select class="custom-select" style="width:auto;" id="CourseSelect03">
 <% }%>
-				<option selected>⇓대학⇓</option>
+				<option selected>대학</option>
 			<%
 				for(int i=0; i< cbxCollegeSize ; i++){
 						Map<String, Object> rmap = cbxMapList.get("collegeList").get(i);
@@ -232,7 +232,7 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 			<table class="table table-bordered" id="CourseTable2">
 				<thead class="thead-team">
 					<tr>
-						<th scope="col">순번</th>
+<!-- 						<th scope="col">순번</th>
 						<th scope="col">과목코드</th>
 						<th scope="col">과목명</th>
 						<th scope="col">이러닝여부</th>
@@ -241,7 +241,7 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 						<th scope="col">개설학과</th>
 						<th scope="col">대상학년</th>
 						<th scope="col">시간표</th>
-						<th scope="col">책임교수</th>
+						<th scope="col">책임교수</th> -->
 					</tr>
 				</thead>
 				<tbody>
@@ -265,15 +265,22 @@ $(function() {
 	
 	
 	function CourseSearchButtonClick(){
+		selectedOption03 = '<%=request.getParameter("CBX_COLLEGE_NAME")%>'
 		console.log('CourseSearchButtonClick');
+		if(selectedOption04===undefined){selectedOption04='학부';}
+		if(selectedOption05===undefined){selectedOption05='학과';}
+		console.log(selectedOption03);
 		console.log(selectedOption04);
 		console.log(selectedOption05);
 			if(selectedOption04!=='학부'){
 				selectedOption03=selectedOption04;
 			}
-			if(!selectedOption05!=='학과'){
+			if(selectedOption05!=='학과'){
 				selectedOption03=selectedOption05;
 			}
+			if(selectedOption06===undefined){selectedOption06='0';}
+			if(selectedOption07===undefined){selectedOption07='전체';}
+			if(selectedOption02===undefined){selectedOption02='전체';}
 		console.log(selectedOption03+selectedOption06+selectedOption07+selectedOption02)
 		$CourseTable2.bootstrapTable('destroy')
 		$CourseTable2.bootstrapTable({
