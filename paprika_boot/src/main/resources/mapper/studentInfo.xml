@@ -15,7 +15,8 @@
 		{CALL PROC_STU_TOTAL_INFO(#{STUDENT_NUMBER}, #{cursor, jdbcType=CURSOR,	mode=OUT, resultMap=testMap})}
 	</select>
 	<select id="studentInfoUpdate" parameterType="map" statementType="CALLABLE">
-		{CALL PROC_PRO_STUDENT_CUD(#{TR_CODE},#{STUDENT_NAME},#{STUDENT_ENG_NAME},#{STUDENT_PHONE},#{COLLEGE_NUMBER},#{STUDENT_ENTER_YEAR},#{STUDENT_EMAIL},#{STUDENT_BIRTH},#{GUARDIAN_NAME},#{GUARDIAN_PHONE},#{MEMO},#{STUDENT_NUMBER},#{REGISTER_NUMBER})}
+		{CALL PROC_PRO_STUDENT_CUD(#{STU_OR_PRO},#{TR_CODE},#{STUDENT_NAME},#{STUDENT_ENG_NAME},#{STUDENT_PHONE},#{COLLEGE_NUMBER},#{STUDENT_ENTER_YEAR},#{STUDENT_EMAIL},#{STUDENT_BIRTH},#{GUARDIAN_NAME},#{GUARDIAN_PHONE},#{MEMO},#{STUDENT_NUMBER},#{REGISTER_NUMBER},
+		#{PEXCEP, mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String},#{PEXCEPMSG, mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String})}
 	</select>
 
 	<select id="getRegisterRecord" parameterType="map" statementType="CALLABLE">

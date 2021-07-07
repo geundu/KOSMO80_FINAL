@@ -3,16 +3,16 @@ package kr.ac.paprika.boot.mvc;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class StudentInfoLogic {
-	@Autowired
-	private StudentInfoDao	studentInfoDao	= null;
-	Logger					logger			= LogManager.getLogger(StudentInfoLogic.class);
+
+	private final StudentInfoDao studentInfoDao;
+
+	public StudentInfoLogic(StudentInfoDao studentInfoDao) {
+		this.studentInfoDao = studentInfoDao;
+	}
 
 	/**
 	 * 신상정보조회 메서드
@@ -21,12 +21,10 @@ public class StudentInfoLogic {
 	 * @return
 	 */
 	public List<Map<String, Object>> getStudentInfo(Map<String, Object> pMap) {
-		logger.info("StudentInfoLogic ==> getStudentInfo() 호출 성공");
-		List<Map<String, Object>> studentList = null;
-		studentList = studentInfoDao.getStudentInfo(pMap);
+		List<Map<String, Object>> studentList = studentInfoDao.getStudentInfo(pMap);
 
 		return studentList;
-	}// http://localhost:8000/paprika/getStudentInfo.do?STUDENT_NUMBER=15722001
+	}
 
 	/**
 	 * 신상정보수정 메서드
@@ -35,9 +33,14 @@ public class StudentInfoLogic {
 	 * @return
 	 */
 	public int studentInfoUpdate(Map<String, Object> pMap) {
-		logger.info("StudentInfoLogic ==> studentInfoUpdate() 호출 성공");
 		int result = 0;
-		result = studentInfoDao.studentInfoUpdate(pMap);
+
+		try {
+			result = studentInfoDao.studentInfoUpdate(pMap);
+		}
+		catch (Exception e) {
+			result = -1;
+		}
 		return result;
 	}
 
@@ -48,12 +51,10 @@ public class StudentInfoLogic {
 	 * @return
 	 */
 	public List<Map<String, Object>> getRegisterRecord(Map<String, Object> pMap) {
-		logger.info("StudentInfoLogic ==> getRegisterRecord() 호출 성공");
-		List<Map<String, Object>> registerRecordList = null;
-		registerRecordList = studentInfoDao.getRegisterRecord(pMap);
+		List<Map<String, Object>> registerRecordList = studentInfoDao.getRegisterRecord(pMap);
 
 		return registerRecordList;
-	}// http://localhost:8000/paprika/getRegisterRecord.do?STUDENT_NUMBER=15722001
+	}
 
 	/**
 	 * 수강목록 조회 메서드 콤보박스 체크 시 이전 학기 수강목록 조회 가능
@@ -62,8 +63,7 @@ public class StudentInfoLogic {
 	 * @return
 	 */
 	public List<Map<String, Object>> getCourseHistory(Map<String, Object> pMap) {
-		List<Map<String, Object>> cbBoxCourseHistory = null;
-		cbBoxCourseHistory = studentInfoDao.getCourseHistory(pMap);
+		List<Map<String, Object>> cbBoxCourseHistory = studentInfoDao.getCourseHistory(pMap);
 		return cbBoxCourseHistory;
 	}
 
@@ -74,9 +74,7 @@ public class StudentInfoLogic {
 	 * @return
 	 */
 	public List<Map<String, Object>> jsonGetCourseHistory(Map<String, Object> pMap) {
-		logger.info("StudentInfoLogic ==> jsonGetCourseHistory() 호출 성공");
-		List<Map<String, Object>> courseHistoryList = null;
-		courseHistoryList = studentInfoDao.jsonGetCourseHistory(pMap);
+		List<Map<String, Object>> courseHistoryList = studentInfoDao.jsonGetCourseHistory(pMap);
 
 		return courseHistoryList;
 	}
@@ -88,9 +86,7 @@ public class StudentInfoLogic {
 	 * @return
 	 */
 	public List<Map<String, Object>> getGradeHistory(Map<String, Object> pMap) {
-		logger.info("StudentInfoLogic ==> getGradeHistory() 호출 성공");
-		List<Map<String, Object>> gradeHistoryList = null;
-		gradeHistoryList = studentInfoDao.getGradeHistory(pMap);
+		List<Map<String, Object>> gradeHistoryList = studentInfoDao.getGradeHistory(pMap);
 
 		return gradeHistoryList;
 	}
@@ -102,9 +98,7 @@ public class StudentInfoLogic {
 	 * @return
 	 */
 	public List<Map<String, Object>> jsonGetGradeHistoryDetail(Map<String, Object> pMap) {
-		logger.info("StudentInfoLogic ==> getGradeHistoryDetail() 호출 성공");
-		List<Map<String, Object>> gradeHistoryDetail = null;
-		gradeHistoryDetail = studentInfoDao.jsonGetGradeHistoryDetail(pMap);
+		List<Map<String, Object>> gradeHistoryDetail = studentInfoDao.jsonGetGradeHistoryDetail(pMap);
 
 		return gradeHistoryDetail;
 	}
@@ -116,12 +110,10 @@ public class StudentInfoLogic {
 	 * @return
 	 */
 	public List<Map<String, Object>> getTuition(Map<String, Object> pMap) {
-		logger.info("StudentInfoLogic ==> getTuition() 호출 성공");
-		List<Map<String, Object>> cbBoxGetTuition = null;
-		cbBoxGetTuition = studentInfoDao.getTuition(pMap);
+		List<Map<String, Object>> cbBoxGetTuition = studentInfoDao.getTuition(pMap);
 		return cbBoxGetTuition;
-	}// http://localhost:8000/paprika/getTuition.do?STUDENT_NUMBER=13222001&SEMESTER=2013-1
-	
+	}
+
 	/**
 	 * 등록금 조회 메서드
 	 * 
@@ -129,10 +121,8 @@ public class StudentInfoLogic {
 	 * @return
 	 */
 	public List<Map<String, Object>> jsonGetTuitionHistory(Map<String, Object> pMap) {
-		logger.info("StudentInfoLogic ==> jsonGetTuitionHistory() 호출 성공");
-		List<Map<String, Object>> jsonGetTuitionHistory = null;
-		jsonGetTuitionHistory = studentInfoDao.jsonGetTuitionHistory(pMap);
+		List<Map<String, Object>> jsonGetTuitionHistory = studentInfoDao.jsonGetTuitionHistory(pMap);
 
 		return jsonGetTuitionHistory;
-	}// http://localhost:8000/paprika/getTuition.do?STUDENT_NUMBER=13222001&SEMESTER=2013-1
+	}
 }

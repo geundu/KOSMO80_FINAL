@@ -1,29 +1,33 @@
 package kr.ac.paprika.boot.mvc;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class MeetingRoomDao {
-	@Autowired
-	private SqlSessionTemplate	sqlSessionTemplate	= null;
-	Logger						logger				= LogManager.getLogger(MeetingRoomDao.class);
+
+	private final SqlSessionTemplate sqlSessionTemplate;
+
+	public MeetingRoomDao(SqlSessionTemplate sqlSessionTemplate) {
+		this.sqlSessionTemplate = sqlSessionTemplate;
+	}
 
 	/**
-	 * 회의실정보조회 메서드(예약하려면 회의실 현황 불러와야 하므로)
+	 * 회의실정보조회 메서드
 	 * 
 	 * @param pMap
 	 * @return
 	 */
-	public List<Map<String, Object>> getMeetingRoomList(Map<String, Object> pMap) {
+	public List<Map<String, Object>> getMeetingRoomList() {
+		Map<String, Object> pMap = new HashMap<String, Object>();
+		sqlSessionTemplate.selectList("getMeetingRoomList", pMap);
+		List<Map<String, Object>> meetingRoomList = (List<Map<String, Object>>) pMap.get("cursor");
+		return meetingRoomList;
 
-		return null;
 	}
 
 	/**
@@ -33,8 +37,9 @@ public class MeetingRoomDao {
 	 * @return
 	 */
 	public int meetingRoomInsert(Map<String, Object> pMap) {
-
-		return 0;
+		sqlSessionTemplate.insert("meetingRoomCUD", pMap);
+		int result = Integer.parseInt((String) pMap.get("PEXCEP"));
+		return result;
 	}
 
 	/**
@@ -44,8 +49,9 @@ public class MeetingRoomDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> getMyBookingList(Map<String, Object> pMap) {
-
-		return null;
+		sqlSessionTemplate.selectList("getMyBookingList", pMap);
+		List<Map<String, Object>> myMeetingRoomList = (List<Map<String, Object>>) pMap.get("cursor");
+		return myMeetingRoomList;
 	}
 
 	/**
@@ -54,8 +60,10 @@ public class MeetingRoomDao {
 	 * @param pMap
 	 * @return
 	 */
-	public int bookingDelete(Map<String, Object> pMap) {
 
-		return 0;
+	public int bookingDelete(Map<String, Object> pMap) {
+		sqlSessionTemplate.insert("meetingRoomCUD", pMap);
+		int result = Integer.parseInt((String) pMap.get("PEXCEP"));
+		return result;
 	}
 }

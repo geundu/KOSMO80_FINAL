@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.ac.paprika.mybatis.mapper.meetingRoom">
+<mapper namespace="kr.ac.paprika.meetingRoom">
+	<resultMap type="java.util.Map" id="meetingRoomMap" />
 
+	<select id="getMeetingRoomList" parameterType="map" statementType="CALLABLE">
+		{CALL PROC_BOOKING_SELECT(#{cursor, jdbcType=CURSOR, mode=OUT, resultMap=meetingRoomMap})}
+	</select>
+	
+	<insert id="meetingRoomCUD" parameterType="map" statementType="CALLABLE">
+		{CALL PROC_BOOKING_CUD(#{TR_CODE},#{BOOKING_NUMBER},#{STUDENT_NUMBER},#{CONFERENCE_NUMBER},#{BOOKING_DATE},#{BOOKING_TIME}
+		,#{PEXCEP, mode=OUT, jdbcType=INTEGER, javaType=java.lang.String},#{PEXCEPMSG, mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String})}
+	</insert>
+	
+	<select id="getMyBookingList" parameterType="map" statementType="CALLABLE">
+		{CALL PROC_BOOKING_MYONE_SELECT(#{STUDENT_NUMBER},#{cursor, jdbcType=CURSOR, mode=OUT, resultMap=meetingRoomMap})}
+	</select>
 </mapper>
