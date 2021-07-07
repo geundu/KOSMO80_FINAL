@@ -20,8 +20,9 @@ public class OnlineTestDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> getOnlineTest(Map<String, Object> pMap) {
+		logger.info("getOnlineTest() 호출 성공");
 		List<Map<String, Object>> onlineTest = null;
-		onlineTest = sqlSessionTemplate.selectList("getLectureList", pMap);
+		onlineTest = sqlSessionTemplate.selectList("getOnlineTest", pMap);
 
 		return onlineTest;
 	}
@@ -33,17 +34,12 @@ public class OnlineTestDao {
 	 * @return
 	 */
 	public int answerInsert(Map<String, Object> pMap) {
-		int result = 0;
+		logger.info("answerInsert() 호출 성공");
+		int answerInsert = 0;
 
-		try {
-			sqlSessionTemplate.insert("answerInsert", pMap);
-			result = 1;
-		}
-		catch (Exception e) {
-			result = -1;
-		}
-
-		return result;
+		sqlSessionTemplate.insert("answerInsert", pMap);
+		answerInsert = Integer.parseInt((String) pMap.get("PEXCEP"));
+		return answerInsert;
 	}
 
 	/**
@@ -53,17 +49,12 @@ public class OnlineTestDao {
 	 * @return
 	 */
 	public int onlineTestInsert(Map<String, Object> pMap) {
-		int result = 0;
+		logger.info("onlineTestInsert() 호출 성공");
+		int onlineTestInsert = 0;
 
-		try {
-			sqlSessionTemplate.insert("onlineTestInsert", pMap);
-			result = 1;
-		}
-		catch (Exception e) {
-			result = -1;
-		}
-
-		return result;
+		sqlSessionTemplate.insert("onlineTestInsert", pMap);
+		onlineTestInsert = Integer.parseInt((String) pMap.get("PEXCEP"));
+		return onlineTestInsert;
 	}
 
 	/**
@@ -73,16 +64,11 @@ public class OnlineTestDao {
 	 * @return
 	 */
 	public int testGrading(Map<String, Object> pMap) {
-		int result = 0;
+		logger.info("testGrading() 호출 성공");
+		int testGrading = 0;
 
-		try {
-			sqlSessionTemplate.update("testGrading", pMap);
-			result = 1;
-		}
-		catch (Exception e) {
-			result = -1;
-		}
-
-		return result;
+		sqlSessionTemplate.update("testGrading", pMap);
+		testGrading = Integer.parseInt((String) pMap.get("PEXCEP"));
+		return testGrading;
 	}
 }
