@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
 
 @Controller
 @RequestMapping("/admin")
@@ -35,8 +38,10 @@ public class AdminController {
 
 		return "forward:../pageContent/ProPeople/Select.jsp";
 	}
+	
 	/**
 	 *관리자 - 학생, 교직원 조회 메서드
+	 *CALL PROC_PRO_PEOPLE_SELECT
 	 * @param req
 	 * @param pMap
 	 * @return "forward:/pageContent/Select.jsp";
@@ -50,6 +55,16 @@ public class AdminController {
 		memberList = adminLogic.getMemberList(pMap);
 		req.setAttribute("memberList", memberList);
 		return "forward:/pageContent/Select.jsp";
+	}
+	
+	@RequestMapping("/jsonGetMemberList")
+	public @ResponseBody String jsonGetMemberList(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
+		logger.info("AdminController ==> getMemberList() 호출 성공");
+		List<Map<String, Object>> memberList = null;
+		memberList = adminLogic.getMemberList(pMap);
+		Gson gson 		= new Gson();
+		String temp 	= gson.toJson(memberList);
+		return temp;
 	}
     
 	

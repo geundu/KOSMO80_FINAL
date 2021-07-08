@@ -25,7 +25,9 @@ public class AdminDao {
 	public List<Map<String, Object>> getCollegeList(Map<String, Object> pMap) {
 		logger.info("AdminDao ==> getCollegeList() 호출 성공");
 		List<Map<String, Object>> collegeList = null;
+		
 		collegeList = sqlSessionTemplate.selectList(NAMESPACE+"cbBoxCollege", pMap);
+		
 		logger.info(collegeList);
 
 		return collegeList;
@@ -40,6 +42,7 @@ public class AdminDao {
 	public List<Map<String, Object>> getDeptList(Map<String, Object> pMap) {
 		logger.info("AdminDao ==> getDeptList() 호출 성공");
 		List<Map<String, Object>> deptList = null;
+		logger.info(pMap);
 		deptList = sqlSessionTemplate.selectList(NAMESPACE+"cbBoxDept", pMap);
 		logger.info(deptList);
 
@@ -69,6 +72,7 @@ public class AdminDao {
 	public List<Map<String, Object>> getMemberList(Map<String, Object> pMap) {
 		logger.info("MemberDao ==> getMember() 호출 성공");
 		List<Map<String, Object>> memberList = null;
+		logger.info(pMap);
 		sqlSessionTemplate.selectList("getMember", pMap);
 		memberList = (List<Map<String, Object>>) pMap.get("cursor");
 		logger.info(memberList);

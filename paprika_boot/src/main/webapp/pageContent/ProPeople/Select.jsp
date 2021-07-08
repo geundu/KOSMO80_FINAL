@@ -9,6 +9,8 @@
 StringBuilder path = new StringBuilder(request.getContextPath());
 path.append("/");
 Map<String, List<Map<String, Object>>> cbxMapList = null;
+List<Map<String, Object>> SelectTableList = null;
+/* SelectTableList = (List<Map<String, Object>) reaquet.getAttribute(""); */
 cbxMapList = (Map<String, List<Map<String, Object>>>) request.getAttribute("cbxMapList");
 
 int cbxCollegeSize = 0;
@@ -97,7 +99,7 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 					<option>학생</option>
 				</select> 
 				<%if(cbxDeptSize > 0){  %>
-				<select class="custom-select form-control-sm" style="width: auto;" id="AdminSelectSelect03"
+				<select class="custom-select form-control-sm" style="width: auto;" id="AdminSelectSelect02"
 				value="<%=request.getParameter("CBX_COLLEGE_NAME")%>">>
 				<% } else {%>
 				<select class="custom-select" style="width:auto;" id="AdminSelectSelect02">
@@ -121,9 +123,9 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 				</select> 
 				
 			<%if(cbxMajorSize > 0){  %>
-<select class="custom-select" style="width:auto;" id="AdminSelectSelect03" value="<%=request.getParameter("CBX_DEPT_NAME")%>">
+<select class="custom-select" style="width:auto;" id="AdminSelectSelect03" value="<%=request.getParameter("DEPT_NAME")%>">
 <% } else {%>
-<select class="custom-select" style="width:auto;" id="adminSelectSelect03">
+<select class="custom-select" style="width:auto;" id="AdminSelectSelect03">
 <% }%>
 					<option selected>학부</option>
 									<%
@@ -177,6 +179,7 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 				</select> 
 				
 				<select class="custom-select form-control-sm" style="width: auto;" id="AdminSelectSelect05">
+					<option>전체</option>
 					<option>재학</option>
 					<option>휴학</option>
 					<option>졸업</option>
@@ -203,14 +206,14 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 				<span class="col-xs-2" style="text-aline: center; padding-left:25%;"> <input
 					class="form-control "
 					style="margin-right: 10px; text-aline: center;" type="text"
-					placeholder="이름" aria-label="Search">
+					placeholder="이름" aria-label="Search" id="selectName">
 
 				</span> <span class="col-xs-2"> <input class="form-control  "
 					style="margin-right: 10px;" type="text" placeholder="학번"
-					aria-label="Search">
+					aria-label="Search" id="selectNumber">
 				</span>
 				<button href="#" style="margin-right: 10px;"
-					class="btn btn-primary ">검색</button>
+					class="btn btn-primary " id="adminSelectSearchButton">검색</button>
 			</div>
 		</div>
 		<div class="screen2"
@@ -363,13 +366,99 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 			 console.log('readyEvent');
 			 initClickEvent();
 		});
-	var selectedOption01 = '구분';
+		
+	    function AdminSelectSearchButtonClick(){
+		selectedOption02 = '<%=request.getParameter("CBX_COLLEGE_NAME")%>'
+		console.log(selectedOption02);
+		console.log('AdminSelectSearchButtonClick');
+		if(selectedOption02===undefined||selectedOption02==='null')
+		{selectedOption02='전체';}
+		if(selectedOption03===undefined){selectedOption03='학부';}
+		if(selectedOption04===undefined){selectedOption04='학과';}
+		console.log(selectedOption02);
+		console.log(selectedOption03);
+		console.log(selectedOption04);
+		if(selectedOption03!=='학부'){
+			selectedOption02=selectedOption03;
+		}
+		if(selectedOption04!=='학과'){
+			selectedOption02=selectedOption04;
+		}
+		if(selectedOption01===undefined){selectedOption01='전체';}
+		if(selectedOption05===undefined){selectedOption05='전체';}
+		if(selectedOption06===undefined||selectedOption06==="입학년도"){selectedOption06='0';}
+		console.log(selectedOption02+selectedOption03+selectedOption05+selectedOption06)
+		var selectNumber = $('#selectNumber').val();
+		if(selectNumber===""||selectNumber===null){selectNumber='0';}
+		var selectName = $('#selectName').val();
+		if(selectName===undefined||selectName===null||selectName===""){selectName='전체';}
+		console.log(typeof(selectedOption01))
+		console.log(typeof(selectedOption02))
+		console.log(typeof(selectedOption03))
+		console.log(typeof(selectedOption04))
+		console.log(typeof(selectedOption05))
+		console.log(typeof(selectedOption06))
+		console.log(typeof(selectNumber))
+		
+		$.ajax({
+			type : 'get',
+			url : '/admin/jsonGetMemberList?PROFESSOR_OR_STUDENT='+selectedOption01+'&STATUS='
+			+selectedOption05+'&YEAR='+selectedOption06
+			+'&NUMBER='+selectNumber+'&NAME='+selectName
+			+'&COL='+selectedOption02,
+			dataType : 'html',
+			success : function(data){
+				$content.html(data).trigger("create");
+			}
+		});
+		return false;
+		
+		/* 
+	 	$AdminSelectTable.bootstrapTable('destroy')
+		$AdminSelectTable.bootstrapTable({
+			url:'/admin/getMemberList?PROFESSOR_OR_STUDENT='+selectedOption01+'&STATUS='
+					+selectedOption05+'&YEAR='+selectedOption06
+					+'&NUMBER='+selectNumber+'&NAME='+selectName
+					+'&COL='+selectedOption02,
+			columns: [{
+				field: 'REGNUM ',
+				title:'순번'
+			},{
+				field: 'STU_NO',
+				title:'학번'
+			},{
+				field: 'STU_OR_PRO',
+				title:'학생/교직원'
+			},{
+				field: 'STU_NAME',
+				title:'이름'
+			},{
+				field: 'STU_MAJOR',
+				title:'대학'
+			},{
+				field: 'STU_COL',
+				title:'학과'
+			},{
+				field: 'STU_DEPT',
+				title:'학부'
+			},{
+				field: 'STU_REGNAME',
+				title:'상태'
+			}
+		}] 
+		});
+		}
+		});
+		return false; */
+	}
+	let selectedOption01 = '구분';
 	var selectedOption02;
 	var selectedOption03;
 	var selectedOption04;
-	var selectedOption05 = '재학';
-	var selectedOption06 = '입학년도';
+	let selectedOption05 = '재학';
+	let selectedOption06 = '입학년도';
 	
+
 	$('#AdminSelectSelect01').on('change', function(e){
 		e.preventDefault();
 		console.log($(this).find("option:selected").val());
@@ -394,7 +483,7 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 		selectedOption06 = $('#AdminSelectSelect06').find("option:selected").val();
 			$.ajax({
 				type :'get',
-				url:'/admin/getAdminComboBox?COLLEGE_NAME='+selectedOption02,
+				url:'/admin/getAdminComboBox?CBX_COLLEGE_NAME='+selectedOption02,
 				dataType:'html',
 				success: function(data){
 					$('#content').html(data).trigger("create");
@@ -420,9 +509,10 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 		selectedOption04 = $('#AdminSelectSelect04').find("option:selected").val();
 		selectedOption05 = $('#AdminSelectSelect05').find("option:selected").val();
 		selectedOption06 = $('#AdminSelectSelect06').find("option:selected").val();
+		
 			$.ajax({
 				type :'get',
-				url:'/admin/getAdminComboBox?COLLEGE_NAME='+selectedOption03,
+				url:'/admin/getAdminComboBox?CBX_COLLEGE_NAME='+selectedOption02+'&CBX_DEPT_NAME='+selectedOption03,
 				dataType:'html',
 				success: function(data){
 					$('#content').html(data).trigger("create");
@@ -449,7 +539,7 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 		selectedOption06 = $('#AdminSelectSelect06').find("option:selected").val();
 		$.ajax({
 			type :'get',
-			url:'/curriculum/getOpenCourse?COLLEGE_NAME='+selectedOption03+'&'+'DEPT_NAME='+selectedOption04,
+			url:'/curriculum/getOpenCourse?CBX_COLLEGE_NAME='+selectedOption03+'&'+'CBX_DEPT_NAME='+selectedOption04,
 			dataType:'html',
 			success: function(data){
 				$('#content').html(data).trigger("create");
@@ -459,6 +549,7 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 		
 		function initClickEvent(){
 			console.log('initClickEvent');
+			 $('#adminSelectSearchButton').click(AdminSelectSearchButtonClick);
 			
 			
 			}

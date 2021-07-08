@@ -11,13 +11,13 @@
        SELECT COL2.COLLEGE_NAME, COL2.COLLEGE_NUMBER 
              FROM COLLEGE COL1, COLLEGE COL2
          WHERE COL2.COLLEGE_HIGHER = COL1.COLLEGE_NUMBER
-         AND COL1.COLLEGE_NAME = #{COLLEGE_NAME};
+         AND COL1.COLLEGE_NAME = #{CBX_COLLEGE_NAME}
    </select>
    <select id="cbBoxMajor"  parameterType="string" resultType="map">
        SELECT COL2.COLLEGE_NAME, COL2.COLLEGE_NUMBER 
                 FROM COLLEGE COL1, COLLEGE COL2
             WHERE COL2.COLLEGE_HIGHER = COL1.COLLEGE_NUMBER
-            AND COL1.COLLEGE_NAME = #{DEPT_NAME};
+            AND COL1.COLLEGE_NAME = #{CBX_DEPT_NAME}
    </select>
 	<select id="getMember" parameterType="map"
 		statementType="CALLABLE">

@@ -383,7 +383,6 @@ $(function() {
 	selectedOption07 = $('#CourseSelect07').find("option:selected").val();
 		$.ajax({
 			type :'get',
-// 			/* url:'pageContent/Course/Course.jsp', */
 			url:'/curriculum/getOpenCourse?CBX_COLLEGE_NAME='+selectedOption03,
 			dataType:'html',
 			success: function(data){

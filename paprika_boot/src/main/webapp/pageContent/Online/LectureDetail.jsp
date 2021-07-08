@@ -77,7 +77,7 @@ out.print("lectureDetailSize:" + lectureDetailSize);
 	<div class="container">
 		<div class="screen1"
 			style="width: 100%; height: auto%; background-color: ;">
-			<h3 style="text-align:center;">강의<%=rmap.get("COURSE_NAME")%>-강좌<%=rmap.get("LECTURE_NAME") %></h3>
+			<h3 style="text-align:center;">강의<%=rmap.get("COURSE_NAME")%>-<%=rmap.get("ONLINE_LECTURE_TITLE") %></h3>
 			<div class="col text-center" style="padding-bottom:10px;">
 				<button class="btn  btn-primary mr-5" onClick="feedbackClickEvent()">피드백보내기</button>
 			</div>
