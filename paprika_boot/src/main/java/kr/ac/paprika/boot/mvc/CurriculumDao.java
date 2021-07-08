@@ -14,6 +14,7 @@ public class CurriculumDao {
 	@Autowired
 	private SqlSessionTemplate	sqlSessionTemplate	= null;
 	Logger						logger				= LogManager.getLogger(CurriculumController.class);
+	private static final String	NAMESPACE	= "kr.ac.paprika.curriculum.";
 
 	/**
 	 * 대학단위 리스트 콤보박스
@@ -24,7 +25,7 @@ public class CurriculumDao {
 	public List<Map<String, Object>> getCollegeList(Map<String, Object> pMap) {
 		logger.info("CurriculumDao ==> getCollegeList() 호출 성공");
 		List<Map<String, Object>> collegeList = null;
-		collegeList = sqlSessionTemplate.selectList("cbBoxCollege", pMap);
+		collegeList = sqlSessionTemplate.selectList(NAMESPACE+"cbBoxCollege", pMap);
 		logger.info(collegeList);
 
 		return collegeList;
@@ -39,7 +40,7 @@ public class CurriculumDao {
 	public List<Map<String, Object>> getDeptList(Map<String, Object> pMap) {
 		logger.info("CurriculumDao ==> getDeptList() 호출 성공");
 		List<Map<String, Object>> deptList = null;
-		deptList = sqlSessionTemplate.selectList("cbBoxDept", pMap);
+		deptList = sqlSessionTemplate.selectList(NAMESPACE+"cbBoxDept", pMap);
 		logger.info(deptList);
 
 		return deptList;
@@ -54,7 +55,7 @@ public class CurriculumDao {
 	public List<Map<String, Object>> getMajorList(Map<String, Object> pMap) {
 		logger.info("CurriculumDao ==> getMajorList() 호출 성공");
 		List<Map<String, Object>> majorList = null;
-		majorList = sqlSessionTemplate.selectList("cbBoxMajor", pMap);
+		majorList = sqlSessionTemplate.selectList(NAMESPACE+"cbBoxMajor", pMap);
 		logger.info(majorList);
 
 		return majorList;
@@ -69,7 +70,7 @@ public class CurriculumDao {
 	public List<Map<String, Object>> getDivisionList(Map<String, Object> pMap) {
 		logger.info("CurriculumDao ==> getDivisionList() 호출 성공");
 		List<Map<String, Object>> divisionList = null;
-		divisionList = sqlSessionTemplate.selectList("cbBoxDivision", pMap);
+		divisionList = sqlSessionTemplate.selectList(NAMESPACE+"cbBoxDivision", pMap);
 		logger.info(divisionList);
 
 		return divisionList;

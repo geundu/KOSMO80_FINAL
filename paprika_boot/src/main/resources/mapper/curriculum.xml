@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.ac.paprika.mybatis.mapper.curriculum">
+<mapper namespace="kr.ac.paprika.curriculum">
 	<resultMap type="java.util.Map" id="courseMap" />
 	<!-- ============================ 강좌조회 - 개설강좌조회 콤보박스 DML 시작 ============================= -->
 	<select id="cbBoxCollege" resultType="map">

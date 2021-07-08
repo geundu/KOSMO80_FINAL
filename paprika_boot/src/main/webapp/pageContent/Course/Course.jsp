@@ -326,7 +326,7 @@ $(function() {
 		return false;
 	}
 	
-	var selectedOption01;
+	let selectedOption01 = '개설년도-학기';
 	let selectedOption02 = '전체';
 	var selectedOption03;
 	var selectedOption04;
@@ -334,56 +334,18 @@ $(function() {
 	let selectedOption06 = '0';
 	let selectedOption07 = '전체';
 	
-	$.cookie('selectItem01','00');
-	$.cookie('selectItem02','00');
-	$.cookie('selectItem06','00');
-	$.cookie('selectItem07','00');
-	
-	$.removeCookie('selectItem01');
-	$.removeCookie('selectItem02');
-	$.removeCookie('selectItem06');
-	$.removeCookie('selectItem07');
-	$('#CourseSelect00').on('change', function(e){
-		e.preventDefault();
-		console.log($(this).find("option:selected").val());
-		$.removeCookie('selectItem00'); 
-		selectedOption00 = $(this).find("option:selected").val();
-		$.cookie('selectItem00',selectedOption00);
-		
-		selectedOption01 = $('#CourseSelect01').find("option:selected").val();
-		selectedOption01 = $.cookie('selectItem01');
-		selectedOption02 = $('#CourseSelect02').find("option:selected").val();
-		selectedOption02 = $.cookie('selectItem02');
-		
-		selectedOption03 = $('#CourseSelect03').find("option:selected").val();
-		selectedOption04 = $('#CourseSelect04').find("option:selected").val();
-		selectedOption05 = $('#CourseSelect05').find("option:selected").val();
-		selectedOption05 = $.cookie('selectItem05');
-		
-		selectedOption06 = $('#CourseSelect06').find("option:selected").val();
-		selectedOption06 = $.cookie('selectItem06');
-		selectedOption07 = $('#CourseSelect07').find("option:selected").val();
-		selectedOption07 = $.cookie('selectItem07');
-		
-	});
-	
 	$('#CourseSelect01').on('change', function(e){
 		e.preventDefault();
 		console.log($(this).find("option:selected").val());
-		$.removeCookie('selectItem01'); 
 		selectedOption01 = $(this).find("option:selected").val();
-		$.cookie('selectItem01',selectedOption01);
 		selectedOption02 = $('#CourseSelect02').find("option:selected").val();
-		selectedOption02 = $.cookie('selectItem02');
 		
 		selectedOption03 = $('#CourseSelect03').find("option:selected").val();
 		selectedOption04 = $('#CourseSelect04').find("option:selected").val();
 		selectedOption05 = $('#CourseSelect05').find("option:selected").val();
 		
 		selectedOption06 = $('#CourseSelect06').find("option:selected").val();
-		selectedOption06 = $.cookie('selectItem06');
 		selectedOption07 = $('#CourseSelect07').find("option:selected").val();
-		selectedOption07 = $.cookie('selectItem07');
 		
 	});
 	
@@ -392,9 +354,7 @@ $(function() {
 		console.log($(this).find("option:selected").val());
 		selectedOption01 = $('#CourseSelect01').find("option:selected").val();
 		selectedOption01 = $.cookie('selectItem01');
-		$.removeCookie('selectItem02'); 
 		selectedOption02 = $(this).find("option:selected").val();
-		$.cookie('selectItem02',selectedOption02);
 		
 		selectedOption03 = $('#CourseSelect03').find("option:selected").val();
 		selectedOption04 = $('#CourseSelect04').find("option:selected").val();
@@ -413,20 +373,14 @@ $(function() {
 	console.log($(this).find("option:selected").val());
 
 	selectedOption01 = $('#CourseSelect01').find("option:selected").val();
-	selectedOption01 = $.cookie('selectItem01');
 	selectedOption02 = $('#CourseSelect02').find("option:selected").val();
-	selectedOption02 = $.cookie('selectItem02');
 	
 	selectedOption03 = $(this).find("option:selected").val();
 	selectedOption04 = $('#CourseSelect04').find("option:selected").val();
 	selectedOption05 = $('#CourseSelect05').find("option:selected").val();
 	
 	selectedOption06 = $('#CourseSelect06').find("option:selected").val();
-	selectedOption06 = $.cookie('selectItem06');
 	selectedOption07 = $('#CourseSelect07').find("option:selected").val();
-	selectedOption07 = $.cookie('selectItem07');
-	console.log("s1="+$.cookie('selectItem01')+"s2="+$.cookie('selectItem02')+"s6="
-			+$.cookie('selectItem06')+"s7="+$.cookie('selectItem07'));
 		$.ajax({
 			type :'get',
 // 			/* url:'pageContent/Course/Course.jsp', */
@@ -437,36 +391,28 @@ $(function() {
 		}
 		});
 		selectedOption01 = $('#CourseSelect01').find("option:selected").val();
-		selectedOption01 = $.cookie('selectItem01');
 		selectedOption02 = $('#CourseSelect02').find("option:selected").val();
-		selectedOption02 = $.cookie('selectItem02');
 		
 		selectedOption03 = $(this).find("option:selected").val();
 		selectedOption04 = $('#CourseSelect04').find("option:selected").val();
 		selectedOption05 = $('#CourseSelect05').find("option:selected").val();
 		
 		selectedOption06 = $('#CourseSelect06').find("option:selected").val();
-		selectedOption06 = $.cookie('selectItem06');
 		selectedOption07 = $('#CourseSelect07').find("option:selected").val();
-		selectedOption07 = $.cookie('selectItem07');
 	});
 	
 	$('#CourseSelect04').on('change', function(e){
 	e.preventDefault();
 	console.log($(this).find("option:selected").val());
 	selectedOption01 = $('#CourseSelect01').find("option:selected").val();
-	selectedOption01 = $.cookie('selectItem01');
 	selectedOption02 = $('#CourseSelect02').find("option:selected").val();
-	selectedOption02 = $.cookie('selectItem02');
 	
 	selectedOption03 = $('#CourseSelect03').find("option:selected").val();
 	selectedOption04 = $(this).find("option:selected").val();
 	selectedOption05 = $('#CourseSelect05').find("option:selected").val();
 	
 	selectedOption06 = $('#CourseSelect06').find("option:selected").val();
-	selectedOption06 = $.cookie('selectItem06');
 	selectedOption07 = $('#CourseSelect07').find("option:selected").val();
-	selectedOption07 = $.cookie('selectItem07');
 	$.ajax({
 		type :'get',
 		/* url:'pageContent/Course/Course.jsp', */
@@ -482,21 +428,15 @@ $(function() {
 		e.preventDefault();
 		console.log($(this).find("option:selected").val());
 		selectedOption01 = $('#CourseSelect01').find("option:selected").val();
-		selectedOption01 = $.cookie('selectItem01');
 		selectedOption02 = $('#CourseSelect02').find("option:selected").val();
-		selectedOption02 = $.cookie('selectItem02');
 		
 		selectedOption03 = $('#CourseSelect03').find("option:selected").val();
 		selectedOption04 = $('#CourseSelect04').find("option:selected").val();
 		
-		$.removeCookie('selectItem05'); 
 		selectedOption05 = $(this).find("option:selected").val();
-		$.cookie('selectItem05',selectedOption05);
 		
 		selectedOption06 = $('#CourseSelect06').find("option:selected").val();
-		selectedOption06 = $.cookie('selectItem06');
 		selectedOption07 = $('#CourseSelect07').find("option:selected").val();
-		selectedOption07 = $.cookie('selectItem07');
 	
 	
 	});
@@ -505,19 +445,14 @@ $(function() {
 		e.preventDefault();
 		console.log($(this).find("option:selected").val());
 		selectedOption01 = $('#CourseSelect01').find("option:selected").val();
-		selectedOption01 = $.cookie('selectItem01');
 		selectedOption02 = $('#CourseSelect02').find("option:selected").val();
-		selectedOption02 = $.cookie('selectItem02');
 		
 		selectedOption03 = $('#CourseSelect03').find("option:selected").val();
 		selectedOption04 = $('#CourseSelect04').find("option:selected").val();
 		selectedOption05 = $('#CourseSelect05').find("option:selected").val();
 		
-		$.removeCookie('selectItem6'); 
 		selectedOption06 = $(this).find("option:selected").val();
-		$.cookie('selectItem06',selectedOption06);
 		selectedOption07 = $('#CourseSelect07').find("option:selected").val();
-		selectedOption07 = $.cookie('selectItem07');
 		
 		
 	});
@@ -525,19 +460,14 @@ $(function() {
 		e.preventDefault();
 		console.log($(this).find("option:selected").val());
 		selectedOption01 = $('#CourseSelect01').find("option:selected").val();
-		selectedOption01 = $.cookie('selectItem01');
 		selectedOption02 = $('#CourseSelect02').find("option:selected").val();
-		selectedOption02 = $.cookie('selectItem02');
 		
 		selectedOption03 = $('#CourseSelect03').find("option:selected").val();
 		selectedOption04 = $('#CourseSelect04').find("option:selected").val();
 		selectedOption05 = $('#CourseSelect05').find("option:selected").val();
 		
 		selectedOption06 = $('#CourseSelect06').find("option:selected").val();
-		selectedOption06 = $.cookie('selectItem06');
-		$.removeCookie('selectItem7'); 
 		selectedOption07 = $(this).find("option:selected").val();
-		$.cookie('selectItem07',selectedOption07);
 		
 		
 	});

@@ -3,7 +3,7 @@
 <%
 request.setCharacterEncoding("utf-8");
 /* String sessionId = String.valueOf(session.getAttribute("STUDENT_NUMBER")); */
-String sessionId = "21915014";
+String sessionId = "15521091";
 %>
 <script>
 	let sid =
@@ -12,7 +12,7 @@ String sessionId = "21915014";
 
 		'use strict';
 
-		$(document).ready(function() {
+// 		$(document).ready(function() {
 			console.log('readyEvent');
 			initClickEvent();
 		});
@@ -177,7 +177,7 @@ String sessionId = "21915014";
 			e.preventDefault();
 			$.ajax({
 				type : 'get',
-				url : 'pageContent/Online/Course.jsp',
+				/* url : 'pageContent/Online/Course.jsp', */
 				url : '/course/getOnlineCourseList?STUDENT_NUMBER=' + sid,
 				dataType : 'html',
 				success : function(data) {
@@ -267,7 +267,7 @@ String sessionId = "21915014";
 			e.preventDefault();
 			$.ajax({
 				type : 'get',
-				url : 'pageContent/ProPeople/Select.jsp',
+				url : '/admin/getAdminComboBox',
 				/* url:'pageContent/ProPeople/Select.jsp', */
 				dataType : 'html',
 				success : function(data) {
@@ -509,7 +509,6 @@ String sessionId = "21915014";
 			$('#sideButton_9_11').click(onClickMenu9_11);
 			$('#sideButton_9_12').click(onClickMenu9_12);
 
-		}
-
-	});
+		};
+	
 </script>

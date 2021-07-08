@@ -16,7 +16,50 @@ public class AdminDao {
 	Logger logger = LogManager.getLogger(AdminDao.class);
 	private static final String	NAMESPACE	= "kr.ac.paprika.admin.";
 
-	
+	/**
+	 * 대학단위 리스트 콤보박스
+	 * 
+	 * @param pMap
+	 * @return collegeList
+	 */
+	public List<Map<String, Object>> getCollegeList(Map<String, Object> pMap) {
+		logger.info("AdminDao ==> getCollegeList() 호출 성공");
+		List<Map<String, Object>> collegeList = null;
+		collegeList = sqlSessionTemplate.selectList(NAMESPACE+"cbBoxCollege", pMap);
+		logger.info(collegeList);
+
+		return collegeList;
+	}
+
+	/**
+	 * 학부단위 리스트 콤보박스
+	 * 
+	 * @param pMap
+	 * @return deptList
+	 */
+	public List<Map<String, Object>> getDeptList(Map<String, Object> pMap) {
+		logger.info("AdminDao ==> getDeptList() 호출 성공");
+		List<Map<String, Object>> deptList = null;
+		deptList = sqlSessionTemplate.selectList(NAMESPACE+"cbBoxDept", pMap);
+		logger.info(deptList);
+
+		return deptList;
+	}
+
+	/**
+	 * 학과단위 리스트 콤보박스
+	 * 
+	 * @param pMap
+	 * @return majorList
+	 */
+	public List<Map<String, Object>> getMajorList(Map<String, Object> pMap) {
+		logger.info("AdminDao ==> getMajorList() 호출 성공");
+		List<Map<String, Object>> majorList = null;
+		majorList = sqlSessionTemplate.selectList(NAMESPACE+"cbBoxMajor", pMap);
+		logger.info(majorList);
+
+		return majorList;
+	}
 	/**
 	 * 관리자 - 학생, 교직원 조회 메서드
 	 * @param req

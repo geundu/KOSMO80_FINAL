@@ -20,6 +20,21 @@ public class AdminController {
 	private AdminLogic adminLogic = null;
 	Logger logger = LogManager.getLogger(AdminController.class);
 
+	
+	@RequestMapping("/getAdminComboBox")
+	public String getAdminComboBox(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
+		logger.info("AdminController ==> getAdminComboBox() 호출 성공");
+		Map<String, List<Map<String, Object>>> cbxMapList = null;
+		cbxMapList = adminLogic.getAdminComboBox(pMap);
+		req.setAttribute("cbxMapList", cbxMapList);
+
+		logger.info(pMap);
+		logger.info("collegeList : " + cbxMapList.get("collegeList"));
+		logger.info("deptList : " + cbxMapList.get("deptList"));
+		logger.info("majorList : " + cbxMapList.get("majorList"));
+
+		return "forward:../pageContent/ProPeople/Select.jsp";
+	}
 	/**
 	 *관리자 - 학생, 교직원 조회 메서드
 	 * @param req
