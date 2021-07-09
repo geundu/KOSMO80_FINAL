@@ -3,7 +3,7 @@
 <%
 request.setCharacterEncoding("utf-8");
 /* String sessionId = String.valueOf(session.getAttribute("STUDENT_NUMBER")); */
-String sessionId = "13222001";
+String sessionId = "15521091";
 %>
 <script>
 	let sid =
@@ -11,7 +11,9 @@ String sessionId = "13222001";
 	$(document).ready(function(){
 
 		'use strict';
-
+		function NullCheckAndAtoB(a,b){
+			if(a===undefined||a===null||a===""||a==="0"||a===Nan||a==='null'){a=b};
+		};
 // 		$(document).ready(function() {
 			console.log('readyEvent');
 			initClickEvent();

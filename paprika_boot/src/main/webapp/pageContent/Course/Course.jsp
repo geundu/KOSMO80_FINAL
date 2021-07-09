@@ -313,6 +313,9 @@ $(function() {
 				field: 'SUBJECT_GRADE',
 				title: '대상학년',
 			},{
+				field: 'COURSE_DAY',
+				title: '요일',
+			},{
 				field: 'COURSE_BEGIN_TIME',
 				title: '시작교시',
 			},{

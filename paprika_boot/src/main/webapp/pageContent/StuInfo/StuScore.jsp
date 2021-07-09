@@ -28,7 +28,7 @@ console.log(<%=sizeList%>);
 console.log(<%=sizeDetail%>);
 </script>
 <!-- Page Content start -->
-<!-- <div id="content" class="p-4 p-md-5"> -->
+<!-- <div id="content" class="p-4 p-md-5">  -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 	<div class="container-fluid" stlye="float:left;">
 
