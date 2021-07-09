@@ -24,6 +24,42 @@ out.print("size:" + size);
 %>
 <script>
 console.log(<%=size%>);
+
+function studentInfoUpd(){
+	
+	let reqUrl = "./student/studentInfoUpdate?STUDENT_NUMBER="
+		+sid+"&STUDENT_ENG_NAME="+$('#STUDENT_ENG_NAME').val()
+		+"&STUDENT_PHONE="+$('#STUDENT_PHONE').val()
+		+"&STUDENT_EMAIL="+$('#STUDENT_EMAIL').val()
+		+"&GUARDIAN_NAME="+$('#GUARDIAN_NAME').val()
+		+"&GUARDIAN_PHONE="+$('#GUARDIAN_PHONE').val();
+	
+	$.ajax({
+		url: reqUrl,
+		dataType:'text',
+		success: function(data) {
+			if(data == '1') {
+				alert('업데이트 성공');
+			}
+			else {
+				alert('업데이트 실패');
+			}
+		},
+		error: function(xhr) {
+			alert('비동기통신 실패');	
+		}
+	});
+	
+	/* 
+	console.log($("#STUDENT_ENG_NAME").val());
+	console.log($("#STUDENT_PHONE").val());
+	console.log($("#STUDENT_EMAIL").val());
+	console.log($("#GUARDIAN_NAME").val());
+	console.log($("#GUARDIAN_PHONE").val());
+	*/	
+			
+}
+
 </script>
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5"> -->
@@ -211,8 +247,8 @@ console.log(<%=size%>);
 							<span class="input-group-text" id="basic-addon3">영문성명</span>
 						</div>
 						<input type="text" class="form-control"
-							placeholder="Park Jeong Ho" value=<%=rmap.get("STUDENT_ENG_NAME")%>
-							aria-describedby="basic-addon3">
+							placeholder="영문성명을 입력해주세요." value=<%=rmap.get("STUDENT_ENG_NAME")%>
+							aria-describedby="basic-addon3" id="STUDENT_ENG_NAME">
 					</div>
 				</div>
 				<div class="col-md-3">
@@ -221,8 +257,8 @@ console.log(<%=size%>);
 							<span class="input-group-text" id="basic-addon3">연락처</span>
 						</div>
 						<input type="text" class="form-control"
-							placeholder="010-5454-5454" value=<%=rmap.get("STUDENT_PHONE")%>
-							aria-describedby="basic-addon3">
+							placeholder="연락처를 입력해주세요." value=<%=rmap.get("STUDENT_PHONE")%>
+							aria-describedby="basic-addon3" id="STUDENT_PHONE">
 					</div>
 				</div>
 				<div class="col-md-4">
@@ -231,13 +267,13 @@ console.log(<%=size%>);
 							<span class="input-group-text" id="basic-addon3">이메일</span>
 						</div>
 						<input type="text" class="form-control"
-							placeholder="comback@fdfdf.com" value=<%=rmap.get("STUDENT_EMAIL")%>
-							aria-describedby="basic-addon3">
+							placeholder="이메일을 입력해주세요." value=<%=rmap.get("STUDENT_EMAIL")%>
+							aria-describedby="basic-addon3" id="STUDENT_EMAIL">
 					</div>
 				</div>
-				<div class="col-md-1">
+				<!-- <div class="col-md-1">
 					<button type="button" class="btn btn-primary">수정</button>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>
@@ -254,8 +290,8 @@ console.log(<%=size%>);
 							<span class="input-group-text" id="basic-addon3">보호자 성명</span>
 						</div>
 						<input type="text" class="form-control"
-							placeholder="Park Jeong Ho" value=<%=rmap.get("GUARDIAN_NAME")%>
-							aria-describedby="basic-addon3">
+							placeholder="보호자 성명" value=<%=rmap.get("GUARDIAN_NAME")%>
+							aria-describedby="basic-addon3" id="GUARDIAN_NAME">
 					</div>
 				</div>
 				<div class="col-md-4">
@@ -264,13 +300,13 @@ console.log(<%=size%>);
 							<span class="input-group-text" id="basic-addon3">보호자 연락처</span>
 						</div>
 						<input type="text" class="form-control"
-							placeholder="010-5454-5454" value=<%=rmap.get("GUARDIAN_PHONE")%>
-							aria-describedby="basic-addon3">
+							placeholder="보호자 연락처" value=<%=rmap.get("GUARDIAN_PHONE")%>
+							aria-describedby="basic-addon3" id="GUARDIAN_PHONE">
 					</div>
 				</div>
 				<div class="col-md-2"></div>
 				<div class="col-md-3">
-					<button type="button" class="btn btn-primary">수정</button>
+					<button type="button" class="btn btn-primary" onClick="studentInfoUpd()">수정</button>
 				</div>
 			</div>
 		</div>

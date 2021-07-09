@@ -41,9 +41,9 @@ public class StudentInfoDao {
 	public int studentInfoUpdate(Map<String, Object> pMap) {
 		logger.info("StudentInfoDao ==> studentInfoUpdate() 호출 성공");
 		int result = 0;
-
+		logger.info(pMap);
 		try {
-			sqlSessionTemplate.update(NAMESPACE + "studentInfoUpdate", pMap);
+			sqlSessionTemplate.selectList(NAMESPACE + "studentInfoUpdate", pMap);
 			result = 1;
 		}
 		catch (Exception e) {

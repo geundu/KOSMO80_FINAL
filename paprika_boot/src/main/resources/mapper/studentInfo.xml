@@ -3,41 +3,61 @@
 <mapper namespace="kr.ac.paprika.studentInfo">
 	<resultMap type="java.util.Map" id="testMap" />
 	<!-- =================== 수강목록 조회 콤보박스 시작 ========================== -->
-	
+
 	<select id="cbBoxCourseHistory" parameterType="map"
 		statementType="CALLABLE">
 		{CALL PROC_COURSE_HISTORY_COMBOBOX(#{STUDENT_NUMBER},
 		#{cursor, jdbcType=CURSOR, mode=OUT, resultMap=testMap})}
 	</select>
-	
-	<!-- =================== 수강목록 조회 콤보박스  끝  ========================== -->
-	<select id="getStudentInfo" parameterType="map" statementType="CALLABLE">
-		{CALL PROC_STU_TOTAL_INFO(#{STUDENT_NUMBER}, #{cursor, jdbcType=CURSOR,	mode=OUT, resultMap=testMap})}
+
+	<!-- =================== 수강목록 조회 콤보박스 끝 ========================== -->
+	<select id="getStudentInfo" parameterType="map"
+		statementType="CALLABLE">
+		{CALL PROC_STU_TOTAL_INFO(#{STUDENT_NUMBER}, #{cursor,
+		jdbcType=CURSOR, mode=OUT, resultMap=testMap})}
 	</select>
-	<select id="studentInfoUpdate" parameterType="map" statementType="CALLABLE">
-		{CALL PROC_PRO_STUDENT_CUD(#{TR_CODE},#{STUDENT_NAME},#{STUDENT_ENG_NAME},#{STUDENT_PHONE},#{COLLEGE_NUMBER},#{STUDENT_ENTER_YEAR},#{STUDENT_EMAIL},#{STUDENT_BIRTH},#{GUARDIAN_NAME},#{GUARDIAN_PHONE},#{MEMO},#{STUDENT_NUMBER},#{REGISTER_NUMBER})}
+	<update id="studentInfoUpdate" parameterType="map"
+		statementType="CALLABLE">
+		{CALL PROC_STU_STUDENT_GUD_UPD(#{STUDENT_NUMBER},
+		#{STUDENT_ENG_NAME}, #{STUDENT_PHONE}
+		, #{STUDENT_EMAIL}, #{GUARDIAN_NAME},#{GUARDIAN_PHONE}
+		,#{PEXCEP, jdbcType=INTEGER, mode=OUT},#{PEXCEPMSG, jdbcType=VARCHAR,mode=OUT})}
+	</update>
+
+	<select id="getRegisterRecord" parameterType="map"
+		statementType="CALLABLE">
+		{CALL PROC_STU_REGISTER_SELECT(#{STUDENT_NUMBER},
+		#{cursor, jdbcType=CURSOR, mode=OUT, resultMap=testMap})}
 	</select>
 
-	<select id="getRegisterRecord" parameterType="map" statementType="CALLABLE">
-		{CALL PROC_STU_REGISTER_SELECT(#{STUDENT_NUMBER}, #{cursor, jdbcType=CURSOR,	mode=OUT, resultMap=testMap})}
-	</select>
-	
-	<select id="getCourseHistory" parameterType="map" statementType="CALLABLE">
-		{CALL PROC_STUDENT_COURSE_SELECT(#{STUDENT_NUMBER},#{SEMESTER}, #{cursor, jdbcType=CURSOR,	mode=OUT, resultMap=testMap})}
-	</select>
-	
-	<select id="getGradeHistory" parameterType="map" statementType="CALLABLE">
-		{CALL PROC_STU_YEAR_SEM_SUBJ_SCORE(#{STUDENT_NUMBER}, #{cursor, jdbcType=CURSOR,	mode=OUT, resultMap=testMap})}
-	</select>
-	
-	<select id="getGradeHistoryDetail" parameterType="map" statementType="CALLABLE">
-		{CALL PROC_SUBJECT_SCORE_SELECT(#{STUDENT_NUMBER},#{SEMESTER}, #{cursor, jdbcType=CURSOR,	mode=OUT, resultMap=testMap})}
+	<select id="getCourseHistory" parameterType="map"
+		statementType="CALLABLE">
+		{CALL
+		PROC_STUDENT_COURSE_SELECT(#{STUDENT_NUMBER},#{SEMESTER}, #{cursor,
+		jdbcType=CURSOR, mode=OUT, resultMap=testMap})}
 	</select>
 
-	<select id="cbBoxGetTuition" parameterType="map" statementType="CALLABLE">
-		{CALL PROC_TUITION_COMBOBOX(#{STUDENT_NUMBER}, #{cursor, jdbcType=CURSOR,	mode=OUT, resultMap=testMap})}
+	<select id="getGradeHistory" parameterType="map"
+		statementType="CALLABLE">
+		{CALL PROC_STU_YEAR_SEM_SUBJ_SCORE(#{STUDENT_NUMBER},
+		#{cursor, jdbcType=CURSOR, mode=OUT, resultMap=testMap})}
 	</select>
-	<select id="jsonGetTuitionHistory" parameterType="map" statementType="CALLABLE">
-		{CALL PROC_TUITION_SELECT(#{STUDENT_NUMBER},#{SEMESTER}, #{cursor, jdbcType=CURSOR,	mode=OUT, resultMap=testMap})}
+
+	<select id="getGradeHistoryDetail" parameterType="map"
+		statementType="CALLABLE">
+		{CALL
+		PROC_SUBJECT_SCORE_SELECT(#{STUDENT_NUMBER},#{SEMESTER}, #{cursor,
+		jdbcType=CURSOR, mode=OUT, resultMap=testMap})}
+	</select>
+
+	<select id="cbBoxGetTuition" parameterType="map"
+		statementType="CALLABLE">
+		{CALL PROC_TUITION_COMBOBOX(#{STUDENT_NUMBER}, #{cursor,
+		jdbcType=CURSOR, mode=OUT, resultMap=testMap})}
+	</select>
+	<select id="jsonGetTuitionHistory" parameterType="map"
+		statementType="CALLABLE">
+		{CALL PROC_TUITION_SELECT(#{STUDENT_NUMBER},#{SEMESTER},
+		#{cursor, jdbcType=CURSOR, mode=OUT, resultMap=testMap})}
 	</select>
 </mapper>
