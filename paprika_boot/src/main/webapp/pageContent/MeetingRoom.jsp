@@ -3,6 +3,18 @@
 <%
 request.setCharacterEncoding("utf-8");
 %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="../js/toggleAction.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/popper.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/main.js"></script>
+<link rel='stylesheet' href="../css/style.css">
+<link rel='stylesheet' href="../css/main.css">
+</head>
+<body>
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5"> -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -48,7 +60,7 @@ request.setCharacterEncoding("utf-8");
 
 <!-- screen1 시작 -->
 <div class="screen1" style="width: 50%; height: 55%; float: left; background-color: bisque;">
-	<div id='calendar'style="width: 45%; height: 45%;"></div>
+	<div id='calendar'style="width: auto; height: auto;"></div>
 </div>
 <!--screen1 끝-->
 <!-- screen2 시작 -->
@@ -184,11 +196,11 @@ request.setCharacterEncoding("utf-8");
 	 <tbody>
 	 <tr>
 	 <td>
-	<button type="button" class="btn btn-primary mr-1" style="width: 65px; height: 180px; text-align: center;">예약</button>				
+	<button id="reserv" type="button" class="btn btn-primary mr-1" style="width: 65px; height: 180px; text-align: center;">예약</button>	<!-- 강찬영 -->			
 				</td>
 				</tr>
 	 </tbody>
-	</table>
+	</table> 
 </div>
 <!--screen3 끝-->
 <div class="screen4" style="width: 40%; height: 30%; float: right; background-color: pink;" id="screen4">
@@ -214,97 +226,91 @@ request.setCharacterEncoding("utf-8");
 
 <!-- Page Content end -->
 
-<script src="../js/toggleAction.js"></script>
-<script src="../js/jquery.min.js"></script>
-<script src="../js/popper.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/main.js"></script>
-<link rel='stylesheet' href="../css/style.css">
-<link rel='stylesheet' href="../css/main.css">
+
 
 <!-- 달력시작 -->
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-      initialDate: '2020-09-12',
-      editable: true,
-      selectable: true,
-      businessHours: true,
-      dayMaxEvents: true, // allow "more" link when too many events
-      events: [
-        {
-          title: 'All Day Event',
-          start: '2020-09-01'
-        },
-        {
-          title: 'Long Event',
-          start: '2020-09-07',
-          end: '2020-09-10'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2020-09-09T16:00:00'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2020-09-16T16:00:00'
-        },
-        {
-          title: 'Conference',
-          start: '2020-09-11',
-          end: '2020-09-13'
-        },
-        {
-          title: 'Meeting',
-          start: '2020-09-12T10:30:00',
-          end: '2020-09-12T12:30:00'
-        },
-        {
-          title: 'Lunch',
-          start: '2020-09-12T12:00:00'
-        },
-        {
-          title: 'Meeting',
-          start: '2020-09-12T14:30:00'
-        },
-        {
-          title: 'Happy Hour',
-          start: '2020-09-12T17:30:00'
-        },
-        {
-          title: 'Dinner',
-          start: '2020-09-12T20:00:00'
-        },
-        {
-          title: 'Birthday Party',
-          start: '2020-09-13T07:00:00'
-        },
-        {
-          title: 'Click for Google',
-          url: 'http://google.com/',
-          start: '2020-09-28'
-        }
-      ]
+    //document.addEventListener("DOMContentLoaded", function () {
+ 	//$('#reserv').on('click',function(){	////////////강찬영
+ 		$(document).ready(function () {
+      var calendarEl = document.getElementById("calendar");
+
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialDate: "2020-09-12",
+        editable: true,
+        selectable: true,
+        businessHours: true,
+        dayMaxEvents: true, // allow "more" link when too many events
+        events: [
+          {
+            title: "All Day Event",
+            start: "2020-09-01",
+          },
+          {
+            title: "Long Event",
+            start: "2020-09-07",
+            end: "2020-09-10",
+          },
+          {
+            groupId: 999,
+            title: "Repeating Event",
+            start: "2020-09-09T16:00:00",
+          },
+          {
+            groupId: 999,
+            title: "Repeating Event",
+            start: "2020-09-16T16:00:00",
+          },
+          {
+            title: "Conference",
+            start: "2020-09-11",
+            end: "2020-09-13",
+          },
+          {
+            title: "Meeting",
+            start: "2020-09-12T10:30:00",
+            end: "2020-09-12T12:30:00",
+          },
+          {
+            title: "Lunch",
+            start: "2020-09-12T12:00:00",
+          },
+          {
+            title: "Meeting",
+            start: "2020-09-12T14:30:00",
+          },
+          {
+            title: "Happy Hour",
+            start: "2020-09-12T17:30:00",
+          },
+          {
+            title: "Dinner",
+            start: "2020-09-12T20:00:00",
+          },
+          {
+            title: "Birthday Party",
+            start: "2020-09-13T07:00:00",
+          },
+          {
+            title: "Click for Google",
+            url: "http://google.com/",
+            start: "2020-09-28",
+          },
+        ],
+      });
+      //alert("asdfsd");
+      calendar.render();
     });
-    calendar.render();
-  });
-</script>
+  </script>
 <style>
-  body {
-    margin: 40px 10px;
-    padding: 0;
-    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-    font-size: 14px;
-  }
   #calendar {
-    max-width: 1100px;
+    max-width: 600px;
     margin: 0 auto;
   }
 
 </style>
+</body>
+</html>
 
 <!-- 달력 선언 끝 -->
 <!-- </div> -->
