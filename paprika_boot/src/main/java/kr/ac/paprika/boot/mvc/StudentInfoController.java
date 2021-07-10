@@ -8,9 +8,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,9 +18,11 @@ import com.google.gson.Gson;
 @Controller
 @RequestMapping("/student")
 public class StudentInfoController {
-	@Autowired
-	private StudentInfoLogic	studentInfoLogic	= null;
-	Logger						logger				= LogManager.getLogger(StudentInfoController.class);
+	private final StudentInfoLogic studentInfoLogic;
+
+	public StudentInfoController(StudentInfoLogic studentInfoLogic) {
+		this.studentInfoLogic = studentInfoLogic;
+	}
 
 	/**
 	 * 신상정보조회 메서드 PROC_STU_TOTAL_INFO
@@ -52,11 +51,9 @@ public class StudentInfoController {
 	 */
 	@RequestMapping("/getStudentInfo")
 	public String getStudentInfo(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
-		logger.info("StudentInfoController ==> getStudentInfo() 호출 성공");
-		HttpSession					session		= req.getSession();
-		List<Map<String, Object>>	studentList	= null;
-		studentList = studentInfoLogic.getStudentInfo(pMap);
-		String STUDENT_NUMBER = String.valueOf(studentList.get(0).get("STUDENT_NUMBER"));
+		HttpSession					session			= req.getSession();
+		List<Map<String, Object>>	studentList		= studentInfoLogic.getStudentInfo(pMap);
+		String						STUDENT_NUMBER	= String.valueOf(studentList.get(0).get("STUDENT_NUMBER"));
 		session.setAttribute("STUDENT_NUMBER", STUDENT_NUMBER);
 		req.setAttribute("studentList", studentList);
 		return "forward:../pageContent/StuInfo/StuTotalInfo.jsp";
@@ -92,10 +89,10 @@ public class StudentInfoController {
 		result = studentInfoLogic.studentInfoUpdate(pMap);
 
 		if (result == 1) {
-			return "redirect:";
+			return "redirect:../success.jsp";
 		}
 		else {
-			return "redirect:";
+			return "redirect:/fail.jsp";
 		}
 	}
 
@@ -121,9 +118,7 @@ public class StudentInfoController {
 	 */
 	@RequestMapping("/getRegisterRecord")
 	public String getRegisterRecord(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
-		logger.info("StudentInfoController ==> getRegisterRecord() 호출 성공");
-		List<Map<String, Object>> registerRecordList = null;
-		registerRecordList = studentInfoLogic.getRegisterRecord(pMap);
+		List<Map<String, Object>> registerRecordList = studentInfoLogic.getRegisterRecord(pMap);
 		req.setAttribute("registerRecordList", registerRecordList);
 
 		return "forward:../pageContent/StuInfo/StuRegister.jsp";
@@ -156,9 +151,7 @@ public class StudentInfoController {
 	 */
 	@RequestMapping("getCourseHistory")
 	public String getCourseHistory(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
-		logger.info("StudentInfoController ==> getCourseHistory() 호출 성공");
-		List<Map<String, Object>> cbBoxCourseHistory = null;
-		cbBoxCourseHistory = studentInfoLogic.getCourseHistory(pMap);
+		List<Map<String, Object>> cbBoxCourseHistory = studentInfoLogic.getCourseHistory(pMap);
 		req.setAttribute("cbBoxCourseHistory", cbBoxCourseHistory);
 		return "forward:../pageContent/StuInfo/StuCourse.jsp";
 	}
@@ -190,11 +183,9 @@ public class StudentInfoController {
 	 */
 	@RequestMapping("jsonGetCourseHistory")
 	public @ResponseBody String jsonGetCourseHistory(@RequestParam Map<String, Object> pMap) {
-		logger.info("StudentInfoController ==> jsonGetCourseHistory() 호출 성공");
-		List<Map<String, Object>> courseHistoryList = null;
-		courseHistoryList = studentInfoLogic.jsonGetCourseHistory(pMap);
-		Gson	gson	= new Gson();
-		String	temp	= gson.toJson(courseHistoryList);
+		List<Map<String, Object>>	courseHistoryList	= studentInfoLogic.jsonGetCourseHistory(pMap);
+		Gson						gson				= new Gson();
+		String						temp				= gson.toJson(courseHistoryList);
 		return temp;
 	}
 
@@ -216,9 +207,7 @@ public class StudentInfoController {
 	 */
 	@RequestMapping("/getGradeHistory")
 	public String getGradeHistory(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
-		logger.info("StudentInfoController ==> getGradeHistory() 호출 성공");
-		List<Map<String, Object>> gradeHistoryList = null;
-		gradeHistoryList = studentInfoLogic.getGradeHistory(pMap);
+		List<Map<String, Object>> gradeHistoryList = studentInfoLogic.getGradeHistory(pMap);
 		req.setAttribute("gradeHistoryList", gradeHistoryList);
 
 		return "forward:../pageContent/StuInfo/StuScore.jsp";
@@ -249,11 +238,9 @@ public class StudentInfoController {
 	// http://localhost:9050/paprika/jsonGetGradeHistoryDetail.do?STUDENT_NUMBER=13222001&SEMESTER=2021-1
 	@RequestMapping("/jsonGetGradeHistoryDetail")
 	public @ResponseBody String jsonGetGradeHistoryDetail(@RequestParam Map<String, Object> pMap) {
-		logger.info("StudentInfoController ==> jsonGetGradeHistoryDetail() 호출 성공");
-		List<Map<String, Object>> gradeHistoryDetail = null;
-		gradeHistoryDetail = studentInfoLogic.jsonGetGradeHistoryDetail(pMap);
-		Gson	gson	= new Gson();
-		String	temp	= gson.toJson(gradeHistoryDetail);
+		List<Map<String, Object>>	gradeHistoryDetail	= studentInfoLogic.jsonGetGradeHistoryDetail(pMap);
+		Gson						gson				= new Gson();
+		String						temp				= gson.toJson(gradeHistoryDetail);
 
 		return temp;
 	}
@@ -279,14 +266,12 @@ public class StudentInfoController {
 	 */
 	@RequestMapping("/getTuition")
 	public String getTuition(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
-		logger.info("StudentInfoController ==> getTuition() 호출 성공");
-		List<Map<String, Object>> cbBoxGetTuition = null;
-		cbBoxGetTuition = studentInfoLogic.getTuition(pMap);
+		List<Map<String, Object>> cbBoxGetTuition = studentInfoLogic.getTuition(pMap);
 		req.setAttribute("tuitionList", cbBoxGetTuition);
 
 		return "forward:../pageContent/Tuition.jsp";
 	}
-	
+
 	/**
 	 * 등록금 조회 메서드 PROC_TUITION_SELECT
 	 * 
@@ -308,11 +293,9 @@ public class StudentInfoController {
 	 */
 	@RequestMapping("/jsonGetTuitionHistory")
 	public @ResponseBody String jsonGetTuitionHistory(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
-		logger.info("StudentInfoController ==> jsonGetTuitionHistory() 호출 성공");
-		List<Map<String, Object>> jsonGetTuitionHistory = null;
-		jsonGetTuitionHistory = studentInfoLogic.jsonGetTuitionHistory(pMap);
-		Gson	gson	= new Gson();
-		String	temp	= gson.toJson(jsonGetTuitionHistory);
+		List<Map<String, Object>>	jsonGetTuitionHistory	= studentInfoLogic.jsonGetTuitionHistory(pMap);
+		Gson						gson					= new Gson();
+		String						temp					= gson.toJson(jsonGetTuitionHistory);
 		return temp;
 	}
 }

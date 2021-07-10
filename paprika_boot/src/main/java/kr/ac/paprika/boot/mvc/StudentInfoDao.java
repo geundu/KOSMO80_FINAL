@@ -3,18 +3,17 @@ package kr.ac.paprika.boot.mvc;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class StudentInfoDao {
-	@Autowired
-	private SqlSessionTemplate	sqlSessionTemplate	= null;
-	Logger						logger				= LogManager.getLogger(StudentInfoDao.class);
-	private static final String	NAMESPACE			= "kr.ac.paprika.studentInfo.";
+	private final SqlSessionTemplate	sqlSessionTemplate;
+	private static final String			NAMESPACE	= "kr.ac.paprika.studentInfo.";
+
+	public StudentInfoDao(SqlSessionTemplate sqlSessionTemplate) {
+		this.sqlSessionTemplate = sqlSessionTemplate;
+	}
 
 	/**
 	 * 신상정보조회 메서드
@@ -23,12 +22,9 @@ public class StudentInfoDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> getStudentInfo(Map<String, Object> pMap) {
-		logger.info("StudentInfoDao ==> getStudentInfo() 호출 성공");
 		List<Map<String, Object>> studentList = null;
 		sqlSessionTemplate.selectList(NAMESPACE + "getStudentInfo", pMap);
-		logger.info(pMap);
 		studentList = (List<Map<String, Object>>) pMap.get("cursor");
-		logger.info(studentList);
 		return studentList;
 	}
 
@@ -39,18 +35,11 @@ public class StudentInfoDao {
 	 * @return
 	 */
 	public int studentInfoUpdate(Map<String, Object> pMap) {
-		logger.info("StudentInfoDao ==> studentInfoUpdate() 호출 성공");
-		int result = 0;
-
-		try {
-			sqlSessionTemplate.update(NAMESPACE + "studentInfoUpdate", pMap);
-			result = 1;
-		}
-		catch (Exception e) {
-			logger.info("studentInfoUpdate 프로시저 실행 실패 : " + e.getMessage());
-			result = -1;
-		}
-
+		int		result		= 0;
+		String	resultMSG	= null;
+		sqlSessionTemplate.update(NAMESPACE + "studentInfoUpdate", pMap);
+		result = Integer.parseInt((String) pMap.get("PEXCEP"));
+		resultMSG = (String) pMap.get("PEXCEPMSG");
 		return result;
 	}
 
@@ -61,12 +50,9 @@ public class StudentInfoDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> getRegisterRecord(Map<String, Object> pMap) {
-		logger.info("StudentInfoDao ==> getRegisterRecord() 호출 성공");
 		List<Map<String, Object>> registerRecordList = null;
 		sqlSessionTemplate.selectList(NAMESPACE + "getRegisterRecord", pMap);
-		logger.info(pMap);
 		registerRecordList = (List<Map<String, Object>>) pMap.get("cursor");
-		logger.info(registerRecordList);
 
 		return registerRecordList;
 	}
@@ -78,12 +64,8 @@ public class StudentInfoDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> getCourseHistory(Map<String, Object> pMap) {
-		logger.info("StudentInfoDao ==> getCourseHistory() 호출 성공");
-		List<Map<String, Object>> cbBoxCourseHistory = null;
 		sqlSessionTemplate.selectList("cbBoxCourseHistory", pMap);
-		logger.info(pMap);
-		cbBoxCourseHistory = (List<Map<String, Object>>) pMap.get("cursor");
-		logger.info(cbBoxCourseHistory);
+		List<Map<String, Object>> cbBoxCourseHistory = (List<Map<String, Object>>) pMap.get("cursor");
 
 		return cbBoxCourseHistory;
 	}
@@ -95,12 +77,8 @@ public class StudentInfoDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> jsonGetCourseHistory(Map<String, Object> pMap) {
-		logger.info("StudentInfoDao ==> jsonGetCourseHistory() 호출 성공");
-		List<Map<String, Object>> courseHistoryList = null;
 		sqlSessionTemplate.selectList("getCourseHistory", pMap);
-		logger.info(pMap);
-		courseHistoryList = (List<Map<String, Object>>) pMap.get("cursor");
-		logger.info(courseHistoryList);
+		List<Map<String, Object>> courseHistoryList = (List<Map<String, Object>>) pMap.get("cursor");
 
 		return courseHistoryList;
 	}// http://localhost:8000/paprika/getCourseHistory.do?STUDENT_NUMBER=13222001
@@ -112,12 +90,8 @@ public class StudentInfoDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> getGradeHistory(Map<String, Object> pMap) {
-		logger.info("StudentInfoDao ==> getGradeHistory() 호출 성공");
-		List<Map<String, Object>> gradeHistoryList = null;
 		sqlSessionTemplate.selectList("getGradeHistory", pMap);
-		logger.info(pMap);
-		gradeHistoryList = (List<Map<String, Object>>) pMap.get("cursor");
-		logger.info(gradeHistoryList);
+		List<Map<String, Object>> gradeHistoryList = (List<Map<String, Object>>) pMap.get("cursor");
 
 		return gradeHistoryList;
 	}
@@ -129,12 +103,8 @@ public class StudentInfoDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> jsonGetGradeHistoryDetail(Map<String, Object> pMap) {
-		logger.info("StudentInfoDao ==> getGradeHistoryDetail() 호출 성공");
-		List<Map<String, Object>> gradeHistoryDetail = null;
 		sqlSessionTemplate.selectList("getGradeHistoryDetail", pMap);
-		logger.info(pMap);
-		gradeHistoryDetail = (List<Map<String, Object>>) pMap.get("cursor");
-		logger.info(gradeHistoryDetail);
+		List<Map<String, Object>> gradeHistoryDetail = (List<Map<String, Object>>) pMap.get("cursor");
 
 		return gradeHistoryDetail;
 	}
@@ -146,16 +116,12 @@ public class StudentInfoDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> getTuition(Map<String, Object> pMap) {
-		logger.info("StudentInfoDao ==> getTuition() 호출 성공");
-		List<Map<String, Object>> cbBoxGetTuition = null;
 		sqlSessionTemplate.selectList("cbBoxGetTuition", pMap);
-		logger.info(pMap);
-		cbBoxGetTuition = (List<Map<String, Object>>) pMap.get("cursor");
-		logger.info(cbBoxGetTuition);
+		List<Map<String, Object>> cbBoxGetTuition = (List<Map<String, Object>>) pMap.get("cursor");
 
 		return cbBoxGetTuition;
 	}
-	
+
 	/**
 	 * 등록금 조회 메서드
 	 * 
@@ -163,12 +129,8 @@ public class StudentInfoDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> jsonGetTuitionHistory(Map<String, Object> pMap) {
-		logger.info("StudentInfoDao ==> jsonGetTuitionHistory() 호출 성공");
-		List<Map<String, Object>> jsonGetTuitionHistory = null;
 		sqlSessionTemplate.selectList("jsonGetTuitionHistory", pMap);
-		logger.info(pMap);
-		jsonGetTuitionHistory = (List<Map<String, Object>>) pMap.get("cursor");
-		logger.info(jsonGetTuitionHistory);
+		List<Map<String, Object>> jsonGetTuitionHistory = (List<Map<String, Object>>) pMap.get("cursor");
 
 		return jsonGetTuitionHistory;
 	}
