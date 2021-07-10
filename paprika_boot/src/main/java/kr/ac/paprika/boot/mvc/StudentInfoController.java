@@ -85,13 +85,10 @@ public class StudentInfoController {
 	 */
 	@RequestMapping("/studentInfoUpdate")
 	public @ResponseBody String studentInfoUpdate(@RequestParam Map<String, Object> pMap) {
-		logger.info("StudentInfoController ==> studentInfoUpdate() 호출 성공");
-		logger.info(pMap);
 		
 		int result = 0;
 		result = studentInfoLogic.studentInfoUpdate(pMap);
 		String resultString = String.valueOf(result);
-		logger.info(result);
 		
 		if (result == 1) {
 			return resultString;
