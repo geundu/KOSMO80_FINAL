@@ -9,13 +9,16 @@
 StringBuilder path = new StringBuilder(request.getContextPath());
 path.append("/");
 Map<String, List<Map<String, Object>>> cbxMapList = null;
-List<Map<String, Object>> SelectTableList = null;
+List<Map<String, Object>> selectTableList = null;
 /* SelectTableList = (List<Map<String, Object>) reaquet.getAttribute(""); */
 cbxMapList = (Map<String, List<Map<String, Object>>>) request.getAttribute("cbxMapList");
+selectTableList = (List<Map<String, Object>>) request.getAttribute("memberList");
+
 
 int cbxCollegeSize = 0;
 int cbxDeptSize = 0;
 int cbxMajorSize = 0;
+int selectTableSize = 0;
 if (cbxMapList != null) {
 	cbxCollegeSize = cbxMapList.get("collegeList").size();
 	if(cbxMapList.get("deptList")!=null){
@@ -25,15 +28,28 @@ if (cbxMapList != null) {
 	cbxMajorSize = 	cbxMapList.get("majorList").size();
 	}
 }
+if (selectTableList !=null){
+	selectTableSize = selectTableList.size();
+	String[] selectTableArr = new String[selectTableSize];
+}
 String[] cbxCollegeArr = new String[cbxCollegeSize];
 String[] cbxDeptArr = new String[cbxDeptSize];
 String[] cbxMajorArr = new String[cbxMajorSize];
+String[] selectTableArr = new String[selectTableSize];
 
 out.print("collegeSize:" + cbxCollegeSize);
+out.print("selectTableSize:" + selectTableSize);
 %>
 <%=request.getParameter("CBX_COLLEGE_NAME")%>
 <%=request.getParameter("CBX_DEPT_NAME")%>
-
+				<% 
+				List<Map<String, Object>> memberDetail=
+				(List<Map<String, Object>>)request.getAttribute("memberDetail");
+				Map<String,Object> zmap = new HashMap<>();
+				if(memberDetail!=null){
+				zmap = memberDetail.get(0);
+				}
+				%>
 
 <script>
 console.log(cbxCollegeSize=<%=cbxCollegeSize   %>);
@@ -95,7 +111,7 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 			style="width: 100%; height: auto%; text-align: center; background-color: E8EBEE; padding-bottom:4px;">
 				<select class="custom-select" style="width: auto;" id="AdminSelectSelect01">
 					<option selected>구분</option>
-					<option>교직원</option>
+					<option>교수</option>
 					<option>학생</option>
 				</select> 
 				<%if(cbxDeptSize > 0){  %>
@@ -214,10 +230,16 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 				</span>
 				<button href="#" style="margin-right: 10px;"
 					class="btn btn-primary " id="adminSelectSearchButton">검색</button>
+					<button type="button" data-toggle="modal" style="margin-right: 10px;"
+					class="btn btn-primary " data-target="#selectModalXl">modal-ex</button>
 			</div>
 		</div>
 		<div class="screen2"
 			style="width: 100%; height: auto%; background-color: E8EBEE;">
+			<%
+			if(selectTableSize!=0){ 
+				
+			%>
 		<table class="table table-bordered" id="adminSelectTable">
 				<thead class="thead-team">
 					<tr>
@@ -232,22 +254,35 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 					</tr>
 				</thead>
 				<tbody class="text-center">
-					<tr>
-						<td>1</td>
-						<td>학생</td>
-						<td>201512135</td>
-						<td>오세현</td>
-						<td>인문대학</td>
-						<td>외국어학부</td>
-						<td>일어일문학</td>
-						<td>재학</td>
+				<%
+				for(int i =0 ; i<selectTableSize ;i++){
+					Map<String, Object> tmap = selectTableList.get(i);
+				%>
+					<tr id="select_table<%=i%>">
+					<%
+					
+					selectTableArr[i] = String.valueOf(tmap.get("STU_NO"));
+					
+					out.print(selectTableArr.length);
+					%>
+						<td><%=tmap.get("ORDERNUM") %></td>
+						<td><%=tmap.get("STU_OR_PRO") %></td>
+						<td><%=tmap.get("STU_NO") %></td>
+						<td><%=tmap.get("STU_NAME") %></td>
+						<td><%=tmap.get("STU_MAJOR") %></td>
+						<td><%=tmap.get("STU_COL") %></td>
+						<td><%=tmap.get("STU_DEPT") %></td>
+						<td><%=tmap.get("STU_REGNAME") %></td>
 					</tr>
+					<%} %>
 				</tbody>
 			</table>
+			<%} %>
 		</div>
-		<div class="screen3"
+		<div class ="modal fade" id="selectModalXl" aria-labelledby="modalXl">
+		<div class="screen3 modal-dialog modal-xl"
 			style="width: 100%; height: auto%; background-color: E8EBEE;">
-			<div class="container-fluid">
+			<div class="container-fluid ">
 				<div class="row" style="text-align: center;">
 					<div class="col-md-3">
 						<img src="images/doge.png"
@@ -355,6 +390,7 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 				</div>
 			</div>
 		</div>
+		</div>
 	</div>
 </div>
 <script src="./js/toggleAction.js"></script>
@@ -367,96 +403,85 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 			 initClickEvent();
 		});
 		
+		var $adminSelectTable = $('adminSelectTable');
+		
+		<%for (int i = 0 ; i< selectTableSize; i++){%>
+		let selectTable<%=i%> ='<%=selectTableArr[i]%>';
+		
+		
+		function onClickRow_SelectTable<%=i%>(e){
+			console.log('onClickRow_SelectTable'+<%=i%>);
+			e.preventDefault();
+			$.ajax({
+				type: "get",
+				url : '/admin/jsonGetMemberList?STUDENT_NUMBER='+<%=selectTableArr[i]%>
+			+"&STU_OR_PRO="+'학생',
+			dataType : 'json',
+			data : 'json',
+			success : function(data) {
+
+				$("#A_STUDNET_NAME").val('asdfasdf');
+				$("#A_STUDNET_NAME").val('PASSEDGRADE');
+				$("#A_STUDNET_NAME").val('<%=request.getParameter("STUDENT_NAME")%>')
+				$('#selectModalXl').modal('show');
+			}//쉬바루 죶같네
+			
+		});
+		return false;
+			
+			/* $.ajax({
+				type : 'get',
+				url : '/admin/getAdminComboBox',
+				dataType : 'html',
+				success : function(data){
+					$content.html(data).trigger("create");
+				}
+			}); */
+		}
+		
+		
+		<%}%>
+		
+		
 	    function AdminSelectSearchButtonClick(){
 		selectedOption02 = '<%=request.getParameter("CBX_COLLEGE_NAME")%>'
-		console.log(selectedOption02);
 		console.log('AdminSelectSearchButtonClick');
-		if(selectedOption02===undefined||selectedOption02==='null')
-		{selectedOption02='전체';}
-		if(selectedOption03===undefined){selectedOption03='학부';}
-		if(selectedOption04===undefined){selectedOption04='학과';}
-		console.log(selectedOption02);
-		console.log(selectedOption03);
-		console.log(selectedOption04);
-		if(selectedOption03!=='학부'){
-			selectedOption02=selectedOption03;
-		}
-		if(selectedOption04!=='학과'){
-			selectedOption02=selectedOption04;
-		}
-		if(selectedOption01===undefined){selectedOption01='전체';}
-		if(selectedOption05===undefined){selectedOption05='전체';}
-		if(selectedOption06===undefined||selectedOption06==="입학년도"){selectedOption06='0';}
-		console.log(selectedOption02+selectedOption03+selectedOption05+selectedOption06)
-		var selectNumber = $('#selectNumber').val();
-		if(selectNumber===""||selectNumber===null){selectNumber='0';}
-		var selectName = $('#selectName').val();
-		if(selectName===undefined||selectName===null||selectName===""){selectName='전체';}
-		console.log(typeof(selectedOption01))
-		console.log(typeof(selectedOption02))
-		console.log(typeof(selectedOption03))
-		console.log(typeof(selectedOption04))
-		console.log(typeof(selectedOption05))
-		console.log(typeof(selectedOption06))
-		console.log(typeof(selectNumber))
+		if(!selectedOption01||selectedOption01==='구분'){selectedOption01='전체';}
+		if(!selectedOption02){selectedOption02='전체';}
+		if(!selectedOption03){selectedOption03='학부';}
+		if(!selectedOption04){selectedOption04='학과';}
+		if(!selectedOption05){selectedOption05='전체';}
+		if(!selectedOption06||selectedOption06==="입학년도"){selectedOption06='0';}
+		if(!selectNumber){selectNumber='0';}
+		if(!selectName){selectName='전체';}
 		
+		if(selectedOption03!=='학부'){selectedOption02=selectedOption03;}
+		if(selectedOption04!=='학과'){selectedOption02=selectedOption04;}	
+		
+		console.log("검색옵션은 "+selectedOption01+" / "+selectedOption02+" / "+selectedOption03+" / "
+				+selectedOption04+" / "+selectedOption05+" / "+selectedOption06+" / "+selectNumber+" / "
+				+selectName)
+				
 		$.ajax({
 			type : 'get',
-			url : '/admin/jsonGetMemberList?PROFESSOR_OR_STUDENT='+selectedOption01+'&STATUS='
-			+selectedOption05+'&YEAR='+selectedOption06
-			+'&NUMBER='+selectNumber+'&NAME='+selectName
-			+'&COL='+selectedOption02,
+			url : '/admin/getMemberList?PROFESSOR_OR_STUDENT='+selectedOption01+'&COL='+selectedOption02+'&STATUS='
+			+selectedOption05+'&YEAR='+selectedOption06+'&NUMBER='+selectNumber+'&NAME='+selectName,
 			dataType : 'html',
 			success : function(data){
 				$content.html(data).trigger("create");
 			}
 		});
 		return false;
-		
-		/* 
-	 	$AdminSelectTable.bootstrapTable('destroy')
-		$AdminSelectTable.bootstrapTable({
-			url:'/admin/getMemberList?PROFESSOR_OR_STUDENT='+selectedOption01+'&STATUS='
-					+selectedOption05+'&YEAR='+selectedOption06
-					+'&NUMBER='+selectNumber+'&NAME='+selectName
-					+'&COL='+selectedOption02,
-			columns: [{
-				field: 'REGNUM ',
-				title:'순번'
-			},{
-				field: 'STU_NO',
-				title:'학번'
-			},{
-				field: 'STU_OR_PRO',
-				title:'학생/교직원'
-			},{
-				field: 'STU_NAME',
-				title:'이름'
-			},{
-				field: 'STU_MAJOR',
-				title:'대학'
-			},{
-				field: 'STU_COL',
-				title:'학과'
-			},{
-				field: 'STU_DEPT',
-				title:'학부'
-			},{
-				field: 'STU_REGNAME',
-				title:'상태'
-			}
-		}] 
-		});
-		}
-		});
-		return false; */
 	}
+	    
 	let selectedOption01 = '구분';
 	var selectedOption02;
 	var selectedOption03;
 	var selectedOption04;
 	let selectedOption05 = '재학';
 	let selectedOption06 = '입학년도';
+	var selectName = $('#selectName').val();
+	var selectNumber = $('#selectNumber').val();
 	
 
 	$('#AdminSelectSelect01').on('change', function(e){
@@ -475,7 +500,6 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 		console.log($(this).find("option:selected").val());
 
 		selectedOption01 = $('#AdminSelectSelect01').find("option:selected").val();
-		
 		selectedOption02 = $(this).find("option:selected").val();
 		selectedOption03 = $('#AdminSelectSelect03').find("option:selected").val();
 		selectedOption04 = $('#AdminSelectSelect04').find("option:selected").val();
@@ -490,10 +514,8 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 			}
 			});
 			selectedOption01 = $('#AdminSelectSelect01').find("option:selected").val();
-			
 			selectedOption02 = $(this).find("option:selected").val();
 			selectedOption03 = $('#AdminSelectSelect03').find("option:selected").val();
-			
 			selectedOption04 = $('#AdminSelectSelect04').find("option:selected").val();
 			selectedOption05 = $('#AdminSelectSelect05').find("option:selected").val();
 			selectedOption06 = $('#AdminSelectSelect06').find("option:selected").val();
@@ -519,10 +541,8 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 			}
 			});
 			selectedOption01 = $('#AdminSelectSelect01').find("option:selected").val();
-			
 			selectedOption02 = $('#AdminSelectSelect02').find("option:selected").val();
 			selectedOption03 = $(this).find("option:selected").val();
-			
 			selectedOption04 = $('#AdminSelectSelect04').find("option:selected").val();
 			selectedOption05 = $('#AdminSelectSelect05').find("option:selected").val();
 			selectedOption06 = $('#AdminSelectSelect06').find("option:selected").val();
@@ -550,6 +570,9 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 		function initClickEvent(){
 			console.log('initClickEvent');
 			 $('#adminSelectSearchButton').click(AdminSelectSearchButtonClick);
+			 <%for (int i = 0 ; i < selectTableSize ; i++){%>
+				 $('#select_table<%=i%>').click(onClickRow_SelectTable<%=i%>);
+			 <%}%>
 			
 			
 			}

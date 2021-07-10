@@ -22,10 +22,15 @@
 	<select id="getMember" parameterType="map"
 		statementType="CALLABLE">
 		{CALL PROC_PRO_PEOPLE_SELECT(#{PROFESSOR_OR_STUDENT}
-		, #{STATUS}, #{YEAR}, #{NUMBER}
-		, #{COL}, #{NAME},
+		,#{COL}, #{STATUS}, #{YEAR}, #{NUMBER}
+		,#{NAME},
 		#{cursor,
 		jdbcType=CURSOR, mode=OUT, resultMap = adminMap} )}
+	</select>
+		<select id="getMemberDetail" parameterType="map"
+		statementType="CALLABLE">
+		{CALL PROC_PRO_PEOPLE_DETAIL(#{STUDENT_NUMBER},#{STU_OR_PRO},
+		#{cursor, jdbcType=CURSOR, mode=OUT, resultMap = adminMap} )}
 	</select>
 	<select id="getStudentGrade" parameterType="map"
 		statementType="CALLABLE">

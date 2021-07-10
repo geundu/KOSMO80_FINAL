@@ -11,8 +11,6 @@ String sessionId = "15521091";
 	$(document).ready(function(){
 
 		'use strict';
-
-// 		$(document).ready(function() {
 			console.log('readyEvent');
 			initClickEvent();
 		});
