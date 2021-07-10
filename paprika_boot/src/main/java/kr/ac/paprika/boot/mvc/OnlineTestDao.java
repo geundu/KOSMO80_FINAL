@@ -3,26 +3,26 @@ package kr.ac.paprika.boot.mvc;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import kr.ac.paprika.boot.util.NameSpace;
 
 @Repository
 public class OnlineTestDao {
-	@Autowired
-	private SqlSessionTemplate	sqlSessionTemplate	= null;
-	Logger						logger				= LogManager.getLogger(OnlineTestDao.class);
+	private final SqlSessionTemplate sqlSessionTemplate;
+
+	public OnlineTestDao(SqlSessionTemplate sqlSessionTemplate) {
+		this.sqlSessionTemplate = sqlSessionTemplate;
+	}
 
 	/**
 	 * @param pMap
 	 * @return
 	 */
 	public List<Map<String, Object>> getOnlineTest(Map<String, Object> pMap) {
-		logger.info("getOnlineTest() 호출 성공");
 		List<Map<String, Object>> onlineTest = null;
-		onlineTest = sqlSessionTemplate.selectList("getOnlineTest", pMap);
+		onlineTest = sqlSessionTemplate.selectList(NameSpace.ONLINETEST + "getOnlineTest", pMap);
 
 		return onlineTest;
 	}
@@ -34,10 +34,9 @@ public class OnlineTestDao {
 	 * @return
 	 */
 	public int answerInsert(Map<String, Object> pMap) {
-		logger.info("answerInsert() 호출 성공");
 		int answerInsert = 0;
 
-		sqlSessionTemplate.insert("answerInsert", pMap);
+		sqlSessionTemplate.insert(NameSpace.ONLINETEST + "answerInsert", pMap);
 		answerInsert = Integer.parseInt((String) pMap.get("PEXCEP"));
 		return answerInsert;
 	}
@@ -49,10 +48,9 @@ public class OnlineTestDao {
 	 * @return
 	 */
 	public int onlineTestInsert(Map<String, Object> pMap) {
-		logger.info("onlineTestInsert() 호출 성공");
 		int onlineTestInsert = 0;
 
-		sqlSessionTemplate.insert("onlineTestInsert", pMap);
+		sqlSessionTemplate.insert(NameSpace.ONLINETEST + "onlineTestInsert", pMap);
 		onlineTestInsert = Integer.parseInt((String) pMap.get("PEXCEP"));
 		return onlineTestInsert;
 	}
@@ -64,10 +62,9 @@ public class OnlineTestDao {
 	 * @return
 	 */
 	public int testGrading(Map<String, Object> pMap) {
-		logger.info("testGrading() 호출 성공");
 		int testGrading = 0;
 
-		sqlSessionTemplate.update("testGrading", pMap);
+		sqlSessionTemplate.update(NameSpace.ONLINETEST + "testGrading", pMap);
 		testGrading = Integer.parseInt((String) pMap.get("PEXCEP"));
 		return testGrading;
 	}

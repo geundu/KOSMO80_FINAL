@@ -22,6 +22,7 @@ public class MeetingRoomLogic {
 	 */
 	public List<Map<String, Object>> getMeetingRoomList() {
 		List<Map<String, Object>> meetingRoomList = meetingRoomDao.getMeetingRoomList();
+
 		return meetingRoomList;
 	}
 
@@ -40,6 +41,7 @@ public class MeetingRoomLogic {
 		catch (Exception e) {
 			result = -1;
 		}
+
 		return result;
 	}
 
@@ -51,6 +53,7 @@ public class MeetingRoomLogic {
 	 */
 	public List<Map<String, Object>> getMyBookingList(Map<String, Object> pMap) {
 		List<Map<String, Object>> myMeetingRoomList = meetingRoomDao.getMyBookingList(pMap);
+
 		return myMeetingRoomList;
 	}
 

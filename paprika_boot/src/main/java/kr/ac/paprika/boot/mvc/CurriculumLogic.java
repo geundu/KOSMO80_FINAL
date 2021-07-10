@@ -4,16 +4,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CurriculumLogic {
-	@Autowired
-	private CurriculumDao	curriculumDao	= null;
-	Logger					logger			= LogManager.getLogger(CurriculumLogic.class);
+	private final CurriculumDao curriculumDao;
+
+	public CurriculumLogic(CurriculumDao curriculumDao) {
+		this.curriculumDao = curriculumDao;
+	}
 
 	/**
 	 * 개설강좌조회 페이지를 불러오는 메서드(콤보박스 포함)
@@ -31,7 +30,6 @@ public class CurriculumLogic {
 	 * @return cbxList
 	 */
 	public Map<String, List<Map<String, Object>>> getOpenCourse(Map<String, Object> pMap) {
-		logger.info("CurriculumLogic ==> getOpenCourse() 호출 성공");
 		Map<String, List<Map<String, Object>>> cbxMapList = new HashMap<>();
 
 		if (pMap.get("CBX_COLLEGE_NAME") != null) {
@@ -68,7 +66,6 @@ public class CurriculumLogic {
 	 * @return courseList
 	 */
 	public List<Map<String, Object>> jsonGetOpenCourseList(Map<String, Object> pMap) {
-		logger.info("CurriculumLogic ==> jsonGetOpenCourseList() 호출 성공");
 		List<Map<String, Object>> courseList = null;
 		courseList = curriculumDao.jsonGetOpenCourseList(pMap);
 
@@ -82,7 +79,6 @@ public class CurriculumLogic {
 	 * @return
 	 */
 	public List<Map<String, Object>> getCurriculum(Map<String, Object> pMap) {
-		logger.info("CurriculumLogic ==> getCurriculum() 호출 성공");
 		List<Map<String, Object>> cbBoxCurriculum = null;
 		cbBoxCurriculum = curriculumDao.getCurriculum(pMap);
 
@@ -96,7 +92,6 @@ public class CurriculumLogic {
 	 * @return
 	 */
 	public List<Map<String, Object>> jsonGetCurriculum(Map<String, Object> pMap) {
-		logger.info("CurriculumLogic ==> jsonGetCurriculum() 호출 성공");
 		List<Map<String, Object>> curriculumList = null;
 		curriculumList = curriculumDao.jsonGetCurriculum(pMap);
 

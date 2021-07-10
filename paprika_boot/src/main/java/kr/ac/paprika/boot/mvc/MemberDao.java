@@ -3,18 +3,16 @@ package kr.ac.paprika.boot.mvc;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.ac.paprika.boot.util.NameSpace;
+
 @Repository
 public class MemberDao {
 	@Autowired
-	private SqlSessionTemplate	sqlSessionTemplate	= null;
-	Logger						logger				= LogManager.getLogger(MemberDao.class);
-	private static final String	NAMESPACE			= "kr.ac.paprika.member.";
+	private SqlSessionTemplate sqlSessionTemplate = null;
 
 	/**
 	 * 로그인 메서드
@@ -23,10 +21,8 @@ public class MemberDao {
 	 * @return
 	 */
 	public String signIn(Map<String, Object> pMap) {
-		logger.info("MemberDao ==> signIn() 호출 성공");
 		String result = null;
-		sqlSessionTemplate.selectOne(NAMESPACE + "signIn", pMap);
-		logger.info(pMap);
+		sqlSessionTemplate.selectOne(NameSpace.MEMBER + "signIn", pMap);
 		result = String.valueOf(pMap.get("result"));
 
 		return result;

@@ -3,17 +3,16 @@ package kr.ac.paprika.boot.mvc;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CourseLogic {
-	@Autowired
-	private CourseDao	courseDao	= null;
-	Logger				logger		= LogManager.getLogger(CourseLogic.class);
+	private final CourseDao courseDao;
+
+	public CourseLogic(CourseDao courseDao) {
+		this.courseDao = courseDao;
+	}
 
 	/**
 	 * 강좌조회 메서드 eg) 알고리즘, 자료구조, 어셈블리어, ...
@@ -22,7 +21,6 @@ public class CourseLogic {
 	 * @return
 	 */
 	public List<Map<String, Object>> getOnlineCourseList(Map<String, Object> pMap) {
-		logger.info("getOnlineCourseList() 호출 성공");
 		List<Map<String, Object>> courseList = null;
 		courseList = courseDao.getOnlineCourseList(pMap);
 
@@ -36,7 +34,6 @@ public class CourseLogic {
 	 * @return
 	 */
 	public List<Map<String, Object>> getLectureList(Map<String, Object> pMap) {
-		logger.info("getLectureList() 호출 성공");
 		List<Map<String, Object>> lectureList = null;
 		lectureList = courseDao.getLectureList(pMap);
 
@@ -50,7 +47,6 @@ public class CourseLogic {
 	 * @return
 	 */
 	public List<Map<String, Object>> getLectureDetail(Map<String, Object> pMap) {
-		logger.info("getLectureDetail() 호출 성공");
 		List<Map<String, Object>> lectureDetail = null;
 		lectureDetail = courseDao.getLectureDetail(pMap);
 
@@ -64,7 +60,6 @@ public class CourseLogic {
 	 * @return
 	 */
 	public int homeworkInsert(Map<String, Object> pMap) {
-		logger.info("homeworkInsert() 호출 성공");
 		int homeworkInsert = 0;
 
 		try {
@@ -84,7 +79,6 @@ public class CourseLogic {
 	 * @return
 	 */
 	public int homeworkUpdate(Map<String, Object> pMap) {
-		logger.info("homeworkUpdate() 호출 성공");
 		int homeworkUpdate = 0;
 
 		try {
@@ -105,7 +99,6 @@ public class CourseLogic {
 	 * @return
 	 */
 	public int feedbackInsert(Map<String, Object> pMap) {
-		logger.info("feedbackInsert() 호출 성공");
 		int feedbackInsert = 0;
 
 		try {
@@ -125,7 +118,6 @@ public class CourseLogic {
 	 * @return
 	 */
 	public int homeworkGrading(Map<String, Object> pMap) {
-		logger.info("homeworkGrading() 호출 성공");
 		int homeworkGrading = 0;
 
 		try {
@@ -146,7 +138,6 @@ public class CourseLogic {
 	 * @return
 	 */
 	public List<Map<String, Object>> getHomeworkList(Map<String, Object> pMap) {
-		logger.info("getHomeworkList() 호출 성공");
 		List<Map<String, Object>> homeworkList = null;
 		homeworkList = courseDao.getHomeworkList(pMap);
 
@@ -160,7 +151,6 @@ public class CourseLogic {
 	 * @return
 	 */
 	public List<Map<String, Object>> getFeedbackList(Map<String, Object> pMap) {
-		logger.info("getFeedbackList() 호출 성공");
 		List<Map<String, Object>> feedbackList = null;
 		feedbackList = courseDao.getFeedbackList(pMap);
 

@@ -6,10 +6,11 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import kr.ac.paprika.boot.util.NameSpace;
+
 @Repository
 public class StudentInfoDao {
-	private final SqlSessionTemplate	sqlSessionTemplate;
-	private static final String			NAMESPACE	= "kr.ac.paprika.studentInfo.";
+	private final SqlSessionTemplate sqlSessionTemplate;
 
 	public StudentInfoDao(SqlSessionTemplate sqlSessionTemplate) {
 		this.sqlSessionTemplate = sqlSessionTemplate;
@@ -23,7 +24,7 @@ public class StudentInfoDao {
 	 */
 	public List<Map<String, Object>> getStudentInfo(Map<String, Object> pMap) {
 		List<Map<String, Object>> studentList = null;
-		sqlSessionTemplate.selectList(NAMESPACE + "getStudentInfo", pMap);
+		sqlSessionTemplate.selectList(NameSpace.STUDENTINFO + "getStudentInfo", pMap);
 		studentList = (List<Map<String, Object>>) pMap.get("cursor");
 		return studentList;
 	}
@@ -36,8 +37,9 @@ public class StudentInfoDao {
 	 */
 	public int studentInfoUpdate(Map<String, Object> pMap) {
 		int result = 0;
+
 		try {
-			sqlSessionTemplate.selectList(NAMESPACE + "studentInfoUpdate", pMap);
+			sqlSessionTemplate.selectList(NameSpace.STUDENTINFO + "studentInfoUpdate", pMap);
 			result = 1;
 		}
 		catch (Exception e) {
@@ -55,7 +57,7 @@ public class StudentInfoDao {
 	 */
 	public List<Map<String, Object>> getRegisterRecord(Map<String, Object> pMap) {
 		List<Map<String, Object>> registerRecordList = null;
-		sqlSessionTemplate.selectList(NAMESPACE + "getRegisterRecord", pMap);
+		sqlSessionTemplate.selectList(NameSpace.STUDENTINFO + "getRegisterRecord", pMap);
 		registerRecordList = (List<Map<String, Object>>) pMap.get("cursor");
 
 		return registerRecordList;
@@ -68,7 +70,7 @@ public class StudentInfoDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> getCourseHistory(Map<String, Object> pMap) {
-		sqlSessionTemplate.selectList("cbBoxCourseHistory", pMap);
+		sqlSessionTemplate.selectList(NameSpace.STUDENTINFO + "cbBoxCourseHistory", pMap);
 		List<Map<String, Object>> cbBoxCourseHistory = (List<Map<String, Object>>) pMap.get("cursor");
 
 		return cbBoxCourseHistory;
@@ -81,7 +83,7 @@ public class StudentInfoDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> jsonGetCourseHistory(Map<String, Object> pMap) {
-		sqlSessionTemplate.selectList("getCourseHistory", pMap);
+		sqlSessionTemplate.selectList(NameSpace.STUDENTINFO + "getCourseHistory", pMap);
 		List<Map<String, Object>> courseHistoryList = (List<Map<String, Object>>) pMap.get("cursor");
 
 		return courseHistoryList;
@@ -94,7 +96,7 @@ public class StudentInfoDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> getGradeHistory(Map<String, Object> pMap) {
-		sqlSessionTemplate.selectList("getGradeHistory", pMap);
+		sqlSessionTemplate.selectList(NameSpace.STUDENTINFO + "getGradeHistory", pMap);
 		List<Map<String, Object>> gradeHistoryList = (List<Map<String, Object>>) pMap.get("cursor");
 
 		return gradeHistoryList;
@@ -107,7 +109,7 @@ public class StudentInfoDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> jsonGetGradeHistoryDetail(Map<String, Object> pMap) {
-		sqlSessionTemplate.selectList("getGradeHistoryDetail", pMap);
+		sqlSessionTemplate.selectList(NameSpace.STUDENTINFO + "getGradeHistoryDetail", pMap);
 		List<Map<String, Object>> gradeHistoryDetail = (List<Map<String, Object>>) pMap.get("cursor");
 
 		return gradeHistoryDetail;
@@ -120,7 +122,7 @@ public class StudentInfoDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> getTuition(Map<String, Object> pMap) {
-		sqlSessionTemplate.selectList("cbBoxGetTuition", pMap);
+		sqlSessionTemplate.selectList(NameSpace.STUDENTINFO + "cbBoxGetTuition", pMap);
 		List<Map<String, Object>> cbBoxGetTuition = (List<Map<String, Object>>) pMap.get("cursor");
 
 		return cbBoxGetTuition;
@@ -133,7 +135,7 @@ public class StudentInfoDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> jsonGetTuitionHistory(Map<String, Object> pMap) {
-		sqlSessionTemplate.selectList("jsonGetTuitionHistory", pMap);
+		sqlSessionTemplate.selectList(NameSpace.STUDENTINFO + "jsonGetTuitionHistory", pMap);
 		List<Map<String, Object>> jsonGetTuitionHistory = (List<Map<String, Object>>) pMap.get("cursor");
 
 		return jsonGetTuitionHistory;

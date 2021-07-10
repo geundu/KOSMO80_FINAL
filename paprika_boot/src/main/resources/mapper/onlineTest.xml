@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.ac.paprika.mybatis.mapper.onlineTest">
-	<select id="getOnlineTest" parameterType="map"
-		statementType="CALLABLE">
+<mapper namespace="kr.ac.paprika.onlineTest">
+	<resultMap type="java.util.Map" id="onlineTestMap" />
+	<select id="getOnlineTest" parameterType="map" statementType="CALLABLE">
 		{CALL PROC_STU_ONLINE_TEST_Q_SEL(#{COURSE_NUMBER},
-		#{cursor, jdbcType=CURSOR, mode=OUT, resultMap=testMap}
+		#{cursor, jdbcType=CURSOR,
+		mode=OUT, resultMap=onlineTestMap}
 		)}
 	</select>
-	<select id="answerInsert" parameterType="map"
-		statementType="CALLABLE">
+
+	<select id="answerInsert" parameterType="map" statementType="CALLABLE">
 		{CALL PROC_STU_ONLINE_TEST_ANSWER(
 		#{ONLINE_TEST_NUMBER},
 		#{STUDENT_NUMBER},
@@ -33,13 +34,14 @@
 		#{ONLINE_TEST_ANSWER_SUBMIT19},
 		#{ONLINE_TEST_ANSWER_FILE},
 		#{PEXCEP,
-		mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String},
+		mode=OUT,
+		jdbcType=VARCHAR, javaType=java.lang.String},
 		#{PEXCEPMSG,
 		mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
 		)}
 	</select>
-	<select id="onlineTestInsert" parameterType="map"
-		statementType="CALLABLE">
+
+	<select id="onlineTestInsert" parameterType="map" statementType="CALLABLE">
 		{CALL PROC_ONLINE_TEST_Q_CUD(
 		#{TR_CODE},
 		#{ONLINE_TEST_QUESTION_NUMBER},
@@ -55,11 +57,12 @@
 		#{ONLINE_TEST_QUESTION_PICTURE},
 		#{ONLINE_TEST_QUESTION_POINT},
 		#{PEXCEP, mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String},
-		#{PEXCEPMSG, mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+		#{PEXCEPMSG,
+		mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
 		)}
 	</select>
-	<select id="testGrading" parameterType="map"
-		statementType="CALLABLE">
+
+	<select id="testGrading" parameterType="map" statementType="CALLABLE">
 		{CALL PROC_PRO_MARK_CUD(
 		#{TR_CODE},
 		#{SCORE},
@@ -68,7 +71,8 @@
 		#{ONLINE_TEST_NUMBER},
 		#{COURSE_NUMBER},
 		#{PEXCEP, mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String},
-		#{PEXCEPMSG, mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+		#{PEXCEPMSG, mode=OUT, jdbcType=VARCHAR,
+		javaType=java.lang.String}
 		)}
 	</select>
 

@@ -7,9 +7,6 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/course")
 public class CourseController {
-	@Autowired
-	private CourseLogic	courseLogic	= null;
-	Logger				logger		= LogManager.getLogger(CourseController.class);
+	private final CourseLogic courseLogic;
+
+	public CourseController(CourseLogic courseLogic) {
+		this.courseLogic = courseLogic;
+	}
 
 	/**
 	 * 강좌조회 메서드 eg) 알고리즘, 자료구조, 어셈블리어, ... 교수, 학생 분기가 있어야 함
@@ -44,11 +43,9 @@ public class CourseController {
 	 */
 	@RequestMapping("/getOnlineCourseList")
 	public String getOnlineCourseList(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
-		logger.info("getOnlineCourseList() 호출 성공");
 		List<Map<String, Object>> courseList = null;
 		courseList = courseLogic.getOnlineCourseList(pMap);
 		req.setAttribute("courseList", courseList);
-		logger.info(courseList);
 
 		return "forward:../pageContent/Online/Course.jsp";
 	}
@@ -72,17 +69,14 @@ public class CourseController {
 	 * @throws IOException
 	 * @throws ServletException
 	 * 
-	 *  **포트 주의 
-	 *  **course.xml 210706 오세현 수정 
-	 *  http://localhost:7000/course/getLectureList?COURSE_NUMBER=41
+	 *                          **포트 주의 **course.xml 210706 오세현 수정
+	 *                          http://localhost:7000/course/getLectureList?COURSE_NUMBER=41
 	 */
 	@RequestMapping("/getLectureList")
 	public String getLectureList(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
-		logger.info("getLectureList() 호출 성공");
 		List<Map<String, Object>> lectureList = null;
 		lectureList = courseLogic.getLectureList(pMap);
 		req.setAttribute("lectureList", lectureList);
-		logger.info(lectureList);
 
 		return "forward:../pageContent/Online/Lecture.jsp";
 	}
@@ -109,7 +103,6 @@ public class CourseController {
 	 */
 	@RequestMapping("/getLectureDetail")
 	public String getLectureDetail(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
-		logger.info("getLectureDetail() 호출 성공");
 		List<Map<String, Object>> lectureDetail = null;
 		lectureDetail = courseLogic.getLectureDetail(pMap);
 		req.setAttribute("lectureDetail", lectureDetail);
@@ -139,7 +132,6 @@ public class CourseController {
 	 */
 	@RequestMapping("/homeworkInsert")
 	public String homeworkInsert(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
-		logger.info("homeworkInsert() 호출 성공");
 		int result = 0;
 		result = courseLogic.homeworkInsert(pMap);
 
@@ -174,7 +166,6 @@ public class CourseController {
 	 */
 	@RequestMapping("/homeworkUpdate")
 	public String homeworkUpdate(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
-		logger.info("homeworkUpdate() 호출 성공");
 		int result = 0;
 		result = courseLogic.homeworkUpdate(pMap);
 
@@ -209,10 +200,8 @@ public class CourseController {
 	 */
 	@RequestMapping("/feedbackInsert")
 	public String feedbackInsert(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
-		logger.info("feedbackInsert() 호출 성공");
 		int result = 0;
 		result = courseLogic.feedbackInsert(pMap);
-		logger.info(result);
 
 		if (result == 1) {
 			return "redirect:../pageContent/Online/Feedback.jsp";
@@ -240,7 +229,6 @@ public class CourseController {
 	 */
 	@RequestMapping("/homeworkGrading")
 	public String homeworkGrading(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
-		logger.info("homeworkGrading() 호출 성공");
 		int result = 0;
 		result = courseLogic.homeworkGrading(pMap);
 
@@ -274,7 +262,6 @@ public class CourseController {
 	 */
 	@RequestMapping("/getHomeworkList")
 	public String getHomeworkList(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
-		logger.info("getHomeworkList() 호출 성공");
 		List<Map<String, Object>> homeworkList = null;
 		homeworkList = courseLogic.getHomeworkList(pMap);
 		req.setAttribute("courseList", homeworkList);
@@ -305,7 +292,6 @@ public class CourseController {
 	 */
 	@RequestMapping("/getFeedbackList")
 	public String getFeedbackList(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
-		logger.info("getFeedbackList() 호출 성공");
 		List<Map<String, Object>> feedbackList = null;
 		feedbackList = courseLogic.getFeedbackList(pMap);
 		req.setAttribute("feedbackList", feedbackList);

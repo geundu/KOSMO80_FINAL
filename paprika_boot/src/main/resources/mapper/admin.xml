@@ -3,42 +3,47 @@
 <mapper namespace="kr.ac.paprika.admin">
 	<resultMap type="java.util.Map" id="adminMap" />
 	<select id="cbBoxCollege" resultType="map">
-       SELECT col.COLLEGE_NAME, col.COLLEGE_NUMBER 
-             FROM COLLEGE col
-         WHERE col.COLLEGE_GROUP = 'COLLEGE'   
-   </select>
-   <select id="cbBoxDept"  parameterType="string" resultType="map">
-       SELECT COL2.COLLEGE_NAME, COL2.COLLEGE_NUMBER 
-             FROM COLLEGE COL1, COLLEGE COL2
-         WHERE COL2.COLLEGE_HIGHER = COL1.COLLEGE_NUMBER
-         AND COL1.COLLEGE_NAME = #{CBX_COLLEGE_NAME}
-   </select>
-   <select id="cbBoxMajor"  parameterType="string" resultType="map">
-       SELECT COL2.COLLEGE_NAME, COL2.COLLEGE_NUMBER 
-                FROM COLLEGE COL1, COLLEGE COL2
-            WHERE COL2.COLLEGE_HIGHER = COL1.COLLEGE_NUMBER
-            AND COL1.COLLEGE_NAME = #{CBX_DEPT_NAME}
-   </select>
-	<select id="getMember" parameterType="map"
-		statementType="CALLABLE">
+		SELECT col.COLLEGE_NAME, col.COLLEGE_NUMBER
+		FROM COLLEGE col
+		WHERE col.COLLEGE_GROUP = 'COLLEGE'
+	</select>
+	
+	<select id="cbBoxDept" parameterType="string" resultType="map">
+		SELECT COL2.COLLEGE_NAME, COL2.COLLEGE_NUMBER
+		FROM COLLEGE COL1, COLLEGE COL2
+		WHERE COL2.COLLEGE_HIGHER = COL1.COLLEGE_NUMBER
+		AND COL1.COLLEGE_NAME = #{CBX_COLLEGE_NAME}
+	</select>
+	
+	<select id="cbBoxMajor" parameterType="string" resultType="map">
+		SELECT COL2.COLLEGE_NAME, COL2.COLLEGE_NUMBER
+		FROM COLLEGE COL1, COLLEGE COL2
+		WHERE COL2.COLLEGE_HIGHER = COL1.COLLEGE_NUMBER
+		AND COL1.COLLEGE_NAME = #{CBX_DEPT_NAME}
+	</select>
+	
+	<select id="getMember" parameterType="map" statementType="CALLABLE">
 		{CALL PROC_PRO_PEOPLE_SELECT(#{PROFESSOR_OR_STUDENT}
-		,#{COL}, #{STATUS}, #{YEAR}, #{NUMBER}
+		,#{COL}, #{STATUS}, #{YEAR},
+		#{NUMBER}
 		,#{NAME},
 		#{cursor,
 		jdbcType=CURSOR, mode=OUT, resultMap = adminMap} )}
 	</select>
-		<select id="getMemberDetail" parameterType="map"
-		statementType="CALLABLE">
+	
+	<select id="getMemberDetail" parameterType="map" statementType="CALLABLE">
 		{CALL PROC_PRO_PEOPLE_DETAIL(#{STUDENT_NUMBER},#{STU_OR_PRO},
-		#{cursor, jdbcType=CURSOR, mode=OUT, resultMap = adminMap} )}
+		#{cursor,
+		jdbcType=CURSOR, mode=OUT, resultMap = adminMap} )}
 	</select>
-	<select id="getStudentGrade" parameterType="map"
-		statementType="CALLABLE">
+	
+	<select id="getStudentGrade" parameterType="map" statementType="CALLABLE">
 		{CALL PROC_MARK_PRO(#{COURSE_NUMBER},
-		#{cursor, jdbcType=CURSOR, mode=OUT, resultMap = adminMap})}
+		#{cursor, jdbcType=CURSOR, mode=OUT,
+		resultMap = adminMap})}
 	</select>
-	<select id="memberInsertUpdate" parameterType="map"
-		statementType="CALLABLE">
+	
+	<select id="memberInsertUpdate" parameterType="map" statementType="CALLABLE">
 		{CALL PROC_PRO_STUDENT_CUD(#{TR_CODE}
 		,#{STUDENT_NAME},#{STUDENT_ENG_NAME},#{STUDENT_PHONE},#{COLLEGE_NUMBER}
 		,#{STUDENT_ENTER_YEAR},#{STUDENT_EMAIL},#{STUDENT_BIRTH}

@@ -3,18 +3,19 @@ package kr.ac.paprika.boot.mvc;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import kr.ac.paprika.boot.util.NameSpace;
+
 @Repository
 public class CourseDao {
-	@Autowired
-	private SqlSessionTemplate	sqlSessionTemplate	= null;
-	Logger						logger				= LogManager.getLogger(CourseDao.class);
+	private final SqlSessionTemplate sqlSessionTemplate;
+
+	public CourseDao(SqlSessionTemplate sqlSessionTemplate) {
+		this.sqlSessionTemplate = sqlSessionTemplate;
+	}
 
 	/**
 	 * 강좌조회 메서드 eg) 알고리즘, 자료구조, 어셈블리어, ...
@@ -23,11 +24,9 @@ public class CourseDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> getOnlineCourseList(Map<String, Object> pMap) {
-		logger.info("getOnlineCourseList() 호출 성공");
 		List<Map<String, Object>> courseList = null;
-		sqlSessionTemplate.selectList("getOnlineCourseList", pMap);
+		sqlSessionTemplate.selectList(NameSpace.COURSE + "getOnlineCourseList", pMap);
 		courseList = (List<Map<String, Object>>) pMap.get("cursor");
-		logger.info(courseList);
 
 		return courseList;
 	}
@@ -39,11 +38,10 @@ public class CourseDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> getLectureList(Map<String, Object> pMap) {
-		logger.info("getLectureList() 호출 성공");
 		List<Map<String, Object>> lectureList = null;
-		sqlSessionTemplate.selectList("getLectureList", pMap);
+		sqlSessionTemplate.selectList(NameSpace.COURSE + "getLectureList", pMap);
 		lectureList = (List<Map<String, Object>>) pMap.get("cursor");
-		logger.info(lectureList);
+
 		return lectureList;
 	}
 
@@ -54,13 +52,10 @@ public class CourseDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> getLectureDetail(Map<String, Object> pMap) {
-		logger.info("getLectureDetail() 호출 성공");
-		logger.info(pMap);
 		List<Map<String, Object>> lectureDetail = null;
-		sqlSessionTemplate.selectList("getLectureDetail", pMap);
-		logger.info(pMap);
+		sqlSessionTemplate.selectList(NameSpace.COURSE + "getLectureDetail", pMap);
 		lectureDetail = (List<Map<String, Object>>) pMap.get("cursor");
-		logger.info(lectureDetail);
+
 		return lectureDetail;
 	}
 
@@ -71,11 +66,10 @@ public class CourseDao {
 	 * @return
 	 */
 	public int homeworkInsert(Map<String, Object> pMap) throws DataAccessException {
-		logger.info("homeworkInsert() 호출 성공");
 		int homeworkInsert = 0;
-
-		sqlSessionTemplate.insert("homeworkCU", pMap);
+		sqlSessionTemplate.insert(NameSpace.COURSE + "homeworkCU", pMap);
 		homeworkInsert = Integer.parseInt((String) pMap.get("PEXCEP"));
+
 		return homeworkInsert;
 	}
 
@@ -86,11 +80,10 @@ public class CourseDao {
 	 * @return
 	 */
 	public int homeworkUpdate(Map<String, Object> pMap) throws DataAccessException {
-		logger.info("homeworkUpdate() 호출 성공");
 		int homeworkUpdate = 0;
-
-		sqlSessionTemplate.update("homeworkCU", pMap);
+		sqlSessionTemplate.update(NameSpace.COURSE + "homeworkCU", pMap);
 		homeworkUpdate = Integer.parseInt((String) pMap.get("PEXCEP"));
+
 		return homeworkUpdate;
 	}
 
@@ -101,11 +94,10 @@ public class CourseDao {
 	 * @return
 	 */
 	public int feedbackInsert(Map<String, Object> pMap) {
-		logger.info("feedbackInsert() 호출 성공");
 		int feedbackInsert = 0;
-
-		sqlSessionTemplate.insert("feedbackInsert", pMap);
+		sqlSessionTemplate.insert(NameSpace.COURSE + "feedbackInsert", pMap);
 		feedbackInsert = Integer.parseInt((String) pMap.get("PEXCEP"));
+
 		return feedbackInsert;
 	}
 
@@ -116,11 +108,10 @@ public class CourseDao {
 	 * @return
 	 */
 	public int homeworkGrading(Map<String, Object> pMap) throws DataAccessException {
-		logger.info("homeworkGrading() 호출 성공");
 		int homeworkGrading = 0;
-
-		sqlSessionTemplate.update("homeworkGrading", pMap);
+		sqlSessionTemplate.update(NameSpace.COURSE + "homeworkGrading", pMap);
 		homeworkGrading = Integer.parseInt((String) pMap.get("PEXCEP"));
+
 		return homeworkGrading;
 	}
 
@@ -131,11 +122,10 @@ public class CourseDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> getHomeworkList(Map<String, Object> pMap) {
-		logger.info("getHomeworkList() 호출 성공");
 		List<Map<String, Object>> homeworkList = null;
-		sqlSessionTemplate.selectList("getHomeworkList", pMap);
+		sqlSessionTemplate.selectList(NameSpace.COURSE + "getHomeworkList", pMap);
 		homeworkList = (List<Map<String, Object>>) pMap.get("cursor");
-		logger.info(homeworkList);
+
 		return homeworkList;
 	}
 
@@ -146,11 +136,10 @@ public class CourseDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> getFeedbackList(Map<String, Object> pMap) {
-		logger.info("getFeedbackList() 호출 성공");
 		List<Map<String, Object>> feedbackList = null;
-
-		sqlSessionTemplate.selectList("getFeedbackList", pMap);
+		sqlSessionTemplate.selectList(NameSpace.COURSE + "getFeedbackList", pMap);
 		feedbackList = (List<Map<String, Object>>) pMap.get("cursor");
+
 		return feedbackList;
 	}
 }

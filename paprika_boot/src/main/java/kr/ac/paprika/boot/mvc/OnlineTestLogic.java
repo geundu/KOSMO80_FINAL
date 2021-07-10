@@ -3,17 +3,16 @@ package kr.ac.paprika.boot.mvc;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 @Service
 public class OnlineTestLogic {
-	@Autowired
-	private OnlineTestDao	onlineTestDao	= null;
-	Logger					logger			= LogManager.getLogger(OnlineTestLogic.class);
+	private final OnlineTestDao onlineTestDao;
+
+	public OnlineTestLogic(OnlineTestDao onlineTestDao) {
+		this.onlineTestDao = onlineTestDao;
+	}
 
 	/**
 	 * @param pMap

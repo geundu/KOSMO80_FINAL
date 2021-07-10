@@ -7,6 +7,8 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import kr.ac.paprika.boot.util.NameSpace;
+
 @Repository
 public class MeetingRoomDao {
 
@@ -24,8 +26,9 @@ public class MeetingRoomDao {
 	 */
 	public List<Map<String, Object>> getMeetingRoomList() {
 		Map<String, Object> pMap = new HashMap<String, Object>();
-		sqlSessionTemplate.selectList("getMeetingRoomList", pMap);
+		sqlSessionTemplate.selectList(NameSpace.MEETINGROOM + "getMeetingRoomList", pMap);
 		List<Map<String, Object>> meetingRoomList = (List<Map<String, Object>>) pMap.get("cursor");
+
 		return meetingRoomList;
 
 	}
@@ -37,8 +40,9 @@ public class MeetingRoomDao {
 	 * @return
 	 */
 	public int meetingRoomInsert(Map<String, Object> pMap) {
-		sqlSessionTemplate.insert("meetingRoomCUD", pMap);
+		sqlSessionTemplate.insert(NameSpace.MEETINGROOM + "meetingRoomCUD", pMap);
 		int result = Integer.parseInt((String) pMap.get("PEXCEP"));
+
 		return result;
 	}
 
@@ -49,8 +53,9 @@ public class MeetingRoomDao {
 	 * @return
 	 */
 	public List<Map<String, Object>> getMyBookingList(Map<String, Object> pMap) {
-		sqlSessionTemplate.selectList("getMyBookingList", pMap);
+		sqlSessionTemplate.selectList(NameSpace.MEETINGROOM + "getMyBookingList", pMap);
 		List<Map<String, Object>> myMeetingRoomList = (List<Map<String, Object>>) pMap.get("cursor");
+
 		return myMeetingRoomList;
 	}
 
@@ -62,8 +67,9 @@ public class MeetingRoomDao {
 	 */
 
 	public int bookingDelete(Map<String, Object> pMap) {
-		sqlSessionTemplate.insert("meetingRoomCUD", pMap);
+		sqlSessionTemplate.insert(NameSpace.MEETINGROOM + "meetingRoomCUD", pMap);
 		int result = Integer.parseInt((String) pMap.get("PEXCEP"));
+
 		return result;
 	}
 }
