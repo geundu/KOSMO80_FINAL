@@ -61,21 +61,21 @@
 			class="fa fa-search"></i>e-Learning
 	</a>
 		<div id="scroll6" class="collapse  ">
-			<ul class="collapse__menu">
+<!-- 			<ul class="collapse__menu">
 					<a id="sideButton_6_1" href="#" class="nav-link text-blue">Dashboard</a>
 					<a id="sideButton_6_2" href="#" class="nav-link text-blue">강좌조회</a>
 					<a id="sideButton_6_3" href="#" class="nav-link text-blue">강좌시청</a>
 					<a id="sideButton_6_4" href="#" class="nav-link text-blue">피드백보내기</a>
 					<a id="sideButton_6_5" href="#" class="nav-link text-blue">시험응시</a>
-			</ul></li>
+			</ul> --></li>
 	<!--scroll6끝-->
 		<!--scroll7시작-->
-		<li class="active"><a id="sideButton_7_0" href="#scroll7"> <i
+<!-- 		<li class="active"><a id="sideButton_7_0" href="#scroll7"> <i
 				class="fa fa-instagram"></i>커뮤니티
 		</a>
 		<ul>
 	</ul>
-	</li>
+	</li> -->
 	<!--scroll7끝-->
 	<!--scroll8시작-->
 	<li class="active"><a id="sideButton_8_0" href="#scroll8"
@@ -83,14 +83,14 @@
 			class="fa fa-search"></i>관리자 - 조회 추가 수정
 	</a>
 		<div id="scroll8" class="collapse  ">
-			<ul class="collapse__menu">
+<!-- 			<ul class="collapse__menu">
 				<a id="sideButton_8_1" href="#" class="nav-link text-blue">학생,교직원 조회</a>
 				<a id="sideButton_8_2" href="#" class="nav-link text-blue">학생,교직원 추가</a>
 				<a id="sideButton_8_3" href="#" class="nav-link text-blue">학생,교직원 수정</a>
-			</ul></li>
+			</ul> --></li>
 	<!--scroll8끝-->
 		<!--scroll9시작-->
-	<li class="active"><a id="sideButton_9_0" href="#scroll9"
+<!-- 	<li class="active"><a id="sideButton_9_0" href="#scroll9"
 		aria-current="page" data-toggle="collapse"> <i
 			class="fa fa-search"></i>관리자 - e-learning
 			</a>
@@ -108,7 +108,7 @@
 				<a id="sideButton_9_10" href="#" class="nav-link text-blue">시험관리-조회</a>
 				<a id="sideButton_9_11" href="#" class="nav-link text-blue">시험관리-등록</a>
 				<a id="sideButton_9_12" href="#" class="nav-link text-blue">시험관리-채점</a>
-			</ul></li>
+			</ul> </li> -->
 	<!--scroll9끝-->
 	<!-- 좌측 nav sidebar footer start -->
 	<footer class="footer">

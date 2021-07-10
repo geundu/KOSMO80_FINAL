@@ -57,13 +57,13 @@ public class CourseController {
 	 * 강의조회 메서드 eg) 알고리즘 1강, 2강, ... 교수, 학생 분기가 있어야 함
 	 * 
 	 * @procedure
-	 * @PROC_ONLINE_LECTURE --> @PROC_STU_SELECT_ONLINE_LECTURE 로 수
+	 * @PROC_ONLINE_LECTURE --> @PROC_STU_SELECT_ONLINE_LECTURE 로 수정
 	 * 
 	 * @param req
-	 * @COURSE_NUMBER 강좌번
+	 * @COURSE_NUMBER 강좌번호
 	 * 
 	 * @param
-	 * @ol.ONLINE_LECTURE_FILE 강의파일 --> 페이지 양식과 달라서 빼놓
+	 * @ol.ONLINE_LECTURE_FILE 강의파일 --> 페이지 양식과 달라서 빼놓음.
 	 * @ROWNUM 순번
 	 * @ol.ONLINE_LECTURE_TITLE 강의제목
 	 * @ol.ONLINE_REMARK 비고
@@ -72,8 +72,9 @@ public class CourseController {
 	 * @throws IOException
 	 * @throws ServletException
 	 * 
-	 *                          **포트 주의
-	 *                          http://localhost:7000/course/getLectureList?STUDENT_NUMBER=41
+	 *  **포트 주의 
+	 *  **course.xml 210706 오세현 수정 
+	 *  http://localhost:7002/paprika/getLectureList.do?COURSE_NUMBER=41
 	 */
 	@RequestMapping("/getLectureList")
 	public String getLectureList(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
@@ -307,7 +308,7 @@ public class CourseController {
 		logger.info("getFeedbackList() 호출 성공");
 		List<Map<String, Object>> feedbackList = null;
 		feedbackList = courseLogic.getFeedbackList(pMap);
-		req.setAttribute("courseList", feedbackList);
+		req.setAttribute("feedbackList", feedbackList);
 
 		return "forward:../pageContent/ProOnline/FeedbackCheck.jsp";
 	}

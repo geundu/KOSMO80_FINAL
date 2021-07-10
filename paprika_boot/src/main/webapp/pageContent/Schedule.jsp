@@ -223,6 +223,8 @@ out.print("로우수:" + size);
 			}
 		}
 	</script>
+<!-- <script src="./project/js/controllers.js"></script>
+<script src="./project/js/menuTemplate.js"></script> -->
 <!-- 오른쪽 메인 프레임 끝-->
 <!-- </div> -->
 <!-- Page Content end -->

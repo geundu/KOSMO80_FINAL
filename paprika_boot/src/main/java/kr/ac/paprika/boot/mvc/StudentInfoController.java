@@ -84,15 +84,20 @@ public class StudentInfoController {
 	 * @throws ServletException http://www.localhost:8000/paprika/studentInfoUpdate.do?TR_CODE=UPDATE&STUDENT_NAME=%EB%9D%BC%EC%9D%B4%EC%B8%84&STUDENT_ENG_NAME=KIMKACHU&STUDENT_PHONE=010551112&COLLEGE_NUMBER=321&STUDENT_ENTER_YEAR=2021&STUDENT_EMAIL=Rksi.com&STUDENT_BIRTH=2107022&GUARDIAN_NAME=%EB%9D%BC%EC%9D%B4%EC%B8%84&GUARDIAN_PHONE=105726&MEMO=LAK&STUDENT_NUMBER=41&REGISTER_NUMBER=0
 	 */
 	@RequestMapping("/studentInfoUpdate")
-	public String studentInfoUpdate(@RequestParam Map<String, Object> pMap) {
+	public @ResponseBody String studentInfoUpdate(@RequestParam Map<String, Object> pMap) {
+		logger.info("StudentInfoController ==> studentInfoUpdate() 호출 성공");
+		logger.info(pMap);
+		
 		int result = 0;
 		result = studentInfoLogic.studentInfoUpdate(pMap);
-
+		String resultString = String.valueOf(result);
+		logger.info(result);
+		
 		if (result == 1) {
-			return "redirect:../success.jsp";
+			return resultString;
 		}
 		else {
-			return "redirect:/fail.jsp";
+			return resultString;
 		}
 	}
 

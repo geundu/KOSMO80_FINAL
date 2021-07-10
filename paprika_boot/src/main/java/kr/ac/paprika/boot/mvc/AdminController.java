@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
 
 @Controller
 @RequestMapping("/admin")
@@ -20,8 +23,25 @@ public class AdminController {
 	private AdminLogic adminLogic = null;
 	Logger logger = LogManager.getLogger(AdminController.class);
 
+	
+	@RequestMapping("/getAdminComboBox")
+	public String getAdminComboBox(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
+		logger.info("AdminController ==> getAdminComboBox() 호출 성공");
+		Map<String, List<Map<String, Object>>> cbxMapList = null;
+		cbxMapList = adminLogic.getAdminComboBox(pMap);
+		req.setAttribute("cbxMapList", cbxMapList);
+
+		logger.info(pMap);
+		logger.info("collegeList : " + cbxMapList.get("collegeList"));
+		logger.info("deptList : " + cbxMapList.get("deptList"));
+		logger.info("majorList : " + cbxMapList.get("majorList"));
+
+		return "forward:../pageContent/ProPeople/Select.jsp";
+	}
+	
 	/**
 	 *관리자 - 학생, 교직원 조회 메서드
+	 *CALL PROC_PRO_PEOPLE_SELECT
 	 * @param req
 	 * @param pMap
 	 * @return "forward:/pageContent/Select.jsp";
@@ -34,7 +54,19 @@ public class AdminController {
 		List<Map<String, Object>> memberList = null;
 		memberList = adminLogic.getMemberList(pMap);
 		req.setAttribute("memberList", memberList);
-		return "forward:/pageContent/Select.jsp";
+		return "forward:/admin/getAdminComboBox";
+	}
+	
+	@RequestMapping("/jsonGetMemberList")
+	public @ResponseBody String jsonGetMemberList(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
+		logger.info("AdminController ==> getMemberList() 호출 성공");
+		List<Map<String, Object>> memberList = null;
+		memberList = adminLogic.getMemberDetail(pMap);
+		Gson gson 		= new Gson();
+		String temp 	= gson.toJson(memberList);
+		req.setAttribute("memberDetail", memberList);
+		logger.info("memberDetail=>"+memberList);
+		return temp;
 	}
     
 	
@@ -58,16 +90,16 @@ public class AdminController {
 	 * 관리자 - 학생, 교직원 상세조회 메서드
 	 * @param req
 	 * @param pMap
-	 * @return "forward:/pageContent/Select.jsp";
-	 *  보류 아직 안만듬 프로시저
 	 */
-	@RequestMapping("/getMemberDetail")
-	public String getMemberDetail(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
-		logger.info("AdminController ==> getMemberDetail() 호출 성공");
+	@RequestMapping("/jsonGetMemberDetail")
+	public @ResponseBody String jsonGetMemberDetail(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
+		logger.info("AdminController ==> jsonGetMemberDetail() 호출 성공");
 		List<Map<String, Object>> memberDetail = null;
 		memberDetail = adminLogic.getMemberDetail(pMap);
-		req.setAttribute("memberDetail", memberDetail);
-		return "forward:/pageContent/Select.jsp";
+		Gson	gson	= new Gson();
+		String	temp	= gson.toJson(memberDetail);
+
+		return temp;
 	}
 	
 	/**

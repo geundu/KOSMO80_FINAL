@@ -1,5 +1,6 @@
 package kr.ac.paprika.boot.mvc;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,32 @@ public class AdminLogic {
 	private AdminDao adminDao = null;
 	Logger logger = LogManager.getLogger(AdminLogic.class);
     
+	public Map<String, List<Map<String, Object>>> getAdminComboBox(Map<String, Object> pMap) {
+		logger.info("AdminLogic ==> getAdminSearchBox() 호출 성공");
+		Map<String, List<Map<String, Object>>> cbxMapList = new HashMap<>();
+
+		if (pMap.get("CBX_COLLEGE_NAME") != null) {
+			// 학부 리스트
+			List<Map<String, Object>> deptList = null;
+			deptList = adminDao.getDeptList(pMap);
+			cbxMapList.put("deptList", deptList);
+		}
+
+		if (pMap.get("CBX_DEPT_NAME") != null) {
+			// 학과 리스트
+			List<Map<String, Object>> majorList = null;
+			majorList = adminDao.getMajorList(pMap);
+			cbxMapList.put("majorList", majorList);
+		}
+
+		// 대학 리스트
+		List<Map<String, Object>> collegeList = null;
+		collegeList = adminDao.getCollegeList(pMap);
+		cbxMapList.put("collegeList", collegeList);
+
+		return cbxMapList;
+	}
+	
 	/**
 	 * 관리자 - 학생, 교직원 조회 메서드
 	 * @param req

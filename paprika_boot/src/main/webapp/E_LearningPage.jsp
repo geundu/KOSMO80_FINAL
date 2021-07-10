@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+ <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 request.setCharacterEncoding("utf-8");
@@ -33,7 +33,6 @@ String sid = String.valueOf(session.getAttribute("STUDENT_NUMBER"));
 			<%-- <jsp:include page="pageContent/Schedule.jsp"></jsp:include> --%>
 
 			<%@ include file="pageContent/Online/Course.jsp" %> 
-
 		</div>
 	</div>
 
@@ -47,11 +46,6 @@ String sid = String.valueOf(session.getAttribute("STUDENT_NUMBER"));
 	<script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 
-	<!-- <script src="js/popper.js"></script> -->
-	<!-- <script type="module" src="js/main.js"></script> -->
-	<!-- <script src="js/toggleAction.js"></script>  -->
-	<!-- <script src="js/jspInclude.js"></script> -->
-	<script src="js/menuTemplate.js"></script>
 	<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
 	<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">

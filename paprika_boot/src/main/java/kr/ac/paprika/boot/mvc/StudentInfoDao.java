@@ -35,11 +35,18 @@ public class StudentInfoDao {
 	 * @return
 	 */
 	public int studentInfoUpdate(Map<String, Object> pMap) {
-		int		result		= 0;
-		String	resultMSG	= null;
-		sqlSessionTemplate.update(NAMESPACE + "studentInfoUpdate", pMap);
-		result = Integer.parseInt((String) pMap.get("PEXCEP"));
-		resultMSG = (String) pMap.get("PEXCEPMSG");
+		logger.info("StudentInfoDao ==> studentInfoUpdate() 호출 성공");
+		int result = 0;
+		logger.info(pMap);
+		try {
+			sqlSessionTemplate.selectList(NAMESPACE + "studentInfoUpdate", pMap);
+			result = 1;
+		}
+		catch (Exception e) {
+			logger.info("studentInfoUpdate 프로시저 실행 실패 : " + e.getMessage());
+			result = -1;
+		}
+
 		return result;
 	}
 

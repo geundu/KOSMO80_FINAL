@@ -1,15 +1,67 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
 <%
 	request.setCharacterEncoding("utf-8");
 %>
+<%
+StringBuilder path = new StringBuilder(request.getContextPath());
+path.append("/");
+Map<String, List<Map<String, Object>>> cbxMapList = null;
+List<Map<String, Object>> selectTableList = null;
+/* SelectTableList = (List<Map<String, Object>) reaquet.getAttribute(""); */
+cbxMapList = (Map<String, List<Map<String, Object>>>) request.getAttribute("cbxMapList");
+selectTableList = (List<Map<String, Object>>) request.getAttribute("memberList");
 
+
+int cbxCollegeSize = 0;
+int cbxDeptSize = 0;
+int cbxMajorSize = 0;
+int selectTableSize = 0;
+if (cbxMapList != null) {
+	cbxCollegeSize = cbxMapList.get("collegeList").size();
+	if(cbxMapList.get("deptList")!=null){
+	cbxDeptSize = cbxMapList.get("deptList").size();
+	}
+	if(cbxMapList.get("majorList")!=null){
+	cbxMajorSize = 	cbxMapList.get("majorList").size();
+	}
+}
+if (selectTableList !=null){
+	selectTableSize = selectTableList.size();
+	String[] selectTableArr = new String[selectTableSize];
+}
+String[] cbxCollegeArr = new String[cbxCollegeSize];
+String[] cbxDeptArr = new String[cbxDeptSize];
+String[] cbxMajorArr = new String[cbxMajorSize];
+String[] selectTableArr = new String[selectTableSize];
+
+out.print("collegeSize:" + cbxCollegeSize);
+out.print("selectTableSize:" + selectTableSize);
+%>
+<%=request.getParameter("CBX_COLLEGE_NAME")%>
+<%=request.getParameter("CBX_DEPT_NAME")%>
+				<% 
+				List<Map<String, Object>> memberDetail=
+				(List<Map<String, Object>>)request.getAttribute("memberDetail");
+				Map<String,Object> zmap = new HashMap<>();
+				if(memberDetail!=null){
+				zmap = memberDetail.get(0);
+				}
+				%>
+
+<script>
+console.log(cbxCollegeSize=<%=cbxCollegeSize   %>);
+console.log(cbxDeptSize=<%=cbxDeptSize   %>);
+console.log(cbxMajorSize=<%=cbxMajorSize   %>);
+</script>
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5"> -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<div class="container-fluid" stlye="float:left;">
-		<button type="button" id="sidebarCollapse" class="btn btn-primary">
+	<div class="container-fluid" style="float:left;">
+
+		<button type="button" id="sidebarCollapse" class="btn btn-primary ">
 			<i class="fa fa-bars"></i> <span class="sr-only">토글 버튼 위치(글씨출력
 				x)</span>
 		</button>
@@ -57,32 +109,111 @@
 	<div class="container">
 		<div class="screen1"
 			style="width: 100%; height: auto%; text-align: center; background-color: E8EBEE; padding-bottom:4px;">
-				<select class="custom-select" style="width: auto;">
-					<option>구분:교직원</option>
-					<option>구분:학생</option>
-				</select> <select class="custom-select form-control-sm" style="width: auto;">
-					<option>대학:인문사회대학</option>
-					<option>대학:공과대학</option>
-					<option>대학:자연과학대학</option>
-				</select> <select class="custom-select form-control-sm" style="width: auto;">
-					<option>학부:외국어학부</option>
-					<option>학부:건축학부</option>
-					<option>학부:예체능부</option>
-				</select> <select class="custom-select form-control-sm" style="width: auto;">
-					<option>학과:일어일문학</option>
-					<option>학과:컴퓨터공학</option>
-					<option>학과:기계공학</option>
-				</select> <select class="custom-select form-control-sm" style="width: auto;">
+				<select class="custom-select" style="width: auto;" id="AdminSelectSelect01">
+					<option selected>구분</option>
+					<option>교수</option>
+					<option>학생</option>
+				</select> 
+				<%if(cbxDeptSize > 0){  %>
+				<select class="custom-select form-control-sm" style="width: auto;" id="AdminSelectSelect02"
+				value="<%=request.getParameter("CBX_COLLEGE_NAME")%>">>
+				<% } else {%>
+				<select class="custom-select" style="width:auto;" id="AdminSelectSelect02">
+				<% }%>
+					<option selected>대학</option>
+						<%
+				for(int i=0; i< cbxCollegeSize ; i++){
+						Map<String, Object> rmap = cbxMapList.get("collegeList").get(i);
+						cbxCollegeArr[i] = (rmap.get("COLLEGE_NAME")).toString();
+					}
+			%>
+			<%for (int i =0 ; i< cbxCollegeSize ; i++){
+				if(cbxCollegeArr[i].equals(request.getParameter("CBX_COLLEGE_NAME"))) {
+				%>
+				<option value="<%=cbxCollegeArr[i]%>" selected><%=cbxCollegeArr[i]%></option>
+				<%}else { %>
+				<option value="<%=cbxCollegeArr[i]%>"><%=cbxCollegeArr[i]%></option>
+			<%
+				}
+			}%>	
+				</select> 
+				
+			<%if(cbxMajorSize > 0){  %>
+<select class="custom-select" style="width:auto;" id="AdminSelectSelect03" value="<%=request.getParameter("DEPT_NAME")%>">
+<% } else {%>
+<select class="custom-select" style="width:auto;" id="AdminSelectSelect03">
+<% }%>
+					<option selected>학부</option>
+									<%
+				for(int i=0; i< cbxDeptSize ; i++){
+						Map<String, Object> rmap = cbxMapList.get("deptList").get(i);
+						cbxDeptArr[i] = (rmap.get("COLLEGE_NAME")).toString();
+					}
+			%>
+			<%for (int i =0 ; i< cbxDeptSize ; i++){
+				if(cbxDeptArr[i].equals(request.getParameter("CBX_DEPT_NAME"))) {
+				%>
+				<option value="<%=cbxDeptArr[i]%>" selected><%=cbxDeptArr[i]%></option>
+				<%}else { %>
+				<option value="<%=cbxDeptArr[i]%>"><%=cbxDeptArr[i]%></option>
+			<%
+				}
+			}%>	
+				</select> 
+					<%
+					if(cbxMajorSize > 0) {
+					%>
+						<select class="custom-select" style="width:auto;" id="AdminSelectSelect04" value="<%=request.getParameter("MAJOR") %>" >
+					<%
+					}
+					else {
+					%>
+						<select class="custom-select" style="width:auto;" id="AdminSelectSelect04">
+					<%
+					}
+					%>
+					<option selected>학과</option>
+					<%
+					for(int i=0; i< cbxMajorSize ; i++){
+						Map<String, Object> rmap = cbxMapList.get("majorList").get(i);
+						cbxMajorArr[i] = (rmap.get("COLLEGE_NAME")).toString();
+					}
+					for (int i = 0; i < cbxMajorSize; i++){
+						if(cbxMajorArr[i].equals(request.getParameter("CBX_DEPT_NAME"))) {
+				
+						%>
+						<option value="<%=cbxMajorArr[i]%>" selected><%=cbxMajorArr[i]%></option>
+						<%
+						}
+						else {
+						%>
+						<option value="<%=cbxMajorArr[i]%>"><%=cbxMajorArr[i]%></option>
+						<%
+						}
+					}
+					%>	
+				</select> 
+				
+				<select class="custom-select form-control-sm" style="width: auto;" id="AdminSelectSelect05">
+					<option>전체</option>
 					<option>재학</option>
 					<option>휴학</option>
 					<option>졸업</option>
+					<option>재적</option>
 					<option>재직</option>
 					<option>퇴직</option>
-				</select> <select class="custom-select form-control-sm" style="width: auto;">
-					<option>입학년도:2020</option>
-					<option>입학년도:2019</option>
-					<option>입학년도:2018</option>
-					<option>입학년도:2017</option>
+				</select> 
+				<select class="custom-select form-control-sm" style="width: auto;" id="AdminSelectSelect06">
+					<option selected>입학년도</option>
+					<option>2021</option>
+					<option>2020</option>
+					<option>2019</option>
+					<option>2018</option>
+					<option>2017</option>
+					<option>2016</option>
+					<option>2015</option>
+					<option>2014</option>
+					<option>2013</option>
 				</select>
 		</div>
 		<div class="screen1.5"
@@ -91,19 +222,25 @@
 				<span class="col-xs-2" style="text-aline: center; padding-left:25%;"> <input
 					class="form-control "
 					style="margin-right: 10px; text-aline: center;" type="text"
-					placeholder="이름" aria-label="Search">
+					placeholder="이름" aria-label="Search" id="selectName">
 
 				</span> <span class="col-xs-2"> <input class="form-control  "
 					style="margin-right: 10px;" type="text" placeholder="학번"
-					aria-label="Search">
+					aria-label="Search" id="selectNumber">
 				</span>
 				<button href="#" style="margin-right: 10px;"
-					class="btn btn-primary ">검색</button>
+					class="btn btn-primary " id="adminSelectSearchButton">검색</button>
+					<button type="button" data-toggle="modal" style="margin-right: 10px;"
+					class="btn btn-primary " data-target="#selectModalXl">modal-ex</button>
 			</div>
 		</div>
 		<div class="screen2"
 			style="width: 100%; height: auto%; background-color: E8EBEE;">
-		<table class="table table-bordered">
+			<%
+			if(selectTableSize!=0){ 
+				
+			%>
+		<table class="table table-bordered" id="adminSelectTable">
 				<thead class="thead-team">
 					<tr>
 						<th scope="col">순번</th>
@@ -117,32 +254,35 @@
 					</tr>
 				</thead>
 				<tbody class="text-center">
-					<tr>
-						<td>1</td>
-						<td>학생</td>
-						<td>201512135</td>
-						<td>오세현</td>
-						<td>인문대학</td>
-						<td>외국어학부</td>
-						<td>일어일문학</td>
-						<td>재학</td>
+				<%
+				for(int i =0 ; i<selectTableSize ;i++){
+					Map<String, Object> tmap = selectTableList.get(i);
+				%>
+					<tr id="select_table<%=i%>">
+					<%
+					
+					selectTableArr[i] = String.valueOf(tmap.get("STU_NO"));
+					
+					out.print(selectTableArr.length);
+					%>
+						<td><%=tmap.get("ORDERNUM") %></td>
+						<td><%=tmap.get("STU_OR_PRO") %></td>
+						<td><%=tmap.get("STU_NO") %></td>
+						<td><%=tmap.get("STU_NAME") %></td>
+						<td><%=tmap.get("STU_MAJOR") %></td>
+						<td><%=tmap.get("STU_COL") %></td>
+						<td><%=tmap.get("STU_DEPT") %></td>
+						<td><%=tmap.get("STU_REGNAME") %></td>
 					</tr>
-					<tr>
-						<td>2</td>
-						<td>학생</td>
-						<td>201812135</td>
-						<td>오세현</td>
-						<td>인문대학</td>
-						<td>외국어학부</td>
-						<td>일어일문학</td>
-						<td>재학</td>
-					</tr>
+					<%} %>
 				</tbody>
 			</table>
+			<%} %>
 		</div>
-		<div class="screen3"
+		<div class ="modal fade" id="selectModalXl" aria-labelledby="modalXl">
+		<div class="screen3 modal-dialog modal-xl"
 			style="width: 100%; height: auto%; background-color: E8EBEE;">
-			<div class="container-fluid">
+			<div class="container-fluid ">
 				<div class="row" style="text-align: center;">
 					<div class="col-md-3">
 						<img src="images/doge.png"
@@ -153,8 +293,8 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon3">이름</span>
 							</div>
-							<input type="text" class="form-control" placeholder="이름을 입력해주세요"
-								id="basic-url" aria-describedby="basic-addon3">
+							<input type="text" class="form-control" readonly value=a
+								id="A_STUDNET_NAME" aria-describedby="basic-addon3">
 						</div>
 					</div>
 					<div class="col-md-3">
@@ -162,8 +302,8 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon3">학번</span>
 							</div>
-							<input type="text" class="form-control" placeholder="학번을 입력해주세요"
-								name="" id="basic-url" aria-describedby="basic-addon3">
+							<input type="text" class="form-control" readonly value=a
+								Id="A_STUDENT_NUMBER" aria-describedby="basic-addon3">
 						</div>
 					</div>
 					<div class="col-md-3"></div>
@@ -174,8 +314,8 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon3">대학</span>
 							</div>
-							<input type="text" class="form-coDntrol" placeholder="인문사회대학"
-								id="basic-url" aria-describedby="basic-addon3">
+							<input type="text" class="form-coDntrol" readonly value=a
+								id="A_COL" aria-describedby="basic-addon3">
 						</div>
 					</div>
 					<div class="col-md-3">
@@ -183,8 +323,8 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon3">학부</span>
 							</div>
-							<input type="text" class="form-control" placeholder="외국어학"
-								id="basic-url" aria-describedby="basic-addon3">
+							<input type="text" class="form-control" readonly value=a
+								id="A_DEPT" aria-describedby="basic-addon3">
 						</div>
 					</div>
 					<div class="col-md-3">
@@ -192,8 +332,8 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon3">학과</span>
 							</div>
-							<input type="text" class="form-control" placeholder="컴퓨터공학과"
-								id="basic-url" aria-describedby="basic-addon3">
+							<input type="text" class="form-control" readonly value=a
+								id="A_MAJOR" aria-describedby="basic-addon3">
 						</div>
 					</div>
 					<div class="col-md-3">
@@ -201,8 +341,8 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="basic-addon3">구분</span>
 							</div>
-							<input type="text" class="form-control" placeholder="대학생/교수"
-								id="basic-url" aria-describedby="basic-addon3">
+							<input type="text" class="form-control" readonly value=a
+								id="A_STU_OR_PRO" aria-describedby="basic-addon3">
 						</div>
 					</div>
 				</div>
@@ -210,30 +350,30 @@
 					<div class="col-md-4">
 						<div class="input-group mb-3">
 							<div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon3">학적상태</span>
+								<span class="input-group-text" id="adminGetStatus">학적상태</span>
 							</div>
-							<input type="text" class="form-control" placeholder="재학"
-								id="basic-url" aria-describedby="basic-addon3">
+							<input type="text" class="form-control" readonly value=a
+								id="A_REG_STATUS" aria-describedby="basic-addon3">
 						</div>
 					</div>
 					<div class="col-md-4">
 						<div class="input-group mb-3">
 							<div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon3">최근학적변동일자</span>
+								<span class="input-group-text" id="adminGetLastestReg">최근학적변동일자</span>
 							</div>
-							<input type="text" class="form-control" placeholder="2020-02-02"
-								id="basic-url" aria-describedby="basic-addon3">
+							<input type="text" class="form-control" readonly value=a
+								id="A_DATE_LASTEST_REG" aria-describedby="adminGetLastestReg">
 						</div>
 					</div>
 					<div class="col-md-4">
 						<div class="input-group mb-3">
 							<div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon3">최종 이수 학년
+								<span class="input-group-text" id="adminGetPassedGrade_Semester">최종 이수 학년
 									및 학기</span>
 							</div>
 							<input type="text" class="form-control"
-								placeholder="최종 이수 학년 및 학기" id="basic-url"
-								aria-describedby="basic-addon3">
+								readonly value=a id="A_PASSEDGRADE_SEMESTER"
+								aria-describedby="adminGetPassedGrade_Semester">
 						</div>
 					</div>
 				</div>
@@ -241,26 +381,202 @@
 					<div class="col-md-3">
 						<div class="input-group mb-3">
 							<div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon3">부전공</span>
+								<span class="input-group-text" id="basic-addon3">입학연도</span>
 							</div>
-							<input type="text" class="form-control" placeholder="해당없음"
-								id="basic-url" aria-describedby="basic-addon3">
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="input-group mb-3">
-							<div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon3">입학일자</span>
-							</div>
-							<input type="text" class="form-control" placeholder="2002-03-01"
-								id="basic-url" aria-describedby="basic-addon3">
+							<input type="text" class="form-control" readonly value=a
+								id="A_STUDENET_ENTER_YEAR" aria-describedby="basic-addon3">
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		</div>
 	</div>
 </div>
 <script src="./js/toggleAction.js"></script>
+<script>
+	$(function(){
+		'use strict';
+		var $AdminSelectTable = $('#AdminSelectTable');
+		$(document).ready(function () {
+			 console.log('readyEvent');
+			 initClickEvent();
+		});
+		
+		var $adminSelectTable = $('adminSelectTable');
+		
+		<%for (int i = 0 ; i< selectTableSize; i++){%>
+		let selectTable<%=i%> ='<%=selectTableArr[i]%>';
+		
+		
+		function onClickRow_SelectTable<%=i%>(e){
+			console.log('onClickRow_SelectTable'+<%=i%>);
+			e.preventDefault();
+			$.ajax({
+				type: "get",
+				url : '/admin/jsonGetMemberList?STUDENT_NUMBER='+<%=selectTableArr[i]%>
+			+"&STU_OR_PRO="+'학생',
+			dataType : 'json',
+			data : 'json',
+			success : function(data) {
+				console.log(data[0]["COLLEGE_NAME"]);
+				$("#A_STUDNET_NAME").val('asdfasdf');
+				$("#A_STUDNET_NAME").val('PASSEDGRADE');
+				$("#A_STUDNET_NAME").val('<%=request.getParameter("STUDENT_NAME")%>')
+				$('#selectModalXl').modal('show');
+			}//쉬바루 죶같네
+			
+		});
+		return false;
+			
+			/* $.ajax({
+				type : 'get',
+				url : '/admin/getAdminComboBox',
+				dataType : 'html',
+				success : function(data){
+					$content.html(data).trigger("create");
+				}
+			}); */
+		}
+		
+		
+		<%}%>
+		
+		
+	    function AdminSelectSearchButtonClick(){
+		selectedOption02 = '<%=request.getParameter("CBX_COLLEGE_NAME")%>'
+		console.log('AdminSelectSearchButtonClick');
+		if(!selectedOption01||selectedOption01==='구분'){selectedOption01='전체';}
+		if(!selectedOption02){selectedOption02='전체';}
+		if(!selectedOption03){selectedOption03='학부';}
+		if(!selectedOption04){selectedOption04='학과';}
+		if(!selectedOption05){selectedOption05='전체';}
+		if(!selectedOption06||selectedOption06==="입학년도"){selectedOption06='0';}
+		if(!selectNumber){selectNumber='0';}
+		if(!selectName){selectName='전체';}
+		
+		if(selectedOption03!=='학부'){selectedOption02=selectedOption03;}
+		if(selectedOption04!=='학과'){selectedOption02=selectedOption04;}	
+		
+		console.log("검색옵션은 "+selectedOption01+" / "+selectedOption02+" / "+selectedOption03+" / "
+				+selectedOption04+" / "+selectedOption05+" / "+selectedOption06+" / "+selectNumber+" / "
+				+selectName)
+				
+		$.ajax({
+			type : 'get',
+			url : '/admin/getMemberList?PROFESSOR_OR_STUDENT='+selectedOption01+'&COL='+selectedOption02+'&STATUS='
+			+selectedOption05+'&YEAR='+selectedOption06+'&NUMBER='+selectNumber+'&NAME='+selectName,
+			dataType : 'html',
+			success : function(data){
+				$content.html(data).trigger("create");
+			}
+		});
+		return false;
+	}
+	    
+	let selectedOption01 = '구분';
+	var selectedOption02;
+	var selectedOption03;
+	var selectedOption04;
+	let selectedOption05 = '재학';
+	let selectedOption06 = '입학년도';
+	var selectName = $('#selectName').val();
+	var selectNumber = $('#selectNumber').val();
+	
+
+	$('#AdminSelectSelect01').on('change', function(e){
+		e.preventDefault();
+		console.log($(this).find("option:selected").val());
+		selectedOption01 = $(this).find("option:selected").val();
+		selectedOption02 = $('#AdminSelectSelect02').find("option:selected").val();
+		selectedOption03 = $('#AdminSelectSelect03').find("option:selected").val();
+		selectedOption04 = $('#AdminSelectSelect04').find("option:selected").val();
+		selectedOption05 = $('#AdminSelectSelect05').find("option:selected").val();
+		selectedOption06 = $('#AdminSelectSelect06').find("option:selected").val();
+	});
+	
+	$('#AdminSelectSelect02').on('change', function(e){
+		e.preventDefault();
+		console.log($(this).find("option:selected").val());
+
+		selectedOption01 = $('#AdminSelectSelect01').find("option:selected").val();
+		selectedOption02 = $(this).find("option:selected").val();
+		selectedOption03 = $('#AdminSelectSelect03').find("option:selected").val();
+		selectedOption04 = $('#AdminSelectSelect04').find("option:selected").val();
+		selectedOption05 = $('#AdminSelectSelect05').find("option:selected").val();
+		selectedOption06 = $('#AdminSelectSelect06').find("option:selected").val();
+			$.ajax({
+				type :'get',
+				url:'/admin/getAdminComboBox?CBX_COLLEGE_NAME='+selectedOption02,
+				dataType:'html',
+				success: function(data){
+					$('#content').html(data).trigger("create");
+			}
+			});
+			selectedOption01 = $('#AdminSelectSelect01').find("option:selected").val();
+			selectedOption02 = $(this).find("option:selected").val();
+			selectedOption03 = $('#AdminSelectSelect03').find("option:selected").val();
+			selectedOption04 = $('#AdminSelectSelect04').find("option:selected").val();
+			selectedOption05 = $('#AdminSelectSelect05').find("option:selected").val();
+			selectedOption06 = $('#AdminSelectSelect06').find("option:selected").val();
+		});
+	
+	$('#AdminSelectSelect03').on('change', function(e){
+		e.preventDefault();
+		console.log($(this).find("option:selected").val());
+
+		selectedOption01 = $('#AdminSelectSelect01').find("option:selected").val();
+		selectedOption02 = $('#AdminSelectSelect02').find("option:selected").val();
+		selectedOption03 = $(this).find("option:selected").val();
+		selectedOption04 = $('#AdminSelectSelect04').find("option:selected").val();
+		selectedOption05 = $('#AdminSelectSelect05').find("option:selected").val();
+		selectedOption06 = $('#AdminSelectSelect06').find("option:selected").val();
+		
+			$.ajax({
+				type :'get',
+				url:'/admin/getAdminComboBox?CBX_COLLEGE_NAME='+selectedOption02+'&CBX_DEPT_NAME='+selectedOption03,
+				dataType:'html',
+				success: function(data){
+					$('#content').html(data).trigger("create");
+			}
+			});
+			selectedOption01 = $('#AdminSelectSelect01').find("option:selected").val();
+			selectedOption02 = $('#AdminSelectSelect02').find("option:selected").val();
+			selectedOption03 = $(this).find("option:selected").val();
+			selectedOption04 = $('#AdminSelectSelect04').find("option:selected").val();
+			selectedOption05 = $('#AdminSelectSelect05').find("option:selected").val();
+			selectedOption06 = $('#AdminSelectSelect06').find("option:selected").val();
+		});
+	
+	$('#CourseSelect04').on('change', function(e){
+		e.preventDefault();
+		console.log($(this).find("option:selected").val());
+		selectedOption01 = $('#AdminSelectSelect01').find("option:selected").val();
+		selectedOption02 = $('#AdminSelectSelect02').find("option:selected").val();
+		selectedOption03 = $('#AdminSelectSelect03').find("option:selected").val();
+		selectedOption04 = $(this).find("option:selected").val();
+		selectedOption05 = $('#AdminSelectSelect05').find("option:selected").val();
+		selectedOption06 = $('#AdminSelectSelect06').find("option:selected").val();
+		$.ajax({
+			type :'get',
+			url:'/curriculum/getOpenCourse?CBX_COLLEGE_NAME='+selectedOption03+'&'+'CBX_DEPT_NAME='+selectedOption04,
+			dataType:'html',
+			success: function(data){
+				$('#content').html(data).trigger("create");
+			}
+			});
+	});
+		
+		function initClickEvent(){
+			console.log('initClickEvent');
+			 $('#adminSelectSearchButton').click(AdminSelectSearchButtonClick);
+			 <%for (int i = 0 ; i < selectTableSize ; i++){%>
+				 $('#select_table<%=i%>').click(onClickRow_SelectTable<%=i%>);
+			 <%}%>
+			
+			
+			}
+	});
+</script>
 <!-- </div> -->
 <!-- Page Content end -->
