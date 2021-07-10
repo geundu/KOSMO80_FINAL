@@ -74,7 +74,7 @@ public class CourseController {
 	 * 
 	 *  **포트 주의 
 	 *  **course.xml 210706 오세현 수정 
-	 *  http://localhost:7002/paprika/getLectureList.do?COURSE_NUMBER=41
+	 *  http://localhost:7000/course/getLectureList?COURSE_NUMBER=41
 	 */
 	@RequestMapping("/getLectureList")
 	public String getLectureList(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
