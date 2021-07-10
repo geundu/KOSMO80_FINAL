@@ -419,7 +419,7 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 			dataType : 'json',
 			data : 'json',
 			success : function(data) {
-
+				console.log(data[0]["COLLEGE_NAME"]);
 				$("#A_STUDNET_NAME").val('asdfasdf');
 				$("#A_STUDNET_NAME").val('PASSEDGRADE');
 				$("#A_STUDNET_NAME").val('<%=request.getParameter("STUDENT_NAME")%>')
