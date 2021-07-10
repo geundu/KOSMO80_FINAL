@@ -7,9 +7,6 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,9 +17,11 @@ import com.google.gson.Gson;
 @Controller
 @RequestMapping("/curriculum")
 public class CurriculumController {
-	@Autowired
-	private CurriculumLogic	curriculumLogic	= null;
-	Logger					logger			= LogManager.getLogger(CurriculumController.class);
+	private final CurriculumLogic curriculumLogic;
+
+	public CurriculumController(CurriculumLogic curriculumLogic) {
+		this.curriculumLogic = curriculumLogic;
+	}
 
 	/**
 	 * 개설강좌조회 페이지 이동, 콤보박스 리스트 셀렉 메소드
@@ -48,16 +47,9 @@ public class CurriculumController {
 	 */
 	@RequestMapping("/getOpenCourse")
 	public String getOpenCourse(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
-		logger.info("CurriculumController ==> getOpenCourse() 호출 성공");
 		Map<String, List<Map<String, Object>>> cbxMapList = null;
 		cbxMapList = curriculumLogic.getOpenCourse(pMap);
 		req.setAttribute("cbxMapList", cbxMapList);
-
-		logger.info(pMap);
-		logger.info("collegeList : " + cbxMapList.get("collegeList"));
-		logger.info("deptList : " + cbxMapList.get("deptList"));
-		logger.info("majorList : " + cbxMapList.get("majorList"));
-		logger.info("divisionList : " + cbxMapList.get("divisionList"));
 
 		return "forward:../pageContent/Course/Course.jsp";
 	}
@@ -80,7 +72,6 @@ public class CurriculumController {
 	 */
 	@RequestMapping("/jsonGetOpenCourseList")
 	public @ResponseBody String jsonGetOpenCourseList(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
-		logger.info("CurriculumController ==> jsonGetOpenCourseList() 호출 성공");
 		List<Map<String, Object>> courseList = null;
 		courseList = curriculumLogic.jsonGetOpenCourseList(pMap);
 		Gson	gson	= new Gson();
@@ -106,7 +97,6 @@ public class CurriculumController {
 	 */
 	@RequestMapping("/getCurriculum")
 	public String getCurriculum(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
-		logger.info("CurriculumController ==> getCurriculum() 호출 성공");
 		List<Map<String, Object>> cbBoxCurriculum = null;
 		cbBoxCurriculum = curriculumLogic.getCurriculum(pMap);
 		req.setAttribute("cbBoxCurriculum", cbBoxCurriculum);
@@ -131,7 +121,6 @@ public class CurriculumController {
 	 */
 	@RequestMapping("/jsonGetCurriculum")
 	public @ResponseBody String jsonGetCurriculum(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
-		logger.info("CurriculumController ==> jsonGetCurriculum() 호출 성공");
 		List<Map<String, Object>> curriculumList = null;
 		curriculumList = curriculumLogic.jsonGetCurriculum(pMap);
 		Gson	gson	= new Gson();

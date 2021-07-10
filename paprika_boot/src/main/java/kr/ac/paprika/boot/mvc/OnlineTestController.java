@@ -1,16 +1,12 @@
 package kr.ac.paprika.boot.mvc;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/onlineTest")
 public class OnlineTestController {
-	@Autowired
-	private OnlineTestLogic	onlineTestLogic	= null;
-	Logger					logger			= LogManager.getLogger(OnlineTestController.class);
+	private final OnlineTestLogic onlineTestLogic;
+
+	public OnlineTestController(OnlineTestLogic onlineTestLogic) {
+		this.onlineTestLogic = onlineTestLogic;
+	}
 
 	/**
 	 * 시험조회 메서드
@@ -51,8 +49,6 @@ public class OnlineTestController {
 	public String getOnlineTest(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
 		List<Map<String, Object>> onlineTest = null;
 		onlineTest = onlineTestLogic.getOnlineTest(pMap);
-		logger.info(pMap);
-		logger.info(onlineTest);
 		req.setAttribute("onlineTestList", onlineTest);
 
 		return "forward:../pageContent/Online/Test.jsp";

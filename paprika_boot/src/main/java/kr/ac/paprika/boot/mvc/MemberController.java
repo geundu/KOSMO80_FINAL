@@ -8,9 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,9 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/member")
 public class MemberController {
-	@Autowired
-	private MemberLogic	memberLogic	= null;
-	Logger				logger		= LogManager.getLogger(MemberController.class);
+	private final MemberLogic memberLogic;
+
+	public MemberController(MemberLogic memberLogic) {
+		this.memberLogic = memberLogic;
+	}
 
 	/**
 	 * 로그인 메서드
@@ -33,7 +32,6 @@ public class MemberController {
 	 */
 	@RequestMapping("/signIn")
 	public String signIn(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
-		logger.info("MemberController ==> signIn() 호출 성공");
 		String result = null;
 		result = memberLogic.signIn(pMap);
 

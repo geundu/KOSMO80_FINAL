@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.ac.paprika.curriculum">
-	<resultMap type="java.util.Map" id="courseMap" />
+	<resultMap type="java.util.Map" id="curriculumMap" />
 	<!-- ============================ 강좌조회 - 개설강좌조회 콤보박스 DML 시작 ============================= -->
 	<select id="cbBoxCollege" resultType="map">
 		SELECT col.COLLEGE_NAME, col.COLLEGE_NUMBER
@@ -10,6 +10,7 @@
 		ORDER BY
 		COLLEGE_NUMBER ASC
 	</select>
+	
 	<select id="cbBoxDept" parameterType="string" resultType="map">
 		SELECT COL2.COLLEGE_NAME, COL2.COLLEGE_NUMBER
 		FROM COLLEGE COL1, COLLEGE COL2
@@ -17,6 +18,7 @@
 		COL2.COLLEGE_HIGHER = COL1.COLLEGE_NUMBER
 		AND COL1.COLLEGE_NAME = #{CBX_COLLEGE_NAME}
 	</select>
+	
 	<select id="cbBoxMajor" parameterType="string" resultType="map">
 		SELECT COL2.COLLEGE_NAME, COL2.COLLEGE_NUMBER
 		FROM COLLEGE COL1, COLLEGE COL2
@@ -24,28 +26,31 @@
 		COL2.COLLEGE_HIGHER = COL1.COLLEGE_NUMBER
 		AND COL1.COLLEGE_NAME = #{CBX_DEPT_NAME}
 	</select>
+	
 	<select id="cbBoxDivision" resultType="map">
 		SELECT DISTINCT SUBJECT_DIVISION
 		FROM SUBJECT
 		ORDER BY SUBJECT_DIVISION DESC
 	</select>
 	<!-- ============================ 강좌조회 - 개설강좌조회 콤보박스 DML 끝 ================================ -->
+	
 	<!-- ============================ 강좌조회 - 개설강좌조회 프로시저  시작 ================================== -->
 	<select id="jsonGetOpenCourseList" parameterType="map" statementType="CALLABLE">
-		{CALL PROC_COURSE(#{COLLEGE_NAME}, #{SUBJECT_GRADE}, #{SUBJECT_DIVISION}, #{COURSE_DAY}, #{cursor, jdbcType=CURSOR, mode=OUT, resultMap=courseMap})}
+		{CALL PROC_COURSE(#{COLLEGE_NAME}, #{SUBJECT_GRADE}, #{SUBJECT_DIVISION}, #{COURSE_DAY}, #{cursor, jdbcType=CURSOR, mode=OUT, resultMap=curriculumMap})}
 	</select>
 	<!-- ============================ 강좌조회 - 개설강좌조회 프로시저  끝 ================================== -->
+	
 	<!-- ============================ 강좌조회 - 커리큘럼조회 프로시저  시작 ================================== -->
 	<select id="cbBoxCurriculum" parameterType="map" statementType="CALLABLE">
 		{CALL PROC_CURRICULUM_COMBOBOX
 		(#{STUDENT_NUMBER}, #{cursor, jdbcType=CURSOR,
-		mode=OUT, resultMap=courseMap})}
+		mode=OUT, resultMap=curriculumMap})}
 	</select>
 
 	<select id="getCurriculum" parameterType="map" statementType="CALLABLE">
 		{CALL PROC_CURRICULUM(#{STUDENT_NUMBER}, #{YEAR}
 		, #{cursor, jdbcType=CURSOR,
-		mode=OUT, resultMap=courseMap})}
+		mode=OUT, resultMap=curriculumMap})}
 	</select>
 	<!-- ============================ 강좌조회 - 커리큘럼조회 프로시저  끝 ================================== -->
 </mapper>

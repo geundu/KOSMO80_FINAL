@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.ac.paprika.studentInfo">
-	<resultMap type="java.util.Map" id="testMap" />
+	<resultMap type="java.util.Map" id="studentInfoMap" />
 	<!-- =================== 수강목록 조회 콤보박스 시작 ========================== -->
 
 	<select id="cbBoxCourseHistory" parameterType="map"
 		statementType="CALLABLE">
 		{CALL PROC_COURSE_HISTORY_COMBOBOX(#{STUDENT_NUMBER},
-		#{cursor, jdbcType=CURSOR, mode=OUT, resultMap=testMap})}
+		#{cursor, jdbcType=CURSOR, mode=OUT, resultMap=studentInfoMap})}
 	</select>
 
 	<!-- =================== 수강목록 조회 콤보박스 끝 ========================== -->
 	<select id="getStudentInfo" parameterType="map"
 		statementType="CALLABLE">
 		{CALL PROC_STU_TOTAL_INFO(#{STUDENT_NUMBER}, #{cursor,
-		jdbcType=CURSOR, mode=OUT, resultMap=testMap})}
+		jdbcType=CURSOR, mode=OUT, resultMap=studentInfoMap})}
 	</select>
 	<update id="studentInfoUpdate" parameterType="map"
 		statementType="CALLABLE">
@@ -27,37 +27,37 @@
 	<select id="getRegisterRecord" parameterType="map"
 		statementType="CALLABLE">
 		{CALL PROC_STU_REGISTER_SELECT(#{STUDENT_NUMBER},
-		#{cursor, jdbcType=CURSOR, mode=OUT, resultMap=testMap})}
+		#{cursor, jdbcType=CURSOR, mode=OUT, resultMap=studentInfoMap})}
 	</select>
 
 	<select id="getCourseHistory" parameterType="map"
 		statementType="CALLABLE">
 		{CALL
 		PROC_STUDENT_COURSE_SELECT(#{STUDENT_NUMBER},#{SEMESTER}, #{cursor,
-		jdbcType=CURSOR, mode=OUT, resultMap=testMap})}
+		jdbcType=CURSOR, mode=OUT, resultMap=studentInfoMap})}
 	</select>
 
 	<select id="getGradeHistory" parameterType="map"
 		statementType="CALLABLE">
 		{CALL PROC_STU_YEAR_SEM_SUBJ_SCORE(#{STUDENT_NUMBER},
-		#{cursor, jdbcType=CURSOR, mode=OUT, resultMap=testMap})}
+		#{cursor, jdbcType=CURSOR, mode=OUT, resultMap=studentInfoMap})}
 	</select>
 
 	<select id="getGradeHistoryDetail" parameterType="map"
 		statementType="CALLABLE">
 		{CALL
 		PROC_SUBJECT_SCORE_SELECT(#{STUDENT_NUMBER},#{SEMESTER}, #{cursor,
-		jdbcType=CURSOR, mode=OUT, resultMap=testMap})}
+		jdbcType=CURSOR, mode=OUT, resultMap=studentInfoMap})}
 	</select>
 
 	<select id="cbBoxGetTuition" parameterType="map"
 		statementType="CALLABLE">
 		{CALL PROC_TUITION_COMBOBOX(#{STUDENT_NUMBER}, #{cursor,
-		jdbcType=CURSOR, mode=OUT, resultMap=testMap})}
+		jdbcType=CURSOR, mode=OUT, resultMap=studentInfoMap})}
 	</select>
 	<select id="jsonGetTuitionHistory" parameterType="map"
 		statementType="CALLABLE">
 		{CALL PROC_TUITION_SELECT(#{STUDENT_NUMBER},#{SEMESTER},
-		#{cursor, jdbcType=CURSOR, mode=OUT, resultMap=testMap})}
+		#{cursor, jdbcType=CURSOR, mode=OUT, resultMap=studentInfoMap})}
 	</select>
 </mapper>
