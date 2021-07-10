@@ -42,7 +42,14 @@ out.print("selectTableSize:" + selectTableSize);
 %>
 <%=request.getParameter("CBX_COLLEGE_NAME")%>
 <%=request.getParameter("CBX_DEPT_NAME")%>
-
+				<% 
+				List<Map<String, Object>> memberDetail=
+				(List<Map<String, Object>>)request.getAttribute("memberDetail");
+				Map<String,Object> zmap = new HashMap<>();
+				if(memberDetail!=null){
+				zmap = memberDetail.get(0);
+				}
+				%>
 
 <script>
 console.log(cbxCollegeSize=<%=cbxCollegeSize   %>);
@@ -409,11 +416,15 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 				type: "get",
 				url : '/admin/jsonGetMemberList?STUDENT_NUMBER='+<%=selectTableArr[i]%>
 			+"&STU_OR_PRO="+'학생',
-			dataType : 'html',
+			dataType : 'json',
+			data : 'json',
 			success : function(data) {
-				$content.html(data).trigger("create");
+
+				$("#A_STUDNET_NAME").val('asdfasdf');
+				$("#A_STUDNET_NAME").val('PASSEDGRADE');
+				$("#A_STUDNET_NAME").val('<%=request.getParameter("STUDENT_NAME")%>')
 				$('#selectModalXl').modal('show');
-			}
+			}//쉬바루 죶같네
 			
 		});
 		return false;
@@ -430,32 +441,27 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 		
 		
 		<%}%>
+		
+		
 	    function AdminSelectSearchButtonClick(){
 		selectedOption02 = '<%=request.getParameter("CBX_COLLEGE_NAME")%>'
-		console.log(selectedOption02);
 		console.log('AdminSelectSearchButtonClick');
-		if(selectedOption02===undefined||selectedOption02==='null')
-		{selectedOption02='전체';}
-		if(selectedOption03===undefined){selectedOption03='학부';}
-		if(selectedOption04===undefined){selectedOption04='학과';}
-		console.log(selectedOption02);
-		console.log(selectedOption03);
-		console.log(selectedOption04);
-		if(selectedOption03!=='학부'){
-			selectedOption02=selectedOption03;
-		}
-		if(selectedOption04!=='학과'){
-			selectedOption02=selectedOption04;
-		}
-		if(selectedOption01===undefined||selectedOption01==='구분'){selectedOption01='전체';}
-		if(selectedOption05===undefined){selectedOption05='전체';}
-		if(selectedOption06===undefined||selectedOption06==="입학년도"){selectedOption06='0';}
-		console.log(selectedOption02+selectedOption03+selectedOption05+selectedOption06)
-		var selectNumber = $('#selectNumber').val();
-		if(selectNumber===""||selectNumber===null){selectNumber='0';}
-		var selectName = $('#selectName').val();
-		if(selectName===undefined||selectName===null||selectName===""){selectName='전체';}
-
+		if(!selectedOption01||selectedOption01==='구분'){selectedOption01='전체';}
+		if(!selectedOption02){selectedOption02='전체';}
+		if(!selectedOption03){selectedOption03='학부';}
+		if(!selectedOption04){selectedOption04='학과';}
+		if(!selectedOption05){selectedOption05='전체';}
+		if(!selectedOption06||selectedOption06==="입학년도"){selectedOption06='0';}
+		if(!selectNumber){selectNumber='0';}
+		if(!selectName){selectName='전체';}
+		
+		if(selectedOption03!=='학부'){selectedOption02=selectedOption03;}
+		if(selectedOption04!=='학과'){selectedOption02=selectedOption04;}	
+		
+		console.log("검색옵션은 "+selectedOption01+" / "+selectedOption02+" / "+selectedOption03+" / "
+				+selectedOption04+" / "+selectedOption05+" / "+selectedOption06+" / "+selectNumber+" / "
+				+selectName)
+				
 		$.ajax({
 			type : 'get',
 			url : '/admin/getMemberList?PROFESSOR_OR_STUDENT='+selectedOption01+'&COL='+selectedOption02+'&STATUS='
@@ -466,15 +472,16 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 			}
 		});
 		return false;
-		
-		
 	}
+	    
 	let selectedOption01 = '구분';
 	var selectedOption02;
 	var selectedOption03;
 	var selectedOption04;
 	let selectedOption05 = '재학';
 	let selectedOption06 = '입학년도';
+	var selectName = $('#selectName').val();
+	var selectNumber = $('#selectNumber').val();
 	
 
 	$('#AdminSelectSelect01').on('change', function(e){
@@ -493,7 +500,6 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 		console.log($(this).find("option:selected").val());
 
 		selectedOption01 = $('#AdminSelectSelect01').find("option:selected").val();
-		
 		selectedOption02 = $(this).find("option:selected").val();
 		selectedOption03 = $('#AdminSelectSelect03').find("option:selected").val();
 		selectedOption04 = $('#AdminSelectSelect04').find("option:selected").val();
@@ -508,10 +514,8 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 			}
 			});
 			selectedOption01 = $('#AdminSelectSelect01').find("option:selected").val();
-			
 			selectedOption02 = $(this).find("option:selected").val();
 			selectedOption03 = $('#AdminSelectSelect03').find("option:selected").val();
-			
 			selectedOption04 = $('#AdminSelectSelect04').find("option:selected").val();
 			selectedOption05 = $('#AdminSelectSelect05').find("option:selected").val();
 			selectedOption06 = $('#AdminSelectSelect06').find("option:selected").val();
@@ -537,10 +541,8 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 			}
 			});
 			selectedOption01 = $('#AdminSelectSelect01').find("option:selected").val();
-			
 			selectedOption02 = $('#AdminSelectSelect02').find("option:selected").val();
 			selectedOption03 = $(this).find("option:selected").val();
-			
 			selectedOption04 = $('#AdminSelectSelect04').find("option:selected").val();
 			selectedOption05 = $('#AdminSelectSelect05').find("option:selected").val();
 			selectedOption06 = $('#AdminSelectSelect06').find("option:selected").val();

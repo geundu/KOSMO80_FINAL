@@ -11,10 +11,6 @@ String sessionId = "15521091";
 	$(document).ready(function(){
 
 		'use strict';
-		function NullCheckAndAtoB(a,b){
-			if(a===undefined||a===null||a===""||a==="0"||a===Nan||a==='null'){a=b};
-		};
-// 		$(document).ready(function() {
 			console.log('readyEvent');
 			initClickEvent();
 		});

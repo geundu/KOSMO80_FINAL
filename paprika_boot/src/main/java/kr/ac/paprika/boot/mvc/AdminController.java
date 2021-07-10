@@ -64,6 +64,8 @@ public class AdminController {
 		memberList = adminLogic.getMemberDetail(pMap);
 		Gson gson 		= new Gson();
 		String temp 	= gson.toJson(memberList);
+		req.setAttribute("memberDetail", memberList);
+		logger.info("memberDetail=>"+memberList);
 		return temp;
 	}
     
@@ -88,16 +90,15 @@ public class AdminController {
 	 * 관리자 - 학생, 교직원 상세조회 메서드
 	 * @param req
 	 * @param pMap
-	 * @return "forward:/pageContent/Select.jsp";
-	 *  보류 아직 안만듬 프로시저
 	 */
 	@RequestMapping("/jsonGetMemberDetail")
-	public @ResponseBody String jsonGetMemberDetail(@RequestParam Map<String, Object> pMap) {
+	public @ResponseBody String jsonGetMemberDetail(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
 		logger.info("AdminController ==> jsonGetMemberDetail() 호출 성공");
 		List<Map<String, Object>> memberDetail = null;
 		memberDetail = adminLogic.getMemberDetail(pMap);
 		Gson	gson	= new Gson();
 		String	temp	= gson.toJson(memberDetail);
+
 		return temp;
 	}
 	

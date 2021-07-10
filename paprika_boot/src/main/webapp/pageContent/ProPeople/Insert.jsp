@@ -65,26 +65,33 @@
 							style="width: 200px; height: 200px; margin-top: 5%;">
 					</div>
 					<div class="col-md-3">
-						<div class="input-group mb-3" style="margin-top: 20%;">
-							<input type="text" class="form-control"
-								placeholder="사진은 350*470px이하 3:4 사이즈로 업로드"
-								aria-label="Recipient's username"
-								aria-describedby="button-addon2">
-							<div class="input-group-append">
-								<button class="btn btn-outline-secondary" type="button"
-									id="button-addon2">업로드</button>
-							</div>
+							<div class="custom-file" style="width: 250px; margin-top: 20%; 
+							padding-left: 10%;">
+					<input type="file" class="custom-file-input" id="customFile">
+					<!-- 파일첨부 -->
+					<label class="custom-file-label" for="customFile">첨부 파일</label>
+				</div>
+				
+					</div>
+					<div class="col-md-3">
+					<div class="input-group "
+						style="margin-top: 20%; padding-left: 10%;">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon3">이름</span>
 						</div>
+						<input type="text" class="form-control" value=123
+							id="STUDENT_NUMBER" aria-describedby="basic-addon3">
+					</div>
 					</div>
 					<div class="col-md-3">
-						<input type="text" class="form-control" placeholder="한글 이름 : 박정호"
-							aria-label="Username" aria-describedby="basic-addon1"
-							style="margin-top: 20%;">
+						<div class="input-group "
+						style="margin-top: 20%; padding-left: 10%;">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon3">학번</span>
+						</div>
+						<input type="text" class="form-control" value=123
+							id="STUDENT_NUMBER" aria-describedby="basic-addon3">
 					</div>
-					<div class="col-md-3">
-						<input type="text" class="form-control"
-							placeholder="학번 : 1232321321" aria-label="Class of"
-							aria-describedby="basic-addon1" style="margin-top: 20%;">
 					</div>
 				</div>
 				<div class="row" style="margin-top: 5%; text-align: center;">
@@ -109,14 +116,15 @@
 							<option>학과:기계공학</option>
 						</select>
 					</div>
+
+				</div>
+				<div class="row" style="margin-top: 5%; text-align: center;">
 					<div class="col-md-3">
 						<select class="custom-select">
 							<option>구분:대학생</option>
 							<option>구분:교직원</option>
 						</select>
 					</div>
-				</div>
-				<div class="row" style="margin-top: 5%; text-align: center;">
 					<div class="col-md-3">
 						<select class="custom-select">
 							<option>학적상태:재학</option>
@@ -125,9 +133,8 @@
 						</select>
 					</div>
 					<div class="col-md-3">
-						<input id="datepicker" width="276" />
+						<input type="text" id="datePicker" readonly class="form-control" value="날짜를 선택해주세요."/>
 					</div>
-					<div class="col-md-6"></div>
 				</div>
 			</div>
 		</div>
@@ -144,14 +151,20 @@
 </div>
 </div>
 <script>
-	$('#datepicker').datepicker({
+$(function(){
+	$('#datePicker').datepicker({
+		format: "yyyy-mm-dd",
+		autoclose : true,
+		orientation: "top auto ", 
+		daysOfWeekDisabled : [0,6],
+		templates : {
+ 	        leftArrow: '&laquo;',
+	        rightArrow: '&raquo;'
+	    },
 		uiLibrary : 'bootstrap4'
 	});
+});
 </script>
-<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js"
-	type="text/javascript"></script>
-<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css"
-	rel="stylesheet" type="text/css" />
 <script src="./js/toggleAction.js"></script>
 <!-- </div> -->
 <!-- Page Content end -->
