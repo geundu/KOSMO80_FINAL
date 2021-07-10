@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -32,10 +33,17 @@ public class OnlineTestLogic {
 	 * @return
 	 */
 	public int answerInsert(Map<String, Object> pMap) {
-		int result = 0;
-		result = onlineTestDao.answerInsert(pMap);
+		int answerInsert = 0;
 
-		return result;
+		try {
+			answerInsert = onlineTestDao.answerInsert(pMap);
+		}
+		catch (DataAccessException de) {
+			answerInsert = -1;
+		}
+
+		return answerInsert;
+
 	}
 
 	/**
@@ -45,10 +53,16 @@ public class OnlineTestLogic {
 	 * @return
 	 */
 	public int onlineTestInsert(Map<String, Object> pMap) {
-		int result = 0;
-		result = onlineTestDao.onlineTestInsert(pMap);
+		int onlineTestInsert = 0;
 
-		return result;
+		try {
+			onlineTestInsert = onlineTestDao.onlineTestInsert(pMap);
+		}
+		catch (DataAccessException de) {
+			onlineTestInsert = -1;
+		}
+
+		return onlineTestInsert;
 	}
 
 	/**
@@ -58,9 +72,16 @@ public class OnlineTestLogic {
 	 * @return
 	 */
 	public int testGrading(Map<String, Object> pMap) {
-		int result = 0;
-		result = onlineTestDao.testGrading(pMap);
+		int testGrading = 0;
 
-		return result;
+		try {
+			testGrading = onlineTestDao.testGrading(pMap);
+		}
+		catch (DataAccessException de) {
+			testGrading = -1;
+		}
+
+		return testGrading;
+
 	}
 }

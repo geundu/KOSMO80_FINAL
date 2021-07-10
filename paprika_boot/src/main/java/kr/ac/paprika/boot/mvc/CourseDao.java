@@ -69,12 +69,11 @@ public class CourseDao {
 	 */
 	public int homeworkInsert(Map<String, Object> pMap) throws DataAccessException {
 		logger.info("homeworkInsert() 호출 성공");
-		int result = 0;
-		result = sqlSessionTemplate.insert("homeworkCU", pMap);
-		logger.info(result);
-		logger.info(pMap);
+		int homeworkInsert = 0;
 
-		return result;
+		sqlSessionTemplate.insert("homeworkCU", pMap);
+		homeworkInsert = Integer.parseInt((String) pMap.get("PEXCEP"));
+		return homeworkInsert;
 	}
 
 	/**
@@ -85,12 +84,11 @@ public class CourseDao {
 	 */
 	public int homeworkUpdate(Map<String, Object> pMap) throws DataAccessException {
 		logger.info("homeworkUpdate() 호출 성공");
-		int result = 0;
-		result = sqlSessionTemplate.update("homeworkCU", pMap);
-		logger.info(result);
-		logger.info(pMap);
+		int homeworkUpdate = 0;
 
-		return result;
+		sqlSessionTemplate.update("homeworkCU", pMap);
+		homeworkUpdate = Integer.parseInt((String) pMap.get("PEXCEP"));
+		return homeworkUpdate;
 	}
 
 	/**
@@ -99,12 +97,13 @@ public class CourseDao {
 	 * @param pMap
 	 * @return
 	 */
-	public int feedbackInsert(Map<String, Object> pMap) throws DataAccessException {
+	public int feedbackInsert(Map<String, Object> pMap) {
 		logger.info("feedbackInsert() 호출 성공");
-		int result = 0;
-		result = sqlSessionTemplate.insert("feedbackInsert", pMap);
+		int feedbackInsert = 0;
 
-		return result;
+		sqlSessionTemplate.insert("feedbackInsert", pMap);
+		feedbackInsert = Integer.parseInt((String) pMap.get("PEXCEP"));
+		return feedbackInsert;
 	}
 
 	/**
@@ -115,10 +114,11 @@ public class CourseDao {
 	 */
 	public int homeworkGrading(Map<String, Object> pMap) throws DataAccessException {
 		logger.info("homeworkGrading() 호출 성공");
-		int result = 0;
-		result = sqlSessionTemplate.update("homeworkGrading", pMap);
+		int homeworkGrading = 0;
 
-		return result;
+		sqlSessionTemplate.update("homeworkGrading", pMap);
+		homeworkGrading = Integer.parseInt((String) pMap.get("PEXCEP"));
+		return homeworkGrading;
 	}
 
 	/**
@@ -145,9 +145,9 @@ public class CourseDao {
 	public List<Map<String, Object>> getFeedbackList(Map<String, Object> pMap) {
 		logger.info("getFeedbackList() 호출 성공");
 		List<Map<String, Object>> feedbackList = null;
+
 		sqlSessionTemplate.selectList("getFeedbackList", pMap);
 		feedbackList = (List<Map<String, Object>>) pMap.get("cursor");
-
 		return feedbackList;
 	}
 }

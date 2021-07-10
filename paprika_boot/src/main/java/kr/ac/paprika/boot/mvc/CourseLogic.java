@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -64,10 +65,16 @@ public class CourseLogic {
 	 */
 	public int homeworkInsert(Map<String, Object> pMap) {
 		logger.info("homeworkInsert() 호출 성공");
-		int result = 0;
-		result = courseDao.homeworkInsert(pMap);
+		int homeworkInsert = 0;
 
-		return result;
+		try {
+			homeworkInsert = courseDao.homeworkInsert(pMap);
+		}
+		catch (DataAccessException de) {
+			homeworkInsert = -1;
+		}
+
+		return homeworkInsert;
 	}
 
 	/**
@@ -78,10 +85,16 @@ public class CourseLogic {
 	 */
 	public int homeworkUpdate(Map<String, Object> pMap) {
 		logger.info("homeworkUpdate() 호출 성공");
-		int result = 0;
-		result = courseDao.homeworkUpdate(pMap);
+		int homeworkUpdate = 0;
 
-		return result;
+		try {
+			homeworkUpdate = courseDao.homeworkUpdate(pMap);
+		}
+		catch (DataAccessException de) {
+			homeworkUpdate = -1;
+		}
+
+		return homeworkUpdate;
 
 	}
 
@@ -93,10 +106,15 @@ public class CourseLogic {
 	 */
 	public int feedbackInsert(Map<String, Object> pMap) {
 		logger.info("feedbackInsert() 호출 성공");
-		int result = 0;
-		result = courseDao.feedbackInsert(pMap);
+		int feedbackInsert = 0;
 
-		return result;
+		try {
+			feedbackInsert = courseDao.feedbackInsert(pMap);
+		}
+		catch (DataAccessException de) {
+			feedbackInsert = -1;
+		}
+		return feedbackInsert;
 
 	}
 
@@ -108,10 +126,17 @@ public class CourseLogic {
 	 */
 	public int homeworkGrading(Map<String, Object> pMap) {
 		logger.info("homeworkGrading() 호출 성공");
-		int result = 0;
-		result = courseDao.homeworkGrading(pMap);
+		int homeworkGrading = 0;
 
-		return result;
+		try {
+			homeworkGrading = courseDao.homeworkGrading(pMap);
+
+		}
+		catch (DataAccessException de) {
+			homeworkGrading = -1;
+		}
+
+		return homeworkGrading;
 	}
 
 	/**

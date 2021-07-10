@@ -29,7 +29,7 @@ public class CourseController {
 	 * 
 	 * @param req
 	 * @P_STUDENT_NUMBER IN NUMBER
-	 *  
+	 * 
 	 * @param res
 	 * @STUDENT_NAME 학생이름
 	 * @SUBJECT_NAME 온라인 강좌이름
@@ -40,7 +40,7 @@ public class CourseController {
 	 * @throws ServletException
 	 * 
 	 *                          **포트 주의
-	 *                          http://localhost:7002/paprika/getOnlineCourseList.do?STUDENT_NUMBER=41
+	 *                          http://localhost:7000/course/getOnlineCourseList?STUDENT_NUMBER=41
 	 */
 	@RequestMapping("/getOnlineCourseList")
 	public String getOnlineCourseList(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
@@ -73,7 +73,7 @@ public class CourseController {
 	 * @throws ServletException
 	 * 
 	 *                          **포트 주의
-	 *                          http://localhost:7002/paprika/getLectureList.do?STUDENT_NUMBER=41
+	 *                          http://localhost:7000/course/getLectureList?STUDENT_NUMBER=41
 	 */
 	@RequestMapping("/getLectureList")
 	public String getLectureList(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
@@ -104,7 +104,7 @@ public class CourseController {
 	 * @throws IOException
 	 * @throws ServletException
 	 * 
-	 *                          http://localhost:7002/paprika/getLectureDetail.do?ONLINE_LECTURE_NUMBER=3001&STUDENT_NUMBER=41
+	 *                          http://localhost:7000/course/getLectureDetail?ONLINE_LECTURE_NUMBER=3001&STUDENT_NUMBER=41
 	 */
 	@RequestMapping("/getLectureDetail")
 	public String getLectureDetail(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
@@ -134,7 +134,7 @@ public class CourseController {
 	 * @throws IOException
 	 * @throws ServletException
 	 * 
-	 *                          http://localhost:7002/paprika/homeworkInsert.do?cud=c&HOMEWORK_NUMBER=1&ONLINE_LECTURE_NUMBER=3001&STUDENT_NUMBER=41&HOMEWORK_FILE=테스트
+	 *                          http://localhost:7000/course/homeworkInsert?TR_CODE=INSERT&HOMEWORK_NUMBER=1&ONLINE_LECTURE_NUMBER=3001&STUDENT_NUMBER=41&HOMEWORK_FILE=테스트
 	 */
 	@RequestMapping("/homeworkInsert")
 	public String homeworkInsert(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
@@ -142,7 +142,7 @@ public class CourseController {
 		int result = 0;
 		result = courseLogic.homeworkInsert(pMap);
 
-		if (result == -1) {
+		if (result == 1) {
 			return "redirect:../pageContent/Online/LectureDetail.jsp";
 		}
 		else {
@@ -169,7 +169,7 @@ public class CourseController {
 	 * @throws IOException
 	 * @throws ServletException
 	 * 
-	 *                          http://localhost:7002/paprika/homeworkUpdate.do?cud=u&HOMEWORK_NUMBER=1&ONLINE_LECTURE_NUMBER=3001&STUDENT_NUMBER=41&HOMEWORK_FILE=%ED%85%8C%EC%8A%A4%ED%8A%B8
+	 *                          http://localhost:7000/course/homeworkUpdate?TR_CODE=update&HOMEWORK_NUMBER=1&ONLINE_LECTURE_NUMBER=3001&STUDENT_NUMBER=41&HOMEWORK_FILE=%ED%85%8C%EC%8A%A4%ED%8A%B8
 	 */
 	@RequestMapping("/homeworkUpdate")
 	public String homeworkUpdate(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
@@ -204,13 +204,14 @@ public class CourseController {
 	 * @throws IOException
 	 * @throws ServletException
 	 * 
-	 *                          http://localhost:7002/paprika/feedbackInsert.do?ONLINE_LECTURE_NUMBER=3001&STUDENT_NUMBER=41&FEEDBACK_CONTENT=재밋는학사&FEEDBACK_TITLE=ㅈㅁ
+	 *                          http://localhost:7000/course/feedbackInsert?ONLINE_LECTURE_NUMBER=3001&STUDENT_NUMBER=41&FEEDBACK_CONTENT=재밋는학사&FEEDBACK_TITLE=ㅈㅁ
 	 */
 	@RequestMapping("/feedbackInsert")
 	public String feedbackInsert(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
 		logger.info("feedbackInsert() 호출 성공");
 		int result = 0;
 		result = courseLogic.feedbackInsert(pMap);
+		logger.info(result);
 
 		if (result == 1) {
 			return "redirect:../pageContent/Online/Feedback.jsp";
@@ -234,7 +235,7 @@ public class CourseController {
 	 * @throws IOException
 	 * @throws ServletException
 	 * 
-	 *                          http://localhost:7002/paprika/homeworkGrading.do?STUDENT_NUMBER=41
+	 *                          http://localhost:7000/course/homeworkGrading?STUDENT_NUMBER=41
 	 */
 	@RequestMapping("/homeworkGrading")
 	public String homeworkGrading(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
@@ -268,7 +269,7 @@ public class CourseController {
 	 * @throws IOException
 	 * @throws ServletException
 	 * 
-	 *                          http://localhost:7002/paprika/getHomeworkList.do?ONLINE_LECTURE_NUMBER=3001
+	 *                          http://localhost:7000/course/getHomeworkList?ONLINE_LECTURE_NUMBER=3001
 	 */
 	@RequestMapping("/getHomeworkList")
 	public String getHomeworkList(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
@@ -299,7 +300,7 @@ public class CourseController {
 	 * @throws IOException
 	 * @throws ServletException
 	 * 
-	 *                          http://localhost:7002/paprika/getFeedbackList.do?ONLINE_LECTURE_NUMBER=3001
+	 *                          http://localhost:7000/course/getFeedbackList?ONLINE_LECTURE_NUMBER=3001
 	 */
 	@RequestMapping("/getFeedbackList")
 	public String getFeedbackList(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
