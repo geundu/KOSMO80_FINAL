@@ -103,7 +103,7 @@ public class CourseController {
 	 */
 	@RequestMapping("/getLectureDetail")
 	public String getLectureDetail(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
-		List<Map<String, Object>> lectureDetail = null;
+		Map<String ,List<Map<String, Object>>> lectureDetail = null;
 		lectureDetail = courseLogic.getLectureDetail(pMap);
 		req.setAttribute("lectureDetail", lectureDetail);
 

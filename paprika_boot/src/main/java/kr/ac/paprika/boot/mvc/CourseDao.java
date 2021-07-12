@@ -51,12 +51,12 @@ public class CourseDao {
 	 * @param pMap
 	 * @return
 	 */
-	public List<Map<String, Object>> getLectureDetail(Map<String, Object> pMap) {
-		List<Map<String, Object>> lectureDetail = null;
+	public void getLectureDetail(Map<String, Object> pMap) {
+		/*List<Map<String, Object>> lectureDetail = null;
+		List<Map<String, Object>> file = null;*/
 		sqlSessionTemplate.selectList(NameSpace.COURSE + "getLectureDetail", pMap);
-		lectureDetail = (List<Map<String, Object>>) pMap.get("cursor");
 
-		return lectureDetail;
+		/*return lectureDetail;*/
 	}
 
 	/**
