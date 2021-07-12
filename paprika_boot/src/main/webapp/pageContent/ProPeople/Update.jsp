@@ -80,7 +80,7 @@
 							<span class="input-group-text" id="basic-addon3">이름</span>
 						</div>
 						<input type="text" class="form-control" value=123
-							id="STUDENT_NUMBER" aria-describedby="basic-addon3">
+							id="STUDENT_NAME" aria-describedby="basic-addon3">
 					</div>
 					</div>
 					<div class="col-md-3">
