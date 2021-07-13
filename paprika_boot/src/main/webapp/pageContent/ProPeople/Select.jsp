@@ -404,6 +404,7 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 	$(function(){
 		'use strict';
 		var $AdminSelectTable = $('#AdminSelectTable');
+		var handleData;
 		$(document).ready(function () {
 			 console.log('readyEvent');
 			 initClickEvent();
@@ -450,11 +451,17 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 		<%}%>
 		function proUpdateButtonClick(e) {
 			console.log('proUpdateButton');
-			
+			/* handleData = {"STUDENT_NUMBER":$(A_STUDENT_NUMBER).val(),} */
 			$.ajax({
 				type : 'get',
-				url : 'pageContent/ProPeople/Update.jsp',
+				url : '/admin/memberUpdatePage?STUDENT_NUMBER='+$("#A_STUDENT_NUMBER").val()+"&"
+						+"STUDENT_NAME="+$("#A_STUDNET_NAME").val()+"&"+"DEPT_NAME="+$("#A_DEPT").val()
+						+"&"+"MAJOR_NAME="+$("#A_MAJOR").val()+"&"+"STU_OR_PRO="+$("#A_STU_OR_PRO").val()
+						+"&"+"REG_STATUS="+$("#A_REG_STATUS").val()
+						+"&"+"STUDENT_ENTER_YEAR="+$("#A_STUDENET_ENTER_YEAR").val(),
+						
 				/* url:'pageContent/ProPeople/Update.jsp', */
+				/* data : handleData, */
 				dataType : 'html',
 				success : function(data) { 
 					$('#selectModalXl').removeClass("show");

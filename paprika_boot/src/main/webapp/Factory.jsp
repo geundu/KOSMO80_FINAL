@@ -6,8 +6,7 @@ request.setCharacterEncoding("utf-8");
 String sessionId = "15521091";
 %>
 <script>
-	let sid =
-<%=sessionId%>
+	let sid = <%=sessionId%>
 	$(document).ready(function(){
 
 		'use strict';

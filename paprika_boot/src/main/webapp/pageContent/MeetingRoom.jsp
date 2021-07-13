@@ -6,16 +6,6 @@ request.setCharacterEncoding("utf-8");
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script src="../js/toggleAction.js"></script>
-<script src="../js/jquery.min.js"></script>
-<script src="../js/popper.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/main.js"></script>
-<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
-<link rel='stylesheet' href="../css/style.css">
-<link rel='stylesheet' href="../css/main.css">
-<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
-
 
 <style>
 #calendar{
@@ -67,33 +57,34 @@ request.setCharacterEncoding("utf-8");
 	<!-- 여기부터 메인 페이지 -->
 
 
-
+<div class="d-flex justify-content-center">
+<div class="container">
 	<!-- screen1 시작 -->
-	<div class="screen1" style="width: 50%; height: 55%; float: left; background-color: bisque;">
+	<div class="screen1" style="width: 40%; height: auto; float: left; background-color: bisque;">
 		<div id='calendar' style="width: auto; height: auto;">
 		</div>
 	</div>
 	<!--screen1 끝-->
 	<!-- screen2 시작 -->
-	<div class="screen2" style="width: 50%; height: 55%; float: right; background-color: yellowgreen; padding: 50px;" id="screen2">
+<div class="screen2" style="width: 60%; height: 65%; float: right; background-color: yellowgreen; padding: 50px;" id="screen2">
 		<table style="margin: 1em;">
 			<thead>
 				<th>
 					<button type="button" class="btn btn-danger mr-5" style="height: 75%; width: 100px; margin-top: 2%; margin-left: 2%;">
-						<h1>A관</h1>
+						<h2>A관</h2>
 					</button>
 				</th>
 				<th>
-					<button type="button" class="btn btn-primary btn-lg" style="padding: 15px;">1회의실</button>
+					<button type="button" class="btn btn-primary btn-lg" style="padding: 15px;">1실</button>
 				</th>
 				<th>
-					<button type="button" class="btn btn-primary btn-lg" style="padding: 15px;">2회의실</button>
+					<button type="button" class="btn btn-primary btn-lg" style="padding: 15px;">2실</button>
 				</th>
 				<th>
-					<button type="button" class="btn btn-primary btn-lg" style="padding: 15px;">3회의실</button>
+					<button type="button" class="btn btn-primary btn-lg" style="padding: 15px;">3실</button>
 				</th>
 				<th>
-					<button type="button" class="btn btn-primary btn-lg" style="padding: 15px;">4회의실</button>
+					<button type="button" class="btn btn-primary btn-lg" style="padding: 15px;">4실</button>
 				</th>
 			</thead>
 			<tbody>
@@ -104,20 +95,19 @@ request.setCharacterEncoding("utf-8");
 			<thead>
 				<th>
 					<button type="button" class="btn btn-danger mr-5" style="height: 75%; width: 100px; margin-top: 2%; margin-left: 2%;">
-						<h1>B관</h1>
+						<h2>B관</h2>
 					</button>
 				<th>
-					<button type="button" class="btn btn-primary btn-lg" style="padding: 15px;">1회의실</button>
+					<button type="button" class="btn btn-primary btn-lg" style="padding: 15px;">1실</button>
 				</th>
 				<th>
-					<button type="button" class="btn btn-primary btn-lg" style="padding: 15px;">2회의실</button>
+					<button type="button" class="btn btn-primary btn-lg" style="padding: 15px;">2실</button>
 				</th>
 				<th>
-					<button type="button" class="btn btn-primary btn-lg" style="padding: 15px;">3회의실</button>
+					<button type="button" class="btn btn-primary btn-lg" style="padding: 15px;">3실</button>
 				</th>
 				<th>
-					<button type="button" class="btn btn-primary btn-lg" style="padding: 15px;">4회의실</button>
-				</th>
+					<button type="button" class="btn btn-primary btn-lg" style="padding: 15px;">4실</button>
 				</th>
 			</thead>
 			<tbody>
@@ -129,20 +119,20 @@ request.setCharacterEncoding("utf-8");
 			<thead>
 				<th>
 					<button type="button" class="btn btn-danger mr-5" style="height: 75%; width: 100px; margin-top: 2%; margin-left: 2%;">
-						<h1>C관</h1>
+						<h2>C관</h2>
 					</button>
 				</th>
 				<th>
-					<button type="button" class="btn btn-primary btn-lg" style="padding: 15px;">1회의실</button>
+					<button type="button" class="btn btn-primary btn-lg" style="padding: 15px;">1실</button>
 				</th>
 				<th>
-					<button type="button" class="btn btn-primary btn-lg" style="padding: 15px;">2회의실</button>
+					<button type="button" class="btn btn-primary btn-lg" style="padding: 15px;">2실</button>
 				</th>
 				<th>
-					<button type="button" class="btn btn-primary btn-lg" style="padding: 15px;">3회의실</button>
+					<button type="button" class="btn btn-primary btn-lg" style="padding: 15px;">3실</button>
 				</th>
 				<th>
-					<button type="button" class="btn btn-primary btn-lg" style="padding: 15px;">4회의실</button>
+					<button type="button" class="btn btn-primary btn-lg" style="padding: 15px;">4실</button>
 				</th>
 			</thead>
 			<tbody>
@@ -152,7 +142,7 @@ request.setCharacterEncoding("utf-8");
 	<!--screen2 끝-->
 	<!-- screen3 시작 -->
 	<div class="screen3"
-		style="width: 60%; height: 30%; float: left; background-color: aquamarine; margin: auto; display: flex; padding: 15px; border-spacing: 10px;"
+		style="width: 45%; height: 25%; float: left; background-color: aquamarine; margin: auto; display: flex; border-spacing: 10px;"
 		id="screen3">
 		<table style="margin: 1em;" id="screen3tb1">
 			<thead>
@@ -160,46 +150,46 @@ request.setCharacterEncoding("utf-8");
 			<tbody>
 				<tr style="margin: 1em;">
 					<td>
-						<button type="button" class="btn btn-primary mr-1" style="width: 65px; height: 90px; text-align: center;">09:00</button>
+						<button type="button" class="btn btn-primary mr-1" style="width: 65px; height: 70px; text-align: center;">09:00</button>
 					</td>
 					<td>
-						<button type="button" class="btn btn-primary mr-1" style="width: 65px; height: 90px; text-align: center;">10:00</button>
+						<button type="button" class="btn btn-primary mr-1" style="width: 65px; height: 70px; text-align: center;">10:00</button>
 					</td>
 					<td>
-						<button type="button" class="btn btn-primary mr-1" style="width: 65px; height: 90px; text-align: center;" disabled='disabled'>11:00</button>
+						<button type="button" class="btn btn-primary mr-1" style="width: 65px; height: 70px; text-align: center;" disabled='disabled'>11:00</button>
 					</td>
 					<td>
-						<button type="button" class="btn btn-primary mr-1" style="width: 65px; height: 90px; text-align: center;">12:00</button>
+						<button type="button" class="btn btn-primary mr-1" style="width: 65px; height: 70px; text-align: center;">12:00</button>
 					</td>
 					<td>
-						<button type="button" class="btn btn-primary mr-1" style="width: 65px; height: 90px; text-align: center;">13:00</button>
+						<button type="button" class="btn btn-primary mr-1" style="width: 65px; height: 70px; text-align: center;">13:00</button>
 					</td>
 					<td>
-						<button type="button" class="btn btn-primary mr-1" style="width: 65px; height: 90px; text-align: center;">14:00</button>
+						<button type="button" class="btn btn-primary mr-1" style="width: 65px; height: 70px; text-align: center;">14:00</button>
 					</td>
 
 				</tr>
 				<tr>
 					<td>
-						<button type="button" class="btn btn-primary mr-1" style="width: 65px; height: 90px; text-align: center;">15:00</button>
+						<button type="button" class="btn btn-primary mr-1" style="width: 65px; height: 70px; text-align: center;">15:00</button>
 					</td>
 					<td>
-						<button type="button" class="btn btn-primary mr-1" style="width: 65px; height: 90px; text-align: center;">16:00</button>
+						<button type="button" class="btn btn-primary mr-1" style="width: 65px; height: 70px; text-align: center;">16:00</button>
 					</td>
 					<td>
-						<button type="button" class="btn btn-primary mr-1" style="width: 65px; height: 90px; text-align: center;">17:00</button>
+						<button type="button" class="btn btn-primary mr-1" style="width: 65px; height: 70px; text-align: center;">17:00</button>
 					</td>
 					<td>
-						<button type="button" class="btn btn-primary mr-1" style="width: 65px; height: 90px; text-align: center;" disabled='disabled'>18:00</button>
+						<button type="button" class="btn btn-primary mr-1" style="width: 65px; height: 70px; text-align: center;" disabled='disabled'>18:00</button>
 					</td>
 					<td>
-						<button type="button" class="btn btn-primary mr-1" style="width: 65px; height: 90px; text-align: center;">19:00</button>
+						<button type="button" class="btn btn-primary mr-1" style="width: 65px; height: 70px; text-align: center;">19:00</button>
 					</td>
 					<td>
-						<button type="button" class="btn btn-primary mr-1" style="width: 65px; height: 90px; text-align: center;">20:00</button>
+						<button type="button" class="btn btn-primary mr-1" style="width: 65px; height: 70px; text-align: center;">20:00</button>
 					</td>
 					<td>
-						<button type="button" id="logout" onclick="logout()" class="btn btn-primary mr-1" style="width: 65px; height: 90px; text-align: center;">로그아웃</button>
+						<button type="button" id="logout" onclick="logout()" class="btn btn-primary mr-1" style="width: 65px; height: 70px; text-align: center;">로그아웃</button>
 					</td>
 					
 				</tr>
@@ -211,7 +201,7 @@ request.setCharacterEncoding("utf-8");
 			<tbody>
 				<tr>
 					<td>
-						<button id="reserv" type="button" class="btn btn-primary mr-1" style="width: 65px; height: 180px; text-align: center;">예약</button> <!-- 강찬영 -->
+						<button id="reserv" type="button" class="btn btn-primary mr-1" style="width: 65px; height: 140px; text-align: center;">예약</button> <!-- 강찬영 -->
 					</td>
 				</tr>
 			</tbody>
@@ -238,12 +228,14 @@ request.setCharacterEncoding("utf-8");
 			</table>
 		</div>
 	</div>
+	</div>
+	</div>
 	<!--screen4  끝-->
 
 	<!-- Page Content end -->
 
 
-
+	<script src="../js/toggleAction.js"></script>
 	<!-- 달력시작 -->
 	<script>
 		//현재 날짜 구하기

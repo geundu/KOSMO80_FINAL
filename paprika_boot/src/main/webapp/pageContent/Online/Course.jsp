@@ -100,8 +100,7 @@ out.print("onlineCourseSize:" + onlineCourseSize);
 							<div class="card-header h6"><%=tmap.get("SUBJECT_NAME")%></div>
 							<div class="card-body">
 								<h5 class="card-title">
-									교수명 :
-									<%=tmap.get("PROFESSOR_NAME")%></h5>
+									교수명 :<%=tmap.get("PROFESSOR_NAME")%></h5>
 								<p class="card-text"><%=tmap.get("COURSE_CONTENT")%>
 								</p>
 							</div>
@@ -123,7 +122,7 @@ function tdClickEvent(course_number){
  	  console.log("course_number : "+course_number);
  	 $.ajax({
 			type : 'get',
-			url : '/course/getLectureList?COURSE_NUMBER=' + course_number,
+ 			url : '/course/getLectureList?COURSE_NUMBER=' + course_number,
 			/* url:'pageContent/StuInfo/StuCourse.jsp', */
 			dataType : 'html',
 			success : function(data) {
@@ -139,8 +138,7 @@ function tdClickEvent(course_number){
 	   'use strict';
 	   var $content = $('#content');
 	   function initCourseAjax() {
-	         console.log('initCourseAjax');
-	         
+// 	         console.log('initCourseAjax');
 	         $.ajax({
 	            type : 'get',
 	            /* url:'pageContent/Online/Course.jsp', */

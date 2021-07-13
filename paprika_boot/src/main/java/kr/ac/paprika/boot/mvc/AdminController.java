@@ -1,5 +1,7 @@
 package kr.ac.paprika.boot.mvc;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -72,6 +74,22 @@ public class AdminController {
 		studentGrade = adminLogic.getStudentGrade(pMap);
 		req.setAttribute("studentGrade", studentGrade);
 		return "forward:/pageContent/Select.jsp";
+	}
+	
+	/**
+	 *  관리자 성적조회 메서드
+	 * @param req
+	 * @param pMap
+	 * @return "forward:/pageContent/Select.jsp";
+	 *http://localhost:7000/admin/getStudentGrade?COURSE_NUMBER=2001001
+	 */
+	@RequestMapping("/memberUpdatePage")
+	public String memberUpdatePage(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
+		List<Map<String, Object>> updateList = new ArrayList<Map<String, Object>>();
+		System.out.println(pMap);
+		updateList.add(pMap);
+		req.setAttribute("updateList", updateList);
+		return "forward:../pageContent/ProPeople/Update.jsp";
 	}
 
 	

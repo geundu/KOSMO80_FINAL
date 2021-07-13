@@ -1,8 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
 <%
 	request.setCharacterEncoding("utf-8");
+%>
+<%
+StringBuilder path = new StringBuilder(request.getContextPath());
+path.append("/");
+List<Map<String, Object>> updateList = null;
+updateList = (List<Map<String, Object>>) request.getAttribute("updateList");
+int updateListSize = 0;
+Map<String, Object> rmap = new HashMap<>();
+if (updateList != null) {
+	updateListSize = updateList.size();
+	for (int i = 0; i < updateListSize; i++) {
+		rmap = updateList.get(i);
+	}
+}
+out.print("updateListSize:"+updateListSize);
+out.print("updateList:"+updateList);
 %>
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5"> -->
@@ -79,7 +96,7 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon3">이름</span>
 						</div>
-						<input type="text" class="form-control" value=123
+						<input type="text" class="form-control" value=<%=rmap.get("STUDENT_NAME")%>
 							id="STUDENT_NAME" aria-describedby="basic-addon3">
 					</div>
 					</div>
@@ -89,7 +106,7 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon3">학번</span>
 						</div>
-						<input type="text" class="form-control" value=123
+						<input type="text" class="form-control" value=<%=rmap.get("STUDENT_NUMBER")%>
 							id="STUDENT_NUMBER" aria-describedby="basic-addon3">
 					</div>
 					</div>
