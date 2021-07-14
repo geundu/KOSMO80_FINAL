@@ -202,12 +202,13 @@ public class CourseController {
 	public String feedbackInsert(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
 		int result = 0;
 		result = courseLogic.feedbackInsert(pMap);
+		String resultString = String.valueOf(result);
 
 		if (result == 1) {
-			return "redirect:../pageContent/Online/Feedback.jsp";
+			return resultString;
 		}
 		else {
-			return "redirect:/pageContent/Course/fail.jsp";
+			return resultString;
 		}
 	}
 
@@ -267,6 +268,15 @@ public class CourseController {
 		req.setAttribute("courseList", homeworkList);
 
 		return "forward:../pageContent/ProOnline/HomeworkCheck.jsp";
+	}
+	
+	@RequestMapping("/feedbackDetail")
+	public String feedbackDetail(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
+		List<Map<String, Object>> feedbackDetail = null;
+		feedbackDetail = courseLogic.getFeedbackList(pMap);
+		req.setAttribute("feedbackDetail", feedbackDetail);
+
+		return "forward:../pageContent/Online/Feedback.jsp";
 	}
 
 	/**

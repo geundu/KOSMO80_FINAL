@@ -97,7 +97,7 @@ public class CourseDao {
 		int feedbackInsert = 0;
 		sqlSessionTemplate.insert(NameSpace.COURSE + "feedbackInsert", pMap);
 		feedbackInsert = Integer.parseInt((String) pMap.get("PEXCEP"));
-
+		
 		return feedbackInsert;
 	}
 
@@ -127,6 +127,14 @@ public class CourseDao {
 		homeworkList = (List<Map<String, Object>>) pMap.get("cursor");
 
 		return homeworkList;
+	}
+	
+	public List<Map<String, Object>> feedbackDetail(Map<String, Object> pMap) {
+		List<Map<String, Object>> feedbackDetail = null;
+		sqlSessionTemplate.selectList(NameSpace.COURSE + "getfeedbackDetail", pMap);
+		feedbackDetail = (List<Map<String, Object>>) pMap.get("cursor");
+
+		return feedbackDetail;
 	}
 
 	/**

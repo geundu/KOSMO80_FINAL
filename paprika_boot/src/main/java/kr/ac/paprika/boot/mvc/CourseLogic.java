@@ -150,6 +150,13 @@ public class CourseLogic {
 		return homeworkList;
 	}
 
+	public List<Map<String, Object>> feedbackDetail(Map<String, Object> pMap) {
+		List<Map<String, Object>> feedbackDetail = null;
+		feedbackDetail = courseDao.feedbackDetail(pMap);
+
+		return feedbackDetail;
+	}
+	
 	/**
 	 * 교수) 받은 피드백 목록 확인
 	 * 

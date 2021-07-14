@@ -96,7 +96,7 @@ out.print("fileInfoSize:" + fileInfoSize);
 			style="width: 100%; height: auto%; background-color: ;">
 			<h3 style="text-align:center;"><%=rmap.get("SUBJECT_NAME")%>-<%=rmap.get("ONLINE_LECTURE_TITLE") %></h3>
 			<div class="col text-center" style="padding-bottom:10px;">
-				<button class="btn  btn-primary mr-5" onClick="feedbackClickEvent()">피드백보내기</button>
+				<button class="btn  btn-primary mr-5" onClick="feedbackClickEvent(<%=rmap.get("ONLINE_LECTURE_NUMBER")%>)">피드백보내기</button>
 			</div>
 		</div>
 		<div class="screen2"
@@ -128,7 +128,7 @@ out.print("fileInfoSize:" + fileInfoSize);
 		console.log("lecture_number :"+lecture_number);
 	 	 $.ajax({
 				type : 'get',
-				url : '/course/getFeedbackList?ONLINE_LECTURE_NUMBER='+lecture_number,
+				url : '/course/feedbackDetail?ONLINE_LECTURE_NUMBER='+lecture_number,
 				/* url:'pageContent/StuInfo/StuCourse.jsp', */
 				dataType : 'html',
 				success : function(data) {

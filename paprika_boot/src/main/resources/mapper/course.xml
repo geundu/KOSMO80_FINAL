@@ -29,7 +29,8 @@
 	<select id="feedbackInsert" parameterType="map">
 		{CALL
 		PROC_STU_FEEDBACK_SEND_INSERT(#{ONLINE_LECTURE_NUMBER},#{STUDENT_NUMBER},#{FEEDBACK_CONTENT},
-		#{FEEDBACK_TITLE})}
+		#{FEEDBACK_TITLE},#{PEXCEP, jdbcType=INTEGER,mode=OUT}
+		,#{PEXCEPMSG, jdbcType=VARCHAR,mode=OUT})}
 	</select>
 
 	<select id="homeworkGrading" parameterType="map">
@@ -43,6 +44,12 @@
 		jdbcType=CURSOR, mode=OUT, resultMap=courseMap})}
 	</select>
 
+	<select id="getfeedbackDetail" parameterType="map" statementType="CALLABLE">
+		{CALL
+		PROC_STU_FEEDBACK_SEND_WINDOW(#{ONLINE_LECTURE_NUMBER},#{cursor,
+		jdbcType=CURSOR, mode=OUT, resultMap=courseMap})}
+	</select>
+	
 	<select id="getFeedbackList" parameterType="map" statementType="CALLABLE">
 		{CALL
 		PROC_PRO_ONLINE_FEEDBACK(#{ONLINE_LECTURE_NUMBER},#{cursor,
