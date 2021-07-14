@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.ac.paprika.course">
 	<resultMap type="java.util.Map" id="courseMap" />
+	<resultMap type="java.util.Map" id="fileMap" />
 	<select id="getOnlineCourseList" parameterType="map" statementType="CALLABLE">
 		{CALL PROC_STU_SELECT_ONLINE_COURSE(#{STUDENT_NUMBER},
 		#{cursor,
@@ -14,12 +15,11 @@
 		mode=OUT, resultMap=courseMap})}
 	</select>
 
-	<select id="getLectureDetail" parameterType="map" statementType="CALLABLE">
-		{CALL
-		PROC_STU_ONLINE_LECTURE_DETAIL(#{ONLINE_LECTURE_NUMBER},#{STUDENT_NUMBER},
-		#{cursor,
-		jdbcType=CURSOR, mode=OUT, resultMap=courseMap})}
-	</select>
+	<select id="getLectureDetail" parameterType="map"
+      statementType="CALLABLE">
+      {CALL PROC_STU_ONLINE_LECTURE_DETAIL(#{ONLINE_LECTURE_NUMBER},#{STUDENT_NUMBER},
+      #{OL_CURSOR,jdbcType=CURSOR, mode=OUT, resultMap=courseMap}, #{HW_CURSOR,jdbcType=CURSOR, mode=OUT, resultMap=fileMap})}
+   </select>
 
 	<select id="homeworkCU" parameterType="map">
 		{CALL
@@ -29,7 +29,8 @@
 	<select id="feedbackInsert" parameterType="map">
 		{CALL
 		PROC_STU_FEEDBACK_SEND_INSERT(#{ONLINE_LECTURE_NUMBER},#{STUDENT_NUMBER},#{FEEDBACK_CONTENT},
-		#{FEEDBACK_TITLE})}
+		#{FEEDBACK_TITLE},#{PEXCEP, jdbcType=INTEGER,mode=OUT}
+		,#{PEXCEPMSG, jdbcType=VARCHAR,mode=OUT})}
 	</select>
 
 	<select id="homeworkGrading" parameterType="map">
@@ -43,6 +44,12 @@
 		jdbcType=CURSOR, mode=OUT, resultMap=courseMap})}
 	</select>
 
+	<select id="getfeedbackDetail" parameterType="map" statementType="CALLABLE">
+		{CALL
+		PROC_STU_FEEDBACK_SEND_WINDOW(#{ONLINE_LECTURE_NUMBER},#{cursor,
+		jdbcType=CURSOR, mode=OUT, resultMap=courseMap})}
+	</select>
+	
 	<select id="getFeedbackList" parameterType="map" statementType="CALLABLE">
 		{CALL
 		PROC_PRO_ONLINE_FEEDBACK(#{ONLINE_LECTURE_NUMBER},#{cursor,

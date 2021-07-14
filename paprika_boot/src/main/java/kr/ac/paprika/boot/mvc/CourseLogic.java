@@ -1,5 +1,6 @@
 package kr.ac.paprika.boot.mvc;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -46,10 +47,15 @@ public class CourseLogic {
 	 * @param pMap
 	 * @return
 	 */
-	public List<Map<String, Object>> getLectureDetail(Map<String, Object> pMap) {
-		List<Map<String, Object>> lectureDetail = null;
-		lectureDetail = courseDao.getLectureDetail(pMap);
-
+	public Map<String ,List<Map<String, Object>>> getLectureDetail(Map<String, Object> pMap) {
+		Map<String ,List<Map<String, Object>>> lectureDetail = new HashMap<>();
+		List<Map<String, Object>> lectureInfo = null;
+		List<Map<String, Object>> fileInfo = null;
+		courseDao.getLectureDetail(pMap);
+		lectureInfo = (List<Map<String, Object>>) pMap.get("OL_CURSOR");
+		fileInfo = (List<Map<String, Object>>) pMap.get("HW_CURSOR");
+		lectureDetail.put("lectureInfo",lectureInfo);
+		lectureDetail.put("fileInfo",fileInfo);
 		return lectureDetail;
 	}
 
@@ -144,6 +150,13 @@ public class CourseLogic {
 		return homeworkList;
 	}
 
+	public List<Map<String, Object>> feedbackDetail(Map<String, Object> pMap) {
+		List<Map<String, Object>> feedbackDetail = null;
+		feedbackDetail = courseDao.feedbackDetail(pMap);
+
+		return feedbackDetail;
+	}
+	
 	/**
 	 * 교수) 받은 피드백 목록 확인
 	 * 
