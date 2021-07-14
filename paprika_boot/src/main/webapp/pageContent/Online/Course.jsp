@@ -18,14 +18,8 @@ if (onlineCourseList != null) {
 		rmap = onlineCourseList.get(i);
 	}
 }
-out.print("onlineCourseSize:" + onlineCourseSize);
 %>
-<script>
-	console.log(
-<%=onlineCourseSize%>
-	);
-</script>
-
+<button type="button" id="logout" onclick="logout()" class="btn btn-primary mr-1" style="margin-left: 0.2em; font-size:12px; width: 100px; height: auto; text-align: center;">logout</button>
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5"> -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -69,9 +63,6 @@ out.print("onlineCourseSize:" + onlineCourseSize);
 				</tr>
 			</thead>
 			<tbody>
-				<%-- <%
-				for (int i = 0; i <= onlineCourseSize + 1 / 4; i++) {
-				%> --%>
 				<%
          		for(int i=0; i < onlineCourseSize; i++){
          		   if(i%4 == 0){
@@ -80,19 +71,6 @@ out.print("onlineCourseSize:" + onlineCourseSize);
 		   <%
             }
          %>
-					<%-- <%
-					int length = 0;
-					if ((onlineCourseSize - i * 4) / 4 > 1) {
-						length = 4;
-					} else if ((onlineCourseSize - i * 4) / 4 == 0) {
-						length = (onlineCourseSize - i * 4) % 4;
-					} else if ((onlineCourseSize - i * 4) / 4 == 1) {
-						length = 4;
-					}
-					for (int j = 0; j < length; j++) {
-						Map<String, Object> tmap = onlineCourseList.get(j + 4 * i);
-					%> --%>
-					<%-- <td scope="row" style="width: 25%;" id="CourseDashBoard<%=i+""+j%>"> --%>
 					<%Map<String, Object> tmap = onlineCourseList.get(i); %>
 					<td scope="row" style="width: 25%;" id="CourseDashBoard<%=i%>" onClick="tdClickEvent(<%=tmap.get("COURSE_NUMBER")%>)">
 						<div class="card text-white bg-teamcolor mb-3"

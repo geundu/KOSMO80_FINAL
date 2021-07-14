@@ -12,12 +12,11 @@
 	cbxMapList = (Map<String, List<Map<String, Object>>>) request.getAttribute("cbxMapList");
 	
 	int cbxCollegeSize = 0;
-	int cbxDivisionSize = 0;
 	int cbxDeptSize = 0;
 	int cbxMajorSize = 0;
+	int selectTableSize = 0;
 	if (cbxMapList != null) {
 		cbxCollegeSize = cbxMapList.get("collegeList").size();
-		cbxDivisionSize = cbxMapList.get("divisionList").size();
 		if(cbxMapList.get("deptList")!=null){
 		cbxDeptSize = cbxMapList.get("deptList").size();
 		}
@@ -26,25 +25,24 @@
 		}
 	}
 	String[] cbxCollegeArr = new String[cbxCollegeSize];
-	String[] cbxDivisionArr = new String[cbxDivisionSize];
 	String[] cbxDeptArr = new String[cbxDeptSize];
 	String[] cbxMajorArr = new String[cbxMajorSize];
-	
+	String[] selectTableArr = new String[selectTableSize];
+
 	out.print("collegeSize:" + cbxCollegeSize);
-	out.print("divisionSize:" + cbxDivisionSize);
-	
-%>
-<%=request.getParameter("CBX_COLLEGE_NAME")%>
-<%=request.getParameter("CBX_DEPT_NAME")%>
+	out.print("selectTableSize:" + selectTableSize);
+	%>
+	<%=request.getParameter("CBX_COLLEGE_NAME")%>
+	<%=request.getParameter("CBX_DEPT_NAME")%>
 
 
 
 <script>
 console.log(cbxCollegeSize=<%=cbxCollegeSize   %>);
-console.log(cbxDivisionSize=<%=cbxDivisionSize   %>);
 console.log(cbxDeptSize=<%=cbxDeptSize   %>);
 console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 </script>
+<button type="button" id="logout" onclick="logout()" class="btn btn-primary mr-1" style="margin-left: 0.2em; font-size:12px; width: 100px; height: auto; text-align: center;">logout</button>
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5"> -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -95,9 +93,9 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 					<div class="input-group "
 						style="margin-top: 20%; padding-left: 10%;">
 						<div class="input-group-prepend">
-							<span class="input-group-text" id="basic-addon3"> - </span>
+							<span class="input-group-text" id="basic-addon3"> 이름 </span>
 						</div>
-						<input type="text" class="form-control" value=
+						<input type="text" class="form-control" value=""
 							id="STUDENT_NAME" aria-describedby="basic-addon3">
 					</div>
 					</div>
@@ -105,9 +103,9 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 						<div class="input-group "
 						style="margin-top: 20%; padding-left: 10%;">
 						<div class="input-group-prepend">
-							<span class="input-group-text" id="basic-addon3"> - </span>
+							<span class="input-group-text" id="basic-addon3"> 학번 </span>
 						</div>
-						<input type="text" class="form-control" value=
+						<input type="text" class="form-control" value=""
 							id="STUDENT_NUMBER" aria-describedby="basic-addon3">
 					</div>
 					</div>
@@ -125,7 +123,7 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 				</div>
 				<div class="row" style="margin-top: 5%; text-align: center;">
 					<div class="input-group-prepend">
-							<span class="input-group-text" id="basic-addon3"> - </span>
+							<span class="input-group-text" id="basic-addon3"> 대학 </span>
 						</div>
 					<div class="col-md-2" style="padding-left:0">
 						<%if(cbxDeptSize > 0){  %>
@@ -153,7 +151,7 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 						</select>
 					</div>
 							<div class="input-group-prepend">
-							<span class="input-group-text" id="basic-addon3"> - </span>
+							<span class="input-group-text" id="basic-addon3"> 학부 </span>
 						</div>
 					<div class="col-md-2" style="padding-left:0">
 					
@@ -182,7 +180,7 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 						</select>
 					</div>
 						<div class="input-group-prepend">
-							<span class="input-group-text" id="basic-addon3"> - </span>
+							<span class="input-group-text" id="basic-addon3"> 학과 </span>
 						</div>
 					<div class="col-md-2" style="padding-left:0">
 					<%	if(cbxMajorSize > 0) {	%>
@@ -213,7 +211,7 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 						</select>
 					</div>
 						<div class="input-group-prepend">
-							<span class="input-group-text" id="basic-addon3"> - </span>
+							<span class="input-group-text" id="basic-addon3"> 구분 </span>
 						</div>
 					<div class="col-md-2" style="padding-left:0">
 						<select class="custom-select">
@@ -224,7 +222,7 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 				</div>
 				<div class="row" style="margin-top: 5%; text-align: center;">
 					<div class="input-group-prepend">
-							<span class="input-group-text" id="basic-addon3"> - </span>
+							<span class="input-group-text" id="basic-addon3"> 학적상태 </span>
 						</div>
 					<div class="col-md-2" style="padding-left:0">
 						<select class="custom-select">
@@ -234,7 +232,7 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 						</select>
 					</div>
 					<div class="input-group-prepend">
-							<span class="input-group-text" id="basic-addon3"> - </span>
+							<span class="input-group-text" id="basic-addon3"> 최근학적변동일자 </span>
 						</div>
 					<div class="col-md-2" style="padding-left:0">
 						<input type="text" id="datePicker" readonly class="form-control"
@@ -282,7 +280,7 @@ $(function(){
 	InsertSelectedOption03 = $('#InsertSelect03').find("option:selected").val();
 		$.ajax({
 			type :'get',
-			url:'/curriculum/getOpenCourse?CBX_COLLEGE_NAME='+selectedOption03,
+			url:'/admin/getAdminInsertComboBox?CBX_COLLEGE_NAME='+InsertSelectedOption01,
 			dataType:'html',
 			success: function(data){
 				$('#content').html(data).trigger("create");
@@ -302,7 +300,8 @@ $(function(){
 	
 	$.ajax({
 		type :'get',
-		url:'/curriculum/getOpenCourse?CBX_COLLEGE_NAME='+selectedOption03+'&CBX_DEPT_NAME='+selectedOption04,
+		url:'/admin/getAdminInsertComboBox?CBX_COLLEGE_NAME='+InsertSelectedOption01+"&"+"CBX_DEPT_NAME="+
+				InsertSelectedOption02,
 		dataType:'html',
 		success: function(data){
 			$('#content').html(data).trigger("create");

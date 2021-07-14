@@ -1,7 +1,6 @@
 package kr.ac.paprika.boot.mvc;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +31,16 @@ public class AdminController {
 
 
 		return "forward:../pageContent/ProPeople/Select.jsp";
+	}
+	
+	@RequestMapping("/getAdminInsertComboBox")
+	public String getAdminInsertComboBox(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
+		Map<String, List<Map<String, Object>>> cbxMapList = null;
+		cbxMapList = adminLogic.getAdminComboBox(pMap);
+		req.setAttribute("cbxMapList", cbxMapList);
+
+
+		return "forward:../pageContent/ProPeople/Insert.jsp";
 	}
 	
 	/**
@@ -169,5 +178,29 @@ public class AdminController {
 		}
 	}
 */
+	/**
+	 * 개설강좌조회 페이지 이동, 콤보박스 리스트 셀렉 메소드
+	 * 
+	 * @사용DML cbBoxCollege, (대학을 골랐을시)cbBoxDept, (부서를 골랐을시)cbBoxMajor, cbBoxDivision
+	 * @param req - (콤보박스에서 고른 대학이름 변수, 전단계 미선택시 생성되지 않음.) CBX_COLLEGE_NAME ,(콤보박스에서
+	 *            고른 학부이름 변소, 전단계 미선택시 생성되지 않음.) CBX_DEPT_NAME
+	 * 
+	 * @param res
+	 * @throws IOException
+	 * @throws ServletException
+	 * 
+	 *                          Map<String, List<Map<String, Object>>>
+	 * @cbxList의 value들은 아래와 같다
+	 * 
+	 *           List<Map<String, Object>>
+	 * @collegeList - 대학단위 리스트
+	 * @deptList - 학부단위 리스트 (상위 콤보박스 선택했을시에 생성)
+	 * @majorList - 학과단위 리스트 (상위 콤보박스 선택했을시에 생성)
+	 * @divisionList - 이수구분 리스트
+	 * 
+	 *               /paprika/getOpenCourse.do/
+	 */
+	
+	
 	
 }

@@ -18,9 +18,8 @@ if (scheduleList != null) {
 		Map<String, Object> rmap = scheduleList.get(i);
 	}
 }
-out.print("로우수:" + size);
 %>
-
+<button type="button" id="logout" onclick="logout()" class="btn btn-primary mr-1" style="margin-left: 0.2em; font-size:12px; width: 100px; height: auto; text-align: center;">logout</button>
 
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5">  -->

@@ -15,6 +15,7 @@ request.setCharacterEncoding("utf-8");
    </style>
 </head>
 <body>
+<button type="button" id="logout" onclick="logout()" class="btn btn-primary mr-1" style="margin-left: 0.2em; font-size:12px; width: 100px; height: auto; text-align: center;">logout</button>
 	<!-- Page Content start -->
 	<!-- <div id="content" class="p-4 p-md-5"> -->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -22,7 +23,6 @@ request.setCharacterEncoding("utf-8");
 			<button type="button" id="sidebarCollapse" class="btn btn-primary">
 				<i class="fa fa-bars"></i> <span class="sr-only">토글 버튼 위치(글씨출력 x)</span>
 			</button>
-
 			<button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<i class="fa fa-bars"></i>
@@ -188,9 +188,6 @@ request.setCharacterEncoding("utf-8");
 					<td>
 						<button type="button" class="btn btn-primary mr-1" style="width: 65px; height: 70px; text-align: center;">20:00</button>
 					</td>
-					<td>
-						<button type="button" id="logout" onclick="logout()" class="btn btn-primary mr-1" style="width: 65px; height: 70px; text-align: center;">로그아웃</button>
-					</td>
 					
 				</tr>
 			</tbody>
@@ -278,12 +275,7 @@ request.setCharacterEncoding("utf-8");
 		//캘린더 부르기 함수 끝
 		
 		/**************************** 로그아웃 함수 ****************************/
-		function logout(){
-			// 세션에 들어있는 오브젝트 언바인드 해준다. (세션 자체는 사라지지 않음)
-			<%session.invalidate();%>
-			// 로그인 페이지로 이동
-			$(location).attr('href', 'login.jsp'); 	 
-		}
+
 		/**************************** 로그아웃 함수 ****************************/
 		
 	</script>	

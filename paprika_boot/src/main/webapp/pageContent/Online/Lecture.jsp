@@ -20,13 +20,8 @@ if (lectureList != null) {
     rmap = lectureList.get(i);
 	}
 }
-out.print("size:" + lectureListSize);
 %>
-<script>
-console.log(<%=lectureListSize%>);
-</script>
-
-
+<button type="button" id="logout" onclick="logout()" class="btn btn-primary mr-1" style="margin-left: 0.2em; font-size:12px; width: 100px; height: auto; text-align: center;">logout</button>
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5"> -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">

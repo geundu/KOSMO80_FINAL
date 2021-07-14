@@ -30,15 +30,11 @@
 	String[] cbxDeptArr = new String[cbxDeptSize];
 	String[] cbxMajorArr = new String[cbxMajorSize];
 	
-	out.print("collegeSize:" + cbxCollegeSize);
-	out.print("divisionSize:" + cbxDivisionSize);
 	
 %>
-<%=request.getParameter("CBX_COLLEGE_NAME")%>
-<%=request.getParameter("CBX_DEPT_NAME")%>
 
 
-
+<button type="button" id="logout" onclick="logout()" class="btn btn-primary mr-1" style="margin-left: 0.2em; font-size:12px; width: 100px; height: auto; text-align: center;">logout</button>
 <script>
 console.log(cbxCollegeSize=<%=cbxCollegeSize   %>);
 console.log(cbxDivisionSize=<%=cbxDivisionSize   %>);
