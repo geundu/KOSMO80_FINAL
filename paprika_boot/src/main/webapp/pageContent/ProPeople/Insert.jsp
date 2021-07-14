@@ -1,9 +1,50 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
 <%
 	request.setCharacterEncoding("utf-8");
 %>
+<%
+	StringBuilder path = new StringBuilder(request.getContextPath());
+	path.append("/");
+	Map<String, List<Map<String, Object>>> cbxMapList = null;
+	cbxMapList = (Map<String, List<Map<String, Object>>>) request.getAttribute("cbxMapList");
+	
+	int cbxCollegeSize = 0;
+	int cbxDivisionSize = 0;
+	int cbxDeptSize = 0;
+	int cbxMajorSize = 0;
+	if (cbxMapList != null) {
+		cbxCollegeSize = cbxMapList.get("collegeList").size();
+		cbxDivisionSize = cbxMapList.get("divisionList").size();
+		if(cbxMapList.get("deptList")!=null){
+		cbxDeptSize = cbxMapList.get("deptList").size();
+		}
+		if(cbxMapList.get("majorList")!=null){
+		cbxMajorSize = 	cbxMapList.get("majorList").size();
+		}
+	}
+	String[] cbxCollegeArr = new String[cbxCollegeSize];
+	String[] cbxDivisionArr = new String[cbxDivisionSize];
+	String[] cbxDeptArr = new String[cbxDeptSize];
+	String[] cbxMajorArr = new String[cbxMajorSize];
+	
+	out.print("collegeSize:" + cbxCollegeSize);
+	out.print("divisionSize:" + cbxDivisionSize);
+	
+%>
+<%=request.getParameter("CBX_COLLEGE_NAME")%>
+<%=request.getParameter("CBX_DEPT_NAME")%>
+
+
+
+<script>
+console.log(cbxCollegeSize=<%=cbxCollegeSize   %>);
+console.log(cbxDivisionSize=<%=cbxDivisionSize   %>);
+console.log(cbxDeptSize=<%=cbxDeptSize   %>);
+console.log(cbxMajorSize=<%=cbxMajorSize   %>);
+</script>
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5"> -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -34,22 +75,7 @@
 						<li class="breadcrumb-item active" aria-current="page">학생,교직원
 							추가</li>
 					</ol>
-
 				</nav>
-
-				<!--               <li class="nav-item active">
-                <a class="nav-link" href="#">Page Content Header menu -1</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Page Content Header menu -2</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Page Content Header menu -3</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Page Content Header menu -4</a>
-              </li>
-            </ul> -->
 		</div>
 		<!-- Page Content Header end -->
 	</div>
@@ -57,14 +83,37 @@
 <div class="d-flex justify-content-center">
 	<div class="container">
 		<div class="screen1"
-			style="width: 100%; height: 100%; background-color: ; padding-bottom:40px;">
+			style="width: 100%; height: 80%; background-color:; padding-bottom: 40px;">
 			<div class="container-fluid">
 				<div class="row" style="text-align: center;">
 					<div class="col-md-3">
 						<img src="images/doge.png"
 							style="width: 200px; height: 200px; margin-top: 5%;">
 					</div>
+	
 					<div class="col-md-3">
+					<div class="input-group "
+						style="margin-top: 20%; padding-left: 10%;">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon3"> - </span>
+						</div>
+						<input type="text" class="form-control" value=
+							id="STUDENT_NAME" aria-describedby="basic-addon3">
+					</div>
+					</div>
+					<div class="col-md-3">
+						<div class="input-group "
+						style="margin-top: 20%; padding-left: 10%;">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon3"> - </span>
+						</div>
+						<input type="text" class="form-control" value=
+							id="STUDENT_NUMBER" aria-describedby="basic-addon3">
+					</div>
+					</div>
+				</div>
+				<div class="row" style="margin-top: -5%; text-align: center;">
+						<div class="col-md-3">
 							<div class="custom-file" style="width: 250px; margin-top: 20%; 
 							padding-left: 10%;">
 					<input type="file" class="custom-file-input" id="customFile">
@@ -73,73 +122,127 @@
 				</div>
 				
 					</div>
-					<div class="col-md-3">
-					<div class="input-group "
-						style="margin-top: 20%; padding-left: 10%;">
-						<div class="input-group-prepend">
-							<span class="input-group-text" id="basic-addon3">이름</span>
+				</div>
+				<div class="row" style="margin-top: 5%; text-align: center;">
+					<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon3"> - </span>
 						</div>
-						<input type="text" class="form-control" value=123
-							id="STUDENT_NUMBER" aria-describedby="basic-addon3">
+					<div class="col-md-2" style="padding-left:0">
+						<%if(cbxDeptSize > 0){  %>
+						<select class="custom-select" id="InsertSelect01" 
+						value="<%=request.getParameter("CBX_COLLEGE_NAME")%>">
+						<% } else {%>
+						<select class="custom-select" id="InsertSelect01" >
+						<% }%>
+							<option>대학</option>	
+							<%
+				for(int i=0; i< cbxCollegeSize ; i++){
+						Map<String, Object> rmap = cbxMapList.get("collegeList").get(i);
+						cbxCollegeArr[i] = (rmap.get("COLLEGE_NAME")).toString();
+					}
+			%>
+			<%for (int i =0 ; i< cbxCollegeSize ; i++){
+				if(cbxCollegeArr[i].equals(request.getParameter("CBX_COLLEGE_NAME"))) {
+				%>
+				<option value="<%=cbxCollegeArr[i]%>" selected><%=cbxCollegeArr[i]%></option>
+				<%}else { %>
+				<option value="<%=cbxCollegeArr[i]%>"><%=cbxCollegeArr[i]%></option>
+			<%
+				}
+			}%>	
+						</select>
 					</div>
-					</div>
-					<div class="col-md-3">
-						<div class="input-group "
-						style="margin-top: 20%; padding-left: 10%;">
-						<div class="input-group-prepend">
-							<span class="input-group-text" id="basic-addon3">학번</span>
+							<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon3"> - </span>
 						</div>
-						<input type="text" class="form-control" value=123
-							id="STUDENT_NUMBER" aria-describedby="basic-addon3">
+					<div class="col-md-2" style="padding-left:0">
+					
+						<%if(cbxMajorSize > 0){  %>
+						<select class="custom-select" id="InsertSelect02" 
+						value="<%=request.getParameter("CBX_DEPT_NAME")%>">
+						<% } else {%>
+						<select class="custom-select" id="InsertSelect02" >
+						<% }%>
+							<option>학부</option>
+							<%
+				for(int i=0; i< cbxDeptSize ; i++){
+						Map<String, Object> rmap = cbxMapList.get("deptList").get(i);
+						cbxDeptArr[i] = (rmap.get("COLLEGE_NAME")).toString();
+					}
+			%>
+			<%for (int i =0 ; i< cbxDeptSize ; i++){
+				if(cbxDeptArr[i].equals(request.getParameter("CBX_DEPT_NAME"))) {
+				%>
+				<option value="<%=cbxDeptArr[i]%>" selected><%=cbxDeptArr[i]%></option>
+				<%}else { %>
+				<option value="<%=cbxDeptArr[i]%>"><%=cbxDeptArr[i]%></option>
+			<%
+				}
+			}%>	
+						</select>
 					</div>
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon3"> - </span>
+						</div>
+					<div class="col-md-2" style="padding-left:0">
+					<%	if(cbxMajorSize > 0) {	%>
+						<select class="custom-select" id="InsertSelect03" value="<%=request.getParameter("MAJOR") %>">
+						<%	}else {	%>
+						<select class="custom-select" id="InsertSelect03">
+						<%	}	%>
+								<option selected>학과</option>
+					<%
+					for(int i=0; i< cbxMajorSize ; i++){
+						Map<String, Object> rmap = cbxMapList.get("majorList").get(i);
+						cbxMajorArr[i] = (rmap.get("COLLEGE_NAME")).toString();
+					}
+					for (int i = 0; i < cbxMajorSize; i++){
+						if(cbxMajorArr[i].equals(request.getParameter("CBX_DEPT_NAME"))) {
+				
+						%>
+						<option value="<%=cbxMajorArr[i]%>" selected><%=cbxMajorArr[i]%></option>
+						<%
+						}
+						else {
+						%>
+						<option value="<%=cbxMajorArr[i]%>"><%=cbxMajorArr[i]%></option>
+						<%
+						}
+					}
+					%>
+						</select>
+					</div>
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon3"> - </span>
+						</div>
+					<div class="col-md-2" style="padding-left:0">
+						<select class="custom-select">
+							<option>학생</option>
+							<option>교직원</option>
+						</select>
 					</div>
 				</div>
 				<div class="row" style="margin-top: 5%; text-align: center;">
-					<div class="col-md-3">
+					<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon3"> - </span>
+						</div>
+					<div class="col-md-2" style="padding-left:0">
 						<select class="custom-select">
-							<option>대학:인문사회대학</option>
-							<option>대학:공과대학</option>
-							<option>대학:자연과학대학</option>
+							<option>&nbsp;재학</option>
+							<option>&nbsp;휴학</option>
+							<option>&nbsp;졸업</option>
 						</select>
 					</div>
-					<div class="col-md-3">
-						<select class="custom-select">
-							<option>학부:외국어학부</option>
-							<option>학부:건축학부</option>
-							<option>학부:예체능부</option>
-						</select>
-					</div>
-					<div class="col-md-3">
-						<select class="custom-select">
-							<option>학과:일어일문학</option>
-							<option>학과:컴퓨터공학</option>
-							<option>학과:기계공학</option>
-						</select>
-					</div>
-
-				</div>
-				<div class="row" style="margin-top: 5%; text-align: center;">
-					<div class="col-md-3">
-						<select class="custom-select">
-							<option>구분:대학생</option>
-							<option>구분:교직원</option>
-						</select>
-					</div>
-					<div class="col-md-3">
-						<select class="custom-select">
-							<option>학적상태:재학</option>
-							<option>학적상태:휴학</option>
-							<option>학적상태:졸업</option>
-						</select>
-					</div>
-					<div class="col-md-3">
-						<input type="text" id="datePicker" readonly class="form-control" value="날짜를 선택해주세요."/>
+					<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon3"> - </span>
+						</div>
+					<div class="col-md-2" style="padding-left:0">
+						<input type="text" id="datePicker" readonly class="form-control"
+						value=>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
 
 
 <div class="screen2"
@@ -152,6 +255,7 @@
 </div>
 <script>
 $(function(){
+	'use strict';
 	$('#datePicker').datepicker({
 		format: "yyyy-mm-dd",
 		autoclose : true,
@@ -163,7 +267,70 @@ $(function(){
 	    },
 		uiLibrary : 'bootstrap4'
 	});
+	
+	
+	var InsertSelectedOption01;
+	var InsertSelectedOption02;
+	var InsertSelectedOption03;
+	
+	
+	$('#InsertSelect01').on('change', function(e){
+	e.preventDefault();
+	console.log($(this).find("option:selected").val());
+	InsertSelectedOption01 = $(this).find("option:selected").val();
+	InsertSelectedOption02 = $('#InsertSelect02').find("option:selected").val();
+	InsertSelectedOption03 = $('#InsertSelect03').find("option:selected").val();
+		$.ajax({
+			type :'get',
+			url:'/curriculum/getOpenCourse?CBX_COLLEGE_NAME='+selectedOption03,
+			dataType:'html',
+			success: function(data){
+				$('#content').html(data).trigger("create");
+		}
+		});
+		InsertSelectedOption01 = $(this).find("option:selected").val();
+		InsertSelectedOption02 = $('#InsertSelect02').find("option:selected").val();
+		InsertSelectedOption03 = $('#InsertSelect03').find("option:selected").val();
+		
+	});
+	$('#InsertSelect02').on('change', function(e){
+	e.preventDefault();
+	console.log($(this).find("option:selected").val());
+	InsertSelectedOption01 = $('#InsertSelect01').find("option:selected").val();
+	InsertSelectedOption02 = $(this).find("option:selected").val();
+	InsertSelectedOption03 = $('#InsertSelect03').find("option:selected").val();
+	
+	$.ajax({
+		type :'get',
+		url:'/curriculum/getOpenCourse?CBX_COLLEGE_NAME='+selectedOption03+'&CBX_DEPT_NAME='+selectedOption04,
+		dataType:'html',
+		success: function(data){
+			$('#content').html(data).trigger("create");
+		}
+		});
+		InsertSelectedOption01 = $('#InsertSelect01').find("option:selected").val();
+		InsertSelectedOption02 = $(this).find("option:selected").val();;
+		InsertSelectedOption03 = $('#InsertSelect03').find("option:selected").val();
+	});
+	
+	$('#InsertSelect03').on('change', function(e){
+		e.preventDefault();
+		console.log($(this).find("option:selected").val());
+		InsertSelectedOption01 = $('#InsertSelect01').find("option:selected").val();
+		InsertSelectedOption02 = $('#InsertSelect02').find("option:selected").val();
+		InsertSelectedOption03 = $(this).find("option:selected").val();
+		
+	
+	
+	});
+	
+	function initClickEvent(){
+		console.log('initClickEvent');
+		
+	}
 });
+
+
 </script>
 <script src="./js/toggleAction.js"></script>
 <!-- </div> -->
