@@ -20,13 +20,8 @@ if (lectureList != null) {
     rmap = lectureList.get(i);
 	}
 }
-out.print("size:" + lectureListSize);
 %>
-<script>
-console.log(<%=lectureListSize%>);
-</script>
-
-
+<button type="button" id="logout" onclick="logout()" class="btn btn-primary mr-1" style="margin-left: 0.2em; font-size:12px; width: 100px; height: auto; text-align: center;">logout</button>
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5"> -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -87,19 +82,8 @@ console.log(<%=lectureListSize%>);
 						<button type="button" class="btn btn-primary">기말고사 응시하기</button>
 					</th>
 					<th scope="col" style="border-top:0px;">
-						<button type="button" class="btn btn-primary">추가시험 응시하기</button>
+						<button type="button" class="btn btn-primary">강의자료 다운로드</button>
 					</th>
-
-				</tr>
-			</tbody>
-		</table>
-		<table class="table ">
-			<tbody>
-				<tr>
-					<th style="border-top:0px;" scope="col">
-					<button type="button" class="btn btn-primary">강의자료 다운로드</button>
-					</th>
-					<th style="border-top:0px;"></th>
 				</tr>
 			</tbody>
 		</table>
@@ -109,9 +93,9 @@ console.log(<%=lectureListSize%>);
 		<table class="table table-bordered">
 			<thead class="thead-team">
 				<tr class="table table-bordered ">
-					<th scope="col"><a id="a_1" style="font-size: 1.2em;" href=#>순번</a></th>
-					<th scope="col"><a id="a_1" style="font-size: 1.2em;" href=#>강의제목</a></th>
-					<th scope="col"><a id="a_1" style="font-size: 1.2em;" href=#>강의번호</a></th>
+					<th scope="col"><a id="a_1" style="font-size: 1.2em;">순번</a></th>
+					<th scope="col"><a id="a_1" style="font-size: 1.2em;">강의제목</a></th>
+					<th scope="col"><a id="a_1" style="font-size: 1.2em;">강의번호</a></th>
 				</tr>
 
 			</thead>

@@ -19,6 +19,7 @@ String sid = String.valueOf(session.getAttribute("STUDENT_NUMBER"));
 <link rel="stylesheet" href="css/bootstrap-datepicker.css">
 <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
 
 
 </head>
@@ -53,6 +54,7 @@ String sid = String.valueOf(session.getAttribute("STUDENT_NUMBER"));
 	<script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 	<script src="js/bootstrap-datepicker.js"></script>
+	<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
 
 	
 

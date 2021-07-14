@@ -4,6 +4,7 @@
 <%
 	request.setCharacterEncoding("utf-8");
 %>
+<button type="button" id="logout" onclick="logout()" class="btn btn-primary mr-1" style="margin-left: 0.2em; font-size:12px; width: 100px; height: auto; text-align: center;">logout</button>
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5"> -->
 	 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -13,7 +14,6 @@
             <i class="fa fa-bars"></i>
             <span class="sr-only">토글 버튼 위치(글씨출력 x)</span>
           </button>
-
           <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
             aria-label="Toggle navigation">

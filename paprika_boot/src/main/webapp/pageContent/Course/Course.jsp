@@ -30,15 +30,11 @@
 	String[] cbxDeptArr = new String[cbxDeptSize];
 	String[] cbxMajorArr = new String[cbxMajorSize];
 	
-	out.print("collegeSize:" + cbxCollegeSize);
-	out.print("divisionSize:" + cbxDivisionSize);
 	
 %>
-<%=request.getParameter("CBX_COLLEGE_NAME")%>
-<%=request.getParameter("CBX_DEPT_NAME")%>
 
 
-
+<button type="button" id="logout" onclick="logout()" class="btn btn-primary mr-1" style="margin-left: 0.2em; font-size:12px; width: 100px; height: auto; text-align: center;">logout</button>
 <script>
 console.log(cbxCollegeSize=<%=cbxCollegeSize   %>);
 console.log(cbxDivisionSize=<%=cbxDivisionSize   %>);
@@ -125,7 +121,8 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 			</select> 
 <!-- 			<select class="custom-select" style="width: auto;" id="CourseSelect03"> -->
 			<%if(cbxDeptSize > 0){  %>
-<select class="custom-select" style="width:auto;" id="CourseSelect03" value="<%=request.getParameter("CBX_COLLEGE_NAME")%>">
+<select class="custom-select" style="width:auto;" id="CourseSelect03" 
+value="<%=request.getParameter("CBX_COLLEGE_NAME")%>">
 <% } else {%>
 <select class="custom-select" style="width:auto;" id="CourseSelect03">
 <% }%>
@@ -149,7 +146,8 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 			
 			<!-- <select class="custom-select" style="width: auto;" id="CourseSelect04"> -->
 			<%if(cbxMajorSize > 0){  %>
-<select class="custom-select" style="width:auto;" id="CourseSelect04" value="<%=request.getParameter("CBX_DEPT_NAME")%>">
+<select class="custom-select" style="width:auto;" id="CourseSelect04" 
+value="<%=request.getParameter("CBX_DEPT_NAME")%>">
 <% } else {%>
 <select class="custom-select" style="width:auto;" id="CourseSelect04">
 <% }%>
@@ -173,18 +171,12 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 			</select> 
 			
 			<!-- <select class="custom-select" style="width: auto;" id="CourseSelect05"> -->
-					<%
-					if(cbxMajorSize > 0) {
-					%>
-						<select class="custom-select" style="width:auto;" id="CourseSelect05" value="<%=request.getParameter("MAJOR") %>" >
-					<%
-					}
-					else {
-					%>
+					<%	if(cbxMajorSize > 0) {	%>
+						<select class="custom-select" style="width:auto;" id="CourseSelect05" 
+						value="<%=request.getParameter("MAJOR") %>" >
+					<%	}else {	%>
 						<select class="custom-select" style="width:auto;" id="CourseSelect05">
-					<%
-					}
-					%>
+					<%	}	%>
 					<option selected>학과</option>
 					<%
 					for(int i=0; i< cbxMajorSize ; i++){

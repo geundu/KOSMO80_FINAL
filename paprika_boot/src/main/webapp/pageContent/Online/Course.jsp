@@ -18,14 +18,8 @@ if (onlineCourseList != null) {
 		rmap = onlineCourseList.get(i);
 	}
 }
-out.print("onlineCourseSize:" + onlineCourseSize);
 %>
-<script>
-	console.log(
-<%=onlineCourseSize%>
-	);
-</script>
-
+<button type="button" id="logout" onclick="logout()" class="btn btn-primary mr-1" style="margin-left: 0.2em; font-size:12px; width: 100px; height: auto; text-align: center;">logout</button>
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5"> -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -69,9 +63,6 @@ out.print("onlineCourseSize:" + onlineCourseSize);
 				</tr>
 			</thead>
 			<tbody>
-				<%-- <%
-				for (int i = 0; i <= onlineCourseSize + 1 / 4; i++) {
-				%> --%>
 				<%
          		for(int i=0; i < onlineCourseSize; i++){
          		   if(i%4 == 0){
@@ -80,19 +71,6 @@ out.print("onlineCourseSize:" + onlineCourseSize);
 		   <%
             }
          %>
-					<%-- <%
-					int length = 0;
-					if ((onlineCourseSize - i * 4) / 4 > 1) {
-						length = 4;
-					} else if ((onlineCourseSize - i * 4) / 4 == 0) {
-						length = (onlineCourseSize - i * 4) % 4;
-					} else if ((onlineCourseSize - i * 4) / 4 == 1) {
-						length = 4;
-					}
-					for (int j = 0; j < length; j++) {
-						Map<String, Object> tmap = onlineCourseList.get(j + 4 * i);
-					%> --%>
-					<%-- <td scope="row" style="width: 25%;" id="CourseDashBoard<%=i+""+j%>"> --%>
 					<%Map<String, Object> tmap = onlineCourseList.get(i); %>
 					<td scope="row" style="width: 25%;" id="CourseDashBoard<%=i%>" onClick="tdClickEvent(<%=tmap.get("COURSE_NUMBER")%>)">
 						<div class="card text-white bg-teamcolor mb-3"
@@ -100,8 +78,7 @@ out.print("onlineCourseSize:" + onlineCourseSize);
 							<div class="card-header h6"><%=tmap.get("SUBJECT_NAME")%></div>
 							<div class="card-body">
 								<h5 class="card-title">
-									교수명 :
-									<%=tmap.get("PROFESSOR_NAME")%></h5>
+									교수명 :<%=tmap.get("PROFESSOR_NAME")%></h5>
 								<p class="card-text"><%=tmap.get("COURSE_CONTENT")%>
 								</p>
 							</div>
@@ -123,7 +100,7 @@ function tdClickEvent(course_number){
  	  console.log("course_number : "+course_number);
  	 $.ajax({
 			type : 'get',
-			url : '/course/getLectureList?COURSE_NUMBER=' + course_number,
+ 			url : '/course/getLectureList?COURSE_NUMBER=' + course_number,
 			/* url:'pageContent/StuInfo/StuCourse.jsp', */
 			dataType : 'html',
 			success : function(data) {
@@ -139,8 +116,7 @@ function tdClickEvent(course_number){
 	   'use strict';
 	   var $content = $('#content');
 	   function initCourseAjax() {
-	         console.log('initCourseAjax');
-	         
+// 	         console.log('initCourseAjax');
 	         $.ajax({
 	            type : 'get',
 	            /* url:'pageContent/Online/Course.jsp', */

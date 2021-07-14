@@ -20,7 +20,6 @@ if (studentList != null) {
     rmap = studentList.get(i);
 	}
 }
-out.print("size:" + size);
 %>
 <script>
 console.log(<%=size%>);
@@ -49,18 +48,10 @@ function studentInfoUpd(){
 			alert('비동기통신 실패');	
 		}
 	});
-	
-	/* 
-	console.log($("#STUDENT_ENG_NAME").val());
-	console.log($("#STUDENT_PHONE").val());
-	console.log($("#STUDENT_EMAIL").val());
-	console.log($("#GUARDIAN_NAME").val());
-	console.log($("#GUARDIAN_PHONE").val());
-	*/	
-			
 }
 
 </script>
+<button type="button" id="logout" onclick="logout()" class="btn btn-primary mr-1" style="margin-left: 0.2em; font-size:12px; width: 100px; height: auto; text-align: center;">logout</button>
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5"> -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
