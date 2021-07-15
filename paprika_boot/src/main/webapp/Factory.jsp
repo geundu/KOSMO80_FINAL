@@ -3,7 +3,8 @@
 <%
 request.setCharacterEncoding("utf-8");
 /* String sessionId = String.valueOf(session.getAttribute("STUDENT_NUMBER")); */
-String sessionId = "15521091";
+String sessionId = "15521091"; 
+/* String sessionId = "21915014"; */
 %>
 <script>
 
@@ -238,7 +239,7 @@ function logout(){
 			e.preventDefault();
 			$.ajax({
 				type : 'get',
-				url : 'pageContent/Online/Test.jsp',
+				url : 'onlineTest/getOnlineTest?ONLINE_TEST_NUMBER=1055',
 				/* url:'pageContent/Online/Test.jsp', */
 				dataType : 'html',
 				success : function(data) {

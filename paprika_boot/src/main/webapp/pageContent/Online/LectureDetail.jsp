@@ -34,6 +34,11 @@ if (fileInfo != null) {
 		fmap = fileInfo.get(i);
 	}
 }
+String youtubeEmbedLink = (String) rmap.get("ONLINE_LECTURE_VIDEO");
+
+String strArr[] = youtubeEmbedLink.split("=");
+
+
 out.print("lectureInfoSize:" + lectureInfoSize);
 out.print("fileInfoSize:" + fileInfoSize);
 %>
@@ -103,7 +108,7 @@ out.print("fileInfoSize:" + fileInfoSize);
 			style="width: 100%; height: 80%; background-color: ;">
 			<div class="col text-center">
 				<iframe width="854" height="480"
-					src="https://www.youtube.com/embed/RD0OOKdUJTw" frameborder="0"
+					src="https://www.youtube.com/embed/<%=strArr[1]%>" frameborder="0"
 					allowfullscreen=""></iframe>
 			</div>
 		</div>

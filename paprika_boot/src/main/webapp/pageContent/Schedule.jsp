@@ -167,7 +167,7 @@ if (scheduleList != null) {
 		<div class="" style="height: auto%; width: auto%; background-color:; text-align: center;">
 			<h3>메모장</h3>
 			<div class="form-group" style="width: 600px;">
-				<textarea class="form-control" id="notePadForm" rows="25" placeholder="메모할 내용을 입력해주세요"></textarea>
+				<textarea class="form-control" id="notePadForm" rows="20" placeholder="메모할 내용을 입력해주세요"></textarea>
 			</div>
 		</div>
 	</div>
@@ -206,22 +206,27 @@ if (scheduleList != null) {
 		} //행 , 열 , span 값 , 클래스명 
 		function setRowspan(rowIndex, colIndex, spanValue, className) {
 			$(
-					'#timetable > tbody > tr:eq(' + rowIndex + ') > td:eq('
-							+ colIndex + ')').attr('rowspan', spanValue);
+					'#timetable > tbody > tr:eq(' + rowIndex + ') > td:eq('	+ colIndex + ')').attr('rowspan', spanValue);
 			$(
-					'#timetable > tbody > tr:eq(' + rowIndex + ') > td:eq('
-							+ colIndex + ') > .className').html(className);
+					'#timetable > tbody > tr:eq(' + rowIndex + ') > td:eq('	+ colIndex + ') > .className').html(className);
 			for (i = 1; i < spanValue; i++) {
 				let tempIndex = rowIndex + i;
 				//alert(tempIndex) 
 				$(
-						'#timetable > tbody > tr:eq(' + tempIndex
-								+ ') > td:eq(' + colIndex + ')').hide();
+						'#timetable > tbody > tr:eq(' + tempIndex + ') > td:eq(' + colIndex + ')').hide();
 			}
+		};
+		
+		var oldVal;
+		/* $("#notePadForm").on("propertychange change keyup paste input", function() { */
+		$("#notePadForm").on("focusout", function() {
+		var currentVal = $(this).val();
+		if(currentVal == oldVal) {
+			return;
 		}
+		oldVal = currentVal;
+		console.log("change alert")
+		});
+		
 	</script>
-<!-- <script src="./project/js/controllers.js"></script>
-<script src="./project/js/menuTemplate.js"></script> -->
-<!-- 오른쪽 메인 프레임 끝-->
-<!-- </div> -->
 <!-- Page Content end -->

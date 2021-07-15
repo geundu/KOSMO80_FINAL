@@ -161,7 +161,7 @@ public class OnlineTestController {
 	 * @throws IOException
 	 * @throws ServletException
 	 * 
-	 *                          http://localhost:7000/onlineTest/testGrading?TR_CODE=update&SCORE=40&&STUDENT_NUMBER=41&MARK_DIV=중간&ONLINE_TEST_NUMBER=1009&COURSE_NUMBER=2001019
+	 * http://localhost:7000/onlineTest/testGrading?TR_CODE=update&SCORE=40&&STUDENT_NUMBER=41&MARK_DIV=중간&ONLINE_TEST_NUMBER=1009&COURSE_NUMBER=2001019
 	 */
 	@RequestMapping("/testGrading")
 	public String testGrading(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {

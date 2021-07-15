@@ -21,19 +21,19 @@
       #{OL_CURSOR,jdbcType=CURSOR, mode=OUT, resultMap=courseMap}, #{HW_CURSOR,jdbcType=CURSOR, mode=OUT, resultMap=fileMap})}
    </select>
 
-	<select id="homeworkCU" parameterType="map">
+	<select id="homeworkCU" parameterType="map" statementType="CALLABLE">
 		{CALL
 		PROC_HOMEWORK_CUD(#{cud},#{HOMEWORK_NUMBER},#{ONLINE_LECTURE_NUMBER},#{STUDENT_NUMBER},#{HOMEWORK_FILE})}
 	</select>
 
-	<select id="feedbackInsert" parameterType="map">
+	<select id="feedbackInsert" parameterType="map" statementType="CALLABLE">
 		{CALL
 		PROC_STU_FEEDBACK_SEND_INSERT(#{ONLINE_LECTURE_NUMBER},#{STUDENT_NUMBER},#{FEEDBACK_CONTENT},
 		#{FEEDBACK_TITLE},#{PEXCEP, jdbcType=INTEGER,mode=OUT}
 		,#{PEXCEPMSG, jdbcType=VARCHAR,mode=OUT})}
 	</select>
 
-	<select id="homeworkGrading" parameterType="map">
+	<select id="homeworkGrading" parameterType="map" statementType="CALLABLE">
 		{CALL
 		PROC_PRO_ONLINE_HOMEWORK_CONF(#{STUDENT_NUMBER})}
 	</select>

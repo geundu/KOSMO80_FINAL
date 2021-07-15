@@ -10,7 +10,7 @@ StringBuilder path = new StringBuilder(request.getContextPath());
 path.append("/");
 
 List<Map<String, Object>> onlineTestList = null; 
-onlineTestList = (List<Map<String, Object>>) request.getAttribute("onlineTest");
+onlineTestList = (List<Map<String, Object>>) request.getAttribute("onlineTestList");
 int onlineTestListSize = 0;
 Map<String,Object> rmap = new HashMap<>();
 
@@ -89,32 +89,41 @@ out.print("onlineTestListSize:" + onlineTestListSize);
 					<!-- 문제시작 -->
 					<%for(int i = 0 ; i < onlineTestListSize ; i++) { 
 						Map<String, Object> tmap = onlineTestList.get(i); %>
+						<%if(i<10){ %>
 					<tr>
-						<th scope="row">문제<%=i %>:<%=tmap.get("ONLINE_TEST_QUESTION_QNUMBER") %></th>
+						<th scope="row">문제<%=tmap.get("ONLINE_TEST_QUESTION_QNUMBER") %>: <%=tmap.get("ONLINE_TEST_QUESTION_CONTENT") %></th>
 					</tr>
+						<%}if(i>=10){ %>
 					<tr>
+						<th scope="row">주관식문제<%=i-9%>: <%=tmap.get("ONLINE_TEST_QUESTION_CONTENT") %></th>
+					</tr>
+						<%} %>
+					<tr>
+					
+					<%if(i<10){ %>
 						<th scope="row">
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="radio"
-									name="inlineRadioBox1" id="inlineRadioBox1" value="option1">
-								<label class="form-check-label" for="inlineRadioBox1">1.<%=tmap.get("ONELINE_TEST_QUESTION_ANSWER1")%></label>
+									name="inlineRadioBox<%=i %>" id="inlineRadioBox1" value="option1">
+								<label class="form-check-label" for="inlineRadioBox1">1.<%=tmap.get("ONLINE_TEST_QUESTION_ANSWER1")%></label>
 							</div>
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="radio"
-									name="inlineRadioBox1" id="inlineRadioBox2" value="option2">
-								<label class="form-check-label" for="inlineRadioBox2">2.<%=tmap.get("ONELINE_TEST_QUESTION_ANSWER2")%></label>
+									name="inlineRadioBox<%=i %>" id="inlineRadioBox2" value="option2">
+								<label class="form-check-label" for="inlineRadioBox2">2.<%=tmap.get("ONLINE_TEST_QUESTION_ANSWER2")%></label>
 							</div>
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="radio"
-									name="inlineRadioBox1" id="inlineRadioBox3" value="option3">
-								<label class="form-check-label" for="inlineRadioBox3">3.<%=tmap.get("ONELINE_TEST_QUESTION_ANSWER3")%></label>
+									name="inlineRadioBox<%=i %>" id="inlineRadioBox3" value="option3">
+								<label class="form-check-label" for="inlineRadioBox3">3.<%=tmap.get("ONLINE_TEST_QUESTION_ANSWER3")%></label>
 							</div>
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="radio"
-									name="inlineRadioBox1" id="inlineRadioBox4" value="option4">
-								<label class="form-check-label" for="inlineRadioBox4">4.<%=tmap.get("ONELINE_TEST_QUESTION_ANSWER4")%></label>
+									name="inlineRadioBox<%=i %>" id="inlineRadioBox4" value="option4">
+								<label class="form-check-label" for="inlineRadioBox4">4.<%=tmap.get("ONLINE_TEST_QUESTION_ANSWER4")%></label>
 							</div>
 						</th>
+						<%} %>
 					</tr>
 					<%} %>
 					<!-- 문제끝 -->
@@ -123,15 +132,6 @@ out.print("onlineTestListSize:" + onlineTestListSize);
 		</div>
 		<div class="screen3"
 			style="width: 100%; height: auto%; background-color: E8EBEE;">
-			<div style="text-align: center;">
-				<a href="#" button type="button" class="btn btn-primary mr-5">주관식 문제 다운로드
-				<%-- 	<%if(onlineTestList.get(0).get("ONLINE_TEST_QUESTION_FILE")==null){
-						%> <%
-					}else{
-						onlineTestList.get(0).get("ONLINE_TEST_QUESTION_FILE");
-					}
-					%> --%></a>
-			</div>
 
 			<div class="col text-center">
 				<a href="#" button type="button" class="btn btn-primary mr-5">주관식 문제 제출</a>
@@ -152,5 +152,8 @@ out.print("onlineTestListSize:" + onlineTestListSize);
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="./js/toggleAction.js"></script>
+<script>
+
+</script>
 <!-- </div> -->
 <!-- Page Content end -->
