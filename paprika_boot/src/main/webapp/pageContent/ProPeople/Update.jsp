@@ -189,7 +189,7 @@ out.print("updateList:"+updateList);
 <script>
 $(function(){
 	$('#datePicker').datepicker({
-		format: "yyyy-mm-dd",
+		format: "yyyy년 mm월",
 		autoclose : true,
 		orientation: "top auto ", 
 		daysOfWeekDisabled : [0,6],

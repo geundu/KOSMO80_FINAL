@@ -216,7 +216,6 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 					<div class="col-md-2" style="padding-left:0">
 						<select class="custom-select">
 							<option>학생</option>
-							<option>교직원</option>
 						</select>
 					</div>
 				</div>
@@ -226,13 +225,11 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 						</div>
 					<div class="col-md-2" style="padding-left:0">
 						<select class="custom-select">
-							<option>&nbsp;재학</option>
-							<option>&nbsp;휴학</option>
-							<option>&nbsp;졸업</option>
+							<option>입학</option>
 						</select>
 					</div>
 					<div class="input-group-prepend">
-							<span class="input-group-text" id="basic-addon3"> 최근학적변동일자 </span>
+							<span class="input-group-text" id="basic-addon3"> 입학년도 </span>
 						</div>
 					<div class="col-md-2" style="padding-left:0">
 						<input type="text" id="datePicker" readonly class="form-control"
@@ -255,7 +252,7 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 $(function(){
 	'use strict';
 	$('#datePicker').datepicker({
-		format: "yyyy-mm-dd",
+		format: "yyyy-mm",
 		autoclose : true,
 		orientation: "top auto ", 
 		daysOfWeekDisabled : [0,6],

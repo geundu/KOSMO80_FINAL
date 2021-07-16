@@ -113,11 +113,11 @@ function studentInfoUpd(){
 					<img
 						src="https://user-images.githubusercontent.com/78460496/122924510-cb104000-d3a0-11eb-8193-1e67a9380ec7.jpg
         "
-						style="width: 150px; height: 200px; margin-top: 5%;">
+						style="width: 200px; height: 250px; margin-top: 5%;">
 				</div>
 				<div class="">
 					<div class="input-group "
-						style="margin-top: 30%; padding-left: 15%;">
+						style="margin-top: 10%; padding-left: 15%;">
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon3">이름</span>
 						</div>
@@ -127,7 +127,7 @@ function studentInfoUpd(){
 				</div>
 				<div class="">
 					<div class="input-group "
-						style="margin-top: 30%; padding-left: 15%;">
+						style="margin-top: 10%; padding-left: 15%;">
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon3">학번</span>
 						</div>
@@ -177,7 +177,7 @@ function studentInfoUpd(){
 			</div>
 			<div class="row" style="margin-top: 2%; text-align: center;">
 				<div class="">
-<!-- 					<div class="input-group " style="margin-left: 5%;"> -->
+					<div class="input-group " style="margin-left: 5%;">
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon3">학적상태</span>
 						</div>
@@ -268,7 +268,7 @@ function studentInfoUpd(){
 	<!--2번째 화면 끝-->
 
 	<!--3번째 화면-->
-	<div class="d-flex justify-content-center" style="margin-top: 0;">
+	<div class="d-flex justify-content-center" style="margin-top: 5%;">
 		<div class="screen3"
 			style="width: 100%; height: 20%; float: right; background-color:; color: white;">
 			<div class="row" style="margin-top: 2%; text-align: center;">
