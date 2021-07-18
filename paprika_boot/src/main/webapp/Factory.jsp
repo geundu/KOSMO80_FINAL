@@ -3,7 +3,8 @@
 <%
 request.setCharacterEncoding("utf-8");
 /* String sessionId = String.valueOf(session.getAttribute("STUDENT_NUMBER")); */
-String sessionId = "15521091";
+String sessionId = "15521091"; 
+/* String sessionId = "21915014"; */
 %>
 <script>
 
@@ -29,8 +30,8 @@ function logout(){
 			e.preventDefault();
 			$.ajax({
 				type : 'get',
-				url : 'pageContent/Schedule.jsp',
-				/* url:'paprika/getSchedule.do?STUDENT_NUMBER='+sid, */
+				/* url : 'pageContent/Schedule.jsp', */
+				url:'/schedule/getMemo?STUDENT_NUMBER='+sid, 
 				dataType : 'html',
 				success : function(data) {
 					$content.html(data).trigger("create");
@@ -162,20 +163,10 @@ function logout(){
 			e.preventDefault();
 			$(location).attr('href', './E_LearningPage.jsp').queue(function() {
 
-			/* 	$.ajax({
-					type : 'get',
-					 url:'pageContent/Online/Course.jsp', 
-					url : '/course/getOnlineCourseList?STUDENT_NUMBER=' + sid,
-					dataType : 'html',
-					success : function(data) {
-						$content.html(data).trigger("create");
-					}
-				}); */
 			});
 			return false;
 
-			/* 					$(location).attr('href', '/course/getOnlineCourseList?STUDENT_NUMBER='+sid)
-			 */}
+			 }
 
 		function onClickMenu6_1(e) {
 			console.log('onClickMenu6_1');
@@ -238,7 +229,7 @@ function logout(){
 			e.preventDefault();
 			$.ajax({
 				type : 'get',
-				url : 'pageContent/Online/Test.jsp',
+				url : 'onlineTest/getOnlineTest?ONLINE_TEST_NUMBER=1055',
 				/* url:'pageContent/Online/Test.jsp', */
 				dataType : 'html',
 				success : function(data) {
@@ -247,19 +238,6 @@ function logout(){
 			});
 			return false;
 		}
-		/* 				function onClickMenu7_0(e){
-		 console.log('onClickMenu7_0');
-		 e.preventDefault();
-		 $.ajax({
-		 type :'get',
-		 url:'pageContent/Community.jsp',
-		 dataType:'html',
-		 success: function(data){
-		 $content.html(data).trigger("create");
-		 }
-		 });
-		 return false;
-		 } */
 		function onClickMenu8_0(e) {
 			console.log('onClickMenu8_0');
 			e.preventDefault();

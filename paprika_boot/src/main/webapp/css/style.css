@@ -6,6 +6,7 @@
  */
 :root {
   --teamcolor: #EC4C27;
+  --teamcolor2: #FF6E2A;
   --blue: #007bff;
   --indigo: #6610f2;
   --purple: #6f42c1;
@@ -1358,10 +1359,10 @@ pre {
   padding: 0.3rem; }
 
 .table-bordered {
-  border: 1px solid #EC4C27; }
+  border: 1px solid var(--teamcolor2);; }
   .table-bordered th,
   .table-bordered td {
-    border: 1px solid #EC4C27; }
+    border: 1px solid var(--teamcolor2);; }
   .table-bordered thead th,
   .table-bordered thead td {
     border-bottom-width: 2px; }
@@ -1538,7 +1539,7 @@ pre {
 
 .table .thead-team th {
   color: #ffffff;
-  background-color: #EC6040;
+  background-color:var(--teamcolor2);
   border-color: #FFFFFF; }
 
 .table-dark {
@@ -2945,7 +2946,7 @@ input[type="button"].btn-block {
   color: #ffffff;
   text-align: center;
   white-space: nowrap;
-  background-color: #EC6040;
+  background-color:var(--teamcolor2);
   border: 1px solid #ced4da;
   border-radius: 0.25rem; }
   .input-group-text input[type="radio"],
