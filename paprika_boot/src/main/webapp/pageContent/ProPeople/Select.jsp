@@ -37,11 +37,7 @@ String[] cbxDeptArr = new String[cbxDeptSize];
 String[] cbxMajorArr = new String[cbxMajorSize];
 String[] selectTableArr = new String[selectTableSize];
 
-out.print("collegeSize:" + cbxCollegeSize);
-out.print("selectTableSize:" + selectTableSize);
 %>
-<%=request.getParameter("CBX_COLLEGE_NAME")%>
-<%=request.getParameter("CBX_DEPT_NAME")%>
 				<% 
 				List<Map<String, Object>> memberDetail=
 				(List<Map<String, Object>>)request.getAttribute("memberDetail");

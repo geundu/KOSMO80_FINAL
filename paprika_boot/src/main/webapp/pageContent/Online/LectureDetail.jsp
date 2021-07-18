@@ -39,8 +39,6 @@ String youtubeEmbedLink = (String) rmap.get("ONLINE_LECTURE_VIDEO");
 String strArr[] = youtubeEmbedLink.split("=");
 
 
-out.print("lectureInfoSize:" + lectureInfoSize);
-out.print("fileInfoSize:" + fileInfoSize);
 %>
 <script>
 	<%-- console.log(

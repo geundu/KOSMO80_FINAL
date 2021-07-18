@@ -76,7 +76,7 @@ out.print("onlineTestListSize:" + onlineTestListSize);
 		<div class="screen1"
 			style="width: 100%; height: auto%; background-color: E8EBEE;">
 			<div style="text-align: center;">
-				<h3><%=rmap.get("SUBJECT_NAME")%>일본어 문화 강좌 // <%=rmap.get("ONLINE_TEST_DIVISION")%>기말고사</h3>
+				<h3><%=rmap.get("SUBJECT_NAME")%>일본어 문화 강좌 // <%=rmap.get("ONLINE_TEST_DIVISION")%></h3>
 			</div>
 		</div>
 		<div class="screen2"

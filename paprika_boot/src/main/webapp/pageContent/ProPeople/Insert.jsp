@@ -29,11 +29,7 @@
 	String[] cbxMajorArr = new String[cbxMajorSize];
 	String[] selectTableArr = new String[selectTableSize];
 
-	out.print("collegeSize:" + cbxCollegeSize);
-	out.print("selectTableSize:" + selectTableSize);
 	%>
-	<%=request.getParameter("CBX_COLLEGE_NAME")%>
-	<%=request.getParameter("CBX_DEPT_NAME")%>
 
 
 
