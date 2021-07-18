@@ -56,6 +56,7 @@ console.log(cbxCollegeSize=<%=cbxCollegeSize   %>);
 console.log(cbxDeptSize=<%=cbxDeptSize   %>);
 console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 </script>
+<button type="button" id="logout" onclick="logout()" class="btn btn-primary mr-1" style="margin-left: 0.2em; font-size:12px; width: 100px; height: auto; text-align: center;">logout</button>
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5"> -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -269,9 +270,9 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 						<td><%=tmap.get("STU_OR_PRO") %></td>
 						<td><%=tmap.get("STU_NO") %></td>
 						<td><%=tmap.get("STU_NAME") %></td>
-						<td><%=tmap.get("STU_MAJOR") %></td>
 						<td><%=tmap.get("STU_COL") %></td>
 						<td><%=tmap.get("STU_DEPT") %></td>
+						<td><%=tmap.get("STU_MAJOR") %></td>
 						<td><%=tmap.get("STU_REGNAME") %></td>
 					</tr>
 					<%} %>
@@ -285,7 +286,7 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 			<div class="container-fluid ">
 				<div class="row" style="text-align: center;">
 					<div class="col-md-3">
-						<img src="images/doge.png"
+						<img id="A_STUDENT_PIC" src="images/doge.png"
 							style="width: 200px; height: 200px; margin-top: 5%;">
 					</div>
 					<div class="col-md-3">
@@ -390,6 +391,12 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 				</div>
 			</div>
 		</div>
+		<div class="screen2"
+	style="width: 100%; height: auto%; background-color: ; padding-top: 40px;">
+	<div class="col text-center">
+		<button href="#" id="proUpdateButton" class="btn btn-primary">상세내역 수정</button>
+	</div>
+</div>
 		</div>
 	</div>
 </div>
@@ -398,12 +405,13 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 	$(function(){
 		'use strict';
 		var $AdminSelectTable = $('#AdminSelectTable');
+		var handleData;
 		$(document).ready(function () {
 			 console.log('readyEvent');
 			 initClickEvent();
+			 
 		});
 		
-		var $adminSelectTable = $('adminSelectTable');
 		
 		<%for (int i = 0 ; i< selectTableSize; i++){%>
 		let selectTable<%=i%> ='<%=selectTableArr[i]%>';
@@ -414,34 +422,57 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 			e.preventDefault();
 			$.ajax({
 				type: "get",
-				url : '/admin/jsonGetMemberList?STUDENT_NUMBER='+<%=selectTableArr[i]%>
+				url : '/admin/jsonGetMemberDetail?STUDENT_NUMBER='+<%=selectTableArr[i]%>
 			+"&STU_OR_PRO="+'학생',
 			dataType : 'json',
 			data : 'json',
 			success : function(data) {
-				console.log(data[0]["COLLEGE_NAME"]);
-				$("#A_STUDNET_NAME").val('asdfasdf');
-				$("#A_STUDNET_NAME").val('PASSEDGRADE');
-				$("#A_STUDNET_NAME").val('<%=request.getParameter("STUDENT_NAME")%>')
+				if(!(data[0]["PASSEDSEMESTER"])){
+					var semester = '신입생'
+				}else{
+					semester = data[0]["PASSEDGRADE"]+"학년"+data[0]["PASSEDSEMESTER"]+"학기"
+				}	
+				$("#A_STUDNET_NAME").val(data[0]["STUDENT_NAME"]);
+				$("#A_STUDENT_NUMBER").val(data[0]["STUDENT_NUMBER"]);
+				$("#A_COL").val(data[0]["COLLEGE_NAME"]);
+				$("#A_DEPT").val(data[0]["DEPT_NAME"]);
+				$("#A_MAJOR").val(data[0]["MAJOR_NAME"]);
+				$("#A_STU_OR_PRO").val(data[0]["STU_OR_PRO"]);
+				$("#A_REG_STATUS").val(data[0]["REG_STATUS"]);
+				$("#A_DATE_LASTEST_REG").val(data[0]["DATE_LASTEST_REG"]);
+				$("#A_PASSEDGRADE_SEMESTER").val(semester);
+				$("#A_STUDENET_ENTER_YEAR").val(data[0]["STUDENT_ENTER_YEAR"]+'년도');
 				$('#selectModalXl').modal('show');
-			}//쉬바루 죶같네
-			
+			}
 		});
 		return false;
-			
-			/* $.ajax({
-				type : 'get',
-				url : '/admin/getAdminComboBox',
-				dataType : 'html',
-				success : function(data){
-					$content.html(data).trigger("create");
-				}
-			}); */
 		}
 		
 		
 		<%}%>
-		
+		function proUpdateButtonClick(e) {
+			console.log('proUpdateButton');
+			/* handleData = {"STUDENT_NUMBER":$(A_STUDENT_NUMBER).val(),} */
+			$.ajax({
+				type : 'get',
+				url : '/admin/memberUpdatePage?STUDENT_NUMBER='+$("#A_STUDENT_NUMBER").val()+"&"
+						+"STUDENT_NAME="+$("#A_STUDNET_NAME").val()+"&"+"DEPT_NAME="+$("#A_DEPT").val()
+						+"&"+"MAJOR_NAME="+$("#A_MAJOR").val()+"&"+"STU_OR_PRO="+$("#A_STU_OR_PRO").val()
+						+"&"+"REG_STATUS="+$("#A_REG_STATUS").val()
+						+"&"+"STUDENT_ENTER_YEAR="+$("#A_STUDENET_ENTER_YEAR").val(),
+						
+				/* url:'pageContent/ProPeople/Update.jsp', */
+				/* data : handleData, */
+				dataType : 'html',
+				success : function(data) { 
+					$('#selectModalXl').removeClass("show");
+					$(".modal-backdrop").remove();
+					$('#selectModalXl').modal('hide');
+					$content.html(data).trigger("create");
+				}
+			});
+			return false;
+		}
 		
 	    function AdminSelectSearchButtonClick(){
 		selectedOption02 = '<%=request.getParameter("CBX_COLLEGE_NAME")%>'
@@ -566,10 +597,11 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 			}
 			});
 	});
-		
+	
 		function initClickEvent(){
 			console.log('initClickEvent');
 			 $('#adminSelectSearchButton').click(AdminSelectSearchButtonClick);
+			 $('#proUpdateButton').click(proUpdateButtonClick);
 			 <%for (int i = 0 ; i < selectTableSize ; i++){%>
 				 $('#select_table<%=i%>').click(onClickRow_SelectTable<%=i%>);
 			 <%}%>

@@ -8,24 +8,41 @@
 <%
 StringBuilder path = new StringBuilder(request.getContextPath());
 path.append("/");
-List<Map<String, Object>> lectureDetailList = null;
-lectureDetailList = (List<Map<String, Object>>) request.getAttribute("lectureDetail");
-int lectureDetailSize = 0;
+
+Map<String, List<Map<String, Object>>> lectureDetail = null;
+lectureDetail = (Map<String, List<Map<String, Object>>>) request.getAttribute("lectureDetail");
+List<Map<String, Object>> lectureInfo = null;
+List<Map<String, Object>> fileInfo = null;
+lectureInfo = lectureDetail.get("lectureInfo");
+fileInfo = lectureDetail.get("fileInfo");
+
+/* List<Map<String, Object>> lectureDetailList = null;
+lectureDetailList = (List<Map<String, Object>>) request.getAttribute("lectureDetail"); */
+int lectureInfoSize = 0;
 Map<String, Object> rmap = new HashMap<>();
-if (lectureDetailList != null) {
-	lectureDetailSize = lectureDetailList.size();
-	for (int i = 0; i < lectureDetailSize; i++) {
-		rmap = lectureDetailList.get(i);
+if (lectureInfo != null) {
+	lectureInfoSize = lectureInfo.size();
+	for (int i = 0; i < lectureInfoSize; i++) {
+		rmap = lectureInfo.get(i);
 	}
 }
-out.print("lectureDetailSize:" + lectureDetailSize);
+int fileInfoSize = 0;
+Map<String, Object> fmap = new HashMap<>();
+if (fileInfo != null) {
+	fileInfoSize = fileInfo.size();
+	for (int i = 0; i < fileInfoSize; i++) {
+		fmap = fileInfo.get(i);
+	}
+}
+out.print("lectureInfoSize:" + lectureInfoSize);
+out.print("fileInfoSize:" + fileInfoSize);
 %>
 <script>
-	console.log(
-<%=lectureDetailSize%>
-	);
+	<%-- console.log(
+<%=fileInfo%>
+	); --%>
 </script>
-
+<button type="button" id="logout" onclick="logout()" class="btn btn-primary mr-1" style="margin-left: 0.2em; font-size:12px; width: 100px; height: auto; text-align: center;">logout</button>
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5"> -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -77,9 +94,9 @@ out.print("lectureDetailSize:" + lectureDetailSize);
 	<div class="container">
 		<div class="screen1"
 			style="width: 100%; height: auto%; background-color: ;">
-			<h3 style="text-align:center;">강의<%=rmap.get("COURSE_NAME")%>-<%=rmap.get("ONLINE_LECTURE_TITLE") %></h3>
+			<h3 style="text-align:center;"><%=rmap.get("SUBJECT_NAME")%>-<%=rmap.get("ONLINE_LECTURE_TITLE") %></h3>
 			<div class="col text-center" style="padding-bottom:10px;">
-				<button class="btn  btn-primary mr-5" onClick="feedbackClickEvent()">피드백보내기</button>
+				<button class="btn  btn-primary mr-5" onClick="feedbackClickEvent(<%=rmap.get("ONLINE_LECTURE_NUMBER")%>)">피드백보내기</button>
 			</div>
 		</div>
 		<div class="screen2"
@@ -97,7 +114,7 @@ out.print("lectureDetailSize:" + lectureDetailSize);
 				<div class="custom-file" style="width: 500px;">
 					<input type="file" class="custom-file-input" id="customFile">
 					<!-- 파일첨부 -->
-					<label class="custom-file-label" for="customFile">첨부 파일</label>
+					<label class="custom-file-label" for="customFile"><%=fmap.get("HOMEWORK_FILE")%></label>
 				</div>
 				<button class="btn btn-primary " style="margin-left:5px;">과제 제출</button>
 			</div>
@@ -105,7 +122,19 @@ out.print("lectureDetailSize:" + lectureDetailSize);
 	</div>
 </div>
 <script>
-	function feedbackClickEvent(){
+	function feedbackClickEvent(lecture_number){
+		var $content = $('#content');
+		console.log("feedbackClickEvent");
+		console.log("lecture_number :"+lecture_number);
+	 	 $.ajax({
+				type : 'get',
+				url : '/course/feedbackDetail?ONLINE_LECTURE_NUMBER='+lecture_number,
+				/* url:'pageContent/StuInfo/StuCourse.jsp', */
+				dataType : 'html',
+				success : function(data) {
+					$content.html(data).trigger("create");
+				}
+			});
 		
 	}
 </script>

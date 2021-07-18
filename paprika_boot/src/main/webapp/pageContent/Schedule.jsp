@@ -18,9 +18,8 @@ if (scheduleList != null) {
 		Map<String, Object> rmap = scheduleList.get(i);
 	}
 }
-out.print("로우수:" + size);
 %>
-
+<button type="button" id="logout" onclick="logout()" class="btn btn-primary mr-1" style="margin-left: 0.2em; font-size:12px; width: 100px; height: auto; text-align: center;">logout</button>
 
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5">  -->
@@ -68,8 +67,8 @@ out.print("로우수:" + size);
 	<div class="row">
 		<div class="" style="height: auto%; background-color:; text-align: center;">
 			<h2>강의 시간표</h2>
-					<TABLE Border="1" Cellpadding="5" Cellspacing="5" id="timetable">
-			<thead>
+				<table class="table table-bordered" Border="1" Cellpadding="5" Cellspacing="5" id="timetable">
+			<thead class="thead-team">
 				<tr>
 					<th>/</th>
 					<th>월</th>
@@ -175,8 +174,6 @@ out.print("로우수:" + size);
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="./js/toggleAction.js"></script>
-<script src="./project/js/controllers.js"></script>
-<script src="./project/js/menuTemplate.js"></script>
 <script type="text/javascript">
 
 /* https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=newyorkinms&logNo=220773010011 참고했음 아직 수정 필요 */

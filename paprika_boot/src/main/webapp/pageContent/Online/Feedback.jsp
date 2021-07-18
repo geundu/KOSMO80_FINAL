@@ -9,22 +9,23 @@
 StringBuilder path = new StringBuilder(request.getContextPath());
 path.append("/");
 
-List<Map<String, Object>> feedbackList = null; 
-feedbackList = (List<Map<String, Object>>) request.getAttribute("feedbackList");
-int feedbackListSize = 0;
+List<Map<String, Object>> feedbackDetail = null; 
+feedbackDetail = (List<Map<String, Object>>) request.getAttribute("feedbackDetail");
+int feedbackDetailSize = 0;
 Map<String,Object> rmap = new HashMap<>();
 
-if (feedbackList != null) {
-	feedbackListSize = feedbackList.size();
-	for(int i=0;i<feedbackListSize;i++){
-    rmap = feedbackList.get(i);
+if (feedbackDetail != null) {
+	feedbackDetailSize = feedbackDetail.size();
+	for(int i=0;i<feedbackDetailSize;i++){
+    rmap = feedbackDetail.get(i);
 	}
 }
-out.print("feedbackListSize:" + feedbackListSize);
+out.print("feedbackDetailSize:" + feedbackDetailSize);
 %>
 <script>
-console.log(<%=feedbackListSize%>);
+console.log(<%=feedbackDetailSize%>);
 </script>
+<button type="button" id="logout" onclick="logout()" class="btn btn-primary mr-1" style="margin-left: 0.2em; font-size:12px; width: 100px; height: auto; text-align: center;">logout</button>
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5"> -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -64,19 +65,19 @@ console.log(<%=feedbackListSize%>);
 		<div class="screen1"
 			style="width: 100%; height: 40%; background-color: ;">
 			<div style="text-align: center;">
-				<h3><%=rmap.get("COURSE_NAME")%>-<%=rmap.get("LECTURE_NAME") %></h3>
+				<h3><%=rmap.get("SUBJECT_NAME")%>-<%=rmap.get("ONLINE_LECTURE_TITLE") %></h3>
 			</div>
 		</div>
 		<div class="screen2"
 			style="width: 100%; height: auto%; background-color: ;">
 			<div class="form-title">
-				<input type="text" name="bdTitle" class="form-control mt-4 mb-2"
+				<input type="text" id="FEEDBACK_CONTENT" name="bdTitle" class="form-control mt-4 mb-2"
 					placeholder="피드백을 입력해주세요." required>
 			</div>
 		</div>
 
 		<div class="col text-center">
-		  <button onClick="" class="btn btn-primary mr-5">피드백보내기</button>
+		  <button onClick="sendFeedback()" class="btn btn-primary mr-5">피드백보내기</button>
 			
 		  <button onClick="writeCancel()" class="btn btn-primary">작성취소</button>
 		</div>
@@ -89,6 +90,31 @@ console.log(<%=feedbackListSize%>);
 		if (confirm("작성을 취소하시겠습니까?")==true){
 			alert("작성이 취소되었습니다. Dashboard창으로 돌아갑니다.")
 		} 
+	};
+	
+	function sendFeedback(){
+		console.log($('#FEEDBACK_CONTENT').val());
+		
+		let reqUrl = "./course/feedbackInsert?STUDENT_NUMBER="
+			+sid+"&ONLINE_LECTURE_NUMBER="+<%=rmap.get("ONLINE_LECTURE_NUMBER") %>
+			+"&FEEDBACK_TITLE=피드백제목입니다."
+			+"&FEEDBACK_CONTENT="+$('#FEEDBACK_CONTENT').val();
+		
+		$.ajax({
+			url: reqUrl,
+			dataType:'text',
+			success: function(data) {
+				if(data == '1') {
+					alert("피드백이 전송되었습니다.");
+				}
+				else {
+					alert("피드백이 전송에 실패하였습니다.");
+				}
+			},
+			error: function(xhr) {
+				alert('비동기통신 실패');	
+			}
+		});
 	};
 </script>
 <!-- </div> -->

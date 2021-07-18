@@ -6,8 +6,15 @@ request.setCharacterEncoding("utf-8");
 String sessionId = "15521091";
 %>
 <script>
-	let sid =
-<%=sessionId%>
+
+function logout(){
+	// 세션에 들어있는 오브젝트 언바인드 해준다. (세션 자체는 사라지지 않음)
+	<%session.invalidate();%>
+	// 로그인 페이지로 이동
+	$(location).attr('href', 'login.jsp'); 	 
+}
+
+	let sid = <%=sessionId%>
 	$(document).ready(function(){
 
 		'use strict';
@@ -279,7 +286,7 @@ String sessionId = "15521091";
 			e.preventDefault();
 			$.ajax({
 				type : 'get',
-				url : 'pageContent/ProPeople/Insert.jsp',
+				url : '/admin/getAdminInsertComboBox',
 				/* url:'pageContent/ProPeople/Insert.jsp', */
 				dataType : 'html',
 				success : function(data) {

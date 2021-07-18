@@ -22,7 +22,7 @@ if (onlineTestList != null) {
 }
 out.print("onlineTestListSize:" + onlineTestListSize);
 %>
-
+<button type="button" id="logout" onclick="logout()" class="btn btn-primary mr-1" style="margin-left: 0.2em; font-size:12px; width: 100px; height: auto; text-align: center;">logout</button>
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5"> -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -124,23 +124,21 @@ out.print("onlineTestListSize:" + onlineTestListSize);
 		<div class="screen3"
 			style="width: 100%; height: auto%; background-color: E8EBEE;">
 			<div style="text-align: center;">
-				<a href="#" button type="button" class="btn btn-primary mr-5">주관식
-					문제 다운로드 + <%if(onlineTestList.get(0).get("OT.ONLINE_TEST_QUESTION_FILE")==null){
+				<a href="#" button type="button" class="btn btn-primary mr-5">주관식 문제 다운로드
+				<%-- 	<%if(onlineTestList.get(0).get("ONLINE_TEST_QUESTION_FILE")==null){
 						%> <%
 					}else{
-						onlineTestList.get(0).get("OT.ONLINE_TEST_QUESTION_FILE");
+						onlineTestList.get(0).get("ONLINE_TEST_QUESTION_FILE");
 					}
-					%></a>
+					%> --%></a>
 			</div>
 
 			<div class="col text-center">
-				<a href="#" button type="button" class="btn btn-primary mr-5">주관식
-					문제 제출</a>
+				<a href="#" button type="button" class="btn btn-primary mr-5">주관식 문제 제출</a>
 				<div class="custom-file" style="width: 500px;">
 					<input type="file" class="custom-file-input" id="customFile">
 					<!-- 파일첨부 -->
-					<label class="custom-file-label" for="customFile">Choose
-						file</label>
+					<label class="custom-file-label" for="customFile">Choose file</label>
 				</div>
 			</div>
 		</div>

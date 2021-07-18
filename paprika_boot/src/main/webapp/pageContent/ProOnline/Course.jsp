@@ -1,9 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
 <%
-	request.setCharacterEncoding("utf-8");
+request.setCharacterEncoding("utf-8");
 %>
+<%
+StringBuilder path = new StringBuilder(request.getContextPath());
+path.append("/");
+List<Map<String, Object>> onlineCourseList = null;
+onlineCourseList = (List<Map<String, Object>>) request.getAttribute("courseList");
+int onlineCourseSize = 0;
+Map<String, Object> rmap = new HashMap<>();
+if (onlineCourseList != null) {
+	onlineCourseSize = onlineCourseList.size();
+	for (int i = 0; i < onlineCourseSize; i++) {
+		rmap = onlineCourseList.get(i);
+	}
+}
+%>
+<button type="button" id="logout" onclick="logout()" class="btn btn-primary mr-1" style="margin-left: 0.2em; font-size:12px; width: 100px; height: auto; text-align: center;">logout</button>
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5"> -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -59,7 +75,7 @@
 			style="width: 100%; height: 40%;">
 			<thead>
 				<tr>
-					<td class="h2" colspan="4" style="text-align: center;">오세현 님의
+					<td class="h2" colspan="4" style="text-align: center;"><%=rmap.get("STUDENT_NAME")%>님의
 						E-Learning DashBoard</td>
 				</tr>
 			</thead>

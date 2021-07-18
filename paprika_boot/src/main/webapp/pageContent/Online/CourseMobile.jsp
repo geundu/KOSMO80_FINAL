@@ -19,37 +19,14 @@ if (onlineCourseList != null) {
 	}
 }
 %>
-<button type="button" id="logout" onclick="logout()" class="btn btn-primary mr-1" style="margin-left: 0.2em; font-size:12px; width: 100px; height: auto; text-align: center;">logout</button>
+<script>
+	console.log(
+<%=onlineCourseSize%>
+	);
+</script>
+
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5"> -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<div class="container-fluid" style="float:left;">
-
-		<button type="button" id="sidebarCollapse" class="btn btn-primary ">
-			<i class="fa fa-bars"></i> <span class="sr-only">토글 버튼 위치(글씨출력
-				x)</span>
-		</button>
-
-		<button class="btn btn-dark d-inline-block d-lg-none ml-auto"
-			type="button" data-toggle="collapse"
-			data-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent" aria-expanded="false"
-			aria-label="Toggle navigation">
-			<i class="fa fa-bars"></i>
-		</button>
-		<!-- Page Content Header Start -->
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="nav navbar-nav">
-				<!-- 현재보고있는 nav item은 calss active를 줄것. -->
-				<nav aria-label="breadcrumb">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a onClick="window.location.reload()" style="color: #5BB04F">DashBoard(강좌) in 'e-Learning'</a></li>
-					</ol>
-				</nav>
-		</div>
-		<!-- Page Content Header end -->
-	</div>
-</nav>
 
 <div class="d-flex justify-content-center">
 	<div class="container">
@@ -63,14 +40,30 @@ if (onlineCourseList != null) {
 				</tr>
 			</thead>
 			<tbody>
+				<%-- <%
+				for (int i = 0; i <= onlineCourseSize + 1 / 4; i++) {
+				%> --%>
 				<%
          		for(int i=0; i < onlineCourseSize; i++){
          		   if(i%4 == 0){
        			%>
-				<tr class="table table-bordered">
 		   <%
             }
          %>
+					<%-- <%
+					int length = 0;
+					if ((onlineCourseSize - i * 4) / 4 > 1) {
+						length = 4;
+					} else if ((onlineCourseSize - i * 4) / 4 == 0) {
+						length = (onlineCourseSize - i * 4) % 4;
+					} else if ((onlineCourseSize - i * 4) / 4 == 1) {
+						length = 4;
+					}
+					for (int j = 0; j < length; j++) {
+						Map<String, Object> tmap = onlineCourseList.get(j + 4 * i);
+					%> --%>
+					<%-- <td scope="row" style="width: 25%;" id="CourseDashBoard<%=i+""+j%>"> --%>
+				<tr class="table table-bordered">
 					<%Map<String, Object> tmap = onlineCourseList.get(i); %>
 					<td scope="row" style="width: 25%;" id="CourseDashBoard<%=i%>" onClick="tdClickEvent(<%=tmap.get("COURSE_NUMBER")%>)">
 						<div class="card text-white bg-teamcolor mb-3"
@@ -78,7 +71,8 @@ if (onlineCourseList != null) {
 							<div class="card-header h6"><%=tmap.get("SUBJECT_NAME")%></div>
 							<div class="card-body">
 								<h5 class="card-title">
-									교수명 :<%=tmap.get("PROFESSOR_NAME")%></h5>
+									교수명 :
+									<%=tmap.get("PROFESSOR_NAME")%></h5>
 								<p class="card-text"><%=tmap.get("COURSE_CONTENT")%>
 								</p>
 							</div>
@@ -100,7 +94,7 @@ function tdClickEvent(course_number){
  	  console.log("course_number : "+course_number);
  	 $.ajax({
 			type : 'get',
- 			url : '/course/getLectureList?COURSE_NUMBER=' + course_number,
+			url : '/course/getLectureList?COURSE_NUMBER=' + course_number,
 			/* url:'pageContent/StuInfo/StuCourse.jsp', */
 			dataType : 'html',
 			success : function(data) {
@@ -116,7 +110,8 @@ function tdClickEvent(course_number){
 	   'use strict';
 	   var $content = $('#content');
 	   function initCourseAjax() {
-// 	         console.log('initCourseAjax');
+	         console.log('initCourseAjax');
+	         
 	         $.ajax({
 	            type : 'get',
 	            /* url:'pageContent/Online/Course.jsp', */
