@@ -58,20 +58,6 @@ console.log(<%=sizeDetail%>);
 					</ol>
 
 				</nav>
-
-				<!--               <li class="nav-item active">
-                <a class="nav-link" href="#">Page Content Header menu -1</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Page Content Header menu -2</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Page Content Header menu -3</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Page Content Header menu -4</a>
-              </li>
-            </ul> -->
 		</div>
 		<!-- Page Content Header end -->
 	</div>
@@ -126,15 +112,6 @@ console.log(<%=sizeDetail%>);
 			<table class="table table-bordered" id="detailTable">
 				<thead class="thead-team">
 						<tr>
-							<!-- <th scope="col">번호</th>
-							<th scope="col">(과목코드)과목명</th>
-							<th scope="col">이수구분</th>
-							<th scope="col">학점</th>
-							<th scope="col">평점</th>
-							<th scope="col">등급</th>
-							<th scope="col">성적삭제구분</th>
-							<th scope="col">재이수여부</th>
-							<th scope="col">재이수학기</th> -->
 						</tr>
 					</thead>
 					<tbody>
@@ -143,18 +120,6 @@ console.log(<%=sizeDetail%>);
 							for (int i = 0; i < sizeDetail; i++) {
 								Map<String, Object> rmap = gradeHistoryDetail.get(i);
 						%>
-<%-- 						<tr>
-							<th scope="row"><%=rmap.get("NUM")%></th>
-							<td><%=rmap.get("SUBJECT_NAME")%></td>
-							<td><%=rmap.get("SUBJECT_DIVISION")%></td>
-							<td><%=rmap.get("SUBJECT_CREDIT")%></td>
-							<td><%=rmap.get("SCORE")%></td>
-							<td><%=rmap.get("MARK")%></td>
-							<td><%=rmap.get("RETAKE")%></td>
-							<td><%=rmap.get("REPASS")%></td>
-							<td><%=rmap.get("REPASS_SEMESTER")%></td>
-						</tr> --%>
-						<!-- 안쓰는 코드이지만 구분을 위해 남겨놓았습니다. -->
 						<%
 							}
 						} else {
@@ -171,42 +136,6 @@ console.log(<%=sizeDetail%>);
 		</div>
 		<!-- 두번쨰 끝-->
 		<!--세번째 시작-->
- 		<div class="screen3" style="width: 100%; height: 100%;">
-			<table class="table table-bordered"
-				style="width: 70%; text-align: center; margin: auto">
-				<thead class="thead-team ">
-					<tr>
-						<th scope="col">구분</th>
-						<th scope="col">전필</th>
-						<th scope="col">전선</th>
-						<th scope="col">교선</th>
-						<th scope="col">교필</th>
-						<th scope="col">부전필</th>
-						<th scope="col">부전선</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<th scope="row">취득학점</th>
-						<td>50</td>
-						<td>30</td>
-						<td>20</td>
-						<td>20</td>
-						<td>0</td>
-						<td>0</td>
-
-					</tr>
-					<tr>
-						<th scope="row">평점평균</th>
-						<td>3.8</td>
-						<td>3.5</td>
-						<td>3.5</td>
-						<td>2.8</td>
-						<td>0</td>
-						<td>0</td>
-					</tr>
-				</tbody>
-			</table>
 			</p>
 		</div> 
 	</div>

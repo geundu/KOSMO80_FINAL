@@ -46,20 +46,6 @@
 					</ol>
 
 				</nav>
-
-				<!--               <li class="nav-item active">
-                <a class="nav-link" href="#">Page Content Header menu -1</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Page Content Header menu -2</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Page Content Header menu -3</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Page Content Header menu -4</a>
-              </li>
-            </ul> -->
 		</div>
 		<!-- Page Content Header end -->
 	</div>
@@ -84,16 +70,12 @@
 					
 					</select>
 			</div>
-			<button class=" btn-sm btn-primary">조회</button>
 		</div>
 		<div class="screen2"
 			style="width: 100%; height: auto; background-color: E8EBEE;">
-			<!-- <img id="TutionImage" src="images/money.jpg"  class="rounded mx-auto d-block" style="height: 100%;"> -->
 			<table class="table table-bordered" id="TutionTable">
 				<thead class="thead-team">
 					<tr>
-<!-- 						<th scope="col">년도-학기</th>
-						<th scope="col">금액 내역</th> -->
 					</tr>
 				</thead>
 				<tbody class="text-center">

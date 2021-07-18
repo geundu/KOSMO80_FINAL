@@ -33,7 +33,17 @@ public class ScheduleDao {
 	public List<Map<String, Object>> getSchedule2(Map<String, Object> pMap) {
 		List<Map<String, Object>> scheduleList = null;
 		scheduleList = sqlSessionTemplate.selectList(NameSpace.SCHEDULE + "getSchedule2", pMap);
-
 		return scheduleList;
 	}
+	
+	public List<Map<String, Object>> getMemo(Map<String, Object> pMap) {
+		List<Map<String, Object>> memoList = null;
+		memoList = sqlSessionTemplate.selectList(NameSpace.SCHEDULE + "getMemo", pMap);
+		return memoList;
+	}
+	
+	public void updateMemo(Map<String, Object> pMap) {
+		sqlSessionTemplate.selectList(NameSpace.SCHEDULE + "updateMemo", pMap);
+	}
+	
 }
