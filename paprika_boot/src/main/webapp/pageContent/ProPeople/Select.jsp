@@ -84,20 +84,6 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 							조회</li>
 					</ol>
 				</nav>
-
-				<!--               <li class="nav-item active">
-                <a class="nav-link" href="#">Page Content Header menu -1</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Page Content Header menu -2</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Page Content Header menu -3</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Page Content Header menu -4</a>
-              </li>
-            </ul> -->
 		</div>
 		<!-- Page Content Header end -->
 	</div>
@@ -227,8 +213,6 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 				</span>
 				<button href="#" style="margin-right: 10px;"
 					class="btn btn-primary " id="adminSelectSearchButton">검색</button>
-					<button type="button" data-toggle="modal" style="margin-right: 10px;"
-					class="btn btn-primary " data-target="#selectModalXl">modal-ex</button>
 			</div>
 		</div>
 		<div class="screen2"
@@ -257,10 +241,7 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 				%>
 					<tr id="select_table<%=i%>">
 					<%
-					
 					selectTableArr[i] = String.valueOf(tmap.get("STU_NO"));
-					
-					out.print(selectTableArr.length);
 					%>
 						<td><%=tmap.get("ORDERNUM") %></td>
 						<td><%=tmap.get("STU_OR_PRO") %></td>
