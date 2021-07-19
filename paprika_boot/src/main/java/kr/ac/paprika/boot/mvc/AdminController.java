@@ -112,7 +112,7 @@ public class AdminController {
 	 */
 
 	@RequestMapping("/memberInsert")
-	public String memberInsert(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
+	public @ResponseBody String memberInsert(@RequestParam Map<String, Object> pMap) {
 		String pexcep = null;
 		String PEXCEPMSG = null;
 		//adminLogic.memberInsert(pMap);
@@ -121,8 +121,7 @@ public class AdminController {
 		PEXCEPMSG = pMap.get("PEXCEPMSG").toString();
 
 		if ("1".equals(pexcep)) {
-			HttpSession session = req.getSession();
-			return PEXCEPMSG;
+			return pexcep;
 		}
 		else {
 			return pexcep;
