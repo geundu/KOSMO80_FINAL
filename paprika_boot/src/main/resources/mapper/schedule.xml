@@ -2,14 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.ac.paprika.schedule">
 	<resultMap type="java.util.Map" id="scheduleMap" />
-
 	<select id="getSchedule" parameterType="map" statementType="CALLABLE">
 		{CALL PROC_MAINPAGE(#{STUDENT_NUMBER}, #{SEMESTER}, #{cursor, jdbcType=CURSOR,
 		mode=OUT, resultMap=scheduleMap})}
 	</select>
 
 	<select id="getSchedule2" parameterType="map" resultType="map">
-		SELECT COURSE_BEGIN_TIME
+		SELECT COURSE_BEGIN_TIME 
 		,COURSE_END_TIME
 		,MAX (NVL (DECODE (COURSE_DAY, '월', SUBJECT_NAME), ' ')) MON
 		,MAX (NVL (DECODE (COURSE_DAY, '화', SUBJECT_NAME), ' ')) TUE
@@ -19,5 +18,16 @@
 		FROM KOSMO.SIGAN
 		GROUP BY COURSE_BEGIN_TIME, COURSE_END_TIME
 		ORDER BY COURSE_BEGIN_TIME
+	</select>
+	
+	<select id="getMemo" parameterType="string" resultType="map">
+	SELECT MEMO
+	FROM STUDENT
+	WHERE STUDENT_NUMBER = #{STUDENT_NUMBER}
+	</select>
+	
+	<select id="updateMemo" parameterType="map" statementType="CALLABLE">
+	{CALL PROC_MEMO_UPDATE(#{STUDENT_NUMBER}, #{MEMO} 
+	)}	
 	</select>
 </mapper>

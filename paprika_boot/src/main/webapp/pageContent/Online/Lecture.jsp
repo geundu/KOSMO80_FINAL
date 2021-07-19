@@ -76,13 +76,13 @@ if (lectureList != null) {
 				<!--버튼 선언 시작 -->
 				<tr>
 					<th scope="col" style="border-top:0px;">
-						<button type="button" class="btn btn-primary">중간고사 응시하기</button>
+						<button type="button" class="btn btn-primary" onClick="testClickEvent(<%=rmap.get("ONLINE_TEST_NUMBER")%>)">중간고사 응시하기</button>
 					</th>
 					<th scope="col" style="border-top:0px;">
 						<button type="button" class="btn btn-primary">기말고사 응시하기</button>
 					</th>
 					<th scope="col" style="border-top:0px;">
-						<button type="button" class="btn btn-primary">강의자료 다운로드</button>
+						<a type="button" class="btn btn-primary" href=<%=rmap.get("COURSE_FILE")%> target="_blank">강의자료 다운로드</a>
 					</th>
 				</tr>
 			</tbody>
@@ -128,6 +128,20 @@ if (lectureList != null) {
 					type : 'get',
 					url : '/course/getLectureDetail?ONLINE_LECTURE_NUMBER='+lecture_number+
 							'&STUDENT_NUMBER='+sid,
+					/* url:'pageContent/StuInfo/StuCourse.jsp', */
+					dataType : 'html',
+					success : function(data) {
+						$content.html(data).trigger("create");
+					}
+				});
+		
+	}
+	function testClickEvent(test_number){
+		var $content = $('#content');
+			console.log("test_number :"+test_number);
+		 	 $.ajax({
+					type : 'get',
+					url : '/onlineTest/getOnlineTest?ONLINE_TEST_NUMBER='+test_number,
 					/* url:'pageContent/StuInfo/StuCourse.jsp', */
 					dataType : 'html',
 					success : function(data) {

@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.ac.paprika.onlineTest">
 	<resultMap type="java.util.Map" id="onlineTestMap" />
-	<select id="getOnlineTest" parameterType="map" statementType="CALLABLE">
-		{CALL PROC_STU_ONLINE_TEST_Q_SEL(#{COURSE_NUMBER},
+	<select id="getOnlineTest" parameterType="map" statementType="CALLABLE" >
+		{CALL PROC_STU_ONLINE_TEST_Q_SEL(#{ONLINE_TEST_NUMBER},
 		#{cursor, jdbcType=CURSOR,
 		mode=OUT, resultMap=onlineTestMap}
 		)}

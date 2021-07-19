@@ -18,8 +18,6 @@ if (updateList != null) {
 		rmap = updateList.get(i);
 	}
 }
-out.print("updateListSize:"+updateListSize);
-out.print("updateList:"+updateList);
 %>
 <!-- Page Content start -->
 <!-- <div id="content" class="p-4 p-md-5"> -->
@@ -189,7 +187,7 @@ out.print("updateList:"+updateList);
 <script>
 $(function(){
 	$('#datePicker').datepicker({
-		format: "yyyy-mm-dd",
+		format: "yyyy년 mm월",
 		autoclose : true,
 		orientation: "top auto ", 
 		daysOfWeekDisabled : [0,6],

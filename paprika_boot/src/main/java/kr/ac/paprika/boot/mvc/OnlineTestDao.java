@@ -22,8 +22,8 @@ public class OnlineTestDao {
 	 */
 	public List<Map<String, Object>> getOnlineTest(Map<String, Object> pMap) {
 		List<Map<String, Object>> onlineTest = null;
-		onlineTest = sqlSessionTemplate.selectList(NameSpace.ONLINETEST + "getOnlineTest", pMap);
-
+		sqlSessionTemplate.selectList(NameSpace.ONLINETEST + "getOnlineTest", pMap);
+		onlineTest = (List<Map<String, Object>>) pMap.get("cursor");
 		return onlineTest;
 	}
 

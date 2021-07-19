@@ -29,12 +29,28 @@ public class ScheduleController {
 	 * @throws ServletException
 	 */
 	// http://localhost:8000/paprika/getSchedule.do?STUDENT_NUMBER=15722001&SEMESTER=2021-1
-	@RequestMapping("/getSchedule")
-	public String getSchedule(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
-		List<Map<String, Object>> scheduleList = null;
-		scheduleList = scheduleLogic.getSchedule(pMap);
-		req.setAttribute("scheduleList", scheduleList);
-
+		@RequestMapping("/getSchedule")
+		public String getSchedule(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
+			List<Map<String, Object>> scheduleList = null;
+			scheduleList = scheduleLogic.getSchedule(pMap);
+			req.setAttribute("scheduleList", scheduleList);
+	
+			return "forward:/pageContent/Schedule.jsp";
+		}
+	
+	@RequestMapping("/getMemo")
+	public String getMemo(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
+		List<Map<String, Object>> memoList = null;
+		memoList = scheduleLogic.getMemo(pMap);
+		req.setAttribute("memoList", memoList);
+		return "forward:/pageContent/Schedule.jsp";
+	}
+	
+	@RequestMapping("/updateMemo")
+	public String updateMemo(HttpServletRequest req, @RequestParam Map<String, Object> pMap) {
+		List<Map<String, Object>> memoList = null;
+		memoList = scheduleLogic.updateMemo(pMap);
+		req.setAttribute("memoList", memoList);
 		return "forward:/pageContent/Schedule.jsp";
 	}
 }

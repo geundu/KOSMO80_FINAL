@@ -25,4 +25,18 @@ public class ScheduleLogic {
 
 		return scheduleList;
 	}
+	
+	public List<Map<String, Object>> getMemo(Map<String, Object> pMap) {
+		List<Map<String, Object>> memoList = null;
+		memoList = scheduleDao.getMemo(pMap);
+
+		return memoList;
+	}
+	
+	public List<Map<String, Object>> updateMemo(Map<String, Object> pMap) {
+		scheduleDao.updateMemo(pMap);
+		List<Map<String, Object>> memoList = null;
+		memoList = scheduleDao.getMemo(pMap);
+		return memoList;
+	}
 }

@@ -7,15 +7,26 @@ request.setCharacterEncoding("utf-8");
 StringBuilder path = new StringBuilder(request.getContextPath());
 path.append("/");
 List<Map<String, Object>> scheduleList = null;
+List<Map<String, Object>> memoList = null;
 scheduleList = (List<Map<String, Object>>) request.getAttribute("scheduleList");
+memoList =(List<Map<String, Object>>) request.getAttribute("memoList");
 
-int size = 0;
+int size1 = 0;
+int size2 = 0;
 
 if (scheduleList != null) {
-	size = scheduleList.size();
+	size1 = scheduleList.size();
 
-	for (int i = 0; i < size; i++) {
+	for (int i = 0; i < size1; i++) {
 		Map<String, Object> rmap = scheduleList.get(i);
+	}
+}
+
+if (memoList != null) {
+	size2 = memoList.size();
+
+	for (int i = 0; i < size2; i++) {
+		Map<String, Object> tmap = memoList.get(i);
 	}
 }
 %>
@@ -44,20 +55,6 @@ if (scheduleList != null) {
 					</ol>
 
 				</nav>
-
-				<!--               <li class="nav-item active">
-                <a class="nav-link" href="#">Page Content Header menu -1</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Page Content Header menu -2</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Page Content Header menu -3</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Page Content Header menu -4</a>
-              </li>
-            </ul> -->
 		</div>
 		<!-- Page Content Header end -->
 	</div>
@@ -65,7 +62,7 @@ if (scheduleList != null) {
 <!-- screen1 시간표 -->
 <div class="d-flex justify-content-center">
 	<div class="row">
-		<div class="" style="height: auto%; background-color:; text-align: center;">
+<!-- 		<div class="" style="height: auto%; background-color:; text-align: center;">
 			<h2>강의 시간표</h2>
 				<table class="table table-bordered" Border="1" Cellpadding="5" Cellspacing="5" id="timetable">
 			<thead class="thead-team">
@@ -161,19 +158,27 @@ if (scheduleList != null) {
 				</TR>
 			</tbody>
 		</TABLE>
-		</div>
+		</div> -->
 
 		<!--오른쪽 메인프레임 시작-->
 		<div class="" style="height: auto%; width: auto%; background-color:; text-align: center;">
 			<h3>메모장</h3>
 			<div class="form-group" style="width: 600px;">
-				<textarea class="form-control" id="notePadForm" rows="25" placeholder="메모할 내용을 입력해주세요"></textarea>
+				<textarea class="form-control" id="notePadForm" rows="20" placeholder="메모할 내용을 입력해주세요">
+				<%=memoList.get(0).get("MEMO") %>
+				</textarea>
 			</div>
 		</div>
 	</div>
 </div>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="./js/toggleAction.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+	<script src="js/bootstrap-datepicker.js"></script>
+	<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
+
 <script type="text/javascript">
 
 /* https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=newyorkinms&logNo=220773010011 참고했음 아직 수정 필요 */
@@ -184,7 +189,7 @@ if (scheduleList != null) {
 			// $('#timetable > tbody > tr:eq(2) > td:eq(0)').hide(); 
 			//$('#timetable > tbody > tr:eq(3) > td:eq(0)').hide();
 			$('#timetable').hide();
-	<%for (int i = 0; i < size; i++) {
+	<%for (int i = 0; i < size1; i++) {
 	Map<String, Object> rmap = scheduleList.get(i);
 	int start_time = Integer.parseInt(rmap.get("COURSE_BEGIN_TIME").toString());
 	int end_time = Integer.parseInt(rmap.get("COURSE_END_TIME").toString());
@@ -206,22 +211,35 @@ if (scheduleList != null) {
 		} //행 , 열 , span 값 , 클래스명 
 		function setRowspan(rowIndex, colIndex, spanValue, className) {
 			$(
-					'#timetable > tbody > tr:eq(' + rowIndex + ') > td:eq('
-							+ colIndex + ')').attr('rowspan', spanValue);
+					'#timetable > tbody > tr:eq(' + rowIndex + ') > td:eq('	+ colIndex + ')').attr('rowspan', spanValue);
 			$(
-					'#timetable > tbody > tr:eq(' + rowIndex + ') > td:eq('
-							+ colIndex + ') > .className').html(className);
+					'#timetable > tbody > tr:eq(' + rowIndex + ') > td:eq('	+ colIndex + ') > .className').html(className);
 			for (i = 1; i < spanValue; i++) {
 				let tempIndex = rowIndex + i;
 				//alert(tempIndex) 
 				$(
-						'#timetable > tbody > tr:eq(' + tempIndex
-								+ ') > td:eq(' + colIndex + ')').hide();
+						'#timetable > tbody > tr:eq(' + tempIndex + ') > td:eq(' + colIndex + ')').hide();
 			}
+		};
+		
+		var oldVal;
+		/* $("#notePadForm").on("propertychange change keyup paste input", function() { */
+		$("#notePadForm").on("focusout", function() {
+		var currentVal = $(this).val();
+		if(currentVal == oldVal) {
+			return;
 		}
+		oldVal = currentVal;
+		$.ajax({
+			type : 'get',
+			url : '/schedule/updateMemo?STUDENT_NUMBER='+sid+'&MEMO='+$("#notePadForm").val(),
+			dataType : 'html',
+			success : function(data){
+				$content.html(data).trigger("create");
+				}
+			})
+		console.log("change alert")
+		});
+		
 	</script>
-<!-- <script src="./project/js/controllers.js"></script>
-<script src="./project/js/menuTemplate.js"></script> -->
-<!-- 오른쪽 메인 프레임 끝-->
-<!-- </div> -->
 <!-- Page Content end -->

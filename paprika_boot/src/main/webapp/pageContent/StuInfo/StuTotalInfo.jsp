@@ -262,9 +262,6 @@ function studentInfoUpd(){
 							aria-describedby="basic-addon3" id="STUDENT_EMAIL">
 					</div>
 				</div>
-				<!-- <div class="col-md-1">
-					<button type="button" class="btn btn-primary">수정</button>
-				</div> -->
 			</div>
 		</div>
 	</div>
