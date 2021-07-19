@@ -37,6 +37,37 @@
 console.log(cbxCollegeSize=<%=cbxCollegeSize   %>);
 console.log(cbxDeptSize=<%=cbxDeptSize   %>);
 console.log(cbxMajorSize=<%=cbxMajorSize   %>);
+
+function memberInsert(){
+	
+	console.log($('#STUDENT_NAME').val());
+	console.log($('#STUDENT_NUMBER').val());
+	console.log($('#InsertSelect03').val());
+	console.log($('#datePicker').val());
+	
+	let reqUrl = "./admin/memberInsert?STU_OR_PRO=학생&TR_CODE=INSERT"
+		+"&STUDENT_NAME="+$('#STUDENT_NAME').val()
+		+"&STUDENT_NUMBER="+$('#STUDENT_NUMBER').val()
+		+"&COLLEGE_NUMBER="+$('#InsertSelect03').val()
+		+"&STUDENT_ENTER_YEAR="+$('#datePicker').val()
+		+"&REGISTER_NAME=입학"
+	
+		$.ajax({
+			url: reqUrl,
+			dataType:'text',
+			success: function(data) {
+				if(data == '1') {
+					alert('업데이트 성공');
+				}
+				else {
+					alert('업데이트 실패');
+				}
+			},
+			error: function(xhr) {
+				alert('비동기통신 실패');	
+			}
+		});
+}
 </script>
 <button type="button" id="logout" onclick="logout()" class="btn btn-primary mr-1" style="margin-left: 0.2em; font-size:12px; width: 100px; height: auto; text-align: center;">logout</button>
 <!-- Page Content start -->
@@ -239,7 +270,7 @@ console.log(cbxMajorSize=<%=cbxMajorSize   %>);
 <div class="screen2"
 	style="width: 100%; height: auto%; background-color: ; padding-top: 40px;">
 	<div class="col text-center">
-		<button href="#" class="btn btn-primary mr-5">추가</button> 
+		<button href="#" class="btn btn-primary mr-5" onClick="memberInsert()">추가</button> 
 		<button href="#" class="btn btn-primary">취소</button>
 	</div>
 </div>
